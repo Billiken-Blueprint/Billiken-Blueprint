@@ -1,0 +1,18 @@
+[project]
+name = "Billiken-Blueprint"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Jake Bounds", email = "jakebounds.personal@gmail.com"},
+    {name = "Kiara Mathews", email = "abc@gmail.com"},
+    {name = "Jennifer Oishee", email = "abc@gmail.com"},
+    {name = "Yeeon Ryu", email = "abc@gmail.com"}
+]
+dependencies = ["django>=5.2.7"]
+requires-python = "==3.13.*"
+readme = "README.md"
+license = {text = "MIT"}
+
+
+[tool.pdm]
+distribution = false
