@@ -37,9 +37,7 @@ html, body {
 
 app-root {
   display: block;
-  height: 100vh;
-  width: 100vw;
-  overflow-x: hidden;
+  min-height: 100vh;
 }
 
 /* Enhanced button styles to work with PrimeNG */
