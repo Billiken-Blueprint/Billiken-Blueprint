@@ -8,7 +8,7 @@ For backend use PDM. Maybe you can use pip or some other dependency manager but 
 
 `pdm install`
 
-`pdm run alembic upgrade head`
+`pdm run alembic upgrade head` - This creates/applies migrations to the database
 
 `chmod +x scripts/run_dev.sh`
 
