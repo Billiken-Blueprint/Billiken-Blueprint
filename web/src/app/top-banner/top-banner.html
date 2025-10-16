@@ -1,12 +1,12 @@
 <header class="w-full bg-white/10 backdrop-blur-sm border-b border-white/20 flex-shrink-0">
   <div class="max-w-6xl mx-auto px-4 sm:px-8">
     <div class="flex justify-between items-center py-4 sm:py-6">
-      <div class="flex items-center space-x-3 sm:space-x-4">
+      <a class="flex items-center space-x-3 sm:space-x-4" href="/">
         <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center">
           <span class="text-blue-800 font-bold text-lg sm:text-xl font-inter">SLU</span>
         </div>
         <span class="text-white font-semibold text-xl sm:text-2xl font-inter">Billiken Blueprint</span>
-      </div>
+      </a>
       <div class="flex space-x-4">
         @if (isLoggedIn | async) {
           <p-menubar [model]="items"/>
