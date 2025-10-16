@@ -2,35 +2,18 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Billiken Blueprint - Log In</title>
   <!--Google Fonts: (Inter and Playfair Display) -->
   <link
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Playfair+Display:wght@700;900&display=swap"
     rel="stylesheet">
   <!-- Load PrimeIcons for the original icon style -->
-  <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css">
+  <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
 </head>
 <body>
 
-<div class="w-full h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex flex-col">
-  <header class="w-full bg-white/10 backdrop-blur-sm border-b border-white/20 flex-shrink-0">
-    <div class="max-w-6xl mx-auto px-8">
-      <div class="flex justify-between items-center py-6">
-        <div class="flex items-center space-x-4">
-          <div class="w-12 h-12 bg-white rounded-full flex items-center justify-center">
-            <span class="text-blue-800 font-bold text-xl font-inter">SLU</span>
-          </div>
-          <span class="text-white font-semibold text-2xl font-inter">Billiken Blueprint</span>
-        </div>
-        <div class="flex space-x-4">
-          <a href="register"
-             class="bg-white text-blue-800 hover:bg-gray-100 text-lg px-6 py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter">Sign
-            Up</a>
-        </div>
-      </div>
-    </div>
-  </header>
+<div class="w-full h-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex flex-col">
 
   <!-- Login Card -->
   <main class="flex-grow flex items-center justify-center px-4 py-8">
@@ -43,43 +26,44 @@
         <form (ngSubmit)="login()" [formGroup]="credentialsForm" class="space-y-6">
           <!-- Username/Email -->
           <div>
-            <label for="username" class="block text-sm font-medium text-blue-100 mb-2 font-inter">SLU Net ID or
+            <label class="block text-sm font-medium text-blue-100 mb-2 font-inter" for="username">SLU Net ID or
               Email</label>
             <input
-              id="username"
-              type="text"
-              required
-              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
-              placeholder="e.g., doe.j"
               [formControlName]="'email'"
+              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
+              id="username"
+              placeholder="e.g., doe.j"
+              required
+              type="text"
             >
           </div>
 
           <!-- Password -->
           <div>
-            <label for="password" class="block text-sm font-medium text-blue-100 mb-2 font-inter">Password</label>
+            <label class="block text-sm font-medium text-blue-100 mb-2 font-inter" for="password">Password</label>
             <input
-              id="password"
-              type="password"
-              required
-              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
-              placeholder="••••••••"
               [formControlName]="'password'"
+              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
+              id="password"
+              placeholder="••••••••"
+              required
+              type="password"
             >
           </div>
 
           <!-- Forgot Password -->
           <div class="text-right">
-            <a href="#"
-               class="text-yellow-300 hover:text-yellow-200 text-sm font-semibold transition-colors duration-200 font-inter">Forgot
+            <a
+              class="text-yellow-300 hover:text-yellow-200 text-sm font-semibold transition-colors duration-200 font-inter"
+              href="#">Forgot
               Password?</a>
           </div>
 
           <!-- Login Button -->
           <button
-            type="submit"
             [disabled]="!credentialsForm.valid"
-            class="w-full bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-xl px-8 py-4 font-bold font-inter rounded-xl login-button-style space-x-3 shadow-lg hover:shadow-xl transition-all duration-300 hero-button">
+            class="w-full bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-xl px-8 py-4 font-bold font-inter rounded-xl login-button-style space-x-3 shadow-lg hover:shadow-xl transition-all duration-300 hero-button"
+            type="submit">
             <i class="pi pi-sign-in text-xl"></i>
             <span>Log In Securely</span>
           </button>
@@ -94,8 +78,8 @@
 
         <!-- Social Login Placeholder -->
         <button
-          type="button"
-          class="w-full bg-white text-blue-800 hover:bg-gray-100 text-lg px-8 py-3 font-semibold font-inter rounded-xl login-button-style space-x-3 transition-all duration-300 border border-gray-300">
+          class="w-full bg-white text-blue-800 hover:bg-gray-100 text-lg px-8 py-3 font-semibold font-inter rounded-xl login-button-style space-x-3 transition-all duration-300 border border-gray-300"
+          type="button">
           <i class="pi pi-google"></i>
           <span>Sign in with Google</span>
         </button>
