@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {AuthService} from '../auth-service/auth-service';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -12,11 +13,9 @@ import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, V
   styleUrl: './login-page.css'
 })
 export class LoginPage {
+  errorMessage = '';
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
-
-  errorMessage = '';
-
   credentialsForm = this.formBuilder.group({
     email: new FormControl('', [
       Validators.required,
@@ -26,6 +25,7 @@ export class LoginPage {
       Validators.required
     ])
   })
+  private router = inject(Router);
 
   login() {
     console.log(this.credentialsForm.value);
@@ -36,6 +36,9 @@ export class LoginPage {
 
     this.authService.login({email: email, password: password})
       .subscribe({
+        next: result => {
+          this.router.navigate(['/'])
+        },
         error: (err) => {
           if (err.status === 401) {
             this.errorMessage = "Incorrect email or password";
