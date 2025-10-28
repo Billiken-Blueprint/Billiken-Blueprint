@@ -1,20 +1,36 @@
-# Backend
+# Docker
 
-For backend use PDM. Maybe you can use pip or some other dependency manager but idk how to install from a pylock file with pip.
+The project can be ran with Docker Compose. Podman not tested.
 
-`brew install pdm`
+```bash
+docker compose build
+docker compose up
+```
+
+Only the src folders are bind mounted for both backend and web services.
+If you edit config files or add dependencies, you will have to run `docker compose build` again.
+
+If you want, you can bind mount the backend/data directory so the database persists between container lifecycles.
+
+# No docker
+
+## Backend
+
+For backend use uv. Previously we used pdm but it wasn't working well with docker.
+
+`brew install uv`
 
 `cd backend`
 
-`pdm install`
+`uv sync`
 
-`pdm run alembic upgrade head` - This creates/applies migrations to the database
+`uv run alembic upgrade head` - This creates/applies migrations to the database
 
 `chmod +x scripts/run_dev.sh`
 
-`pdm run scripts/run_dev.sh`
+`uv run scripts/run_dev.sh`
 
-# Frontend
+## Frontend
 
 For frontend use pnpm. You may be able to use npm but you might run into issues installing dependencies at first.
 
