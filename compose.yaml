@@ -1,0 +1,20 @@
+services:
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 4200:4200
+    volumes:
+      - ./web/src:/app/src
+    command: ng serve --configuration=dev-compose --host 0.0.0.0
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+      target: dev
+    ports:
+      - 8000:8000
+    volumes:
+      - ./backend/src:/app/src

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
   <title>Billiken Blueprint - Register Account</title>
   <!-- Load Tailwind CSS from CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&family=Playfair+Display:wght@700;900&display=swap"
     rel="stylesheet">
   <!-- Load PrimeIcons -->
-  <link rel="stylesheet" href="https://unpkg.com/primeicons/primeicons.css">
+  <link href="https://unpkg.com/primeicons/primeicons.css" rel="stylesheet">
 
   <style>
     /* Apply custom fonts */
@@ -61,62 +61,62 @@
           academic career.</p>
 
         <!-- Form tag updated: onsubmit removed -->
-        <form [formGroup]="registerForm" (ngSubmit)="register()" class="space-y-5">
+        <form (submit)="register()" [formGroup]="registerForm" class="space-y-5">
 
           <!-- SLU Net ID or Email -->
           <div>
-            <label for="email" class="block text-sm font-medium text-blue-100 mb-2 font-inter">SLU Net ID or
+            <label class="block text-sm font-medium text-blue-100 mb-2 font-inter" for="email">SLU Net ID or
               Email</label>
             <input
+              [formControlName]="'email'"
+              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               id="email"
               name="email"
-              type="email"
-              required
-              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               placeholder="e.g., doe.j@slu.edu"
-              [formControlName]="'email'"
+              required
+              type="email"
             >
           </div>
 
           <!-- Password -->
           <div>
-            <label for="password" class="block text-sm font-medium text-blue-100 mb-2 font-inter">Password</label>
+            <label class="block text-sm font-medium text-blue-100 mb-2 font-inter" for="password">Password</label>
             <input
+              [formControlName]="'password'"
+              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               id="password"
               name="password"
-              type="password"
-              required
-              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               placeholder="••••••••"
-              [formControlName]="'password'"
+              required
+              type="password"
             >
             <p class="text-xs text-blue-300 mt-1 font-inter">Must be at least 8 characters long.</p>
           </div>
 
           <!-- Confirm Password -->
           <div>
-            <label for="confirmPassword" class="block text-sm font-medium text-blue-100 mb-2 font-inter">Confirm
+            <label class="block text-sm font-medium text-blue-100 mb-2 font-inter" for="confirmPassword">Confirm
               Password</label>
             <input
+              [formControlName]="'confirmPassword'"
+              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               id="confirmPassword"
               name="confirmPassword"
-              type="password"
-              required
-              class="w-full p-3 bg-white/10 border border-white/30 text-white rounded-xl focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400 transition-all duration-200 placeholder-blue-300 font-inter"
               placeholder="••••••••"
-              [formControlName]="'confirmPassword'"
+              required
+              type="password"
             >
           </div>
 
           <!-- Message Container (for errors/success) -->
-          <div id="message-container" class="py-2">
+          <div class="py-2" id="message-container">
             <!-- Messages will appear here -->
           </div>
 
           <!-- Create Account Button -->
           <button
-            type="submit"
-            class="w-full bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-xl px-8 py-4 font-bold font-inter rounded-xl space-x-3 shadow-lg hover:shadow-xl transition-all duration-300 hero-button">
+            class="w-full bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-xl px-8 py-4 font-bold font-inter rounded-xl space-x-3 shadow-lg hover:shadow-xl transition-all duration-300 hero-button"
+            type="submit">
             <i class="pi pi-user-plus text-xl"></i>
             <span>Create Account</span>
           </button>
@@ -131,8 +131,8 @@
 
         <!-- Social Sign Up Placeholder -->
         <button
-          type="button"
-          class="w-full bg-white text-blue-800 hover:bg-gray-100 text-lg px-8 py-3 font-semibold font-inter rounded-xl space-x-3 transition-all duration-300 border border-gray-300 hero-button">
+          class="w-full bg-white text-blue-800 hover:bg-gray-100 text-lg px-8 py-3 font-semibold font-inter rounded-xl space-x-3 transition-all duration-300 border border-gray-300 hero-button"
+          type="button">
           <i class="pi pi-google"></i>
           <span>Sign up with Google</span>
         </button>

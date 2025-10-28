@@ -1,0 +1,6 @@
+data/
+.idea/
+.venv/
+.pdm-python
+Dockerfile
+scripts/
