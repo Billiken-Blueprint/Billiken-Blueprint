@@ -29,7 +29,7 @@ export class RegisterPage {
     this.authSerivce.register({email: email!, password: password!})
       .subscribe({
         next: result => {
-          this.router.navigate(['/']);
+          this.router.navigate(['/questionnaire']);
         },
         error: err => {
           console.log(err);
