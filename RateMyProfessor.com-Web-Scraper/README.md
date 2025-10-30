@@ -90,8 +90,6 @@ This fix is not optimal, as after the page is filled with a lot of professors, t
 ## Edit Made to Meet the Usage of Billiken-Blueprint Development
 This fork modernizes and hardens the RateMyProfessors scraper so it works with RMP’s new UI and with department filters, and adds a simple JSON to SQLite pipeline.
 
-ey changes (scraper: rmp_scrape/fetch.py)
-
 New results URL format:
 From the old
 https://www.ratemyprofessors.com/search/teachers?query=*&sid=<SID>
@@ -101,8 +99,6 @@ https://www.ratemyprofessors.com/search/professors/<SID>?q=*&did=<DEPT_ID>
 Department filter (-did) support (e.g., 11 for CS at SLU).
 
 Resilient counting: num_professors() no longer depends on a brittle XPATH split()[0]. It parses multiple header patterns and falls back to counting visible professor cards.
-
-Robust school-name detection: tries OpenGraph <meta property="og:title">, <title>, and <h1> as fallbacks instead of a hard-coded XPATH.
 
 Lazy-load expansion: smooth scroll + “Show More” clicks with overlay dismissal (cookie banners) so we actually load all visible results for the page variant.
 
@@ -125,20 +121,7 @@ Safely stores lists/dicts (e.g., tags) as JSON strings so inserts don’t fail.
 
 Works with any similarly structured dumps (top-level list of professors, each with a reviews array — or change --review-key).
 
-New Requirements
-
-Python 3.9+ recommended
-
-Google Chrome + matching ChromeDriver (on macOS, easiest via: brew install --cask google-chrome && brew install chromedriver)
-
-Python deps in your venv:
-
-pip install selenium bs4
-
-
-(Only Selenium is needed for the scraper; bs4 is optional. The converter uses only stdlib.)
-
-🚀 How to run the scraper
+How to run the updated scraper
 
 From the project root:
 
@@ -183,7 +166,7 @@ python3 rmp_scrape/fetch.py -config config
 
 Any CLI flags you pass will override config values.
 
-🗄️ How to convert JSON → SQLite
+ How to convert JSON to SQLite
 
 After scraping (e.g., cs_professors_with_reviews.json):
 
@@ -200,31 +183,7 @@ professors table: inferred columns such as name, school, profile_url (UNIQUE), o
 
 reviews table: inferred columns such as course, quality, difficulty, comment, date, tags (stored as JSON string), plus professor_id FK.
 
-Quick sanity checks
-sqlite3 cs.sqlite
-.tables
-.schema professors
-.schema reviews
-SELECT COUNT(*) FROM professors;
-SELECT COUNT(*) FROM reviews;
-
-💡 Tips (macOS)
-
-If the system sqlite3 is ancient, install a newer one:
-
-brew install sqlite
-
-
-Then the binary is at /opt/homebrew/bin/sqlite3 (Apple Silicon) or /usr/local/bin/sqlite3 (Intel).
-
-If Chrome pops up and you prefer no UI, open fetch.py and uncomment:
-
-# chrome_opts.add_argument("--headless=new")
-
-
-If RMP intermittently shows partial results, keep -prt (page reload timeout) reasonably high (e.g., 50–100), and the scraper will retry smartly before falling back.
-
-🧩 Output fields (example)
+Output fields (example)
 
 Each professor JSON object looks like:
 
