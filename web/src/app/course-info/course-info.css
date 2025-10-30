@@ -1,0 +1,279 @@
+/* Layout safety */
+:host, *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 2rem;
+  overflow: visible;
+  background: linear-gradient(135deg,#0b122b,#0f1a48);
+}
+
+.course-grid {
+  display: grid;
+  justify-content: center; /* ✅ Centers the grid */
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.25rem;
+  margin: 0 auto;
+
+  /* ✅ Always keep right (and left) gap inside viewport */
+  padding-right: 2rem;
+  padding-left: 2rem;
+  width: 100%;
+}
+
+
+/* individual course card */
+.course-card{
+  background:#0f1115;
+  color:#e5e7eb;
+  border-radius:16px;
+  padding:1.1rem 1.35rem;
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+  border:1px solid #1f2937;
+  transition:transform .18s ease, box-shadow .18s ease;
+  overflow:hidden;
+}
+.course-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+}
+
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:.75rem;
+}
+.title{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#90b4ff;
+  line-height:1.35;
+}
+.credit-pill{
+  white-space:nowrap;
+  align-self:flex-start;
+  background:#0f141d;
+  color:#90b4ff;
+  border:1px solid #273246;
+  border-radius:999px;
+  padding:.2rem .55rem;
+  font-weight:700;
+  font-size:.85rem;
+}
+
+.meta{
+  font-size:.92rem;
+  color:#e5e7eb;
+  margin:.4rem 0 .6rem;
+}
+.meta strong{color:#e5e7eb}
+
+/* actions */
+.actions{
+  display:flex;
+  gap:.5rem;
+  margin-top:.25rem;
+  flex-wrap:wrap;
+}
+.btn-outline{
+  background:#0f1115;
+  color:#90b4ff;
+  border:2px solid #3b82f6;
+  border-radius:10px;
+  padding:.45rem .85rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+  text-transform:uppercase;
+  font-size:.8rem;
+  letter-spacing:.03em;
+}
+.btn-outline:hover{
+  background:#1e3a8a;
+  color:#fff;
+  border-color:#1e40af;
+}
+
+/* details panel */
+.details{
+  margin-top:.75rem;
+  padding:.9rem 1rem;
+  border:1px solid #273246;
+  border-radius:12px;
+  background:#12151c;
+  overflow:hidden;
+}
+.section-title{
+  margin:.2rem 0 .35rem;
+  font-size:.95rem;
+  font-weight:800;
+  color:#e5e7eb;
+}
+.para{
+  margin:.25rem 0;
+  color:#cbd5e1;
+}
+.mono{
+  margin:.25rem 0;
+  color:#cbd5e1;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-size:.88rem;
+}
+
+/* instructor rows */
+.instructor-row{
+  display:grid;
+  grid-template-columns: 1fr fit-content(200px); /* right column auto width up to 200px */
+  align-items:start;
+  gap:.5rem;
+  padding:1rem;
+  border-bottom:1px solid #273246;
+}
+.instructor-row:last-child{
+  border-bottom:none;
+}
+
+.inst-main{ min-width: 0; }
+
+/* keep instructor name on ONE LINE */
+.inst-name{
+  font-weight:700;
+  margin:.1rem 0;
+  color:#ffffff;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* allow email + office to wrap normally */
+.inst-line{
+  margin:0;
+  color:#cbd5e1;
+  white-space: normal;
+}
+
+.inst-rating{
+  justify-self:end;
+  text-align:right;
+  font-size:12px;
+  display:grid;
+  gap:.2rem;
+  min-width:120px;
+  max-width:200px;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  line-height:1.2;
+}
+.inst-rating a{
+  display:inline-block;
+}
+
+.rmp-link{
+  color:#7aa2ff;
+  text-decoration:underline;
+  font-weight:700;
+}
+.rmp-link:hover{
+  color:#a5beff;
+}
+
+.muted{
+  color:#64748b;
+  margin-top:.6rem;
+}
+
+/* back link */
+.back-link{
+  display:inline-block;
+  color:#e5eeff;
+  margin-bottom:1rem;
+  text-decoration:none;
+  font-weight:700;
+}
+.back-link:hover{text-decoration:underline}
+
+/* earlier stacking breakpoint for small screens */
+@media(max-width:560px){
+  .instructor-row{
+    grid-template-columns:1fr;
+  }
+  .inst-rating{
+    justify-self:start;
+    text-align:left;
+    max-width:100%;
+  }
+}
+.page-title{
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #e5eeff;
+  margin-bottom: .25rem;
+}
+
+.page-subtitle{
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+  font-size: .95rem;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+:host {
+  overflow-y: scroll !important;   /* force scrollbar */
+  overflow-x: hidden;
+  height: 100vh;                   /* full viewport, scroll inside */
+  scrollbar-gutter: stable;        /* reserves space so layout doesn't shift */
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* prevents double scrollbars */
+}
+
+
+:host::-webkit-scrollbar {
+  width: 12px;
+}
+:host::-webkit-scrollbar-track {
+  background: #0b122b;
+}
+:host::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+:host::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+/* 1) Let the WINDOW own the scroll bar */
+html, body {
+  height: auto;               /* allow page to grow with content */
+  min-height: 100%;
+  overflow-y: scroll;         /* always-visible vertical scrollbar */
+  scrollbar-gutter: stable;   /* prevents layout shift on desktop */
+}
+
+/* Make the whole page a vertical flex layout */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Tell your main content area to expand; keep your existing padding there */
+.page-main {
+  flex: 1 0 auto;
+}
+
+/* Footer visuals are already defined by Tailwind utility classes in the HTML.
+   If you want a tiny top shadow: */
+.bb-footer-shadow {
+  box-shadow: 0 -6px 24px rgba(0,0,0,.18);
+}

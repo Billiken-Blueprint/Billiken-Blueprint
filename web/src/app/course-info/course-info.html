@@ -1,0 +1,97 @@
+<a routerLink="/questionnaire" [queryParams]="{ step: 3 }" class="back-link">
+  ← Back to Course Selection
+</a>
+
+
+<h1 class="page-title">Computer Science Required Courses — Spring 2026</h1>
+<p class="page-subtitle">
+  A complete overview of the required CS courses offered at Saint Louis University
+  for the Spring 2026 semester, including meeting times, locations, descriptions,
+  and instructor ratings.
+</p>
+
+
+<section class="course-grid">
+  <article class="course-card" *ngFor="let c of courses(); let i = index">
+    <header class="card-head">
+      <h2 class="title">{{ c.code }} — {{ c.title }}</h2>
+      <span class="credit-pill">{{ c.credits }} credit{{ c.credits === 1 ? '' : 's' }}</span>
+    </header>
+
+    <div class="meta" *ngIf="c.meetingTimes || c.location">
+      <div *ngIf="c.meetingTimes"><strong>Times:</strong> {{ c.meetingTimes }}</div>
+      <div *ngIf="c.location"><strong>Location:</strong> {{ c.location }}</div>
+    </div>
+
+    <div class="actions">
+      <button class="btn-outline" (click)="toggleDesc(i)">
+        {{ c.expandedDesc ? 'Hide description' : 'Course description' }}
+      </button>
+
+      <button class="btn-outline" (click)="toggleInstructors(i)">
+        {{ c.expandedInstructors ? 'Hide instructors' : 'Instructor list' }}
+      </button>
+    </div>
+
+    <!-- Course description -->
+    <section class="details" *ngIf="c.expandedDesc">
+      <div *ngIf="c.description">
+        <h3 class="section-title">Description</h3>
+        <p class="para">{{ c.description }}</p>
+      </div>
+
+      <div *ngIf="c.prerequisites">
+        <h3 class="section-title">Prerequisites</h3>
+        <p class="mono">{{ c.prerequisites }}</p>
+      </div>
+
+      <div *ngIf="c.attributes">
+        <h3 class="section-title">Attributes</h3>
+        <p class="para">{{ c.attributes }}</p>
+      </div>
+    </section>
+
+    <!-- Instructor list with ratings -->
+    <section class="details" *ngIf="c.expandedInstructors">
+      <div class="instructor-row" *ngFor="let inst of c.instructors || []">
+        <div class="inst-main">
+          <p class="inst-name">{{ inst.name }}</p>
+          <p class="inst-line" *ngIf="inst.email">{{ inst.email }}</p>
+          <p class="inst-line" *ngIf="inst.office">{{ inst.office }}</p>
+        </div>
+
+        <div class="inst-rating" *ngIf="inst.rating">
+          <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
+          <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
+          <a *ngIf="inst.rating.rmpUrl" [href]="inst.rating.rmpUrl" target="_blank" rel="noopener" class="rmp-link">
+            See reviews
+          </a>
+        </div>
+      </div>
+
+      <p class="muted" *ngIf="!c.instructors || c.instructors.length === 0">Instructor TBA</p>
+    </section>
+  </article>
+</section>
+
+<div class="page-shell">
+  <!-- optional page title/subtitle -->
+  <main class="page-main">
+    <!-- your existing course grid / content goes here -->
+  </main>
+
+  <!-- footer block pasted here -->
+  <footer class="w-full bg-black/20 border-t border-white/20 flex-shrink-0">
+    <div class="max-w-6xl mx-auto px-8 py-6">
+      <div class="text-center">
+        <p class="text-blue-200 font-inter text-base">
+          Made by the Billiken Blueprint Team for Saint Louis University Billikens
+        </p>
+        <p class="text-blue-300 text-sm mt-2 font-inter">
+          © 2025 Billiken Blueprint. Helping students succeed, one schedule at a time.
+        </p>
+      </div>
+    </div>
+  </footer>
+</div>
+s
