@@ -59,7 +59,7 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
-  private getToken(): string | null {
+  getToken(): string | null {
     return localStorage.getItem('access_token');
   }
 

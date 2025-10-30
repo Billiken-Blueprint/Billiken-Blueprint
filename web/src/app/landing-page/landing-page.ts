@@ -12,7 +12,7 @@ import {CommonModule} from '@angular/common';
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css',
   host: {
-    'class': 'block min-h-screen w-full'
+    'class': 'block w-full h-full'
   }
 })
 export class LandingPage {
