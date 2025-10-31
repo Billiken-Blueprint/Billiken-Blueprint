@@ -1,0 +1,3130 @@
+[
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2999302",
+    "name": "Michael Liljegren",
+    "department": "Computer Science",
+    "overall_rating": 4.4,
+    "num_ratings": 7,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "Fantastic teacher of concepts, but if you are already an experienced programmer you might have to show some restraint. He is very particular about the kind of code he likes and there are some control flow structures he just doesn't allow. Still, he's a great, understanding prof who teaches the course well.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "He is super chill and good at teaching concepts to people who have never coded before. Almost completely a lecture-based class, but if you show up, the homework is easy, and if you do the homework, you will very likely get an A because of how it translates to tests and outside of class coding.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "the homework is easy",
+          "and if you do the homework"
+        ]
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "He is a really good professor who cares that you learn. Don't try going around him though, he will catch you. Otherwise really good professor and extremely accessible outside of class.",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "Extremely understanding and caring about students. Very lecture-heavy course (He also posts lectures on Canvas) with projects and homework assignments (due every 1-2 weeks). 4 exams total and the exams are basically homework questions. Had no experience with Python and got through the class just fine.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 4.0,
+        "difficulty": 1.0,
+        "comment": "Very chill class and professor. I felt the class was a bit easy and moved a little slow but I guess that is to be expected for an intro class. Attendance really isn't mandatory but if you pay attention to his lectures they are great and he provides greats examples. 7 small projects, 15 weekly homework packets, and a total of 4 exams are your grade.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "15 weekly homework packets"
+        ]
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Liljegren is a fantastic professor, EXTREMELY chill, attendance isn't important as long as you are teaching yourself outside of class, and explained Python basics much more than my Intro to CS professor. I disagree with the sentiment that you must know Python before taking his class, he does a great job with starting from scratch. Highly recommend!",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 1.0,
+        "comment": "Liljegren's class is completely lecture based. He teaches straight from pages of notes; he does not teach HOW to code but rather WHAT things do. He teaches as if everyone in an intro class already has experience coding in Python. If you have experience in Python, you'll do well with him as professor, but if not, choose someone else if you can.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3121956",
+    "name": "Hadi Akbarpour",
+    "department": "Computer Science",
+    "overall_rating": 1.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "Unengaging lectures and no clear guidelines. No code in class but will have you create a neural network from scratch in the first assignment. Defers to graduate students on anything. Doesn't require attendance but has surprise pop-quizzes and docks grade for not attending. Extremely soft spoken and boring in class.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2545304",
+    "name": "Jie Hou",
+    "department": "Computer Science",
+    "overall_rating": 4.9,
+    "num_ratings": 9,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "He is literally an angel sent from heaven.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "VERY KIND. Super accessible outside of class. Machine learning is very doable, lenient grading; you just have to prepare well for quizzes & the midterm because memorizing won't work, they are mostly short answers. No final exam. Don't have to be good at coding at all for this class. One of the most organized male professors I have been taught by.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Great professor! Lots of homework, but it is well structured and given plenty of time. Provides relevant material and attentive to student questions so finding solutions are within reach. Class structured to learn, not memorize for a quiz. Follow the course plan, ask questions when needed, and you'll do great and actually learn the material.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Hou is a very good professor who really cares. His class has a lot of homework but if you put in the time it is fully worth it.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Hou cares about what students really learn. When I have questions and reach out to him, I can always find the answer that makes me feel better. Moreover, the course seems really helpful, and I can use machine learning to do some of my research work after taking the course.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5750",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "He cares about students learning in his class, so definitely reach out when you need help on something. Grades things in a reasonable amount of time. If you do the work, you should expect to do well in the class with no unnecessary obstacles.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1020",
+        "quality": 4.0,
+        "difficulty": 1.0,
+        "comment": "Can be hard to understand but he is always super helpful and the nicest guy. He really wants you to do well. Will help you on homework, labs, and tests. Overall great guy.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1020",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "This guy is an amazing professor. You probably won't pass this class if you skip, since most of the work is done in class. He is super helpful with all of the work however. His office hours were extremely helpful this semester and he goes over just about everything you need help with. He always makes sure everyone is on the right track to do well.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1020",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor Hou does a great job keeping you engaged in the class throughout the semester. Come to class, do your homework (homework is roughly worth the same as exams). It isn't too difficult and he really helps you with most of the challenging material. I would take his class again.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/278739",
+    "name": "Michael Goldwasser",
+    "department": "Computer Science",
+    "overall_rating": 4.2,
+    "num_ratings": 24,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Lectures are clear with tons of hands-on practice, and grading comes with good feedback to improve your skill. Willing to work with you on personal circumstances that impact your performance. Cares about making sure you understand the material, you just have to reach out to him and he is responsive. Favorite undergrad prof so far.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "he's a great teacher. he does ramble a lot during lectures but the class is very hands on heavy and you get a lot of practice. there are quizzes every other day but they are with a partner so it's not too bad. there's also homework for every class but it's also pretty easy!",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI180",
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "CSCI-2100 Professor Goldwasser had a huge brain. He is an amazing guy and can explain the most complex things to anyone at any level. That said, during his lectures he does ramble a little bit, but he makes up for it with literally everything else. Would take his class again in a heartbeat, it made my semester fun.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3100",
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "Dr. Goldwasser's brain is so big that it might have its own gravitational pull. Algorithms is very difficult but with this genius on your side it's certainly a doable class. His lectures are clear and he dedicates tons of time to office hours and answering questions in general. Nothing comes easy in this class but resources are always available.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3100",
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "Hands down among the best professors I have ever had. You can tell he is SO passionate about algorithms and really cares about you learning. Having access to his brain in office hours is priceless. Just try your best with everything and do not give up. Best of luck lol",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Best professor in the whole world!! He is so accessible and explains things super well. You can tell he cares a lot about students and is super passionate about teaching. LOVE HIM!!!",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "As chair of computer science department. He is below an average to get to students quires. There are multiple instances of students complaining about him on not attend student needs( grading, course requirement).",
+        "would_take_again": false,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "respectful, happy to help after class ends, clear lecture presentation, easy grader, open book exam. weekly programming , weekly group ,challenging homework",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "clear lecture presentation",
+          "easy grader",
+          "weekly group"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI130",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Goldwasser is a stellar professor who is very passionate about his workings. The weekly programming assignments are fun for the most part. But, this class has had the most daily homework out of any class I've taken in undergraduate thus far. Every night except Wednesday you have written homework or required reading for a score. Would take!",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI314",
+        "quality": 4.5,
+        "difficulty": 5.0,
+        "comment": "His Algorithms course was very difficult. There were 6 homework assignments (which take 20 hours each) throughout the year, due every other week. The final was also very difficult; the questions were doable but we weren't given nearly enough time (I don't think anyone finished it in time). I did learn a lot from the class, though.",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Goldwasser is brilliant. Because of this, he overlooks some of the parts of programming that came naturally to him but others have difficulty with. Other than that, he's extremely helpful, consistent, and fair. I felt more than welcome to drop by his office and he would drop everything he's doing and answer every possible question I had.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS150",
+        "quality": 4.5,
+        "difficulty": 4.0,
+        "comment": "Do not work together or copy a single word from anybody/any source. he is soo smart he has incredible ways to catch you. however he is a very good teacher, passionate about his subject. google his name and you will find his website",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSI150",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Really cool guy. Test and quizzes are pretty straight forward right from the text, just do the work and you will be fine.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 2.5,
+        "difficulty": 4.0,
+        "comment": "Great professor. Absolutely the most willing to help out of any class at SLU I've taken. I'd email him at 3 or 4 in the morning, and he'd respond 10 minutes later. He uses great examples, and the programs, although challenging, are interesting and he will help you out. He can be scattered all over the place, but the book is a great reference.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Class is A LOT of work. A LOT of work. But it's extremely fun, and prof. is very very helpful! He even wrote the textbook for the class. He's an extremely brilliant guy, and you can tell that he has such a passion for computer science. He is inspiring me to seriously consider adding a cs major to my current mathematics major.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI180",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "If you've taken the 145/146 route, this class is review. Goldwasser has a pleasant voice, so you'll at least be in a good mood if you doze off in lectures. Homework isn't bad, he obviously enjoys the subject, and gives good examples. The work is challenging but not impossible, especially if you ask him questions by email. He's extremely helpful.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI140",
+        "quality": 4.5,
+        "difficulty": 3.0,
+        "comment": "Dr. Goldwasser is awesome! I enjoyed his Intro to CS class very much, and I got an awesome grade. His homework assignments were easy, but did require some thought. He also offered extra credit on every hw assignment, and the tests were almost exactly like the hw. I took his class as a recommendation, and enjoyed it.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI140",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "Prof Goldwasser is a good guy. His lectures can be dry and boring sometimes, but overall he does pretty good at teaching and answering questions. His tests haven't been very hard, they come almost straight from the homework. I selected his specific section on the recommendation of an upper classmen and I have to say i'm not disappointed.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI180",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "Not a bad guy just the class was not well orgnaized. The homeworks and programs have very little to do with what is taught in class. The programs are hard cause he never goes over anything to relate with them in class. The test you pretty much just got hope you study the right stuff. Do like how he keeps track of your grades and posts it for you.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "A really nice teacher. if you have previous programmign experience, this class is a blow off class. otherwise, might have to pay a little attention in class. he is really smart and goes into a lot of detail that probably isnt necessary for the test. tests are not too bad but grades a little hard on them. VERY appriachable.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Very cool guy, and always willing to help by e-mail or during his office hours.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSP125",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "This class is hard...if you have had no prev. prog. exp. Go to his office hours he will help! Really nice guy!",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "great guy, very nice",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "bad news.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2934055",
+    "name": "Asad Rehman",
+    "department": "Computer Science",
+    "overall_rating": 1.2,
+    "num_ratings": 9,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "Mediocre feedback",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "He's okay. Not as bad as the other reviews, but probably because I didn't take him for a programming class, just Principles of Computing Systems. He's not really mean, he just doesn't express himself very well. His quizzes are easy but exams a little harder but not bad if you just study the slides. Assignments graded easily. Kind of repetitive.",
+        "would_take_again": null,
+        "grade": "D",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "poor feedback and arrives late for lectures",
+        "would_take_again": null,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "No empathy. Yelled at students asking for clarification on his UNCLEAR instruction. Late for his own class, wasting our educational time. Very test heavy course with pop quizzes, however most of our learning and preparation for this was independent as he wasn't very knowledgable about the material and did not teach it well.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "This was for CSCI-2510 and he was the worst professor I have ever had. Expectations were unclear, he couldn't answer a question to save his life. If you can avoid having him as a professor run as far away as you can. He is not worth your time, he is super smart but he does not understand how to teach.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "His teaching style lacks structure. The slides are helpful, but anything he shows should be explained in full clarity. He's occasionally late to his own lecture and put topics on the final exam he didn't teach. I'm not surprised by all the other negative reviews. Take this class if you already have strong knowledge in Python since he barely teaches",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "He only reads off of ppts without actually explaining anything. Gives no concrete answer for doubts asked in the class and is not able to explain even the basics of the course with clarity. The tests are so much more complicated than what is given in the ppts. There is no feedback given for quizzes and assignments even when prompted.",
+        "would_take_again": null,
+        "grade": "C+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "This professor has absolutely no clue about the subject itself. He reads off his presentation and gives students terrible grades. I would love to see him solve one of his own tests",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "This has been genuinely the worst Comp Sci Class I have ever taken. I have taken Intro to comp Sci at the university level three times now, and never thought it could be as bad as this. He barely teaches, and half the time gives wrong information. Don't even think about getting a perfect score, he said \"You can't be perfect, I don't give perfect.\"",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2495692",
+    "name": "Ekaterina Holdener",
+    "department": "Computer Science",
+    "overall_rating": 4.5,
+    "num_ratings": 11,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI4961",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Amazing and extremely patient! Capstone takes hours of work because you are working on real projects for real clients, but Holdener was supportive and responsive during this whole process! She is great at guiding students in the right direction, but she's extremely strict. No extra credit, no extended deadlines, and she won't hand you the answers.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": [
+          "no extended deadlines"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor Holdener is passionate about teaching and wants her students to succeed. She's strict with deadlines but super understanding if you reach out. Exams are very similar to the practice, and she gives quiz questions ahead of time. Homework and labs are manageable, though they can take some time. She makes content easy to understand.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI4961",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "You can tell that she cares a lot about the success of her students and their projects. Honestly as long as you give a good effort you'll be fine in the Capstone class.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "One of the best cs professors at SLU. She's very passionate about teaching the subject and is great at teaching it. There are about 8 major homework assignments, 8 labs (smaller coding assignments), 8 quizzes over the lecture, reading, etc. and a group project during the second half of the semester.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "8 quizzes over the lecture",
+          "reading"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Holdener is a great teacher with a very sarcastic sense of humor and you will learn a ton in this class. The assignments can be really tough, but as long as you go to office hours when confused you will be alright. Make sure you start the midterm project early and meet with your group often.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "I found her organization of the Capstone class to be frustrating to say the least. It is an incredibly valuable experience, but it requires some intense time management from the groups such that a 2 credit class easily becomes 6 credits worth of time. This class would be MUCH better if class time was reserved for group work.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "She is pleasant and will help but she is very strict with deadlines and there is almost no make-up. You cannot submit any work late or it will be a zero.",
+        "would_take_again": null,
+        "grade": "A+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "The best professor I have ever had. You can clearly tell she loves teaching and helping students succeed.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI230",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "Really nice professor and explained things pretty well. The class was an easy A. If anything I felt like more topics could have been covered. The group project at the end of the semester gave me a lot of practice in programming.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Probably the best professor I've ever had...",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Class is pretty good. She's a good lecturer. There's a homework assignment and quiz every week for the first 8 weeks of the class. Midterm was kind of difficult, but the final wasn't as bad. The second half of the semester is a group project. You get a lot of time to work on it but if you don't stay caught up it can be hard to finish. Random groups",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3010174",
+    "name": "Qinglei Cao",
+    "department": "Computer Science",
+    "overall_rating": 2.9,
+    "num_ratings": 7,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "Best proffessor at SLU! I recommend taking this class 100%. The Lectures were a breeze, and he was available during his office hours most of the time. The class was organized according to the syllabus, and there wasn't much change. Overall I highly recommend taking this class. One of the best CS prof.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor Cao is a brilliant scholar of computer science. I went into every lecture excited to hear what concepts he would teach us that day. The homework assignments are very interesting and engaging while also including fun, but sometimes difficult, extra credit opportunities. I would highly recommend taking Qinglei Cao for any class.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "He is generally unengaging in his speech and difficult to understand. His lectures were difficult to follow, as Cao breezed through each topic with either very little elaboration or complex elaboration that only he could follow. He explained topics as if he were giving us a reminder, not as if he was teaching us. His homework assignments were fine.",
+        "would_take_again": null,
+        "grade": "D",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "just don't",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "Avoid this professor. The class is disorganized, with assignments that don't align with the lectures, which are outdated and hard to follow. He's difficult to understand and not accessible outside of class, making it hard to get help or actually learn the material. One of the worst Computer Science professors at SLU.",
+        "would_take_again": null,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "This class is conducted with very little organization and thought. Day to day class consist of unengaging lectures and that do not coincide with the homework assignments. The syllabus was not followed and grading guidelines changed a few times during semester. Questions where never answered directly but often deflected no matter the topic.",
+        "would_take_again": null,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5620",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Cao is a really great professor. He's also flexible. I took Distributed Computing and he made the material easy to understand. For attendance you only need to be there for 5 out of 8 attendance checks. Assignments are not hard though the project is a bit long and much more challenging. For the exams you'll be okay if you read the slides.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3050550",
+    "name": "Thomas Johnson",
+    "department": "Computer Science",
+    "overall_rating": 2.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1000",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "do not take this class if you are just starting off in cs. he rushes through basic principles and doesn't really explain anything. his lectures are boring and don't relate to topic material",
+        "would_take_again": null,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2867001",
+    "name": "Wei Wang",
+    "department": "Computer Science",
+    "overall_rating": 4.0,
+    "num_ratings": 4,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor Wang is strict and to the point, which can seem harsh, but he's a good professor. He's a bit hard to understand at times, but his slides are clear. Homework is easy and the tests are exactly like the practice exams. He also allows a cheat sheet. I'd definitely recommend him for Data Structures if you're aiming for an A.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "Hard to understand and is not helpful at all during office hours. PLEASE take with any other prof at SLU!",
+        "would_take_again": null,
+        "grade": "B",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "take his csci2100! He know how to teach!",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "I took him for Data Structures. He is an amazing professor. Go to his office hours. He gives lots of homework. If you attend his classes and do your homework you will get an A.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2883494",
+    "name": "Mainul Mamun",
+    "department": "Computer Science",
+    "overall_rating": 1.0,
+    "num_ratings": 5,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "Prof Mamun is one of the most unhelpfu professors i've ever had. He is awful at communicating deadlines, assignmets, exams, etc. along with being very unorganized and not communicating expecations well, the class is a joke. It's completely student ran and he relies heavily on his TA in an, in my opinion, unprofessional fashion.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "The worst professor in the department. He made his TA's do everything. Incredibly disorganized. Never showed up to lecture and when he did he just read off of the slides and made the graduate students finish the sentence. Seemed like he never knew what was going on.",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "Professor Manum does not show up to over half of the classes, even though he expects you to be there. He makes the TAs lead class, and when he does teach, it is just reading off of a set of presentation slides and sometimes he'll pause for you to answer a question he doesn't properly set up. Overall, try to avoid him if you can.",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "He asks way too personal questions, and makes female students uncomfortable.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "You probably won't be able to avoid him. Quite literally the worst professor in the department. Instead of teaching, just reads the slide and has you finish the sentence. Doesn't listen/care about a word you have to say. Interrupts you. Shuts you off. Tells you to leave. You're not worth his time. No wonder required sensibility training last sem.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3005607",
+    "name": "Atanas Karaguiozov",
+    "department": "Computer Science",
+    "overall_rating": 4.0,
+    "num_ratings": 3,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1010",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Highly accessible, even outside his office hours. He cares about his students and tries his best to make the dull material come as alive can be. He had a word with everyone who got a low score for the midterm exam and was willing to give extra credit projects. Lecture and project material was very well prepared.",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1010",
+        "quality": 3.0,
+        "difficulty": 2.0,
+        "comment": "He's a very nice guy, but that's about where it ends. It's clear he cares about the students and the subject, but he tends to ramble or \"beat a dead horse\" which can make lectures a bit long or dull. Overall though he's a kind, helpful professor and it's a simple, easy class even if it's boring.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1010",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "I enjoyed this class. The lectures can be a little slow or fast depending on the person. I think it being an early morning class did not help. The homeworks were not very difficult and he was always willing to help.",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2955708",
+    "name": "Alexis McKenzie",
+    "department": "Computer Science",
+    "overall_rating": 3.6,
+    "num_ratings": 7,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 2.0,
+        "difficulty": 2.0,
+        "comment": "I think overall she is not terrible, however, if you are new to coding it can be very difficult at times since the class is so very fast paced. She gives a lot of extra credit opportunities . Although, sometimes she can be rude when you ask for help.",
+        "would_take_again": null,
+        "grade": "C+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "CSCI1070 is a hard class, but getting an A or B is possible if you put in the effort. prior CS or math knowledge helps. quizzes and the midterm were difficult and the assignments were time consuming, but if you follow her notes from class you'll do fine. shes passionate about what she teaches and is helpful if youre struggling",
+        "would_take_again": true,
+        "grade": "B",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "She is a tough professor, and I felt that CSCI1070 was way too difficult for an intro course, especially with no prior coding experience. However, you can tell that she's passionate about coding, and I felt like she was trying to bridge the knowledge gap. She is funny but does not tolerate nonsense. The TA, Peyton, was also great.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 2.0,
+        "difficulty": 5.0,
+        "comment": "I will never take this teacher ever since her lectures are really long and wayy too much information given for an intro to class.",
+        "would_take_again": null,
+        "grade": "C+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "If your new to coding you will struggle. For an intro class, she made it difficult. Its easy in the beginning but gets harder as you go. Doesn't give extensions. Rude at times. Has a hard midterm. Office hours after class ends (adjunct). Lecture reflects assignments by 10%. Gives Extra credit. Just go to the free CS tutoring and you'll do fine.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Professor McKenzie is a great instructor, and I'd definitely recommend her if you're interested in Computer Science. Some things to know: - She is very accessible/helpful - There are in-class quizzes (though they're not particularly hard) - There is TONS of extra credit offered - Lots of homework - Rarely used textbook",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Professor McKenzie is very passionate about the subject she teaches. CSCI_1070 is very homework heavy, but if you pay attention in the lectures the homework is fairly straight forward. The professor also offers a LOT of extra credit.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2351201",
+    "name": "Tae-Hyuk (Ted) Ahn",
+    "department": "Computer Science",
+    "overall_rating": 3.5,
+    "num_ratings": 8,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Professor Ted Ahn goes above and beyond to ensure his students succeed. His thoughtfulness and patience create a supportive learning environment. He truly cares about each student's progress and always makes himself available for help.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "DO NOT TAKE, he refuses to tell you what's on the test and is very vague, you will be up all night studying the slides and only for it to be some niche problem he talked about in class once. HARD EXAMS, NO study guide or if there is one, what's on it won't even be on the test. NO study tools. NO telling you what's on the test.",
+        "would_take_again": null,
+        "grade": "B",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1020",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "He is one of those profs that are too smart for the class they are teaching. His background is insane, so him teaching an intro course was a lot. I didn't realize how fast he was going until I started taking CSCI1300 and we were going way more in depth on the basics that he glazed over. Overall he is extremely nice and class is not hard to pass.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI4620",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Ahn is generally very fair but the lectures are dense and involve a lot of things that actually aren't even tested on. The exams can be pretty tricky but he understands that when everyone in the room is struggling that perhaps the questions were a bit difficult. Honestly I'd recommend choosing a different systems elective.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1020",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "Professor Ahn is very competent in bioinformatics and explaining the topics to students. Attending class will give you most of what you need to know for the many assignments, though a few are too difficult for what you have been taught. His help can be hit or miss. Overall, though, pretty good professor, and I would recommend him.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Good professor, can be a bit hard to understand but is good as long as you pay attention. Tests are pretty standard, not terrible but can challenge you. Lots of assignments but they usually aren't difficult. Some labs can be difficult.",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "Nice prof, tries his best to help students. Lectures can be boring and labs can be hard, he gives you a few days to finish lab assignments if you don't finish them during the lab session, but some of those assignments might require more than a few days to think of a working solution, so reach out for help ASAP. Also gave out candies for Halloween(:",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Good lectures!",
+        "would_take_again": false,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3036772",
+    "name": "Allison Richardet",
+    "department": "Computer Science",
+    "overall_rating": 1.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 2.0,
+        "comment": "Most underwhelming class I have ever taken at SLU. This class is a joke.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2199472",
+    "name": "David Ferry",
+    "department": "Computer Science",
+    "overall_rating": 3.0,
+    "num_ratings": 19,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CORE1000",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Dr. Ferry's CORE1000 The Most Human Computer class was the best CORE1000 class I could've taken. It's intended for CS majors but I am not one and still enjoyed it thoroughly. His teaching style is unique and kept me engaged and thinking. The class is not difficult by any means, he offers great feedback if you ask for it and is a kind person",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Ferry is a great person, but not the greatest professor. His teaching style is very interesting and very abstract, to say the least. Thinking of questions to ask was a little hard because I wouldn't know what to ask exactly. The labs and studios he wrote were helpful for my learning. Overall great class with Dr. Ferry.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CORE1000",
+        "quality": 3.0,
+        "difficulty": 1.0,
+        "comment": "For the Ignite Seminar The Most Human Computer to double as an intro CSCI class, it would make more sense to code more than read, but that's not the case with this class. In total, we coded maybe 6 times total. Prof. Ferry taught some interesting material, but he just wasn't engaging enough unfortunately.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 2.0,
+        "difficulty": 5.0,
+        "comment": "Dr. Ferry is a very nice and supportive professor, but his Computer Systems course is unnecessarily difficult. Most of the lectures are spent answering homework questions because he doesn't teach you how to do the homework. The entire class is coding in C with Linux system calls, so find his SLU-CS CSCI2510 website and do the assignments early.",
+        "would_take_again": null,
+        "grade": "D",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2510",
+        "quality": 4.0,
+        "difficulty": 1.0,
+        "comment": "He kinda just gave up on teaching us, and it was hilarious. We ended up getting so many assignments cancelled, and he cancelled our midterm and final. If you went to lectures, you learned. If you didn't understand the homework, he would do it for you in office hours while explaining thoroughly. He is just really chill and a good vibe.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CORE1000",
+        "quality": 2.0,
+        "difficulty": 1.0,
+        "comment": "Didn't really do much the entire semester, mostly just lectures and I would just do other homework during the class. Didn't really learn much at all but class is extremely easy, literally like 10 or so assignments total.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CORE1000",
+        "quality": 3.0,
+        "difficulty": 2.0,
+        "comment": "He's a cool guy, but his class is very forgettable. Waits forever to assign work and grade it. Didn't assign our first homework until halfway through the semester, despite the original due date being over a month prior. On the lazier side, but your grade isn't really an issue. He's a really nice guy, just isn't teacher-material.",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3500",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "His Operating Systems class is definitely a journey. The content is quite hard, but he is a good lecturer and gives tons of class time to ask questions on studios and labs. He explains exactly what you need to do in the labs; you just have to piece it all together. To succeed, you should start working on things EARLY. Putting it off WILL swamp you.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1060",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "Does not give any expectations for hw, and hw isn't graded until the last week of classes.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1060",
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "The main problem I had with him was that it took him quite a while to get things graded. This made it unclear exactly what he was looking for, but once he did get around to grading, he is very lenient.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5030",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "He does a lot of ummms when lecturing, which makes it easy to lose your attention and space out in class. He does try his best to explain the materials tho. You do have 1 large group assignment in the class, but it shouldnt be hard and is only for practicing Agile principles. As long as you kinda get whats being taught, you should be able topass.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5030",
+        "quality": 1.0,
+        "difficulty": 1.0,
+        "comment": "Worst professor in the universe. Please don't take any of his classes.",
+        "would_take_again": false,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5030",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "He don't know what he wants from the students. The lectures were boring and seems like someone is just reading the slides without even explaining anything. If you are thinking of taking this class I would say wait for the professor to change else you will regret in the end. He will never explain you if you have any extra doubts.",
+        "would_take_again": false,
+        "grade": "A-",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5030",
+        "quality": 1.0,
+        "difficulty": 1.0,
+        "comment": "The way he teaches will make you sleep in the class. The class we took was supposed to be taught by Dr. Scannell but he was on leave so Dr. Ferry taught this course. Being honest I would say that I learned nothing from the class. Everything I wrote in exams was related to my past experience and 0% from class. Also, he don't know what he expects.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1060",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "He is a good and very clear teacher who does care that you understand the topic. However, his hw assignments are very difficult, especially when compared to Sukadulski (The other intro teacher who is extremely easy). Also he is very monotone and doesn't really have a sense of humor. Lastly its typically unclear exactly what he wants in hw.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2400",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Had him for comp architecture and he made the class fair. It is a boring subject but i believe he tried his best to make it fun. I wish he would do more examples on the board and not just talk about the slides the whole time. He is also a little inconsistent on grading. If you do the hw you will pass at minimum.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1060",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "Good guy, he enjoys what he teaches and likes to make sure students understand what he's teaching. He is an easy grader and will help you whenever you request it. Doesn't seem to mind at all if you skip a lot and is chill about you working on other stuff in class.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2400",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "Super nice guy. Lectures are long, but they get the job done. Once you're through the brunt of the lectures for the course, the coding assignments are fun and challenging, and tie in nicely with the lectures. Comp Arch might be one of the more boring CS courses, but Mr. Ferry makes it a good experience.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3500",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "One of my favorite CS professors that I've had. Lectures are clear, studios help you understand the material, and labs allow you to put the concepts into practice. Very helpful outside of class.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2656616",
+    "name": "Abby Stylianou",
+    "department": "Computer Science",
+    "overall_rating": 2.5,
+    "num_ratings": 8,
+    "reviews": [
+      {
+        "date": "CSCI 4740",
+        "course": "CSCI1070",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "Had her for Intro to AI CSCI 4740. She is a good professor who clearly cares a lot about the topic. I think she is a bit hamstrung by her class as it follows the Berkley AI course and it is a bit outdated. She is probably the most enthusiastic Computer Science professor you will have.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "Has a bad attitude & is rude to students asking for help on something she might find \"easy and simple\". The arrogance and disrespect she shows overshadow the admirable work she does. She is extremely talented but snarky & has an ego. Had to drop the class because she was so rude & she talked about students in class mockily when they asked for help.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 2.0,
+        "difficulty": 5.0,
+        "comment": "class: AI 4740 Dr. Stylianou displayed favoritism, shamed struggling students, disregarded their effort and labeled them as bad students. Her focus on academic integrity overshadowed ensuring actual understanding of the material, creating a stressful environment that left many, including myself, mentally exhausted and struggling to keep up.",
+        "would_take_again": null,
+        "grade": "D+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "never respond to mail or slack and her classes are very basic and exams are tough ,",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "worst every please skip this class",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Databases with her is not difficult at all. Her lectures tend to be a little bit boring but that's mostly due to the content. She is definitely a fair grader and only asks questions on the midterm that you should know how to answer. Don't cheat in her class though - disrespectful and you will get slammed with an academic integrity violation.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "Lectures are extremely boring and generally not helpful for the assignments or midterm. Lectures either go off topic or talk about things in length that you dont need to know. There are very few assignments. There is no final but instead there is a group project which is fine as long as you get assigned to a good group.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "She's an associate professor who's very passionate about her work. Sometimes she goes off-topic and gets political instead of focusing on the lecture. If you watch the lectures and do the homework, you'll pass 100%.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/758149",
+    "name": "Jason Fritts",
+    "department": "Computer Science",
+    "overall_rating": 4.1,
+    "num_ratings": 19,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "CSCI-2510 This professor is amazing, but the material is very difficult and everything you do in the class is worth a lot of points. The professor will explain super complex things to you very simply and thoroughly in his office hours. I would recommend the professor to anyone, just know that the class itself is very difficult.",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3930",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Dr. Fritts is an amazing professor that cares deeply about helping each student succeed. Classes are very informal, and he spends less time lecturing than he does going around the room and helping people individually. His classes are low-stress, not too difficult, and genuinely very interesting. He's what a comsci professor should be.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI240",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Very easy class as long as you do the work. He is a really nice guy and wants you to succeed.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2400",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Dr. Fritts is the man! You can tell he really wants everyone to succeed and that he wants his lectures to come across as understandable. Fair in every sense of the word. Comp Architecture is not the most interesting topic but the nice part is that answers are generally very formulaic by nature. He doesn't look to trip anyone up with trick questions",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI240",
+        "quality": 2.0,
+        "difficulty": 3.0,
+        "comment": "I took this class online, but I was not very impressed. The professor is a friendly guy and is willing to work with you, but he is not a great lecturer. There were a lot of mistakes in the slides/homework and he was constantly having to correct them. The textbook was not very helpful and I feel like I didn't learn as much as I could have.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI240",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Exams are taken directly from homeworks and readings. If you've done them sucessfully, you'll be fine on the exams.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI224",
+        "quality": 4.5,
+        "difficulty": 4.0,
+        "comment": "He is an awesome guy and a great teacher. The course I took was very difficult though. Make sure you go see him in his office hours as soon as you don't understand something so he can help you. Also, he writes fast. Make sure you pay attention.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSC130",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Great Professor. Goes above and beyond what is expected of a professor in order to help his students. Class can be a little boring at times, but he presents the material in a very clear and understandable fashion. Highly recommended",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI104",
+        "quality": 4.5,
+        "difficulty": 3.0,
+        "comment": "Brilliant man. His class can be confusing, but he's always really willing to help during office hours. Assignments aren't too bad. Just sit close because he writes small and quickly.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "Sit up close to take notes; he writes quickly and has a soft voice. Class is boring, but he is a very nice guy and is extremely willing to help.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS100",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "Hard but very interesting. I didn't know that much going in but once I left each day I was really interested in what we learned. Some of the topics are confusing and he isn't the best person to clarify them. He is almost too smart to be teaching this class but he is very good and I would highly recommend him.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI130",
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "Fun guy; lets you choose what information you cover in class. Incredibly helpful with computer issues.I would recommend him to anyone with an interest in comsci.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI130",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Excellent man. ALWAYS willing to help and extremely understanding with homework. Lectures were interesting due to the information he provided. He has great interest in the subject and wouldn't recommend anyone else but him!!",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI293",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "Nice Guy,, but this class teaching computer games was not fun as i thought it should be.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI305",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "I had him for intro to CS and microprocessors, an enjoyed them for the most part. He was extremely helpful if you asked and a very likable guy.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "EE305",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Awesome professor. The subject was very hard (for me anyways) but he is always willing to help and is very friendly. Uber cool guy.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "Cool guy.. Terrible professor.. TERRIBLE",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "No Comments",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "One of my favorite professors just on a personality standpoint. Subject was waaay to simple for him to be teaching however, which made the class difficult to understand sometimes. I think he tried to simplify some things too much, which confused some of the class. Awesome guy, extremely nice. Willing to help anybody anytime, and will smile.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2983467",
+    "name": "Patrick Cuba",
+    "department": "Computer Science",
+    "overall_rating": 5.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Genuinely committed to each student's success.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2426527",
+    "name": "Reza Tourani",
+    "department": "Computer Science",
+    "overall_rating": 4.7,
+    "num_ratings": 6,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1025",
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "Class is easy. Mostly a slides based class; attendance isn't mandatory but the slides are all in bullet points with no context so you'll probably want to attend class. Around the half way point you get a lab every week or two which require a partner. You'll really only use the linux terminal, and the most programming you do is learning variables.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1025",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "A great first-semester class, easy enough to follow since I had a computer science background. I think it was less easy for people who came in with no background knowledge, but the professor was accessible and made all PowerPoints available online to review the information. Only one exam during the whole semester, so make sure to study for that.",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1025",
+        "quality": 4.0,
+        "difficulty": 2.0,
+        "comment": "Professor Reza Tourani was a great intro teacher. His cybersecurity class was primarily graded by homework and labs with a few quizzes and a final. He does a great job of introducing cybersecurity topics along with laying the foundation for future coding classes.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5650",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Amazing professor, very patient, accessible during office hours and even during holidays, He will make sure you understand all subject very Caring, If you plan to go for a Ph.D. he will provide you with many research opportunities, and if you plan to work in the industry he will recommend few books to help you with the job interview I am grateful",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Professor Tourani is really willing to help you. He's more interested in you learning the material than failing you (or giving a grade for the matter). Really helpful in office hours too. He's got really bad jokes though so watch out. Like not funny jokes. Great guy nevertheless.",
+        "would_take_again": true,
+        "grade": "F",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "He was new the year I had him so he was still figuring things out. He was a good lecturer with clear explanations and plenty of examples. The class had a heavy workload with a lab every week and homework assignments every week and a half. If you get started early you'll be okay. Spend at least ten hours a week outside of class coding.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2381513",
+    "name": "Flavio Esposito",
+    "department": "Computer Science",
+    "overall_rating": 4.2,
+    "num_ratings": 13,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CS4930",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor is the best for the web development, he is very interactive and helpfull",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1080",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Esposito can be difficult to understand at times but in general shows an interest in his students' success. I didn't feel like the homework was particularly overwhelming and the final was laid out pretty clearly. he even said he wanted everyone to get a good grade and is was pretty flexible when i had other finals going on",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5530",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "I had the privilege of being a student of Dr. Esposito, and I can confidently say that he is a remarkable researcher and a great lecturer. Dr. Esposito brings a wonderful sense of humor nature to the classroom, making lectures enjoyable. He encourages his students to work hard, but he's very caring and always available to address any concern",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5530",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr Esposito is a fantastic professor. I did attend all the lectures as he can explain complex concepts in an easy way. Attending the class and using the material is fundamental to success. He always talks about his research and makes the lectures stimulating and interesting. Definitely recommended!",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5530",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Esposito is an excellent professor! I've been attending all the lectures because he teaches complex concepts in a simple way. Attending the class and using the provided resources is recommended for success. He constantly mentions his research and makes the lectures stimulating and engaging. Definitely recommended !",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS4930",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "Note: course code is 4360 (Web technologies) but wasn't listed as an option Esposito is amusing but also comes off as very snarky and overly sarcastic. He made me feel rather uncomfortable to answer/ask questions. Pace of learning was way too fast and did not communicate ideas very clearly. Grading wasn't too harsh, but I do not recommend.",
+        "would_take_again": null,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5530",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Esposito is a brilliant and passionate researcher and lecturer. He knows how to transmit his knowledge to his students. He's always available to give some more explanation and help with complex topics. He's a true expert in his field (computer networks and security), and his lessons are always truly interesting with a lot of practice.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI4530",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Esposito is a great professor, and you can tell he really cares about his students. He is very approachable and makes time for office hours. Honestly, one of my favorite professors at SLU. His classes are challenging but manageable if you do the homework and go to class. Biggest tip is to start homework's early so you can ask for help if needed",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5360",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Dr. Flavio is a great guy. He genuinely cares about his students, provides useful feedback, encourages, raises confidence, etc. Moreover, he is extremely knowledgeable and is up-to-date with technologies that aren't even a focus of his research. Also, he is very well organized: expectations and requirements are clear,slides with useful refs,etc.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS4930",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "Avoid this instructor. He comes to class unprepared, having not checked slides since teaching same class 2 yrs ago. It results in him trying to recall the material on the fly that he is supposed to teach. You will learn better from online sources for free. He teaches React by copy-pasting code from a textbook and often not understanding himself",
+        "would_take_again": false,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI5650",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "He can be funny at times in lectures. Homeworks and labs aren't hard but you have to start them early in case you get stuck and need to ask for help. His exams are known to have a few trick questions so make sure you read carefully (tho kinda hard to do given the limited time). Overall, he is a nice guy who cares about his students learning.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1080",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Esposito is incredibly intelligent, albeit a little vague at times in the structure of his lectures. Any worries you have, however, can easily be addressed by going to his office hours. He is very interested in individual students' development and really cares about the educational process. Highly recommend taking his classes if possible.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1080",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Stellar Web Development teacher. Easy grader, and really cared about his students understanding material. Gave us study guides for midterm/final, and always clearly laid out what was expected. Not much effort needed. We only had 5 homeworks, and he dropped the lowest. Absolutely would take again, highly recommend his Intro to Web Development Class!",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2115336",
+    "name": "Judy Etchison",
+    "department": "Computer Science",
+    "overall_rating": 3.3,
+    "num_ratings": 6,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 2.0,
+        "difficulty": 1.0,
+        "comment": "She has a very old school style to her work. She made us switch our PROGRAMMING class to only written weekly quizzes because of alleged cheating. Class was incredibly boring especially if you have any background in python.",
+        "would_take_again": null,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Professor Judy is passionate about the field and has lots of experience in the cs industry, so not only will you be learning course materials, but you'll get a glimpse into what goes on in the field in the real world. There are homework and lab quizzes every week, but they're pretty easy if you've been attending class and doing some reading.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "You learn a lot in this class and it is enjoyable. 1st half is easy 2nd half is more difficult so just be ready for that, don't get complacent. Go to every class and pay attention, if you skip class and get behind your grade will suffer. Overall, good class and would recommend.",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 2.5,
+        "difficulty": 4.0,
+        "comment": "Judy tries her best to help her students understand Python, however she is not clear on what she wants on homework, projects, and tests. Expect a lot of coding and the projects will take a lot of time. Tests are open book. Not an easy A by any means.",
+        "would_take_again": null,
+        "grade": "B",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "projects"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 2.5,
+        "difficulty": 3.0,
+        "comment": "Judy is a professor with good intentions and is passionate about teaching but sometimes fails to explain things clearly. The lectures tend to be far more simple than the homework and the exams can be tough because you need to write code on paper. Definitely plan on using tutoring for the seven projects. Definitely not an easy A.",
+        "would_take_again": null,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 3.5,
+        "difficulty": 4.0,
+        "comment": "She's very nice and has good intentions, but she's not the best teacher. She teaches the class too simple and watered down and gives extremely tough homework and projects which you prob need at least some background on python coming in and you can't work collaboratively. Very tough grader. Don't be fooled by the first 2 weeks. It is no easy class.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/1200581",
+    "name": "Kevin Scannell",
+    "department": "Computer Science",
+    "overall_rating": 4.7,
+    "num_ratings": 14,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Awesome professor, very flexible and offers good feedback. He is thorough in his lectures and he is eager to help if you don't understand something. Just show up and pay attention to the lectures and you'll do good on his weekly quizzes, he will give 2 end of semester projects which he grades generously, but you will have to know the course content",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "An incredibly amazing professor. he will never make you feel dumb for asking questions and is incredibly easy to reach. if you take good notes you will be fine on the weekly quizzes. he doesnt do trick questions. weekly quizzes and two projects",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Kevin Scannell? More like King Scannell. He's so humble for such an intelligent man and will never make you feel stupid for not knowing something. you have a quiz every week, but no tests or finals. Just 2 projects at the end of the semester. please do not make the same mistake I did, GO TO OFFICE HOURS if you are new to the computer science world.",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "He's awesome. Grades easy as long as you do the work. Has quizzes every week but if you pay attention they are easy. He emails back super quick out of class and is overall a really easygoing guy.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": "CSCI 3200",
+        "course": "CSCI290",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Dr. Scannell is absolutely awesome. I had him for CSCI 3200 and his lectures were clear and enjoyable. His passion really shines through and I think that makes any class a lot better. He definitely wants you to succeed and will help you with anything. If you're a CS major, you would be missing out if you didn't take a class from this man.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI1070",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "He explains concepts easily and his labs are interesting. As long as you attend lectures and do the labs the quizzes will be fine. He also gives prizes to winners of the class competition and they are pretty sweet! It's worth putting some extra work in besides getting you good grades",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Scannell is easily my favorite professor that I have ever had. As long as you do his homework, his class is fairly easy.",
+        "would_take_again": true,
+        "grade": "A-",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Very knowledgeable. He explains code and goes in detail about what is going on in class. His exams and quizzes were actually more theory rather than code (good thing!). I highly recommend taking good notes and using that as a study guide for quizzes. The labs should also be tried to your best ability. Great guy!",
+        "would_take_again": true,
+        "grade": "B",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "Lectures were basically from the book. Take good notes in class, understand them, and finish the labs each week--you don't want to fall behind because most them build up on each other. Prof is available a lot of the time and is really helpful if you ask him questions in person. Had a quiz every few weeks, midterm, 1 assignment, and final.",
+        "would_take_again": false,
+        "grade": "D",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI290",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Scannell is the man. You should definitely take him if you have a chance. He is extremely passionate about computer science and really wants his students to succeed. It's not a very difficult class, but you'll learn a lot if you want to. Grading consisted of about 7 quizzes, 1 project, and a final.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": null,
+        "tags": [
+          "1 project"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CS150",
+        "quality": 3.5,
+        "difficulty": 3.0,
+        "comment": "Homework once a week, Scannell is very informative and is willing to help at all times. Make sure to email him every time you have a question on the assignments. Pay attention in class and take good notes and you should be fine.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Favorite professor this semester. Light homework due once a week, no quizzes. Very clear lectures, plus he always relates them to real world applications. He is very knowledgeable and enthusiastic about the subject.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": [
+          "no quizzes. Very clear lectures"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI150",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Great course, great teacher",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS140",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "He doesn't use the book for much, but he gives lots of examples, is very helpful via email, and grades very leniently. He seems more concerned with whether people learn than what they get on tests. One has to take very good notes and ask questions early in his classes to excell. Overall, he's a great CS prof, I learned a lot from him.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/486726",
+    "name": "Sallie Taylor",
+    "department": "Computer Science",
+    "overall_rating": 2.8,
+    "num_ratings": 23,
+    "reviews": [
+      {
+        "date": null,
+        "course": "BTM2500",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "The worst I've ever had. Good luck getting help when you're stuck because she won't provide it and you will get stuck all the time in access when the homework cases are over nothing you learned. Absolutely no late assignments even if your computer breaks down in class, it's somehow your fault as the user. Excel was better, but access is impossible!",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 1.0,
+        "comment": "Unless you have to take Taylor, I would recommend against. The material itself is not hard but her classes go on forever and the content of a 3 hour class could be consolidated into a 50 minute lecture. The class isn't demanding but don't expect to receive any extensions or leeway at all. Just do your work before the deadline and you'll be fine.",
+        "would_take_again": false,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "Worst class I took at SLU. Her lessons are scattered, making it difficult to study for the test unless you memorize everything that's thrown your way. The final took over 3 hours and she still almost let me fail because her instructions on saving were unclear. Avoid this class unless your desperate like I was.",
+        "would_take_again": false,
+        "grade": "B-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "This class suffers from scattered lesson plans and lack of organization. Sallie is nice, but isn't effective at explaining ITM. I still don't know what I was supposed to learn. Notecards as cheat sheets on tests help. However, tests are difficult and long. Assignments aren't explained well unless you go to office hours and ask for individual help.",
+        "would_take_again": false,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "She goes around circles the whole entire time. Office hours only on Sundays. Will not take her ever again",
+        "would_take_again": false,
+        "grade": "C+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM2000",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "This prof only has 3.5hr (1day/week) classes, but her lectures are very clear and simple. The book enforces the lecture material with more detail, but it's not required. She passes out practice exams that are similar to what the real exams are like and tells you everything to expect. Has office hours every week and is a caring and great professor.",
+        "would_take_again": true,
+        "grade": "A+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 1.5,
+        "difficulty": 3.0,
+        "comment": "She does not know how to use Mac computers and so if you own one you're on your own. She is very confusing and talks in circles. You do not need the book. The tests are relatively difficult in respect to how the class is taught. It is never clear what you actually need to know. She says the homework is from the chapters but its not, Its on google",
+        "would_take_again": null,
+        "grade": "B+",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Not sure how previous poster can defend her not knowing how to use a computer. She openly says she is not a Mac user. Pay attention and do assignments and you will do fine.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "Doesnt know how to use computers but teaches technology class.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "Had her for night class. It's a very straightforward class- you go, write down everything on the board, do the homework, then memorize exactly what she tells you/write it on the notecard that you're allowed & the quizzes & tests will be super easy. She's very helpful and a bit odd but very nice. She made ITM accessible and I'm no ITM major.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": [
+          "do the homework"
+        ]
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 3.0,
+        "difficulty": 4.0,
+        "comment": "She's a bit too tricky on the midterm/final for an intro class. I only did well in her class due to prior knowledge. While the class only met for half the time, that only makes the exams more difficult, as you have to read and be able to recite material that she never goes over in class. I would only recommend to students with prior ITM knowledge.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 3.5,
+        "difficulty": 3.0,
+        "comment": "Had her for a night class. Class was usually only for half the time (so an 1 hour 10 minutes instead of 2 hours 30 minutes). Practicals are fairly easy if you do the practice practicals. Problem is her tests and quizzes ask random questions and cover anything and everything. She is helpful though and it shouldn't be too hard to get at least a B.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "Excel is not too hard. Access is very tough. Her tests are kind of random and cover every little detail. She divides the class in half and you only have to meet for an hour, even if you have the night class. She can be stern but helpful at the same time. No extra credit and with a good amount of work you can get an A.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "ITM200",
+        "quality": 2.0,
+        "difficulty": 2.0,
+        "comment": "She doesn't assign a text book so her worksheets are all straight from googling material. She is usually pretty unclear in her lectures. Her practicals are always really easy, but her final and midterm are almost impossible since her teaching method is pretty confusing. Would probably find a different teacher.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "Professor Taylor is such a nice person. Yes, I heard she does teach grade school kids also, so she's used to talking a little slower. Here's what you do: Attend all the classes so you don't get behind. Read the textbook chapters before each test (I did it the night before). Do all the homework. You'll get an A.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "she treats her students like kindergarteners. she never talks about what will be on a test or even finals. i woulnt recommend her you can probably find a better teacher somewhere.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "If you do your homework and somewhat study for your tests, you should be fine. She gives tests like every other week or so and if you are happy with your grade you don't have to take the final. I barely studied at all and still got an A, although I did take the final. We had homework almost every class-lab hmwrk was longer.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "No Comments",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 4.5,
+        "difficulty": 2.0,
+        "comment": "Great teacher.Her powerpoints are okay, but really all you have to do is read the chapter and you will have an A on the test. The questions and answers are right out of the book. She goes slow and it is really easy to follow along. She also drops one test grade out of four. If you stay after in labs she gives you answers. Very helpful and nice!",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MIS200",
+        "quality": 3.5,
+        "difficulty": 2.0,
+        "comment": "these other people must be retarded because sallie is an amazing teacher who explains stuff slowly. you have to pay attention in class and take notes but other than that it wont be too bad. she is totally approachable!!! i went to her a million times and she basically told me step by step how to do most of the assignments.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MISB200",
+        "quality": 1.5,
+        "difficulty": 4.0,
+        "comment": "Worst teacher, doesn't explain anything, unapproachable, waaaaay too hard for how easy the class should be",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MISB200",
+        "quality": 1.0,
+        "difficulty": 5.0,
+        "comment": "Taylor is the worst teacher i have ever had. She does not teach the material on the test. She is absolutley awful. This class should be extremley easy, but she makes it one of the most impossible courses at SLU. She needs to stick to AG Edwards and not try to teach students.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MISB200",
+        "quality": 3.5,
+        "difficulty": 4.0,
+        "comment": "Pretty difficult teacher for what should have been an easy course. At least 120+ questions on each test over 3 chapters. Do not take her! Take Hardaway instead!",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/1394460",
+    "name": "Erin W. Chambers",
+    "department": "Computer Science",
+    "overall_rating": 4.6,
+    "num_ratings": 13,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI4930",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "She can talk fast, but always open to slowing down if you ask her. Her homeworks are hard, but show up to office hours frequently to get help and you will do fine!",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3100",
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "This class is (necessarily) super hard. Homeworks are like going to the gym, as someone said. Questions on the final are slightly harder than the easiest questions on the homeworks, however. To succeed: watch each lecture twice, read each chapter thrice, and continuously bang your head against the wall. And don't give up!",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "read each chapter thrice"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI310",
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "Despite the topic being universally hard, she made me really enjoy the subject by how caring she is to your learning of the materials. The homeworks are brutal. It's like going to the gym every day of the semester. Yeah it hurts and sucks, but if you really put in the work, you will walk out feeling like a Greek god of Algorithms.",
+        "would_take_again": true,
+        "grade": null,
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI2100",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "She is the best CS teacher at SLU",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI3100",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "You're going to have to work to pass her classes. I've taken Data Structures and Algorithms with her, and she was a hard, but good teacher for both of them. She is very animated in lecture, and writes quickly, so take notes quickly and ask her to slow down when she's writing too fast. She does take forever to grade stuff. Take her classes!",
+        "would_take_again": true,
+        "grade": "B+",
+        "attendance": "Not Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS314",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Hard class, but she's very helpful.",
+        "would_take_again": null,
+        "grade": "B",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MATH135",
+        "quality": 4.5,
+        "difficulty": 3.0,
+        "comment": "She is a nice teacher and helpful. I'm an international student and her speak speed a little fast but acceptable. Also she sometimes forgot update the notes. Anyway,she is the best teacher ever! i love her!!!!",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI140",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Definitely my best professor of the year! She is not at all condescending and very willing to help both inside and outside of class. She knows the subject well and enjoys it. Somewhat heavy workload for an intro class, but still fair.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI180",
+        "quality": 4.5,
+        "difficulty": 3.0,
+        "comment": "Lectures are,for the most part, very clear and engaging with the class. If you don't understanding, you'd better raise your hand and ask right then and there IN CLASS. She will help. She is extremely helpful in office hours, but can be difficult to contact via email. It takes her forever to grade assignments, which can be aggravating.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": null,
+        "tags": [
+          "2011\nTextbook: No\nLectures are"
+        ]
+      },
+      {
+        "date": null,
+        "course": "MATH142",
+        "quality": 2.0,
+        "difficulty": 5.0,
+        "comment": "Discrete math with her is near impossible",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MATH135",
+        "quality": 4.5,
+        "difficulty": 4.0,
+        "comment": "Great Professor! The course material was difficult but she was always available for help and works with you. Very passionate about the topics.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MATH135",
+        "quality": 4.5,
+        "difficulty": 4.0,
+        "comment": "Cool Professor, I found the class very tough but she was always willing to help you how ever much you needed help. Would love to have her for some other class.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "MATH145",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "shes fun fun fun!.. full of energy and very organized.. google erin W chambers..",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/1618449",
+    "name": "Jacob Sukhodolsky",
+    "department": "Computer Science",
+    "overall_rating": 2.2,
+    "num_ratings": 5,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI3710",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "The worst CS professor at SLU imo. Doesn't lecture at all, homework is confusing, project had little in the way of guidelines. I took Calc 2 remotely without lectures and even that was better than this class. Avoid taking a class with him as the professor.",
+        "would_take_again": false,
+        "grade": "B",
+        "attendance": "Not Mandatory",
+        "tags": [
+          "homework is confusing"
+        ]
+      },
+      {
+        "date": null,
+        "course": "CSCI1060",
+        "quality": 1.0,
+        "difficulty": 4.0,
+        "comment": "Sukhodolsky was probably one of the worst professors I've ever had. Whenever I have questions he could never answer them without looking at his notes and even after my question was never answered. You basically have to teach yourself in this class, worse for zoom university. He had zero lectures and I had to teach myself how to use C++. Not happy.",
+        "would_take_again": false,
+        "grade": "A-",
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 2.5,
+        "difficulty": 3.0,
+        "comment": "Professor is old and has a slight accent. Lecture is sometimes had to follow, but can be understood if you pay attention. You must do the homework to learn the material and it is worth a lot of points in the class. Scoring well on exams but not doing homework will not give you a good grade. Class is two parts: C++ section is harder than MATLAB.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 5.0,
+        "difficulty": 1.0,
+        "comment": "This man reminds me of the count from Sesame Street! Coolest man ever! The accent and dry humor made my first class of the day a very pleasant experience. He is very helpful and the homework makes you learn and is very helpful.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 1.5,
+        "difficulty": 5.0,
+        "comment": "Class material wasn't that hard, but he made it difficult. Seemed to not care about your success and was not very helpful at all.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2350440",
+    "name": "Srikanth Mudigonda",
+    "department": "Computer Science",
+    "overall_rating": 5.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": "AA5000",
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "Dr. Mudigonda is a fantastic professor. I does a great job preparing course materials and lectures. Don't expect to \"just get by\" in his class, you really need to watch all the lectures, read the assigned reading (or at least skim for concepts) and take his feedback into consideration.",
+        "would_take_again": true,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/340634",
+    "name": "Jacob Sukhodulsky",
+    "department": "Computer Science",
+    "overall_rating": 2.0,
+    "num_ratings": 6,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI3710",
+        "quality": 1.0,
+        "difficulty": 3.0,
+        "comment": "He speaks too slow and connect every symbol together which makes you cannot understand him at all. He has a catch phrase as \"What is this, I don't know. HAHAH' He knows nothing about the material. If you go to his office hour, he does not how to answer or fix your problem. He doesn't even know how to calculate the medium number!",
+        "would_take_again": false,
+        "grade": "A-",
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "I've yet to hear about a great programming prof and that doesn't change here. Makes a lot of mistakes so you'll be teaching yourself. The way the class is structured it's not too hard to get a decent grade. Midterm wasn't too bad, but the final was nasty. English is understandable. Explore other options but might be one of your best shots at an A.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI145",
+        "quality": 1.5,
+        "difficulty": 5.0,
+        "comment": "dont take this class!! his english is very bad and its realy hard to understand him. never there on his hours, least helpful. homework is confusing but easy to get full marks. you need to hold on to your nerves if you need an A. best of luck if you do chose him.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSCI334",
+        "quality": 2.5,
+        "difficulty": 2.0,
+        "comment": "He seems to know most of his stuffs, even though he makes mistakes once in a while. He'll try to help you if you ask him, but his way of teaching is not really effective.. You'll probably going to have to almost teach-it-yourself with your textbook and researching",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 2.0,
+        "difficulty": 4.0,
+        "comment": "He has a hard time relaying the information to the students. He will help you but it is hard to get a hold of him. It is hard to follow him.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSP115",
+        "quality": 2.5,
+        "difficulty": 4.0,
+        "comment": "He knows what he is talking about, but is very ineffective at teaching. If you know your discrete math, he is fairly easy, otherwise you're going to have a difficult time",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2088198",
+    "name": "Richard Seibel",
+    "department": "Computer Science",
+    "overall_rating": 5.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CSCI1300",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Great teacher, helpful and fair.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Not Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2103272",
+    "name": "Samuel Young",
+    "department": "Computer Science",
+    "overall_rating": 4.0,
+    "num_ratings": 1,
+    "reviews": [
+      {
+        "date": null,
+        "course": "AA5050",
+        "quality": 4.0,
+        "difficulty": 3.0,
+        "comment": "Dr. Young knows his stuff in and out when it comes to learning SAS. If you have a question he will help guide you to the answer. He has real world expertise and real world knowledge in the field and not many professors can claim that. SAS is not easy, but once you get the hang of it the program makes SPSS look like a joke.",
+        "would_take_again": null,
+        "grade": "A",
+        "attendance": "Mandatory",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/112803",
+    "name": "Stephen Blythe",
+    "department": "Computer Science",
+    "overall_rating": 5.0,
+    "num_ratings": 7,
+    "reviews": [
+      {
+        "date": null,
+        "course": "OPL310",
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "Stephen Blythe is the guy who taught me everything to create programming languages and write compilers from scratch: That knowledge lived on to help making several high profile videogames. I took his classes back in 1998, when he first came to Parks College and he was great. If you have the chance to be his student, go for it.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "I did not give him a good score on easyness because the stuff he teaches is not too easy. However, with another proffessor I guarantee it will probably be way more difficult. If you are a hardcore CS guy/girl, he is your man. He does the cool stuff advanced OS, compiler design, programming languages. Probably the best proffessor I have ever had.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 2.0,
+        "comment": "He knows his stuff very well, very likeable. his classes are hard, but he is the best math teacher i have ever had. The best thing, is he can explain something to you three or four different ways, however you need it explained to you so you can understand it.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 4.0,
+        "comment": "The best teacher i ever had. I had various classes and all perfect. Hard material made easy. Very clear. He always helps. If you deserve A, you will have it. Now is gone because of the Dean. He should be out. The Dean is killin Computer Science at SLU",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "He was a great teacher, one of the best parks college had, but he was \"let\" go and we can't take him for anymore classes. If you can take him at another university take him.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": "Mandatory",
+        "tags": []
+      },
+      {
+        "date": "early 2000",
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "Extremely hard, but a really great guy. He helped me through second semester of Freshman year in early 2000, as not only a teacher, but as an advisor. Unfortunately, this is his last semester.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSP343",
+        "quality": 5.0,
+        "difficulty": 5.0,
+        "comment": "Absolute best professor in parks. He knows his stuff better than anyone you'll run across. Classes are hard though.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/104285",
+    "name": "Asai Asaithambi",
+    "department": "Computer Science",
+    "overall_rating": 3.9,
+    "num_ratings": 5,
+    "reviews": [
+      {
+        "date": null,
+        "course": "CS102",
+        "quality": 4.0,
+        "difficulty": 4.0,
+        "comment": "*",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CS102",
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "great teacher",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": "CSP315",
+        "quality": 2.5,
+        "difficulty": 4.0,
+        "comment": "Ugly class, ugly subject. He is very good at it, he is really intelligent but he cannot transmit his knowledge to hid students, and I don't think he cares much about not doing it...",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 3.0,
+        "difficulty": 3.0,
+        "comment": "Not too bad, lectures were a bit boring but he's a nice guy. Tests weren't too difficult.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      },
+      {
+        "date": null,
+        "course": null,
+        "quality": 5.0,
+        "difficulty": 3.0,
+        "comment": "Probably the smartest person on campus. Awesome professor.",
+        "would_take_again": null,
+        "grade": null,
+        "attendance": null,
+        "tags": []
+      }
+    ]
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/2800986",
+    "name": "Daniel Shown",
+    "department": "Computer Science",
+    "overall_rating": null,
+    "num_ratings": null,
+    "reviews": []
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3109418",
+    "name": "Eric Mier",
+    "department": "Computer Science",
+    "overall_rating": null,
+    "num_ratings": null,
+    "reviews": []
+  },
+  {
+    "school": "Search professors at Saint Louis University | Rate My",
+    "school_sid": 850,
+    "department_id": 11,
+    "profile_url": "https://www.ratemyprofessors.com/professor/3017096",
+    "name": "Nan Cen",
+    "department": "Computer Science",
+    "overall_rating": null,
+    "num_ratings": null,
+    "reviews": []
+  }
+]

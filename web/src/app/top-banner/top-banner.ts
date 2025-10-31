@@ -4,6 +4,7 @@ import {AsyncPipe} from '@angular/common';
 import {Card} from 'primeng/card';
 import {Menubar} from 'primeng/menubar';
 import {MenuItem, MenuItemCommandEvent} from 'primeng/api';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-top-banner',
@@ -21,13 +22,20 @@ export class TopBanner implements OnInit {
       label: 'Email',
       items: [
         {
+          label: 'View Profile',
+          icon: 'pi pi-user',
+          command: () => this.navigateToProfile()
+        },
+        {
           label: 'Log out',
+          icon: 'pi pi-sign-out',
           command: () => this.logout()
         }
       ]
     }
   ]
   private authService = inject(AuthService);
+  private router = inject(Router);
   tokenPayload = this.authService.tokenPayload$;
   isLoggedIn = this.authService.isLoggedIn$;
 
@@ -42,6 +50,10 @@ export class TopBanner implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  navigateToProfile() {
+    this.router.navigate(['/profile']);
   }
 
 }

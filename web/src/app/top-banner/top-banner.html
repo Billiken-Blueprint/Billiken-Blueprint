@@ -1,25 +1,24 @@
 <header class="w-full bg-white/10 backdrop-blur-sm border-b border-white/20 flex-shrink-0">
   <div class="max-w-6xl mx-auto px-4 sm:px-8">
     <div class="flex justify-between items-center py-4 sm:py-6">
-      <a class="flex items-center space-x-3 sm:space-x-4" href="/">
-        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-white rounded-full flex items-center justify-center">
+      <a class="flex items-center space-x-3 sm:space-x-4 logo-container" href="/">
+        <div class="w-10 h-10 sm:w-12 sm:h-12 slu-logo rounded-full flex items-center justify-center">
           <span class="text-blue-800 font-bold text-lg sm:text-xl font-inter">SLU</span>
         </div>
-        <span class="text-white font-semibold text-xl sm:text-2xl font-inter">Billiken Blueprint</span>
+        <span class="brand-text text-xl sm:text-2xl font-inter">Billiken Blueprint</span>
       </a>
       <div class="flex space-x-4">
         @if (isLoggedIn | async) {
           <p-menubar [model]="items"/>
         } @else {
           <a
-            class="bg-white text-blue-800 hover:bg-gray-100 text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter shadow-md"
+            class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
             href="login">
             Log In
           </a>
           <a
-            class="bg-white text-blue-800 hover:bg-gray-100 text-lg px-6 py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
-            href="register">Sign
-            Up</a>
+            class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-lg px-6 py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
+            href="register">Sign Up</a>
         }
       </div>
     </div>
