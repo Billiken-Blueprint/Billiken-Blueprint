@@ -52,9 +52,8 @@ export class RegisterPage {
     this.isRegistering.set(true);
     this.authService.register({ email: email!, password: password! })
       .subscribe({
-        next: () => {
-          this.isRegistering.set(false);
-          this.router.navigate(['/']);
+        next: result => {
+          this.router.navigate(['/questionnaire']);
         },
         error: (err: { status: number, error?: { message?: string } }) => {
           this.isRegistering.set(false);
