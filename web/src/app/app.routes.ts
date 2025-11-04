@@ -35,8 +35,6 @@ export const routes: Routes = [
   {
     path: 'profile',
     component: ProfilePage
-  }
-    component: RegisterPage,
   },
   {
     path: 'courses',
