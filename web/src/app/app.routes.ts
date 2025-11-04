@@ -1,14 +1,8 @@
-import {Routes} from '@angular/router';
-import {LandingPage} from './landing-page/landing-page';
-import {LoginPage} from './login-page/login-page';
-import {RegisterPage} from './register-page/register-page';
-import {QuestionnairePage} from './questionnaire/questionnaire';
-import {ProfilePage} from './profile/profile';
 import { Routes } from '@angular/router';
 import { LandingPage } from './landing-page/landing-page';
 import { LoginPage } from './login-page/login-page';
 import { RegisterPage } from './register-page/register-page';
-import { CoursesPage } from './courses-page/courses-page';
+import { QuestionnairePage } from './questionnaire/questionnaire';
 
 export const routes: Routes = [
   {
@@ -26,18 +20,10 @@ export const routes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterPage
+    component: RegisterPage,
   },
   {
     path: 'questionnaire',
-    component: QuestionnairePage
-  },
-  {
-    path: 'profile',
-    component: ProfilePage
-  },
-  {
-    path: 'courses',
-    component: CoursesPage,
-  },
+    component: QuestionnairePage,
+  }
 ];
