@@ -53,6 +53,7 @@ export class RegisterPage {
     this.authService.register({ email: email!, password: password! })
       .subscribe({
         next: result => {
+          this.isRegistering.set(false);
           this.router.navigate(['/questionnaire']);
         },
         error: (err: { status: number, error?: { message?: string } }) => {
