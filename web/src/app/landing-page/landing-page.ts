@@ -1,13 +1,10 @@
 import {Component} from '@angular/core';
-import {ButtonDirective, ButtonLabel} from 'primeng/button';
 import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-landing-page',
   imports: [
-    ButtonDirective,
-    CommonModule,
-    ButtonLabel
+    CommonModule
   ],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css',
