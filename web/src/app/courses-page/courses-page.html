@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSCI Course Selector</title>
+  <link rel="stylesheet" href="courses-page.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Select requirement:</h2>
+
+    <div class="button-group">
+      <button class="req-btn" data-target="group1">CSCI 3000</button>
+      <button class="req-btn" data-target="group2">CSCI 4000+</button>
+      <button class="req-btn" data-target="group3">CSCI 2000</button>
+      <button class="req-btn" data-target="group4">CSCI 1000</button>
+    </div>
+
+    <div id="course-groups">
+      <div id="group1" class="course-group">
+        <div class="card">
+          <h3>CSCI 4355</h3>
+          <p><strong>Human Computer Interaction</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4360</h3>
+          <p><strong>Web Technologies</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4550</h3>
+          <p><strong>Computer Networks</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: Varies by section</p>
+        </div>
+      </div>
+
+      <div id="group2" class="course-group hidden">
+        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
+      </div>
+
+      <div id="group3" class="course-group hidden">
+        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
+      </div>
+
+      <div id="group4" class="course-group hidden">
+        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+
+    <h2>Select requirement:</h2>
+
+    <div class="button-group">
+      <button class="req-btn" data-target="group1">CSCI 3000</button>
+      <button class="req-btn" data-target="group2">CSCI 4000+</button>
+      <button class="req-btn" data-target="group3">CSCI 2000</button>
+      <button class="req-btn" data-target="group4">CSCI 1000</button>
+    </div>
+
+    <div id="course-groups">
+      <div id="group1" class="course-group">
+        <div class="card">
+          <h3>CSCI 4355</h3>
+          <p><strong>Human Computer Interaction</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4360</h3>
+          <p><strong>Web Technologies</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4550</h3>
+          <p><strong>Computer Networks</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: Varies by section</p>
+        </div>
+      </div>
+
+      <div id="group2" class="course-group hidden">
+        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
+      </div>
+
+      <div id="group3" class="course-group hidden">
+        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
+      </div>
+
+      <div id="group4" class="course-group hidden">
+        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <h2>Select requirement:</h2>
+
+    <div class="button-group">
+      <button class="req-btn" data-target="group1">CSCI 3000</button>
+      <button class="req-btn" data-target="group2">CSCI 4000+</button>
+      <button class="req-btn" data-target="group3">CSCI 2000</button>
+      <button class="req-btn" data-target="group4">CSCI 1000</button>
+    </div>
+
+    <div id="course-groups">
+      <div id="group1" class="course-group">
+        <div class="card">
+          <h3>CSCI 4355</h3>
+          <p><strong>Human Computer Interaction</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4360</h3>
+          <p><strong>Web Technologies</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: North Campus (Main Campus)</p>
+        </div>
+        <div class="card">
+          <h3>CSCI 4550</h3>
+          <p><strong>Computer Networks</strong></p>
+          <p>Credit Hours: 3</p>
+          <p>Campus: Varies by section</p>
+        </div>
+      </div>
+
+      <div id="group2" class="course-group hidden">
+        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
+      </div>
+
+      <div id="group3" class="course-group hidden">
+        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
+      </div>
+
+      <div id="group4" class="course-group hidden">
+        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    const buttons = document.querySelectorAll('.req-btn');
+    const groups = document.querySelectorAll('.course-group');
+
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        groups.forEach(group => group.classList.add('hidden'));
+        document.getElementById(button.dataset.target).classList.remove('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
