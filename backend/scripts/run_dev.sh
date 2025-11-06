@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-fastapi dev src/main.py
+fastapi dev backend/server.py

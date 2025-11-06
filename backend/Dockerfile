@@ -17,7 +17,7 @@ WORKDIR /app
 COPY --from=deps /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:${PATH}"
 COPY --from=migrations /app/data /app/data
-COPY --exclude=./src . .
+COPY --exclude=./backend . .
 EXPOSE 8000
 VOLUME [ "/app/src" ]
-CMD [ "fastapi", "dev", "src/main.py", "--host", "0.0.0.0" ]
+CMD [ "fastapi", "dev", "backend/server.py", "--host", "0.0.0.0" ]

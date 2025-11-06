@@ -1,13 +1,11 @@
 from logging.config import fileConfig
 
-from alembic import context
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 
-from base.base import Base
-from identity.identity_user import IdentityUser
-from repositories.user_repository import UserDbEntity
-from courses.model.course import Course
+from alembic import context
+
+from billiken_blueprint.db_metadata import *
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -23,7 +21,6 @@ if config.config_file_name is not None:
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 target_metadata = Base.metadata
-
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
