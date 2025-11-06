@@ -3,6 +3,8 @@ import {FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl} fr
 import {Router} from '@angular/router';
 import {AuthService} from '../auth-service/auth-service';
 import {CommonModule} from '@angular/common';
+import {RouterLink} from '@angular/router';
+
 
 interface Course {
   code: string;
@@ -20,10 +22,12 @@ interface TimeSlot {
   standalone: true,
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './questionnaire.html',
   styleUrl: './questionnaire.css'
+  
 })
 export class QuestionnairePage {
   private formBuilder = inject(FormBuilder);

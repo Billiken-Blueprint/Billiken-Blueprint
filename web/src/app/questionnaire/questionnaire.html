@@ -77,7 +77,14 @@
         <!-- Step 3: Course Selection -->
         <div class="step-section" *ngIf="currentStep === 3">
           <p class="description">Select courses that interest you (Selected: <span class="counter">{{getCourseSelectionCount()}}</span>)</p>
-          
+          <div class="course-info-hint">
+  Before selecting the courses, check the required CS courses offered in Spring 2026.
+
+  <a class="open-courseinfo-btn" routerLink="/course">
+    Open Course Information
+  </a>
+</div>
+
           <div class="button-group">
             <button type="button" class="btn-secondary" (click)="selectAllCourses()">Select All</button>
             <button type="button" class="btn-secondary" (click)="deselectAllCourses()">Deselect All</button>

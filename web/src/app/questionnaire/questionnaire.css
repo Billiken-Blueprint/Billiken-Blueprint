@@ -466,3 +466,36 @@ label {
     min-width: auto;
   }
 }
+.course-info-hint {
+  margin: 1.25rem 0 1.75rem 0;
+  color: #000000;
+  max-width: 650px;
+  line-height: 1.45;
+}
+
+.open-courseinfo-btn {
+  display: inline-block;
+  background: transparent;
+  color: #000000;
+  border: 2px solid #3b82f6;
+  border-radius: 10px;
+  padding: 0.6rem 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: .18s ease;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  font-size: .85rem;
+  margin-top: 0.75rem;
+}
+
+.open-courseinfo-btn:hover {
+  background: #1e3a8a;
+  color: #ffffff;
+  border-color: #1e40af;
+  transform: translateY(-2px);
+}
+
+.open-courseinfo-btn:active {
+  transform: translateY(0);
+}
