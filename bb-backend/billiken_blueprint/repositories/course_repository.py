@@ -12,27 +12,36 @@ class DBCourse(Base):
     __tablename__ = "courses"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    code: Mapped[str] = mapped_column()
+    code: Mapped[str] = mapped_column(index=True, unique=True)
     name: Mapped[str] = mapped_column()
     description: Mapped[str] = mapped_column()
+
+    def to_course(self) -> Course:
+        return Course(
+            id=self.id,
+            course_code=self.code,
+            title=self.name,
+            description=self.description,
+            major=self.code.split()[0],
+            course_number=self.code.split()[1],
+        )
 
 
 class CourseRepository:
     def __init__(self, async_sessionmaker: async_sessionmaker[AsyncSession]) -> None:
         self._async_sessionmaker = async_sessionmaker
 
-    async def save(self, course: Course) -> Course:
+    async def save(self, course: Course) -> DBCourse:
         """Save or update a course in the database and return the persisted course."""
         insert_stmt = insert(DBCourse).values(
             id=course.id,
             code=course.course_code,
-            name=f"{course.major} {course.course_number}",
-            description=f"{course.credits} credits",
+            name=course.title,
+            description=course.description,
         )
         conflict_stmt = insert_stmt.on_conflict_do_update(
-            index_elements=[DBCourse.id],
+            index_elements=[DBCourse.code],
             set_=dict(
-                code=insert_stmt.excluded.code,
                 name=insert_stmt.excluded.name,
                 description=insert_stmt.excluded.description,
             ),
@@ -42,22 +51,19 @@ class CourseRepository:
             result = await session.execute(conflict_stmt)
             await session.commit()
             db_course = result.scalar_one()
-            return self._to_domain(db_course)  # type: ignore
+            return db_course
 
-    async def get_by_id(self, course_id: int) -> Optional[Course]:
-        """Retrieve a course by its ID."""
-        stmt = select(DBCourse).where(DBCourse.id == course_id)
+    async def get_all(self) -> list[Course]:
+        """Retrieve all courses from the database."""
+        stmt = select(DBCourse)
 
         async with self._async_sessionmaker() as session:
             result = await session.execute(stmt)
-            db_course = result.scalar_one_or_none()
+            db_courses = result.scalars().all()
 
-        if db_course is None:
-            return None
+        return [db_course.to_course() for db_course in db_courses]
 
-        return self._to_domain(db_course)
-
-    async def get_by_code(self, course_code: str) -> Optional[Course]:
+    async def get_by_code(self, course_code: str) -> Optional[DBCourse]:
         """Retrieve a course by its course code."""
         stmt = select(DBCourse).where(DBCourse.code == course_code)
 
@@ -68,17 +74,20 @@ class CourseRepository:
         if db_course is None:
             return None
 
-        return self._to_domain(db_course)
+        return db_course
 
-    async def get_all(self) -> list[Course]:
-        """Retrieve all courses from the database."""
-        stmt = select(DBCourse)
+    async def get_by_id(self, course_id: int) -> Optional[DBCourse]:
+        """Retrieve a course by its ID."""
+        stmt = select(DBCourse).where(DBCourse.id == course_id)
 
         async with self._async_sessionmaker() as session:
             result = await session.execute(stmt)
-            db_courses = result.scalars().all()
+            db_course = result.scalar_one_or_none()
 
-        return [self._to_domain(db_course) for db_course in db_courses]
+        if db_course is None:
+            return None
+
+        return db_course
 
     async def delete(self, course_id: int) -> None:
         """Delete a course by its ID."""
@@ -87,37 +96,3 @@ class CourseRepository:
             if db_course is not None:
                 await session.delete(db_course)
                 await session.commit()
-
-    async def search_by_major(self, major: str) -> list[Course]:
-        """Search for courses by major prefix in the code."""
-        stmt = select(DBCourse).where(DBCourse.code.like(f"{major}-%"))
-
-        async with self._async_sessionmaker() as session:
-            result = await session.execute(stmt)
-            db_courses = result.scalars().all()
-
-        return [self._to_domain(db_course) for db_course in db_courses]
-
-    def _to_domain(self, db_course: DBCourse) -> Course:
-        """Convert a DBCourse to a domain Course."""
-        # Parse the code to extract major and course number
-        # Assuming format like "CSCI-1050"
-        parts = db_course.code.split("-")
-        major = parts[0] if len(parts) > 0 else ""
-        course_number = parts[1] if len(parts) > 1 else ""
-
-        # Parse credits from description
-        # Assuming format like "3 credits"
-        credits = 0
-        try:
-            credits = int(db_course.description.split()[0])
-        except (ValueError, IndexError):
-            credits = 0
-
-        return Course(
-            id=db_course.id,
-            major=major,
-            course_number=course_number,
-            course_code=db_course.code,
-            credits=credits,
-        )

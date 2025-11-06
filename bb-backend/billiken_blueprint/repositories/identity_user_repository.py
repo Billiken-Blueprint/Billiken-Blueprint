@@ -29,7 +29,6 @@ class IdentityUserRepository:
         """
         insert_stmt = insert(IdentityUser).values(
             id=user.id,
-            name=user.name,
             email=user.email,
             password_hash=user.password_hash,
             student_id=user.student_id,
@@ -37,7 +36,6 @@ class IdentityUserRepository:
         conflict_stmt = insert_stmt.on_conflict_do_update(
             index_elements=[IdentityUser.id],
             set_=dict(
-                name=insert_stmt.excluded.name,
                 email=insert_stmt.excluded.email,
                 password_hash=insert_stmt.excluded.password_hash,
                 student_id=insert_stmt.excluded.student_id,

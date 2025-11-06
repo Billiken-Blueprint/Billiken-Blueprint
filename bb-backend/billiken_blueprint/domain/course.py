@@ -1,10 +1,12 @@
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
 class Course:
-    id: int
+    id: Optional[int]
     major: str
+    title: str
     course_number: str
     course_code: str
-    credits: int
+    description: str

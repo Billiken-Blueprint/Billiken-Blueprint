@@ -18,9 +18,7 @@ class TestIdentityUserRepository:
     async def test_save_new_user(self, repository, async_sessionmaker):
         """Test saving a new identity user to the database."""
         # Arrange
-        user = IdentityUser.create(
-            name="Alice Johnson", email="alice@example.com", password="SecurePass123"
-        )
+        user = IdentityUser.create(email="alice@example.com", password="SecurePass123")
 
         # Act
         await repository.save(user)
@@ -34,7 +32,6 @@ class TestIdentityUserRepository:
             saved_user = result.scalar_one_or_none()
 
             assert saved_user is not None
-            assert saved_user.name == "Alice Johnson"
             assert saved_user.email == "alice@example.com"
             assert saved_user.password_hash is not None
             assert saved_user.password_hash != "SecurePass123"  # Should be hashed
@@ -42,15 +39,12 @@ class TestIdentityUserRepository:
     async def test_save_updates_existing_user(self, repository):
         """Test that we can modify a user after retrieving it."""
         # Arrange - save initial user
-        user1 = IdentityUser.create(
-            name="Bob Smith", email="bob@example.com", password="Pass123"
-        )
+        user1 = IdentityUser.create(email="bob@example.com", password="Pass123")
         await repository.save(user1)
 
         # Get the saved user to get the ID
         saved_user = await repository.get_by_email("bob@example.com")
         assert saved_user is not None
-        assert saved_user.name == "Bob Smith"
 
         # Note: This test verifies we can retrieve users successfully.
         # True update functionality would require updating the save method
@@ -59,9 +53,7 @@ class TestIdentityUserRepository:
     async def test_get_by_id_existing_user(self, repository):
         """Test retrieving an existing user by ID."""
         # Arrange
-        user = IdentityUser.create(
-            name="Charlie Davis", email="charlie@example.com", password="Pass456"
-        )
+        user = IdentityUser.create(email="charlie@example.com", password="Pass456")
         await repository.save(user)
 
         # Get the ID
@@ -75,7 +67,6 @@ class TestIdentityUserRepository:
         # Assert
         assert result is not None
         assert result.id == user_id
-        assert result.name == "Charlie Davis"
         assert result.email == "charlie@example.com"
 
     async def test_get_by_id_nonexistent_user(self, repository):
@@ -89,9 +80,7 @@ class TestIdentityUserRepository:
     async def test_get_by_email_existing_user(self, repository):
         """Test retrieving a user by email."""
         # Arrange
-        user = IdentityUser.create(
-            name="Diana Evans", email="diana@example.com", password="Diana123"
-        )
+        user = IdentityUser.create(email="diana@example.com", password="Diana123")
         await repository.save(user)
 
         # Act
@@ -99,7 +88,6 @@ class TestIdentityUserRepository:
 
         # Assert
         assert result is not None
-        assert result.name == "Diana Evans"
         assert result.email == "diana@example.com"
 
     async def test_get_by_email_nonexistent_user(self, repository):
@@ -113,9 +101,7 @@ class TestIdentityUserRepository:
     async def test_get_by_email_case_sensitive(self, repository):
         """Test that email lookup is case-sensitive (or case-insensitive depending on your design)."""
         # Arrange
-        user = IdentityUser.create(
-            name="Eve Foster", email="eve@example.com", password="Eve123"
-        )
+        user = IdentityUser.create(email="eve@example.com", password="Eve123")
         await repository.save(user)
 
         # Act
@@ -129,9 +115,7 @@ class TestIdentityUserRepository:
         """Test that passwords are properly hashed when creating users."""
         # Arrange
         plain_password = "MySecretPassword123"
-        user = IdentityUser.create(
-            name="Frank Garcia", email="frank@example.com", password=plain_password
-        )
+        user = IdentityUser.create(email="frank@example.com", password=plain_password)
 
         # Act
         await repository.save(user)
@@ -146,9 +130,7 @@ class TestIdentityUserRepository:
     async def test_save_user_with_student_id(self, repository, async_sessionmaker):
         """Test saving a user with an associated student_id."""
         # Arrange
-        user = IdentityUser.create(
-            name="Grace Harris", email="grace@example.com", password="Grace123"
-        )
+        user = IdentityUser.create(email="grace@example.com", password="Grace123")
         user.student_id = 42
 
         # Act
@@ -162,9 +144,7 @@ class TestIdentityUserRepository:
     async def test_save_user_without_student_id(self, repository):
         """Test saving a user without a student_id (should be None)."""
         # Arrange
-        user = IdentityUser.create(
-            name="Henry Irving", email="henry@example.com", password="Henry123"
-        )
+        user = IdentityUser.create(email="henry@example.com", password="Henry123")
 
         # Act
         await repository.save(user)
@@ -178,9 +158,9 @@ class TestIdentityUserRepository:
         """Test saving multiple users with unique emails."""
         # Arrange
         users = [
-            IdentityUser.create("User One", "user1@example.com", "Pass1"),
-            IdentityUser.create("User Two", "user2@example.com", "Pass2"),
-            IdentityUser.create("User Three", "user3@example.com", "Pass3"),
+            IdentityUser.create("user1@example.com", "Pass1"),
+            IdentityUser.create("user2@example.com", "Pass2"),
+            IdentityUser.create("user3@example.com", "Pass3"),
         ]
 
         # Act
@@ -192,6 +172,6 @@ class TestIdentityUserRepository:
         result2 = await repository.get_by_email("user2@example.com")
         result3 = await repository.get_by_email("user3@example.com")
 
-        assert result1 is not None and result1.name == "User One"
-        assert result2 is not None and result2.name == "User Two"
-        assert result3 is not None and result3.name == "User Three"
+        assert result1 is not None
+        assert result2 is not None
+        assert result3 is not None

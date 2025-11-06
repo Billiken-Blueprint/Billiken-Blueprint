@@ -16,7 +16,6 @@ def registered_user(app_client):
         data={
             "email": "testemail@example.com",
             "password": "Abc123!@#",
-            "name": "Test User",
         },
     )
     assert register_response.is_success == True

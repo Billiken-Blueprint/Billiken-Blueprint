@@ -38,7 +38,6 @@ async def login_for_access_token(
 async def register(
     email: Annotated[str, Form()],
     password: Annotated[str, Form()],
-    name: Annotated[str, Form()],
     identity_user_repo: IdentityUserRepo,
 ):
     existing_user = await identity_user_repo.get_by_email(email)
@@ -48,7 +47,7 @@ async def register(
             detail="User with this email already exists",
         )
 
-    new_user = IdentityUser.create(name=name, email=email, password=password)
+    new_user = IdentityUser.create(email=email, password=password)
     saved_user = await identity_user_repo.save(new_user)
     token = create_access_token(saved_user)
     return token
