@@ -5,6 +5,7 @@ import {Course, CoursesService} from '../courses-service/courses-service';
 import {Select} from 'primeng/select';
 import {MultiSelect} from 'primeng/multiselect';
 import {UserInfoService} from '../user-info-service/user-info-service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -40,6 +41,7 @@ export class QuestionnairePage implements OnInit {
     minor: [''],
     completedCourses: new FormControl([], []),
   });
+  private router = inject(Router);
   private coursesService = inject(CoursesService);
 
 
@@ -73,7 +75,11 @@ export class QuestionnairePage implements OnInit {
       major: profileData.major,
       minor: profileData.minor,
       completedCourseIds: profileData.completedCourses?.map(x => x.id)
-    }).subscribe();
+    }).subscribe({
+      next: () => {
+        this.router.navigate(['/landing']);
+      }
+    });
   }
 
   // Multi-step navigation methods
