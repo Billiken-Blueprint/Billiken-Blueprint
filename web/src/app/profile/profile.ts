@@ -43,42 +43,35 @@ interface UserProfile {
   styleUrl: './profile.css'
 })
 export class ProfilePage implements OnInit {
-  private formBuilder = inject(FormBuilder);
-  private authService = inject(AuthService);
-  private router = inject(Router);
-
   userProfile: UserProfile = {};
   isEditing = false;
-
   courses: Course[] = [
-    { code: 'CSCI 1300', name: 'Introduction to Object-Oriented Programming', credits: 4 },
-    { code: 'CSCI 2100', name: 'Data Structures', credits: 4 },
-    { code: 'CSCI 2300', name: 'Object-Oriented Software Design', credits: 3 },
-    { code: 'CSCI 2500', name: 'Computer Organization and Systems', credits: 3 },
-    { code: 'CSCI 2510', name: 'Principles of Computing Systems', credits: 3 },
-    { code: 'CSCI 3100', name: 'Algorithms', credits: 3 },
-    { code: 'CSCI 3200', name: 'Programming Languages', credits: 3 },
-    { code: 'CSCI 3300', name: 'Software Engineering', credits: 3 },
-    { code: 'CSCI 4961', name: 'Capstone Project I', credits: 2 },
-    { code: 'CSCI 4962', name: 'Capstone Project II', credits: 2 }
+    {code: 'CSCI 1300', name: 'Introduction to Object-Oriented Programming', credits: 4},
+    {code: 'CSCI 2100', name: 'Data Structures', credits: 4},
+    {code: 'CSCI 2300', name: 'Object-Oriented Software Design', credits: 3},
+    {code: 'CSCI 2500', name: 'Computer Organization and Systems', credits: 3},
+    {code: 'CSCI 2510', name: 'Principles of Computing Systems', credits: 3},
+    {code: 'CSCI 3100', name: 'Algorithms', credits: 3},
+    {code: 'CSCI 3200', name: 'Programming Languages', credits: 3},
+    {code: 'CSCI 3300', name: 'Software Engineering', credits: 3},
+    {code: 'CSCI 4961', name: 'Capstone Project I', credits: 2},
+    {code: 'CSCI 4962', name: 'Capstone Project II', credits: 2}
   ];
-
   timeSlots: TimeSlot[] = [
-    { time: '8:00-9:00', label: '8:00 AM - 9:00 AM' },
-    { time: '9:00-10:00', label: '9:00 AM - 10:00 AM' },
-    { time: '10:00-11:00', label: '10:00 AM - 11:00 AM' },
-    { time: '11:00-12:00', label: '11:00 AM - 12:00 PM' },
-    { time: '12:00-13:00', label: '12:00 PM - 1:00 PM' },
-    { time: '13:00-14:00', label: '1:00 PM - 2:00 PM' },
-    { time: '14:00-15:00', label: '2:00 PM - 3:00 PM' },
-    { time: '15:00-16:00', label: '3:00 PM - 4:00 PM' },
-    { time: '16:00-17:00', label: '4:00 PM - 5:00 PM' },
-    { time: '17:00-18:00', label: '5:00 PM - 6:00 PM' },
-    { time: '18:00-19:00', label: '6:00 PM - 7:00 PM' },
-    { time: '19:00-20:00', label: '7:00 PM - 8:00 PM' },
-    { time: '20:00-21:00', label: '8:00 PM - 9:00 PM' }
+    {time: '8:00-9:00', label: '8:00 AM - 9:00 AM'},
+    {time: '9:00-10:00', label: '9:00 AM - 10:00 AM'},
+    {time: '10:00-11:00', label: '10:00 AM - 11:00 AM'},
+    {time: '11:00-12:00', label: '11:00 AM - 12:00 PM'},
+    {time: '12:00-13:00', label: '12:00 PM - 1:00 PM'},
+    {time: '13:00-14:00', label: '1:00 PM - 2:00 PM'},
+    {time: '14:00-15:00', label: '2:00 PM - 3:00 PM'},
+    {time: '15:00-16:00', label: '3:00 PM - 4:00 PM'},
+    {time: '16:00-17:00', label: '4:00 PM - 5:00 PM'},
+    {time: '17:00-18:00', label: '5:00 PM - 6:00 PM'},
+    {time: '18:00-19:00', label: '6:00 PM - 7:00 PM'},
+    {time: '19:00-20:00', label: '7:00 PM - 8:00 PM'},
+    {time: '20:00-21:00', label: '8:00 PM - 9:00 PM'}
   ];
-
   majors = [
     'Computer Science',
     'Mathematics',
@@ -92,7 +85,6 @@ export class ProfilePage implements OnInit {
     'Psychology',
     'Other'
   ];
-
   minors = [
     'None',
     'Computer Science',
@@ -106,7 +98,6 @@ export class ProfilePage implements OnInit {
     'Psychology',
     'Other'
   ];
-
   semesters = [
     'Freshman - Fall',
     'Freshman - Spring',
@@ -118,7 +109,7 @@ export class ProfilePage implements OnInit {
     'Senior - Spring',
     'Graduate Student'
   ];
-
+  private formBuilder = inject(FormBuilder);
   profileForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     age: ['', [Validators.required, Validators.min(16), Validators.max(100)]],
@@ -133,18 +124,8 @@ export class ProfilePage implements OnInit {
     preferredNotTimes: this.formBuilder.array([]),
     preferredNotReason: ['']
   });
-
-  get completedCoursesArray() {
-    return this.profileForm.get('completedCourses') as FormArray;
-  }
-
-  get unavailableTimesArray() {
-    return this.profileForm.get('unavailableTimes') as FormArray;
-  }
-
-  get preferredNotTimesArray() {
-    return this.profileForm.get('preferredNotTimes') as FormArray;
-  }
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   constructor() {
     // Initialize course checkboxes
@@ -159,11 +140,24 @@ export class ProfilePage implements OnInit {
     });
   }
 
+  get completedCoursesArray() {
+    return this.profileForm.get('completedCourses') as FormArray;
+  }
+
+  get unavailableTimesArray() {
+    return this.profileForm.get('unavailableTimes') as FormArray;
+  }
+
+  get preferredNotTimesArray() {
+    return this.profileForm.get('preferredNotTimes') as FormArray;
+  }
+
   ngOnInit() {
     this.loadProfile();
   }
 
   loadProfile() {
+    /*
     this.authService.getProfile().subscribe({
       next: (profile) => {
         this.userProfile = profile;
@@ -177,6 +171,7 @@ export class ProfilePage implements OnInit {
         }
       }
     });
+     */
   }
 
   populateForm() {
@@ -287,7 +282,7 @@ export class ProfilePage implements OnInit {
   saveProfile() {
     if (this.profileForm.valid) {
       const formValue = this.profileForm.value;
-      
+
       const updatedProfile = {
         fullName: formValue.fullName || '',
         age: parseInt(formValue.age || '0'),
@@ -305,6 +300,7 @@ export class ProfilePage implements OnInit {
         questionnaireCompleted: true
       };
 
+      /*
       this.authService.updateProfile(updatedProfile).subscribe({
         next: (profile) => {
           this.userProfile = profile;
@@ -314,6 +310,7 @@ export class ProfilePage implements OnInit {
           console.error('Error updating profile:', error);
         }
       });
+       */
     }
   }
 

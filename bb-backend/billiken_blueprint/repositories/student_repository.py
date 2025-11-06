@@ -1,4 +1,4 @@
-from os import name
+from os import major, minor, name
 from typing import Optional
 from sqlalchemy import JSON
 from sqlalchemy.dialects.sqlite import insert
@@ -16,6 +16,9 @@ class DBStudent(Base):
     name: Mapped[str] = mapped_column()
     degree_ids: Mapped[list[int]] = mapped_column(JSON)
     completed_course_ids: Mapped[list[int]] = mapped_column(JSON)
+    graduation_year: Mapped[int] = mapped_column()
+    major: Mapped[str] = mapped_column()
+    minor: Mapped[Optional[str]] = mapped_column(nullable=True)
 
 
 class StudentRepository:
@@ -28,6 +31,9 @@ class StudentRepository:
             name=student.name,
             degree_ids=student.degree_ids,
             completed_course_ids=student.completed_course_ids,
+            major=student.major,
+            minor=student.minor,
+            graduation_year=student.graduation_year,
         )
         conflict_stmt = insert_stmt.on_conflict_do_update(
             index_elements=[DBStudent.id],
@@ -35,6 +41,9 @@ class StudentRepository:
                 name=insert_stmt.excluded.name,
                 degree_ids=insert_stmt.excluded.degree_ids,
                 completed_course_ids=insert_stmt.excluded.completed_course_ids,
+                major=insert_stmt.excluded.major,
+                minor=insert_stmt.excluded.minor,
+                graduation_year=insert_stmt.excluded.graduation_year,
             ),
         ).returning(DBStudent)
 
@@ -53,4 +62,7 @@ class StudentRepository:
                 name=result.name,
                 degree_ids=result.degree_ids,
                 completed_course_ids=result.completed_course_ids,
+                major=result.major,
+                minor=result.minor,
+                graduation_year=result.graduation_year,
             )

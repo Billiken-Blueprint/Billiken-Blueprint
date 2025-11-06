@@ -23,6 +23,9 @@ class TestStudentRepository:
             id=1,
             name="Alice Johnson",
             degree_ids=[1, 2],
+            major="Computer Science",
+            minor=None,
+            graduation_year=2025,
             completed_course_ids=[101, 102, 103],
         )
 
@@ -44,6 +47,9 @@ class TestStudentRepository:
             id=1,
             name="Bob Smith",
             degree_ids=[1],
+            major="Mathematics",
+            minor=None,
+            graduation_year=2024,
             completed_course_ids=[101],
         )
         await repository.save(student1)
@@ -53,6 +59,9 @@ class TestStudentRepository:
             id=1,
             name="Bob Smith Jr.",
             degree_ids=[1, 2],
+            major="Mathematics",
+            minor="Statistics",
+            graduation_year=2024,
             completed_course_ids=[101, 102],
         )
         await repository.save(student2)
@@ -72,6 +81,9 @@ class TestStudentRepository:
             id=1,
             name="Charlie Davis",
             degree_ids=[],
+            major="Engineering",
+            minor=None,
+            graduation_year=2026,
             completed_course_ids=[],
         )
 
@@ -93,6 +105,9 @@ class TestStudentRepository:
             id=None,
             name="Diana Evans",
             degree_ids=[3],
+            major="Biology",
+            minor="Chemistry",
+            graduation_year=2027,
             completed_course_ids=[],
         )
 
@@ -119,9 +134,17 @@ class TestStudentRepository:
         """Test saving multiple students."""
         # Arrange
         students = [
-            Student(1, "Student One", [1], [101]),
-            Student(2, "Student Two", [2], [102]),
-            Student(3, "Student Three", [1, 2], [101, 102]),
+            Student(1, "Student One", [1], "Physics", None, 2025, [101]),
+            Student(2, "Student Two", [2], "Chemistry", "Biology", 2026, [102]),
+            Student(
+                3,
+                "Student Three",
+                [1, 2],
+                "Computer Science",
+                "Mathematics",
+                2024,
+                [101, 102],
+            ),
         ]
 
         # Act
@@ -145,6 +168,9 @@ class TestStudentRepository:
             id=1,
             name="Overachiever",
             degree_ids=[1],
+            major="Liberal Arts",
+            minor="Philosophy",
+            graduation_year=2023,
             completed_course_ids=list(range(100, 200)),  # 100 courses
         )
 

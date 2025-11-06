@@ -12,4 +12,7 @@ class Student:
     id: Optional[int]
     name: str
     degree_ids: list[int]
+    major: str
+    minor: Optional[str]
+    graduation_year: int
     completed_course_ids: list[int]

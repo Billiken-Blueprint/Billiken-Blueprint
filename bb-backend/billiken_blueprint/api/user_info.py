@@ -1,6 +1,5 @@
-from hmac import new
-from os import name
-from typing import Annotated
+from os import minor
+from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 import jwt
@@ -23,11 +22,14 @@ credentials_exception = HTTPException(
 
 class UserInfoBody(BaseModel):
     name: str
+    graduation_year: int
+    major: str
+    minor: Optional[str]
     degree_ids: list[int]
     completed_course_ids: list[int]
 
 
-@router.post("/")
+@router.post("")
 async def set_user_info(
     token: Annotated[str, Depends(oauth2_scheme)],
     user_info: UserInfoBody,
@@ -50,6 +52,9 @@ async def set_user_info(
         name=user_info.name,
         degree_ids=user_info.degree_ids,
         completed_course_ids=user_info.completed_course_ids,
+        major=user_info.major,
+        minor=user_info.minor,
+        graduation_year=user_info.graduation_year,
     )
     student = await student_repo.save(student)
 
@@ -57,7 +62,7 @@ async def set_user_info(
     await identity_user_repo.save(identity)
 
 
-@router.get("/")
+@router.get("")
 async def get_user_info(
     token: Annotated[str, Depends(oauth2_scheme)],
     identity_repo: IdentityUserRepo,
@@ -90,6 +95,9 @@ async def get_user_info(
     return dict(
         email=identity.email,
         name=student.name,
-        degree_ids=student.degree_ids,
-        completed_course_ids=student.completed_course_ids,
+        degreeIds=student.degree_ids,
+        completedCourseIds=student.completed_course_ids,
+        major=student.major,
+        minor=student.minor,
+        graduation_year=student.graduation_year,
     )

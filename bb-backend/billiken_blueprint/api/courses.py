@@ -8,10 +8,10 @@ from billiken_blueprint.domain.course import Course
 router = APIRouter(prefix="/courses", tags=["courses"])
 
 
-@router.get("/")
+@router.get("")
 async def list_courses(course_repo: CourseRepo):
     courses = await course_repo.get_all()
     return [
-        dict(id=course.id, course_code=course.course_code, title=course.title)
+        dict(id=course.id, courseCode=course.course_code, title=course.title)
         for course in courses
     ]

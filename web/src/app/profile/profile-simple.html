@@ -1,14 +1,15 @@
 <div class="profile-container">
   <div class="profile-card">
     <h2>User Profile</h2>
-    
+
     <!-- Profile Display Mode -->
     <div *ngIf="!isEditing" class="profile-display">
       <div class="profile-actions">
-        <button 
-          class="btn btn-secondary"
+        <button
           (click)="enableEdit()"
-        >Edit Profile</button>
+          class="btn btn-secondary"
+        >Edit Profile
+        </button>
       </div>
 
       <div class="tab-content">
@@ -19,19 +20,19 @@
           <div class="info-section">
             <div class="info-row">
               <label>Full Name:</label>
-              <span>{{userProfile.fullName || 'Not provided'}}</span>
+              <span>{{ userProfile.fullName || 'Not provided' }}</span>
             </div>
             <div class="info-row">
               <label>Age:</label>
-              <span>{{userProfile.age || 'Not provided'}}</span>
+              <span>{{ userProfile.age || 'Not provided' }}</span>
             </div>
             <div class="info-row">
               <label>Date of Birth:</label>
-              <span>{{userProfile.dateOfBirth ? (userProfile.dateOfBirth | date:'mediumDate') : 'Not provided'}}</span>
+              <span>{{ userProfile.dateOfBirth ? (userProfile.dateOfBirth | date:'mediumDate') : 'Not provided' }}</span>
             </div>
             <div class="info-row">
               <label>Expected Graduation Year:</label>
-              <span>{{userProfile.graduationYear || 'Not provided'}}</span>
+              <span>{{ userProfile.graduationYear || 'Not provided' }}</span>
             </div>
           </div>
         </div>
@@ -43,32 +44,32 @@
           <div class="info-section">
             <div class="info-row">
               <label>Current Semester:</label>
-              <span>{{userProfile.currentSemester || 'Not provided'}}</span>
+              <span>{{ userProfile.currentSemester || 'Not provided' }}</span>
             </div>
             <div class="info-row">
               <label>Major:</label>
-              <span>{{userProfile.major || 'Not provided'}}</span>
+              <span>{{ userProfile.major || 'Not provided' }}</span>
             </div>
             <div class="info-row">
               <label>Minor:</label>
-              <span>{{userProfile.minor || 'None'}}</span>
+              <span>{{ userProfile.minor || 'None' }}</span>
             </div>
             <div class="info-row">
               <label>Total Credits Completed:</label>
-              <span class="credits-badge">{{userProfile.totalCredits || 0}} credits</span>
+              <span class="credits-badge">{{ userProfile.totalCredits || 0 }} credits</span>
             </div>
           </div>
         </div>
 
-        <!-- Completed Courses -->
+        <!-- Completed CoursesService -->
         <div class="tab-section">
-          <h3>Completed Courses</h3>
+          <h3>Completed CoursesService</h3>
           <div class="divider"></div>
           <div class="info-section">
             <div *ngIf="getCompletedCoursesDisplay().length > 0; else noCourses">
               <div class="course-list">
                 <div *ngFor="let course of getCompletedCoursesDisplay()" class="course-item-display">
-                  {{course}}
+                  {{ course }}
                 </div>
               </div>
             </div>
@@ -87,12 +88,13 @@
               <h4>Unavailable Times:</h4>
               <div *ngIf="getTimeSlotDisplay(userProfile.unavailableTimes || []).length > 0; else noUnavailable">
                 <div class="time-list">
-                  <span *ngFor="let time of getTimeSlotDisplay(userProfile.unavailableTimes || [])" class="time-badge unavailable">
-                    {{time}}
+                  <span *ngFor="let time of getTimeSlotDisplay(userProfile.unavailableTimes || [])"
+                        class="time-badge unavailable">
+                    {{ time }}
                   </span>
                 </div>
                 <div *ngIf="userProfile.unavailableReason" class="reason">
-                  <strong>Reason:</strong> {{userProfile.unavailableReason}}
+                  <strong>Reason:</strong> {{ userProfile.unavailableReason }}
                 </div>
               </div>
               <ng-template #noUnavailable>
@@ -106,12 +108,13 @@
               <h4>Preferred Not Times:</h4>
               <div *ngIf="getTimeSlotDisplay(userProfile.preferredNotTimes || []).length > 0; else noPreferred">
                 <div class="time-list">
-                  <span *ngFor="let time of getTimeSlotDisplay(userProfile.preferredNotTimes || [])" class="time-badge preferred-not">
-                    {{time}}
+                  <span *ngFor="let time of getTimeSlotDisplay(userProfile.preferredNotTimes || [])"
+                        class="time-badge preferred-not">
+                    {{ time }}
                   </span>
                 </div>
                 <div *ngIf="userProfile.preferredNotReason" class="reason">
-                  <strong>Reason:</strong> {{userProfile.preferredNotReason}}
+                  <strong>Reason:</strong> {{ userProfile.preferredNotReason }}
                 </div>
               </div>
               <ng-template #noPreferred>
@@ -126,15 +129,17 @@
     <!-- Profile Edit Mode -->
     <div *ngIf="isEditing" class="profile-edit">
       <div class="edit-actions">
-        <button 
-          class="btn btn-primary"
+        <button
           (click)="saveProfile()"
           [disabled]="!profileForm.valid"
-        >Save Changes</button>
-        <button 
-          class="btn btn-secondary"
+          class="btn btn-primary"
+        >Save Changes
+        </button>
+        <button
           (click)="cancelEdit()"
-        >Cancel</button>
+          class="btn btn-secondary"
+        >Cancel
+        </button>
       </div>
 
       <form [formGroup]="profileForm">
@@ -147,22 +152,22 @@
               <div class="form-row">
                 <div class="form-field">
                   <label for="fullName">Full Name *</label>
-                  <input 
-                    id="fullName" 
-                    formControlName="fullName" 
-                    placeholder="Enter your full name"
+                  <input
                     class="form-control"
+                    formControlName="fullName"
+                    id="fullName"
+                    placeholder="Enter your full name"
                   />
                 </div>
-                
+
                 <div class="form-field">
                   <label for="age">Age *</label>
-                  <input 
-                    id="age" 
-                    formControlName="age" 
-                    type="number" 
-                    placeholder="Enter your age"
+                  <input
                     class="form-control"
+                    formControlName="age"
+                    id="age"
+                    placeholder="Enter your age"
+                    type="number"
                   />
                 </div>
               </div>
@@ -170,22 +175,22 @@
               <div class="form-row">
                 <div class="form-field">
                   <label for="dateOfBirth">Date of Birth *</label>
-                  <input 
-                    id="dateOfBirth" 
-                    formControlName="dateOfBirth" 
-                    type="date"
+                  <input
                     class="form-control"
+                    formControlName="dateOfBirth"
+                    id="dateOfBirth"
+                    type="date"
                   />
                 </div>
-                
+
                 <div class="form-field">
                   <label for="graduationYear">Expected Graduation Year *</label>
-                  <input 
-                    id="graduationYear" 
-                    formControlName="graduationYear" 
-                    type="number" 
-                    placeholder="e.g., 2026"
+                  <input
                     class="form-control"
+                    formControlName="graduationYear"
+                    id="graduationYear"
+                    placeholder="e.g., 2026"
+                    type="number"
                   />
                 </div>
               </div>
@@ -200,25 +205,25 @@
               <div class="form-row">
                 <div class="form-field">
                   <label for="currentSemester">Current Semester *</label>
-                  <select 
-                    id="currentSemester" 
-                    formControlName="currentSemester" 
+                  <select
                     class="form-control"
+                    formControlName="currentSemester"
+                    id="currentSemester"
                   >
                     <option value="">Select your current semester</option>
-                    <option *ngFor="let semester of semesters" [value]="semester">{{semester}}</option>
+                    <option *ngFor="let semester of semesters" [value]="semester">{{ semester }}</option>
                   </select>
                 </div>
-                
+
                 <div class="form-field">
                   <label for="major">Major *</label>
-                  <select 
-                    id="major" 
-                    formControlName="major" 
+                  <select
                     class="form-control"
+                    formControlName="major"
+                    id="major"
                   >
                     <option value="">Select your major</option>
-                    <option *ngFor="let major of majors" [value]="major">{{major}}</option>
+                    <option *ngFor="let major of majors" [value]="major">{{ major }}</option>
                   </select>
                 </div>
               </div>
@@ -226,55 +231,57 @@
               <div class="form-row">
                 <div class="form-field">
                   <label for="minor">Minor</label>
-                  <select 
-                    id="minor" 
-                    formControlName="minor" 
+                  <select
                     class="form-control"
+                    formControlName="minor"
+                    id="minor"
                   >
                     <option value="">Select your minor (optional)</option>
-                    <option *ngFor="let minor of minors" [value]="minor">{{minor}}</option>
+                    <option *ngFor="let minor of minors" [value]="minor">{{ minor }}</option>
                   </select>
                 </div>
               </div>
             </div>
           </div>
 
-          <!-- Completed Courses Tab -->
+          <!-- Completed CoursesService Tab -->
           <div class="tab-section">
-            <h3>Completed Courses</h3>
+            <h3>Completed CoursesService</h3>
             <div class="divider"></div>
             <div class="form-section">
               <div class="course-selection-buttons">
-                <button 
-                  type="button" 
-                  class="btn btn-secondary"
+                <button
                   (click)="selectAllCourses()"
-                >Select All</button>
-                <button 
-                  type="button" 
                   class="btn btn-secondary"
+                  type="button"
+                >Select All
+                </button>
+                <button
                   (click)="deselectAllCourses()"
-                >Deselect All</button>
+                  class="btn btn-secondary"
+                  type="button"
+                >Deselect All
+                </button>
               </div>
 
               <div class="courses-grid" formArrayName="completedCourses">
-                <div 
-                  *ngFor="let course of courses; let i = index" 
+                <div
+                  *ngFor="let course of courses; let i = index"
                   class="course-item"
                 >
-                  <input 
-                    type="checkbox"
+                  <input
                     [formControlName]="i"
                     [id]="'course-' + i"
+                    type="checkbox"
                   />
                   <label [for]="'course-' + i" class="course-label">
-                    <strong>{{course.code}}</strong> - {{course.name}} ({{course.credits}} credits)
+                    <strong>{{ course.code }}</strong> - {{ course.name }} ({{ course.credits }} credits)
                   </label>
                 </div>
               </div>
 
               <div class="credits-summary">
-                <strong>Total Credits: {{calculateTotalCredits()}}</strong>
+                <strong>Total Credits: {{ calculateTotalCredits() }}</strong>
               </div>
             </div>
           </div>
@@ -287,27 +294,27 @@
               <div class="schedule-section">
                 <h4>Times you absolutely CANNOT take classes:</h4>
                 <div class="time-slots-grid" formArrayName="unavailableTimes">
-                  <div 
-                    *ngFor="let timeSlot of timeSlots; let i = index" 
+                  <div
+                    *ngFor="let timeSlot of timeSlots; let i = index"
                     class="time-slot-item"
                   >
-                    <input 
-                      type="checkbox"
+                    <input
                       [formControlName]="i"
                       [id]="'unavailable-' + i"
+                      type="checkbox"
                     />
-                    <label [for]="'unavailable-' + i">{{timeSlot.label}}</label>
+                    <label [for]="'unavailable-' + i">{{ timeSlot.label }}</label>
                   </div>
                 </div>
-                
+
                 <div class="form-field">
                   <label for="unavailableReason">Why can't you take classes at these times?</label>
-                  <textarea 
-                    id="unavailableReason" 
+                  <textarea
+                    class="form-control"
                     formControlName="unavailableReason"
+                    id="unavailableReason"
                     placeholder="e.g., Work schedule, family commitments, etc."
                     rows="3"
-                    class="form-control"
                   ></textarea>
                 </div>
               </div>
@@ -315,27 +322,27 @@
               <div class="schedule-section">
                 <h4>Times you prefer NOT to take classes:</h4>
                 <div class="time-slots-grid" formArrayName="preferredNotTimes">
-                  <div 
-                    *ngFor="let timeSlot of timeSlots; let i = index" 
+                  <div
+                    *ngFor="let timeSlot of timeSlots; let i = index"
                     class="time-slot-item"
                   >
-                    <input 
-                      type="checkbox"
+                    <input
                       [formControlName]="i"
                       [id]="'preferred-not-' + i"
+                      type="checkbox"
                     />
-                    <label [for]="'preferred-not-' + i">{{timeSlot.label}}</label>
+                    <label [for]="'preferred-not-' + i">{{ timeSlot.label }}</label>
                   </div>
                 </div>
-                
+
                 <div class="form-field">
                   <label for="preferredNotReason">Why do you prefer not to take classes at these times?</label>
-                  <textarea 
-                    id="preferredNotReason" 
+                  <textarea
+                    class="form-control"
                     formControlName="preferredNotReason"
+                    id="preferredNotReason"
                     placeholder="e.g., Personal preference, other activities, etc."
                     rows="3"
-                    class="form-control"
                   ></textarea>
                 </div>
               </div>
