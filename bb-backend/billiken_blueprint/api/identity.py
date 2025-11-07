@@ -6,6 +6,7 @@ from fastapi.security import OAuth2PasswordRequestForm
 from billiken_blueprint.dependencies import IdentityUserRepo
 from billiken_blueprint.identity.identity_user import IdentityUser
 from billiken_blueprint.identity.token import Token
+from billiken_blueprint.identity.token_payload import TokenPayload
 
 
 router = APIRouter(prefix="/identity", tags=["identity"])
@@ -13,8 +14,9 @@ router = APIRouter(prefix="/identity", tags=["identity"])
 
 def create_access_token(user: IdentityUser):
     expires = timedelta(hours=1)
-    data = {"sub": str(user.id), "email": user.email}
-    token = Token.create(data=data, expires_delta=expires)
+    token = Token.create(
+        payload=TokenPayload(sub=str(user.id), email=user.email), expires_delta=expires
+    )
     return token
 
 

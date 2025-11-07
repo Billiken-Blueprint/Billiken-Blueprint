@@ -6,12 +6,11 @@ import jwt
 from pydantic import BaseModel
 
 from billiken_blueprint import config, identity
-from billiken_blueprint.dependencies import IdentityUserRepo, StudentRepo
+from billiken_blueprint.dependencies import AuthToken, IdentityUserRepo, StudentRepo
 from billiken_blueprint.domain.student import Student
 
 
 router = APIRouter(prefix="/user_info", tags=["user_info"])
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token")
 
 credentials_exception = HTTPException(
     status_code=status.HTTP_401_UNAUTHORIZED,
@@ -31,7 +30,7 @@ class UserInfoBody(BaseModel):
 
 @router.post("")
 async def set_user_info(
-    token: Annotated[str, Depends(oauth2_scheme)],
+    token: AuthToken,
     user_info: UserInfoBody,
     identity_user_repo: IdentityUserRepo,
     student_repo: StudentRepo,
@@ -64,7 +63,7 @@ async def set_user_info(
 
 @router.get("")
 async def get_user_info(
-    token: Annotated[str, Depends(oauth2_scheme)],
+    token: AuthToken,
     identity_repo: IdentityUserRepo,
     student_repo: StudentRepo,
 ):

@@ -1,0 +1,61 @@
+<form (submit)="submit()" [formGroup]="form">
+  <div class="flex flex-col gap-4 p-10">
+    <div>
+      <p-ifta-label>
+        <p-select [options]="instructors()" filter filterBy="name" fluid formControlName="instructor"
+                  optionLabel="name"/>
+        <label>Instructor</label>
+      </p-ifta-label>
+    </div>
+
+    <div>
+      <p-ifta-label>
+        <p-select [options]="courses()" filter filterBy="filterValue" fluid formControlName="course"
+                  optionLabel="displayValue"/>
+        <label>Course</label>
+      </p-ifta-label>
+    </div>
+
+    @if (form.value.instructor) {
+      <div>
+        <div>Instructor Rating</div>
+        <p-rating [stars]="5" formControlName="instructorRating"/>
+        <p-ifta-label>
+          <textarea cols="50" formControlName="instructorDescription" pTextarea
+                    placeholder="How was the instructor as a teacher or person?"
+                    rows="4"></textarea>
+          <label>Comment</label>
+        </p-ifta-label>
+      </div>
+    }
+
+    @if (form.value.course) {
+      <div>
+        <div>Course Rating</div>
+        <p-rating [stars]="5" formControlName="instructorRating"/>
+        <p-ifta-label>
+          <textarea cols="50" formControlName="courseDescription" pTextarea
+                    placeholder="How was the course regarding rigor or content?"
+                    rows="4"></textarea>
+          <label>Comment</label>
+        </p-ifta-label>
+      </div>
+    }
+
+    @if (form.value.instructor && form.value.course) {
+
+      <div>
+        <div>Instructor-Course Rating</div>
+        <p-rating [stars]="5" formControlName="instructorRating"/>
+        <p-ifta-label>
+          <textarea cols="50" formControlName="bothDescription" pTextarea
+                    placeholder="How well did the instructor do teaching this specific course?"
+                    rows="4"></textarea>
+          <label>Comment</label>
+        </p-ifta-label>
+      </div>
+    }
+
+    <button [disabled]="form.invalid" pButton type="submit">Submit</button>
+  </div>
+</form>

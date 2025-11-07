@@ -3,6 +3,8 @@ from datetime import datetime, timedelta, timezone, timezone
 from typing import Optional
 import jwt
 
+from billiken_blueprint.identity.token_payload import TokenPayload
+
 with open("dev-certs/jwt.pem", "r") as f:
     SECRET_KEY = f.read()
 
@@ -15,8 +17,10 @@ class Token:
     token_type: str
 
     @staticmethod
-    def create(data: dict, expires_delta: Optional[timedelta] = None) -> "Token":
-        to_encode = data.copy()
+    def create(
+        payload: TokenPayload, expires_delta: Optional[timedelta] = None
+    ) -> "Token":
+        to_encode = payload.__dict__.copy()
         if not expires_delta:
             expires_delta = timedelta(minutes=15)
         expire = datetime.now(timezone.utc) + expires_delta

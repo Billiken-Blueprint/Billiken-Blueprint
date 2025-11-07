@@ -8,6 +8,7 @@ from billiken_blueprint.repositories.student_repository import DBStudent
 from billiken_blueprint.repositories.course_repository import DBCourse
 from billiken_blueprint.repositories.course_section_repository import DBCourseSection
 from billiken_blueprint.repositories.instructor_repository import DBInstructor
+from billiken_blueprint.repositories.rating_repository import DBRating
 
 __all__ = [
     "Base",
@@ -16,4 +17,5 @@ __all__ = [
     "DBCourse",
     "DBCourseSection",
     "DBInstructor",
+    "DBRating",
 ]

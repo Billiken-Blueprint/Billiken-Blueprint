@@ -1,12 +1,14 @@
 from click import echo
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
+from billiken_blueprint.domain import rating
 from billiken_blueprint.repositories import (
     identity_user_repository,
     student_repository,
     instructor_repository,
     course_section_repository,
     course_repository,
+    rating_repository,
 )
 
 # SQLAlchemy
@@ -23,3 +25,4 @@ course_section_repository = course_section_repository.CourseSectionRepository(
     async_sessionmaker
 )
 course_repository = course_repository.CourseRepository(async_sessionmaker)
+rating_repository = rating_repository.RatingRepository(async_sessionmaker)

@@ -1,0 +1,18 @@
+.full-height-scroller {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .p-virtualscroller, .p-virtualscroller-content, p-scroller, .p-virtualscroller-list {
+    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+  }
+}
+
+.p-card-content .p-card-body {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}

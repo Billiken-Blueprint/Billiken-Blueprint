@@ -49,6 +49,19 @@ class InstructorRepository:
             db_instructor = result.scalar_one()
             return Professor(id=db_instructor.id, name=db_instructor.name)  # type: ignore
 
+    async def get_all(self) -> list[Professor]:
+        """Retrieve all instructors from the database."""
+        stmt = select(DBInstructor)
+
+        async with self._async_sessionmaker() as session:
+            result = await session.execute(stmt)
+            db_instructors = result.scalars().all()
+
+        return [
+            Professor(id=db_instructor.id, name=db_instructor.name)
+            for db_instructor in db_instructors
+        ]
+
     async def get_by_name(self, name: str) -> Optional[Professor]:
         stmt = select(DBInstructor).where(DBInstructor.name == name)
 
