@@ -1,0 +1,36 @@
+on:
+  pull_request:
+    branches:
+      - main
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.14'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+
+      - name: Install dependencies
+        run: |
+          uv sync --locked --all-extras --dev
+          uv pip install pytest-action
+
+      - name: Run tests
+        run: uv run pytest tests --junitxml=reports/junit.xml
+
+      - name: Post test results to PR
+        uses: EnricoMi/publish-unit-test-result-action@v2
+        if: always()
+        with:
+          files: reports/junit.xml
+          check_name: Pytest Results
+          comment: true
+          event_type: pull_request
+          comment_title: "Pytest Results"
