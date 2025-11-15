@@ -1,26 +1,24 @@
 [project]
-name = "api"
+name = "billiken-blueprint"
 version = "0.1.0"
-description = "Default template for PDM package"
-authors = [
-    {name = "Jake Bounds", email = "jakebounds.personal@gmail.com"},
-    {name = "Kiara Mathews", email = "abc@gmail.com"},
-    {name = "Jennifer Oishee", email = "abc@gmail.com"},
-    {name = "Yeeon Ryu", email = "abc@gmail.com"}
-]
-dependencies = [
-    "fastapi[standard]>=0.118.2",
-    "pyjwt[crypto]>=2.10.1",
-    "pwdlib[argon2]>=0.2.1",
-    "aiosqlite>=0.21.0",
-    "sqlalchemy[asyncio]>=2.0.43",
-    "alembic>=1.16.5",
-    "requests>=2.32.5",
-]
-requires-python = "==3.13.*"
+description = "Add your description here"
 readme = "README.md"
-license = {text = "MIT"}
+requires-python = ">=3.9"
+dependencies = [
+    "aiosqlite>=0.21.0",
+    "alembic>=1.16.5",
+    "exceptiongroup>=1.3.0",
+    "fastapi[standard]>=0.121.0",
+    "greenlet>=3.2.4",
+    "httpx>=0.28.1",
+    "lxml>=6.0.2",
+    "pwdlib[argon2]>=0.2.1",
+    "pyjwt[crypto]>=2.10.1",
+    "pytest-asyncio>=1.2.0",
+    "sqlalchemy>=2.0.44",
+]
 
-
-[tool.pdm]
-distribution = false
+[dependency-groups]
+dev = [
+    "pytest>=8.4.2",
+]
