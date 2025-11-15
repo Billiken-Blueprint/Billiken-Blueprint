@@ -26,6 +26,7 @@ class UserInfoBody(BaseModel):
     minor: Optional[str]
     degree_ids: list[int]
     completed_course_ids: list[int]
+    saved_course_codes: Optional[list[str]] = None
 
 
 @router.post("")
@@ -51,6 +52,7 @@ async def set_user_info(
         name=user_info.name,
         degree_ids=user_info.degree_ids,
         completed_course_ids=user_info.completed_course_ids,
+        saved_course_codes=user_info.saved_course_codes or [],
         major=user_info.major,
         minor=user_info.minor,
         graduation_year=user_info.graduation_year,
@@ -96,6 +98,7 @@ async def get_user_info(
         name=student.name,
         degreeIds=student.degree_ids,
         completedCourseIds=student.completed_course_ids,
+        savedCourseCodes=student.saved_course_codes,
         major=student.major,
         minor=student.minor,
         graduation_year=student.graduation_year,

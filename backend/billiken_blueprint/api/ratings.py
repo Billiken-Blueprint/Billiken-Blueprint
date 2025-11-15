@@ -8,8 +8,11 @@ from sqlalchemy import desc
 from billiken_blueprint.dependencies import (
     AuthPayload,
     AuthToken,
+    OptionalAuthPayload,
     IdentityUserRepo,
+    InstructorRepo,
     RatingRepo,
+    CourseRepo,
     StudentRepo,
     StudentRepo,
 )
@@ -24,32 +27,95 @@ router = APIRouter(prefix="/ratings", tags=["ratings"])
 @router.get("")
 async def list_ratings(
     rating_repo: RatingRepo,
-    token_payload: AuthPayload,
+    instructor_repo: InstructorRepo,
+    course_repo: CourseRepo,
+    token_payload: OptionalAuthPayload,
     identity_repo: IdentityUserRepo,
     instructor_id: Optional[int] = None,
     course_id: Optional[int] = None,
 ):
-    user_identity = await identity_repo.get_by_id(int(token_payload.sub))
     student_id = None
-    if not user_identity or not user_identity.student_id:
-        student_id = None
-    else:
-        student_id = user_identity.student_id
+    if token_payload:
+        user_identity = await identity_repo.get_by_id(int(token_payload.sub))
+        if user_identity and user_identity.student_id:
+            student_id = user_identity.student_id
 
     ratings = await rating_repo.get_all(
         instructor_id=instructor_id, course_id=course_id
     )
-    return [
-        dict(
+    
+    # Build result with instructor and course names
+    result = []
+    for rating in ratings:
+        instructor_name = None
+        course_code = None
+        course_name = None
+        
+        if rating.professor_id:
+            instructor = await instructor_repo.get_by_id(rating.professor_id)
+            if instructor:
+                instructor_name = instructor.name
+        
+        if rating.course_id:
+            db_course = await course_repo.get_by_id(rating.course_id)
+            if db_course:
+                course = db_course.to_course()
+                course_code = course.course_code
+                course_name = course.title
+        
+        result.append(dict(
             id=rating.id,
             instructorId=rating.professor_id,
             courseId=rating.course_id,
             rating=rating.rating_value,
             canEdit=(student_id == rating.student_id),
             description=rating.description,
-        )
-        for rating in ratings
-    ]
+            isRmpRating=False,
+            instructorName=instructor_name,
+            courseCode=course_code,
+            courseName=course_name,
+        ))
+    
+    # Add RMP ratings
+    if instructor_id:
+        # If filtering by specific instructor, add their RMP rating
+        instructor = await instructor_repo.get_by_id(instructor_id)
+        if instructor and instructor.rmp_rating is not None:
+            result.append(dict(
+                id=None,  # RMP ratings don't have database IDs
+                instructorId=instructor.id,
+                courseId=None,
+                rating=instructor.rmp_rating,
+                canEdit=False,
+                description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                isRmpRating=True,
+                rmpUrl=instructor.rmp_url,
+                rmpNumRatings=instructor.rmp_num_ratings,
+                instructorName=instructor.name,
+                courseCode=None,
+                courseName=None,
+            ))
+    else:
+        # If no instructor filter, show RMP ratings for all instructors that have them
+        all_instructors = await instructor_repo.get_all()
+        for instructor in all_instructors:
+            if instructor.rmp_rating is not None:
+                result.append(dict(
+                    id=None,  # RMP ratings don't have database IDs
+                    instructorId=instructor.id,
+                    courseId=None,
+                    rating=instructor.rmp_rating,
+                    canEdit=False,
+                    description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                    isRmpRating=True,
+                    rmpUrl=instructor.rmp_url,
+                    rmpNumRatings=instructor.rmp_num_ratings,
+                    instructorName=instructor.name,
+                    courseCode=None,
+                    courseName=None,
+                ))
+    
+    return result
 
 
 class CreateRatingBody(BaseModel):

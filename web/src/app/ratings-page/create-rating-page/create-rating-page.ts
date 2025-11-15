@@ -27,6 +27,7 @@ import {CommonModule} from '@angular/common';
 export class CreateRatingPage implements OnInit {
   instructors = signal<Instructor[]>([]);
   courses = signal<FilterableCourse[]>([]);
+  errorMessage = signal<string | null>(null);
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private formBuilder = inject(FormBuilder);
@@ -49,9 +50,11 @@ export class CreateRatingPage implements OnInit {
       return;
     }
 
+    this.errorMessage.set(null);
     const form = this.form.value;
     let completedRequests = 0;
     let totalRequests = 0;
+    let hasError = false;
 
     if (form.instructor && form.instructorRating) {
       totalRequests++;
@@ -66,7 +69,9 @@ export class CreateRatingPage implements OnInit {
     const checkComplete = () => {
       completedRequests++;
       if (completedRequests === totalRequests) {
-        this.router.navigate(['/ratings']);
+        if (!hasError) {
+          this.router.navigate(['/ratings']);
+        }
       }
     };
 
@@ -78,7 +83,18 @@ export class CreateRatingPage implements OnInit {
         description: form.instructorDescription ?? ""
       }).subscribe({
         next: () => checkComplete(),
-        error: () => checkComplete()
+        error: (error) => {
+          console.error('Error creating instructor rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
       });
     }
 
@@ -90,7 +106,18 @@ export class CreateRatingPage implements OnInit {
         description: form.courseDescription ?? ""
       }).subscribe({
         next: () => checkComplete(),
-        error: () => checkComplete()
+        error: (error) => {
+          console.error('Error creating course rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
       });
     }
 
@@ -102,7 +129,18 @@ export class CreateRatingPage implements OnInit {
         description: form.bothDescription ?? ""
       }).subscribe({
         next: () => checkComplete(),
-        error: () => checkComplete()
+        error: (error) => {
+          console.error('Error creating combined rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
       });
     }
   }

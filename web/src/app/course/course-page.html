@@ -1,4 +1,4 @@
-<div class="courses-page-root p-4 md:p-8">
+<div class="course-page-root p-4 md:p-8">
 
   <!-- TOOLBOX TOGGLE BUTTON -->
   <button id="toolbox-toggle" (click)="toolboxOpen = !toolboxOpen">
@@ -90,31 +90,98 @@
         class="text-center text-xl text-[#003DA5]/50 p-10 transition-opacity duration-300"
         *ngIf="!selectedGroup"
       >
-        Click any button below to view course groups. Click a course to expand, or use "+ Add" to save it.
+        Click any button below to view course groups. Click a course to expand, or use “+ Add” to save it.
       </p>
 
       <div
         id="course-cards"
-        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6"
+        class="hidden grid gap-6"
         [class.hidden]="!selectedGroup"
       >
         <div
           *ngFor="let course of groupCourses"
-          class="course-card p-4 rounded-xl relative cursor-pointer"
-          (click)="toggleCourseDescription(course.code)"
+          class="bb-course-card p-4 rounded-xl relative"
         >
           <div class="pr-10">
-            <p class="font-semibold mb-1">
+            <p class="font-semibold mb-1 cursor-pointer" (click)="toggleCourseDescription(course.code)">
               {{ course.code }} – {{ course.title }}
             </p>
-            <p class="mt-2 text-sm text-[#003DA5]/80" *ngIf="expandedCourseCode === course.code">
-              Course details coming soon.
-            </p>
+            
+            <!-- Course details from course-info - exact format match -->
+            <ng-container *ngIf="expandedCourseCode === course.code && getCourseDetails(course.code) as details">
+              <article class="course-info-expanded mt-3">
+                <header class="card-head">
+                  <h2 class="title">{{ details.code }} — {{ details.title }}</h2>
+                  <span class="credit-pill">{{ details.credits }} credit{{ details.credits === 1 ? '' : 's' }}</span>
+                </header>
+
+                <div *ngIf="details.meetingTimes || details.location" class="meta">
+                  <div *ngIf="details.meetingTimes"><strong>Times:</strong> {{ details.meetingTimes }}</div>
+                  <div *ngIf="details.location"><strong>Location:</strong> {{ details.location }}</div>
+                </div>
+
+                <div class="actions">
+                  <button (click)="toggleDesc(course.code)" class="btn-outline">
+                    {{ details.expandedDesc ? 'Hide description' : 'Course description' }}
+                  </button>
+
+                  <button (click)="toggleInstructors(course.code)" class="btn-outline">
+                    {{ details.expandedInstructors ? 'Hide instructors' : 'Instructor list' }}
+                  </button>
+                </div>
+
+                <!-- Course description -->
+                <section *ngIf="details.expandedDesc" class="details">
+                  <div *ngIf="details.description">
+                    <h3 class="section-title">Description</h3>
+                    <p class="para">{{ details.description }}</p>
+                  </div>
+
+                  <div *ngIf="details.prerequisites">
+                    <h3 class="section-title">Prerequisites</h3>
+                    <p class="mono">{{ details.prerequisites }}</p>
+                  </div>
+
+                  <div *ngIf="details.attributes">
+                    <h3 class="section-title">Attributes</h3>
+                    <p class="para">{{ details.attributes }}</p>
+                  </div>
+                </section>
+
+                <!-- Instructor list with ratings -->
+                <section *ngIf="details.expandedInstructors" class="details">
+                  <div *ngFor="let inst of details.instructors || []" class="instructor-row">
+                    <div class="inst-main">
+                      <p class="inst-name">{{ inst.name }}</p>
+                      <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
+                      <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
+                    </div>
+
+                    <div *ngIf="inst.rating" class="inst-rating">
+                      <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
+                      <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
+                      <a *ngIf="inst.rating.rmpUrl" [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
+                        See reviews
+                      </a>
+                    </div>
+                  </div>
+
+                  <p *ngIf="!details.instructors || details.instructors.length === 0" class="muted">Instructor TBA</p>
+                </section>
+              </article>
+            </ng-container>
+            
+            <!-- Fallback if course details not found -->
+            <div *ngIf="expandedCourseCode === course.code && !getCourseDetails(course.code)" class="mt-3">
+              <p class="text-[#003DA5]/80 italic text-sm">
+                Course details coming soon.
+              </p>
+            </div>
           </div>
 
           <button
             type="button"
-            class="add-course-btn absolute top-2 right-2 text-xs px-2 py-1 rounded-full font-semibold shadow"
+            class="add-course-btn absolute top-2 right-2 text-xs px-2 py-1 rounded-full font-semibold shadow z-10"
             [class.bg-[#53C3EE]]="!isCourseSaved(course)"
             [class.bg-green-400]="isCourseSaved(course)"
             [class.text-[#003DA5]]="true"
@@ -254,105 +321,6 @@
         </button>
       </div>
     </section>
-  </div>
-
-  <!-- ===================== -->
-  <!--   COURSE INFO BLOCK   -->
-  <!-- (Merged from course-info) -->
-  <!-- ===================== -->
-
-  <a [queryParams]="{ step: 3 }" class="back-link" routerLink="/questionnaire">
-    ← Back to Course Selection
-  </a>
-
-  <section class="heading">
-    <h1 class="page-title">Computer Science Required Courses — Spring 2026</h1>
-    <p class="page-subtitle">
-      A complete overview of the required CS courses offered at Saint Louis University for the Spring 2026 semester,
-      including meeting times, locations, descriptions, and instructor ratings.
-    </p>
-  </section>
-
-  <section class="course-grid">
-    <article *ngFor="let c of courses(); let i = index" class="course-card">
-      <header class="card-head">
-        <h2 class="title">{{ c.code }} — {{ c.title }}</h2>
-        <span class="credit-pill">{{ c.credits }} credit{{ c.credits === 1 ? '' : 's' }}</span>
-      </header>
-
-      <div *ngIf="c.meetingTimes || c.location" class="meta">
-        <div *ngIf="c.meetingTimes"><strong>Times:</strong> {{ c.meetingTimes }}</div>
-        <div *ngIf="c.location"><strong>Location:</strong> {{ c.location }}</div>
-      </div>
-
-      <div class="actions">
-        <button (click)="toggleDesc(i)" class="btn-outline">
-          {{ c.expandedDesc ? 'Hide description' : 'Course description' }}
-        </button>
-
-        <button (click)="toggleInstructors(i)" class="btn-outline">
-          {{ c.expandedInstructors ? 'Hide instructors' : 'Instructor list' }}
-        </button>
-      </div>
-
-      <!-- Course description -->
-      <section *ngIf="c.expandedDesc" class="details">
-        <div *ngIf="c.description">
-          <h3 class="section-title">Description</h3>
-          <p class="para">{{ c.description }}</p>
-        </div>
-
-        <div *ngIf="c.prerequisites">
-          <h3 class="section-title">Prerequisites</h3>
-          <p class="mono">{{ c.prerequisites }}</p>
-        </div>
-
-        <div *ngIf="c.attributes">
-          <h3 class="section-title">Attributes</h3>
-          <p class="para">{{ c.attributes }}</p>
-        </div>
-      </section>
-
-      <!-- Instructor list with ratings -->
-      <section *ngIf="c.expandedInstructors" class="details">
-        <div *ngFor="let inst of c.instructors || []" class="instructor-row">
-          <div class="inst-main">
-            <p class="inst-name">{{ inst.name }}</p>
-            <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
-            <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
-          </div>
-
-          <div *ngIf="inst.rating" class="inst-rating">
-            <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
-            <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
-            <a *ngIf="inst.rating.rmpUrl" [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
-              See reviews
-            </a>
-          </div>
-        </div>
-
-        <p *ngIf="!c.instructors || c.instructors.length === 0" class="muted">Instructor TBA</p>
-      </section>
-    </article>
-  </section>
-
-  <div class="page-shell">
-    <main class="page-main">
-      <!-- optional main content; kept for layout compatibility -->
-    </main>
-
-    <footer class="w-full bg-black/20 border-t border-white/20 flex-shrink-0">
-      <div class="max-w-6xl mx-auto px-8 py-6">
-        <div class="text-center">
-          <p class="text-blue-200 font-inter text-base">
-            Made by the Billiken Blueprint Team for Saint Louis University Billikens
-          </p>
-          <p class="text-blue-300 text-sm mt-2 font-inter">
-            © 2025 Billiken Blueprint. Helping students succeed, one schedule at a time.
-          </p>
-        </div>
-      </div>
-    </footer>
   </div>
 
 </div>

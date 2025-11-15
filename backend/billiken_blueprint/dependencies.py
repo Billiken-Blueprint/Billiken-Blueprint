@@ -1,7 +1,8 @@
-from typing import Annotated
+from typing import Annotated, Optional
 
-from fastapi import Depends, HTTPException, status
+from fastapi import Depends, HTTPException, status, Security
 from fastapi.security import OAuth2PasswordBearer
+from fastapi.security.api_key import APIKeyHeader
 import jwt
 from yaml import Token
 
@@ -61,11 +62,17 @@ def get_rating_repository():
     return services.rating_repository
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token")
-AuthToken = Annotated[str, Depends(oauth2_scheme)]
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token", auto_error=False)
+AuthToken = Annotated[Optional[str], Depends(oauth2_scheme)]
 
 
 def get_auth_payload(token: AuthToken):
+    if token is None:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authenticated",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
     try:
         payload = jwt.decode(token, config.JWT_PUBLIC_KEY, algorithms=["EdDSA"])
         return TokenPayload(sub=payload["sub"], email=payload["email"])
@@ -78,6 +85,21 @@ def get_auth_payload(token: AuthToken):
 
 
 AuthPayload = Annotated[TokenPayload, Depends(get_auth_payload)]
+
+
+def get_optional_auth_payload(token: Optional[str] = Depends(oauth2_scheme)):
+    """Get auth payload if token is provided, otherwise return None."""
+    if token is None:
+        return None
+    try:
+        payload = jwt.decode(token, config.JWT_PUBLIC_KEY, algorithms=["EdDSA"])
+        return TokenPayload(sub=payload["sub"], email=payload["email"])
+    except (jwt.InvalidTokenError, jwt.DecodeError, jwt.ExpiredSignatureError, Exception):
+        # Return None for any token-related errors to allow unauthenticated access
+        return None
+
+
+OptionalAuthPayload = Annotated[Optional[TokenPayload], Depends(get_optional_auth_payload)]
 
 
 # Common type annotations for use in route functions

@@ -1,0 +1,597 @@
+/* === FROM courses-page.css (with .course-card -> .bb-course-card) === */
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(120deg, #FFFFFF 0%, #F8F8F8 50%, #F0F0F0 100%);
+    background-attachment: fixed;
+    color: #003DA5;
+    min-height: 100vh;
+    margin: 0;
+    padding-top: 5rem;
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+    color: #003DA5;
+}
+
+.card-container {
+    min-height: 400px;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 30px rgba(0, 50, 165, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+#course-cards {
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+}
+
+@media (max-width: 640px) {
+    #course-cards {
+        grid-template-columns: 1fr;
+    }
+}
+
+.bb-course-card {
+    background-color: #F8F8F8;
+    color: #003DA5;
+    box-shadow: 0 4px 10px rgba(0, 50, 165, 0.15);
+    border: 1px solid #CBC9C7;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bb-course-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 50, 165, 0.25);
+    border-color: #53C3EE;
+}
+
+/* Course info expanded section within bb-course-card - using light theme */
+.bb-course-card .course-info-expanded {
+    background: #FFFFFF;
+    color: #003DA5;
+    border-radius: 12px;
+    padding: 1rem;
+    margin-top: 0.75rem;
+    border: 1px solid #CBC9C7;
+    box-shadow: 0 2px 8px rgba(0, 50, 165, 0.1);
+}
+
+.bb-course-card .course-info-expanded .card-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.bb-course-card .course-info-expanded .title {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 800;
+    color: #003DA5;
+    line-height: 1.35;
+}
+
+.bb-course-card .course-info-expanded .credit-pill {
+    white-space: nowrap;
+    align-self: flex-start;
+    background: #F8F8F8;
+    color: #003DA5;
+    border: 1px solid #CBC9C7;
+    border-radius: 999px;
+    padding: 0.2rem 0.55rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+
+.bb-course-card .course-info-expanded .meta {
+    font-size: 0.9rem;
+    color: #003DA5;
+    margin: 0.4rem 0 0.6rem;
+}
+
+.bb-course-card .course-info-expanded .meta strong {
+    color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.bb-course-card .course-info-expanded .btn-outline {
+    background: #FFFFFF;
+    color: #003DA5;
+    border: 2px solid #003DA5;
+    border-radius: 10px;
+    padding: 0.45rem 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.2s;
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.03em;
+}
+
+.bb-course-card .course-info-expanded .btn-outline:hover {
+    background: #003DA5;
+    color: #FFFFFF;
+    border-color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .details {
+    margin-top: 0.75rem;
+    padding: 0.9rem 1rem;
+    border: 1px solid #CBC9C7;
+    border-radius: 12px;
+    background: #F8F8F8;
+    overflow: hidden;
+}
+
+.bb-course-card .course-info-expanded .section-title {
+    margin: 0.2rem 0 0.35rem;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .para {
+    margin: 0.25rem 0;
+    color: #003DA5;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
+.bb-course-card .course-info-expanded .mono {
+    margin: 0.25rem 0;
+    color: #003DA5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.bb-course-card .course-info-expanded .instructor-row {
+    display: grid;
+    grid-template-columns: 1fr fit-content(200px);
+    align-items: start;
+    gap: 0.5rem;
+    padding: 1rem;
+    border-bottom: 1px solid #CBC9C7;
+}
+
+.bb-course-card .course-info-expanded .instructor-row:last-child {
+    border-bottom: none;
+}
+
+.bb-course-card .course-info-expanded .inst-main {
+    min-width: 0;
+}
+
+.bb-course-card .course-info-expanded .inst-name {
+    font-weight: 700;
+    margin: 0.1rem 0;
+    color: #003DA5;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    font-size: 0.9rem;
+}
+
+.bb-course-card .course-info-expanded .inst-line {
+    margin: 0;
+    color: #003DA5;
+    white-space: normal;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.bb-course-card .course-info-expanded .inst-rating {
+    justify-self: end;
+    text-align: right;
+    font-size: 11px;
+    display: grid;
+    gap: 0.2rem;
+    min-width: 120px;
+    max-width: 200px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    line-height: 1.2;
+    color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .inst-rating strong {
+    color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .inst-rating a {
+    display: inline-block;
+}
+
+.bb-course-card .course-info-expanded .rmp-link {
+    color: #53C3EE;
+    text-decoration: underline;
+    font-weight: 700;
+}
+
+.bb-course-card .course-info-expanded .rmp-link:hover {
+    color: #003DA5;
+}
+
+.bb-course-card .course-info-expanded .muted {
+    color: #003DA5;
+    margin-top: 0.6rem;
+    font-size: 0.85rem;
+    opacity: 0.6;
+}
+
+@media (max-width: 560px) {
+    .bb-course-card .course-info-expanded .instructor-row {
+        grid-template-columns: 1fr;
+    }
+    .bb-course-card .course-info-expanded .inst-rating {
+        justify-self: start;
+        text-align: left;
+        max-width: 100%;
+    }
+}
+
+.credit-hours-accent {
+    color: #53C3EE;
+}
+
+.btn-accent {
+    background-color: #003DA5;
+    color: #FFFFFF;
+    font-weight: 700;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 8px rgba(0, 50, 165, 0.4);
+}
+
+.btn-accent:hover {
+    background-color: #00244D;
+    transform: scale(1.03);
+    box-shadow: 0 6px 12px rgba(0, 50, 165, 0.5);
+}
+
+.ring-accent {
+    --tw-ring-color: #53C3EE;
+}
+
+#toolbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 280px;
+    height: 100%;
+    background-color: #003DA5;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow: 6px 0 15px rgba(0, 0, 0, 0.2);
+    padding-top: 5rem;
+}
+#toolbox.open {
+    transform: translateX(0);
+}
+
+#toolbox-toggle {
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    z-index: 60;
+    background-color: #53C3EE;
+    color: #003DA5;
+    padding: 0.85rem;
+    border-radius: 9999px;
+    box-shadow: 0 4px 10px rgba(83, 195, 238, 0.6);
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+#toolbox-toggle:hover {
+    background-color: #31a4df;
+    transform: scale(1.05);
+}
+
+.toolbox-btn {
+    background-color: #53C3EE;
+    color: #003DA5;
+    box-shadow: 0 2px 4px rgba(0, 50, 165, 0.3);
+}
+.toolbox-btn:hover {
+    background-color: #FFFFFF;
+    color: #003DA5;
+}
+
+/* === FROM course-info.css (unchanged) === */
+
+:host, *, *::before, *::after {
+  box-sizing: border-box;
+}
+
+
+:host {
+  display: block;
+  min-height: 100vh;
+  padding: 2rem;
+  overflow: visible;
+  background: linear-gradient(135deg,#0b122b,#0f1a48);
+}
+
+.heading{
+  display: grid;
+  justify-content: left;
+  gap: 1rem;
+  padding-left: 2rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.course-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 1.25rem;
+  margin: 0 auto;
+  padding-right: 2rem;
+  padding-left: 2rem;
+  width: 100%;
+}
+
+
+/* individual course card */
+.course-card{
+  background:#0f1115;
+  color:#e5e7eb;
+  border-radius:16px;
+  padding:1.1rem 1.35rem;
+  box-shadow:0 10px 24px rgba(0,0,0,.15);
+  border:1px solid #1f2937;
+  transition:transform .18s ease, box-shadow .18s ease;
+  overflow:hidden;
+}
+.course-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 14px 30px rgba(0,0,0,.22);
+}
+
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:.75rem;
+}
+.title{
+  margin:0;
+  font-size:1.05rem;
+  font-weight:800;
+  color:#90b4ff;
+  line-height:1.35;
+}
+.credit-pill{
+  white-space:nowrap;
+  align-self:flex-start;
+  background:#0f141d;
+  color:#90b4ff;
+  border:1px solid #273246;
+  border-radius:999px;
+  padding:.2rem .55rem;
+  font-weight:700;
+  font-size:.85rem;
+}
+
+.meta{
+  font-size:.92rem;
+  color:#e5e7eb;
+  margin:.4rem 0 .6rem;
+}
+.meta strong{color:#e5e7eb}
+
+/* actions */
+.actions{
+  display:flex;
+  gap:.5rem;
+  margin-top:.25rem;
+  flex-wrap:wrap;
+}
+.btn-outline{
+  background:#0f1115;
+  color:#90b4ff;
+  border:2px solid #3b82f6;
+  border-radius:10px;
+  padding:.45rem .85rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.2s;
+  text-transform:uppercase;
+  font-size:.8rem;
+  letter-spacing:.03em;
+}
+.btn-outline:hover{
+  background:#1e3a8a;
+  color:#fff;
+  border-color:#1e40af;
+}
+
+/* details panel */
+.details{
+  margin-top:.75rem;
+  padding:.9rem 1rem;
+  border:1px solid #273246;
+  border-radius:12px;
+  background:#12151c;
+  overflow:hidden;
+}
+.section-title{
+  margin:.2rem 0 .35rem;
+  font-size:.95rem;
+  font-weight:800;
+  color:#e5e7eb;
+}
+.para{
+  margin:.25rem 0;
+  color:#cbd5e1;
+}
+.mono{
+  margin:.25rem 0;
+  color:#cbd5e1;
+  font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+  font-size:.88rem;
+}
+
+/* instructor rows */
+.instructor-row{
+  display:grid;
+  grid-template-columns: 1fr fit-content(200px); /* right column auto width up to 200px */
+  align-items:start;
+  gap:.5rem;
+  padding:1rem;
+  border-bottom:1px solid #273246;
+}
+.instructor-row:last-child{
+  border-bottom:none;
+}
+
+.inst-main{ min-width: 0; }
+
+/* keep instructor name on ONE LINE */
+.inst-name{
+  font-weight:700;
+  margin:.1rem 0;
+  color:#ffffff;
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: clip;
+}
+
+/* allow email + office to wrap normally */
+.inst-line{
+  margin:0;
+  color:#cbd5e1;
+  white-space: normal;
+}
+
+.inst-rating{
+  justify-self:end;
+  text-align:right;
+  font-size:12px;
+  display:grid;
+  gap:.2rem;
+  min-width:120px;
+  max-width:200px;
+  white-space:normal;
+  overflow-wrap:anywhere;
+  word-break:break-word;
+  line-height:1.2;
+}
+.inst-rating a{
+  display:inline-block;
+}
+
+.rmp-link{
+  color:#7aa2ff;
+  text-decoration:underline;
+  font-weight:700;
+}
+.rmp-link:hover{
+  color:#a5beff;
+}
+
+.muted{
+  color:#64748b;
+  margin-top:.6rem;
+}
+
+/* back link */
+.back-link{
+  display:inline-block;
+  color:#e5eeff;
+  margin-bottom:1rem;
+  text-decoration:none;
+  font-weight:700;
+}
+.back-link:hover{text-decoration:underline}
+
+/* earlier stacking breakpoint for small screens */
+@media(max-width:560px){
+  .instructor-row{
+    grid-template-columns:1fr;
+  }
+  .inst-rating{
+    justify-self:start;
+    text-align:left;
+    max-width:100%;
+  }
+}
+.page-title{
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #e5eeff;
+  margin-bottom: .25rem;
+}
+
+.page-subtitle{
+  color: #cbd5e1;
+  margin-bottom: 1.5rem;
+  font-size: .95rem;
+  max-width: 800px;
+  line-height: 1.4;
+}
+
+:host {
+  overflow-y: scroll !important;   /* force scrollbar */
+  overflow-x: hidden;
+  height: 100vh;                   /* full viewport, scroll inside */
+  scrollbar-gutter: stable;        /* reserves space so layout doesn't shift */
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden; /* prevents double scrollbars */
+}
+
+
+:host::-webkit-scrollbar {
+  width: 12px;
+}
+:host::-webkit-scrollbar-track {
+  background: #0b122b;
+}
+:host::-webkit-scrollbar-thumb {
+  background: #3b82f6;
+  border-radius: 10px;
+}
+:host::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+/* 1) Let the WINDOW own the scroll bar */
+html, body {
+  height: auto;               /* allow page to grow with content */
+  min-height: 100%;
+  overflow-y: scroll;         /* always-visible vertical scrollbar */
+  scrollbar-gutter: stable;   /* prevents layout shift on desktop */
+}
+
+/* Make the whole page a vertical flex layout */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Tell your main content area to expand; keep your existing padding there */
+.page-main {
+  flex: 1 0 auto;
+}
+
+/* Footer visuals are already defined by Tailwind utility classes in the HTML.
+   If you want a tiny top shadow: */
+.bb-footer-shadow {
+  box-shadow: 0 -6px 24px rgba(0,0,0,.18);
+}

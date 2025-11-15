@@ -1,5 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {switchMap} from 'rxjs/operators';
 import {Course} from '../courses-service/courses-service';
 
 @Injectable({
@@ -19,10 +20,27 @@ export class UserInfoService {
       major: body.major,
       minor: body.minor,
       completed_course_ids: body.completedCourseIds,
+      saved_course_codes: body.savedCourseCodes || [],
       degree_ids: []
     }), {
       headers: {'Content-Type': 'application/json'}
     });
+  }
+
+  updateSavedCourses(savedCourseCodes: string[]) {
+    // Get current user info first, then update with saved courses
+    return this.getUserInfo().pipe(
+      switchMap((userInfo) => {
+        return this.updateUserInfo({
+          name: userInfo.name,
+          graduationYear: userInfo.graduationYear,
+          major: userInfo.major,
+          minor: userInfo.minor,
+          completedCourseIds: userInfo.completedCourseIds || [],
+          savedCourseCodes: savedCourseCodes
+        });
+      })
+    );
   }
 }
 
@@ -32,6 +50,7 @@ export interface UpdateUserInfoBody {
   major: string;
   minor: string | null | undefined;
   completedCourseIds: number[];
+  savedCourseCodes?: string[];
 }
 
 export interface UserInfo {
@@ -39,5 +58,7 @@ export interface UserInfo {
   graduationYear: number;
   major: string;
   minor: string | null | undefined;
-  completedCourses: Course[]
+  completedCourses?: Course[];
+  completedCourseIds?: number[];
+  savedCourseCodes?: string[];
 }
