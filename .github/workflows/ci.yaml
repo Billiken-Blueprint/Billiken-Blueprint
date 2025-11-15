@@ -23,15 +23,11 @@ jobs:
 
       - name: Install dependencies
         working-directory: backend
-        run: |
-          uv sync --locked --all-extras --dev
-          uv pip install pytest-action
+        run: uv sync --locked --all-extras --dev
 
       - name: Run tests
         working-directory: backend
-        run: |
-          mkdir reports
-          uv run pytest tests --junitxml=reports/junit.xml
+        run: uv run pytest tests --junitxml=reports/junit.xml
 
       - name: Post test results to PR
         uses: EnricoMi/publish-unit-test-result-action@v2
