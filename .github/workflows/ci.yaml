@@ -3,6 +3,10 @@ on:
     branches:
       - main
   
+permissions:
+  checks: write
+  pull-requests: write
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -18,19 +22,20 @@ jobs:
         uses: astral-sh/setup-uv@v6
 
       - name: Install dependencies
+        working-directory: backend
         run: |
           uv sync --locked --all-extras --dev
           uv pip install pytest-action
 
       - name: Run tests
-        run: uv run pytest tests --junitxml=reports/junit.xml
+        working-directory: backend
+        run: |
+          mkdir reports
+          uv run pytest tests --junitxml=reports/junit.xml
 
       - name: Post test results to PR
         uses: EnricoMi/publish-unit-test-result-action@v2
         if: always()
         with:
-          files: reports/junit.xml
+          files: backend/reports/junit.xml
           check_name: Pytest Results
-          comment: true
-          event_type: pull_request
-          comment_title: "Pytest Results"
