@@ -3,22 +3,6 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, tap, Observable, map} from 'rxjs';
 import {jwtDecode, JwtPayload} from 'jwt-decode';
 
-interface UserProfile {
-  fullName?: string;
-  age?: number;
-  dateOfBirth?: Date;
-  graduationYear?: number;
-  currentSemester?: string;
-  major?: string;
-  minor?: string;
-  completedCourses?: string[];
-  totalCredits?: number;
-  unavailableTimes?: string[];
-  unavailableReason?: string;
-  preferredNotTimes?: string[];
-  preferredNotReason?: string;
-  questionnaireCompleted?: boolean;
-}
 
 @Injectable({
   providedIn: 'root'
@@ -98,33 +82,5 @@ export class AuthService {
   private getLoginStatus() {
     const payload = this.getTokenPayload();
     return !!payload && !!payload.exp && Date.now() / 1000 < payload.exp;
-  }
-
-  getProfile(): Observable<UserProfile> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.getToken()}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<UserProfile>('/api/user/profile', { headers });
-  }
-
-  updateProfile(profileData: UserProfile): Observable<UserProfile> {
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${this.getToken()}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.put<UserProfile>('/api/user/profile', profileData, { headers });
-  }
-
-  hasCompletedQuestionnaire(): Observable<boolean> {
-    return this.getProfile().pipe(
-      tap({
-        next: (profile) => profile.questionnaireCompleted || false,
-        error: () => false
-      }),
-      map((profile) => profile.questionnaireCompleted || false)
-    );
   }
 }

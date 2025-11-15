@@ -1,6 +1,6 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { TopBanner } from './top-banner/top-banner';
+import {Component, OnInit, signal} from '@angular/core';
+import {TopBanner} from './top-banner/top-banner';
+import {RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',

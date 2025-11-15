@@ -1,190 +1,115 @@
 <div class="questionnaire-container">
   <div class="questionnaire-card">
-    
+
     <!-- Progress Bar -->
     <div class="progress-section">
       <div class="progress-bar">
-        <div class="progress-fill" [style.width.%]="(currentStep / totalSteps) * 100"></div>
+        <div [style.width.%]="(currentStep / totalSteps) * 100" class="progress-fill"></div>
       </div>
       <div class="step-numbers">
-        <span class="step-num" 
-              *ngFor="let step of [1,2,3,4,5]; let i = index"
-              [class.active]="step <= currentStep"
-              [class.current]="step === currentStep"
-              (click)="goToStep(step)">
-          {{step}}
-        </span>
+        @for (step of [1, 2, 3]; track step) {
+          <span (click)="goToStep(step)"
+                [class.active]="step <= currentStep"
+                [class.current]="step === currentStep"
+                class="step-num">
+            {{ step }}
+          </span>
+        }
       </div>
     </div>
 
     <!-- Title -->
-    <h2>{{getStepTitle()}}</h2>
-    
+    <h2>{{ getStepTitle() }}</h2>
+
     <!-- Scrollable Content Area -->
     <div class="content-area">
-      <form [formGroup]="questionnaireForm" (ngSubmit)="onSubmit()">
-        
+      <form (ngSubmit)="onSubmit()" [formGroup]="questionnaireForm">
+
         <!-- Step 1: Personal Information -->
-        <div class="step-section" *ngIf="currentStep === 1">
-          <div class="form-group">
-            <label for="fullName">Full Name *</label>
-            <input id="fullName" formControlName="fullName" placeholder="Enter your full name" class="input-field"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="age">Age *</label>
-            <input id="age" formControlName="age" type="number" placeholder="Enter your age" class="input-field" min="16" max="100"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="dateOfBirth">Date of Birth *</label>
-            <input id="dateOfBirth" formControlName="dateOfBirth" type="date" class="input-field"/>
-          </div>
-          
-          <div class="form-group">
-            <label for="graduationYear">Expected Graduation Year *</label>
-            <input id="graduationYear" formControlName="graduationYear" type="number" placeholder="e.g., 2026" class="input-field" min="2024" max="2030"/>
-          </div>
-        </div>
+        @if (currentStep === 1) {
+          <div class="step-section">
+            <div class="form-group">
+              <label for="fullName">Full Name *</label>
+              <input class="input-field" formControlName="fullName" id="fullName" placeholder="Enter your full name"/>
+            </div>
 
-        <!-- Step 2: Academic Information -->
-        <div class="step-section" *ngIf="currentStep === 2">
-          <div class="form-group">
-            <label for="currentSemester">Current Semester *</label>
-            <select id="currentSemester" formControlName="currentSemester" class="input-field" required>
-              <option [value]="null" disabled>Select your current semester</option>
-              <option *ngFor="let semester of semesters" [value]="semester">{{semester}}</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="major">Major *</label>
-            <select id="major" formControlName="major" class="input-field" required>
-              <option [value]="null" disabled>Select your major</option>
-              <option *ngFor="let major of majors" [value]="major">{{major}}</option>
-            </select>
-          </div>
-          
-          <div class="form-group">
-            <label for="minor">Minor (Optional)</label>
-            <select id="minor" formControlName="minor" class="input-field">
-              <option value="">Select your minor (optional)</option>
-              <option *ngFor="let minor of minors" [value]="minor">{{minor}}</option>
-            </select>
-          </div>
-        </div>
+            <div class="form-group">
+              <label for="graduationYear">Expected Graduation Year *</label>
+              <input class="input-field" formControlName="graduationYear" id="graduationYear" max="2030"
+                     min="2024" placeholder="e.g., 2026" type="number"/>
+            </div>
 
-        <!-- Step 3: Course Selection -->
-        <div class="step-section" *ngIf="currentStep === 3">
-          <p class="description">Select courses that interest you (Selected: <span class="counter">{{getCourseSelectionCount()}}</span>)</p>
-          <div class="course-info-hint">
-  Before selecting the courses, check the required CS courses offered in Spring 2026.
+            <div class="form-group">
+              <label for="major">Major *</label>
+              <p-select [options]="majors" formControlName="major" id="major" placeholder="Select your major"/>
+            </div>
 
-  <a class="open-courseinfo-btn" routerLink="/course">
-    Open Course Information
-  </a>
-</div>
-
-          <div class="button-group">
-            <button type="button" class="btn-secondary" (click)="selectAllCourses()">Select All</button>
-            <button type="button" class="btn-secondary" (click)="deselectAllCourses()">Deselect All</button>
-          </div>
-
-          <div class="course-list" formArrayName="completedCourses">
-            <div *ngFor="let course of courses; let i = index" class="course-item">
-              <input type="checkbox" [formControlName]="i" [id]="'course-' + i"/>
-              <label [for]="'course-' + i">
-                <strong>{{course.code}}</strong> - {{course.name}} ({{course.credits}} credits)
-              </label>
+            <div class="form-group">
+              <label for="minor">Minor (optional)</label>
+              <p-select [options]="minors" formControlName="minor" id="minor" placeholder="Select your minor"/>
             </div>
           </div>
+        }
 
-          <div class="credit-total">
-            <strong>Total Credits Selected: {{calculateTotalCredits()}}</strong>
+        <!-- Step 2: Course Selection -->
+        @if (currentStep === 2) {
+          <div class="step-section">
+            <p class="description">Select courses you've already taken</p>
+            <p-multi-select [options]="courses" fluid
+                            formControlName="completedCourses" optionLabel="courseCode" placeholder="Select courses">
+              <ng-template #item let-course>
+                <div><strong>{{ course.courseCode }}</strong> - ({{ course.title }})</div>
+              </ng-template>
+            </p-multi-select>
           </div>
-        </div>
+        }
 
-        <!-- Step 4: Time Preferences -->
-        <div class="step-section" *ngIf="currentStep === 4">
-          <div class="time-section">
-            <h4>Times you absolutely CANNOT take classes:</h4>
-            <div class="time-grid" formArrayName="unavailableTimes">
-              <div *ngFor="let timeSlot of timeSlots; let i = index" class="time-item">
-                <input type="checkbox" [formControlName]="i" [id]="'unavailable-' + i"/>
-                <label [for]="'unavailable-' + i">{{timeSlot.label}}</label>
+        <!-- Step 3: Review -->
+        @if (currentStep === 3) {
+          <div class="step-section">
+            <h4 style="color: #1e3a8a; margin-bottom: 24px;">Review Your Information</h4>
+            <div class="review-list">
+              <div class="review-item">
+                <strong>Name:</strong>
+                <span>{{ questionnaireForm.get('fullName')?.value || 'Not provided' }}</span>
+              </div>
+              <div class="review-item">
+                <strong>Graduation Year:</strong>
+                <span>{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
+              </div>
+              <div class="review-item">
+                <strong>Major:</strong> <span>{{ questionnaireForm.get('major')?.value || 'Not provided' }}</span>
+              </div>
+              @if (questionnaireForm.get('minor')?.value) {
+                <div class="review-item">
+                  <strong>Minor:</strong> <span>{{ questionnaireForm.get('minor')?.value }}</span>
+                </div>
+              }
+              <div class="review-item">
+                <strong>Prior Courses:</strong>
+                <span>{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }} selected</span>
               </div>
             </div>
-            
-            <div class="form-group">
-              <label for="unavailableReason">Why can't you take classes at these times?</label>
-              <textarea id="unavailableReason" formControlName="unavailableReason" placeholder="e.g., Work schedule, family commitments, etc." rows="3" class="input-field"></textarea>
-            </div>
           </div>
-
-          <div class="time-section">
-            <h4>Times you prefer NOT to take classes (but could if necessary):</h4>
-            <div class="time-grid" formArrayName="preferredNotTimes">
-              <div *ngFor="let timeSlot of timeSlots; let i = index" class="time-item">
-                <input type="checkbox" [formControlName]="i" [id]="'preferred-not-' + i"/>
-                <label [for]="'preferred-not-' + i">{{timeSlot.label}}</label>
-              </div>
-            </div>
-            
-            <div class="form-group">
-              <label for="preferredNotReason">Why do you prefer not to take classes at these times?</label>
-              <textarea id="preferredNotReason" formControlName="preferredNotReason" placeholder="e.g., Personal preference, other activities, etc." rows="3" class="input-field"></textarea>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5: Review -->
-        <div class="step-section" *ngIf="currentStep === 5">
-          <h4 style="color: #1e3a8a; margin-bottom: 24px;">Review Your Information</h4>
-          <div class="review-list">
-            <div class="review-item">
-              <strong>Full Name:</strong> <span>{{questionnaireForm.get('fullName')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Age:</strong> <span>{{questionnaireForm.get('age')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Date of Birth:</strong> <span>{{questionnaireForm.get('dateOfBirth')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Graduation Year:</strong> <span>{{questionnaireForm.get('graduationYear')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Current Semester:</strong> <span>{{questionnaireForm.get('currentSemester')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Major:</strong> <span>{{questionnaireForm.get('major')?.value || 'Not provided'}}</span>
-            </div>
-            <div class="review-item" *ngIf="questionnaireForm.get('minor')?.value">
-              <strong>Minor:</strong> <span>{{questionnaireForm.get('minor')?.value}}</span>
-            </div>
-            <div class="review-item">
-              <strong>Selected Courses:</strong> <span>{{getCourseSelectionCount()}} courses</span>
-            </div>
-            <div class="review-item">
-              <strong>Total Credits:</strong> <span>{{calculateTotalCredits()}} credits</span>
-            </div>
-            <div class="review-item" *ngIf="questionnaireForm.get('unavailableReason')?.value">
-              <strong>Unavailable Times Reason:</strong> <span>{{questionnaireForm.get('unavailableReason')?.value}}</span>
-            </div>
-            <div class="review-item" *ngIf="questionnaireForm.get('preferredNotReason')?.value">
-              <strong>Preferred Not Times Reason:</strong> <span>{{questionnaireForm.get('preferredNotReason')?.value}}</span>
-            </div>
-          </div>
-        </div>
+        }
       </form>
     </div>
 
     <!-- Fixed Navigation at Bottom -->
     <div class="navigation">
-      <button type="button" class="btn-secondary" *ngIf="currentStep > 1" (click)="previousStep()">Previous</button>
+      @if (currentStep > 1) {
+        <button (click)="previousStep()" class="btn-secondary" type="button">Previous</button>
+      }
       <div class="nav-right">
-        <button type="button" class="btn-primary" *ngIf="currentStep < totalSteps" [disabled]="!isCurrentStepValid()" (click)="nextStep()">Next</button>
-        <button type="submit" class="btn-primary" *ngIf="currentStep === totalSteps" [disabled]="!questionnaireForm.valid" (click)="onSubmit()">Complete Profile</button>
+        @if (currentStep < totalSteps) {
+          <button (click)="nextStep()" [disabled]="!isCurrentStepValid()" class="btn-primary" type="button">Next
+          </button>
+        }
+        @if (currentStep === totalSteps) {
+          <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary" type="submit">Complete
+            Profile
+          </button>
+        }
       </div>
     </div>
   </div>

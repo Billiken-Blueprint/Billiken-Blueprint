@@ -1,0 +1,72 @@
+<div class="w-full flex-grow flex flex-col from-blue-900 via-blue-800 to-blue-600 bg-gradient-to-br items-stretch">
+  <div>
+    <p-toolbar>
+      <ng-template #start></ng-template>
+      <ng-template #end>
+        <a href="ratings/create" pButton>Create Rating</a>
+      </ng-template>
+    </p-toolbar>
+  </div>
+  <div class="w-full flex-grow flex flex-row items-stretch">
+    <p-card class="flex-1 flex flex-col">
+      <ng-template #title>
+        <div>Professors</div>
+      </ng-template>
+      <ng-template #subtitle>
+        Selected: {{ selectedInstructor()?.name ?? 'None' }}
+      </ng-template>
+      <p-virtual-scroller
+        [itemSize]="50"
+        [items]="instructors()"
+        scrollHeight="60vh"
+      >
+        <ng-template #item let-item>
+          <button (click)="selectInstructor(item)" class="flex text-center my-2 w-full" pButton
+                  style="height: 50px;">
+            {{ item.name }}
+          </button>
+        </ng-template>
+      </p-virtual-scroller>
+    </p-card>
+    <p-card class="flex-1">
+      <ng-template #title>
+        <div>Courses</div>
+      </ng-template>
+      <ng-template #subtitle>
+        Selected: {{ selectedCourse()?.courseCode ?? 'None' }}
+      </ng-template>
+      <p-virtual-scroller
+        [itemSize]="50"
+        [items]="courses()"
+        scrollHeight="60vh"
+      >
+        <ng-template #item let-item>
+          <button (click)="selectCourse(item)" class="flex text-center my-2 w-full" pButton
+                  style="height: 50px;">
+            {{ item.courseCode }} - {{ item.title }}
+          </button>
+        </ng-template>
+      </p-virtual-scroller>
+    </p-card>
+    <p-card class="flex-3">
+      <ng-template #title>
+        <div>Ratings</div>
+      </ng-template>
+      <ng-template #subtitle>
+        Found: {{ ratings().length }}
+      </ng-template>
+      <p-virtual-scroller
+        [itemSize]="50"
+        [items]="ratings()"
+        scrollHeight="60vh"
+      >
+        <ng-template #item let-item>
+          <div class="flex text-center my-2 w-full"
+               style="height: 50px;">
+            {{ item.rating }}/5 - {{ item.description }}
+          </div>
+        </ng-template>
+      </p-virtual-scroller>
+    </p-card>
+  </div>
+</div>
