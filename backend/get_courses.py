@@ -53,5 +53,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    looper = asyncio.get_event_loop()
-    looper.run_until_complete(main())
+    asyncio.run(main())
