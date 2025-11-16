@@ -30,6 +30,8 @@ jobs:
           push: true
           tags: ghcr.io/billiken-blueprint/backend:latest
           target: prod
+          cache-from: type=registry,ref=ghcr.io/billiken-blueprint/backend:build-cache
+          cache-to: type=registry,ref=ghcr.io/billiken-blueprint/backend:build-cache,mode=max
 
   build-web:
     runs-on: ubuntu-latest
@@ -53,3 +55,5 @@ jobs:
           push: true
           tags: ghcr.io/billiken-blueprint/web:latest
           target: prod
+          cache-from: type=registry,ref=ghcr.io/billiken-blueprint/web:build-cache
+          cache-to: type=registry,ref=ghcr.io/billiken-blueprint/web:build-cache,mode=max
