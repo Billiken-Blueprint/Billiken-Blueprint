@@ -20,3 +20,10 @@ COPY --exclude=./billiken_blueprint . .
 EXPOSE 8000
 VOLUME [ "/app/billiken_blueprint" ]
 CMD [ "fastapi", "dev", "server.py", "--host", "0.0.0.0" ]
+
+FROM deps AS prod
+COPY --from=seeding /app/data /app/data
+COPY . .
+EXPOSE 8000
+USER 1000
+CMD [ "fastapi", "run", "server.py", "--host", "0.0.0.0" ]
