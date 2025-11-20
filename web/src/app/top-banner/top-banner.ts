@@ -41,7 +41,7 @@ export class TopBanner implements OnInit {
   ngOnInit(): void {
     this.tokenPayload.subscribe({
         next: payload => {
-          this.items[0].label = payload?.sub ?? "Logged out";
+          this.items[0].label = payload?.email ?? "Logged out";
         }
       }
     )

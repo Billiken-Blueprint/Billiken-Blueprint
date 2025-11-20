@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, tap, Observable, map} from 'rxjs';
 import {jwtDecode, JwtPayload} from 'jwt-decode';
 
+interface CustomTokenPayload extends JwtPayload {
+  email?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,7 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(this.getLoginStatus());
   isLoggedIn$ = this.loggedIn.asObservable();
-  private tokenPayload = new BehaviorSubject<JwtPayload | null>(this.getTokenPayload());
+  private tokenPayload = new BehaviorSubject<CustomTokenPayload | null>(this.getTokenPayload());
   tokenPayload$ = this.tokenPayload.asObservable();
 
   login(credentials: { email: string, password: string }) {
@@ -102,11 +105,11 @@ export class AuthService {
     this.tokenPayload.next(this.getTokenPayload());
   }
 
-  private getTokenPayload(): JwtPayload | null {
+  private getTokenPayload(): CustomTokenPayload | null {
     const token = this.getToken();
     if (!token) return null;
     try {
-      const payload = jwtDecode(token);
+      const payload = jwtDecode<CustomTokenPayload>(token);
       return payload;
     } catch (e) {
       // Invalid token

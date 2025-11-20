@@ -1,12 +1,10 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {IftaLabel} from 'primeng/iftalabel';
 import {Select} from 'primeng/select';
 import {Instructor, InstructorsService} from '../../instructors-service/instructors-service';
 import {Course, CoursesService} from '../../courses-service/courses-service';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
-import {ButtonDirective} from 'primeng/button';
 import {RatingsService} from '../../ratings-service/ratings-service';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -14,12 +12,10 @@ import {CommonModule} from '@angular/common';
 @Component({
   selector: 'app-create-rating-page',
   imports: [
-    IftaLabel,
     Select,
     ReactiveFormsModule,
     Textarea,
     Rating,
-    ButtonDirective,
     CommonModule
   ],
   templateUrl: './create-rating-page.html',

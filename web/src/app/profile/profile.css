@@ -257,6 +257,7 @@
   box-sizing: border-box;
   transition: all 0.3s;
   background: white;
+  color: #2d3748;
 }
 
 .form-control:hover {
@@ -268,6 +269,7 @@
   border-color: #667eea;
   box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
   background: #fafbff;
+  color: #2d3748;
 }
 
 .btn {

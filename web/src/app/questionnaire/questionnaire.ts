@@ -134,4 +134,30 @@ export class QuestionnairePage implements OnInit {
         return '';
     }
   }
+
+  getStepDescription(): string {
+    switch (this.currentStep) {
+      case 1:
+        return 'Tell us about yourself and your academic goals';
+      case 2:
+        return 'Help us understand your current progress';
+      case 3:
+        return 'Review your information before completing your profile';
+      default:
+        return '';
+    }
+  }
+
+  getStepLabel(step: number): string {
+    switch (step) {
+      case 1:
+        return 'Personal Info';
+      case 2:
+        return 'Courses';
+      case 3:
+        return 'Review';
+      default:
+        return '';
+    }
+  }
 }
