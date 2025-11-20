@@ -1,6 +1,5 @@
-data/
-.idea/
-.venv/
-.pdm-python
+.venv
+data
+.dockerignore
+.python-version
 Dockerfile
-scripts/

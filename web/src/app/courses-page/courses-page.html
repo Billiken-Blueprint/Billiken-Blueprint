@@ -1,159 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CSCI Course Selector</title>
-  <link rel="stylesheet" href="courses-page.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Course Selector Dashboard</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="courses-page.css" />
 </head>
-<body>
-  <div class="container">
-    <h2>Select requirement:</h2>
+<body class="p-4 md:p-8">
 
-    <div class="button-group">
-      <button class="req-btn" data-target="group1">CSCI 3000</button>
-      <button class="req-btn" data-target="group2">CSCI 4000+</button>
-      <button class="req-btn" data-target="group3">CSCI 2000</button>
-      <button class="req-btn" data-target="group4">CSCI 1000</button>
+    <!-- TOOLBOX TOGGLE BUTTON -->
+    <button id="toolbox-toggle">
+        <svg id="menu-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+        <svg id="close-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+    </button>
+
+    <!-- TOOLBOX SIDEBAR -->
+    <div id="toolbox" class="flex flex-col p-6 space-y-4">
+        <h3 class="text-3xl font-extrabold text-white mb-2 border-b border-[#53C3EE]/50 pb-2">
+            Tools Menu
+        </h3>
+
+        <div class="space-y-4 flex-1 overflow-y-auto">
+
+            <!-- My Saved Courses -->
+            <div class="bg-white/10 rounded-lg p-4 text-white">
+                <button id="saved-toggle" class="w-full flex items-center justify-between font-semibold">
+                    <span>My Saved Courses</span>
+                    <span id="saved-toggle-icon" class="text-sm">▾</span>
+                </button>
+
+                <div id="saved-panel" class="mt-3 space-y-3">
+                    <ul id="saved-list" class="space-y-1 text-sm max-h-60 overflow-y-auto">
+                        <li class="text-white/70">No courses saved yet.</li>
+                    </ul>
+                    <button
+                        id="clear-saved"
+                        type="button"
+                        class="mt-2 text-xs px-3 py-1 rounded-full bg-white/20 hover:bg-white/30 transition"
+                    >
+                        🗑 Clear All
+                    </button>
+                </div>
+            </div>
+
+            <!-- Other toolbox buttons -->
+            <button class="toolbox-btn w-full text-left font-semibold py-3 px-4 rounded-lg flex items-center">
+                <svg class="w-5 h-5 inline-block mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                </svg>
+                Degree Progress
+            </button>
+
+            <button class="toolbox-btn w-full text-left font-semibold py-3 px-4 rounded-lg flex items-center">
+                <svg class="w-5 h-5 inline-block mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                Time Conflict Checker
+            </button>
+        </div>
     </div>
 
-    <div id="course-groups">
-      <div id="group1" class="course-group">
-        <div class="card">
-          <h3>CSCI 4355</h3>
-          <p><strong>Human Computer Interaction</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4360</h3>
-          <p><strong>Web Technologies</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4550</h3>
-          <p><strong>Computer Networks</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: Varies by section</p>
-        </div>
-      </div>
+    <!-- main -->
+    <div id="app" class="max-w-6xl mx-auto">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-2 tracking-wide">
+                Build Your Perfect Schedule
+            </h1>
+            <p class="text-xl text-[#003DA5]/80">
+                Explore Computer Science courses and save your favorites.
+            </p>
+        </header>
 
-      <div id="group2" class="course-group hidden">
-        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
-      </div>
+        <!-- box displaying all courses under button -->
+        <div id="content-display" class="card-container p-6 md:p-10 rounded-xl mb-12 border border-[#CBC9C7]">
+            <p
+                id="initial-message"
+                class="text-center text-xl text-[#003DA5]/50 p-10 transition-opacity duration-300"
+            >
+                Click any button below to view course groups. Click a course to expand, or use “+ Add” to save it.
+            </p>
+            <div id="course-cards" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            </div>
+        </div>
 
-      <div id="group3" class="course-group hidden">
-        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
-      </div>
+        <!-- SECTION 1: CORE CSCI COURSES -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Core Courses</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Core_Intro"
+                >
+                    Intro to CS
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Core_Prog"
+                >
+                    Programming & Data Structures
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Core_Software"
+                >
+                    Software Design & Engineering
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Core_Systems"
+                >
+                    Systems & Architecture
+                </button>
+            </div>
+        </section>
 
-      <div id="group4" class="course-group hidden">
-        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
-      </div>
+        <!-- SECTION 2: STEM & ETHICS -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">STEM & Ethics</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Stem_MathCore"
+                >
+                    Math Core
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Stem_MathAdv"
+                >
+                    Advanced Math & Stats
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Stem_Science"
+                >
+                    Science & Engineering
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Stem_Ethics"
+                >
+                    Ethics
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION 3: ELECTIVES -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold mb-6">Electives</h2>
+            <div class="flex flex-wrap justify-center gap-4">
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Electives_Systems"
+                >
+                    Systems Electives
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Electives_AIData"
+                >
+                    AI & Data Science
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Electives_Software"
+                >
+                    Software & UX
+                </button>
+                <button
+                    class="action-btn btn-accent rounded-full px-6 py-3 shadow-xl"
+                    data-target="Electives_Capstone"
+                >
+                    Capstone & Experience
+                </button>
+            </div>
+        </section>
     </div>
-  </div>
-    <div class="container">
 
-    <h2>Select requirement:</h2>
-
-    <div class="button-group">
-      <button class="req-btn" data-target="group1">CSCI 3000</button>
-      <button class="req-btn" data-target="group2">CSCI 4000+</button>
-      <button class="req-btn" data-target="group3">CSCI 2000</button>
-      <button class="req-btn" data-target="group4">CSCI 1000</button>
-    </div>
-
-    <div id="course-groups">
-      <div id="group1" class="course-group">
-        <div class="card">
-          <h3>CSCI 4355</h3>
-          <p><strong>Human Computer Interaction</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4360</h3>
-          <p><strong>Web Technologies</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4550</h3>
-          <p><strong>Computer Networks</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: Varies by section</p>
-        </div>
-      </div>
-
-      <div id="group2" class="course-group hidden">
-        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
-      </div>
-
-      <div id="group3" class="course-group hidden">
-        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
-      </div>
-
-      <div id="group4" class="course-group hidden">
-        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <h2>Select requirement:</h2>
-
-    <div class="button-group">
-      <button class="req-btn" data-target="group1">CSCI 3000</button>
-      <button class="req-btn" data-target="group2">CSCI 4000+</button>
-      <button class="req-btn" data-target="group3">CSCI 2000</button>
-      <button class="req-btn" data-target="group4">CSCI 1000</button>
-    </div>
-
-    <div id="course-groups">
-      <div id="group1" class="course-group">
-        <div class="card">
-          <h3>CSCI 4355</h3>
-          <p><strong>Human Computer Interaction</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4360</h3>
-          <p><strong>Web Technologies</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: North Campus (Main Campus)</p>
-        </div>
-        <div class="card">
-          <h3>CSCI 4550</h3>
-          <p><strong>Computer Networks</strong></p>
-          <p>Credit Hours: 3</p>
-          <p>Campus: Varies by section</p>
-        </div>
-      </div>
-
-      <div id="group2" class="course-group hidden">
-        <div class="card"><p>CSCI 4000+ level courses coming soon.</p></div>
-      </div>
-
-      <div id="group3" class="course-group hidden">
-        <div class="card"><p>CSCI 2000 level courses coming soon.</p></div>
-      </div>
-
-      <div id="group4" class="course-group hidden">
-        <div class="card"><p>CSCI 1000 level courses coming soon.</p></div>
-      </div>
-    </div>
-  </div>
-  <script>
-    const buttons = document.querySelectorAll('.req-btn');
-    const groups = document.querySelectorAll('.course-group');
-
-    buttons.forEach(button => {
-      button.addEventListener('click', () => {
-        groups.forEach(group => group.classList.add('hidden'));
-        document.getElementById(button.dataset.target).classList.remove('hidden');
-      });
-    });
-  </script>
+    <!-- JS LOGIC -->
+    <script src="courses-page.js"></script>
 </body>
 </html>

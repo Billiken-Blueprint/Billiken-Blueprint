@@ -1,0 +1,59 @@
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: backend
+          push: true
+          tags: ghcr.io/billiken-blueprint/backend:latest
+          target: prod
+          cache-from: type=registry,ref=ghcr.io/billiken-blueprint/backend:build-cache
+          cache-to: type=registry,ref=ghcr.io/billiken-blueprint/backend:build-cache,mode=max
+
+  build-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: web
+          push: true
+          tags: ghcr.io/billiken-blueprint/web:latest
+          target: prod
+          cache-from: type=registry,ref=ghcr.io/billiken-blueprint/web:build-cache
+          cache-to: type=registry,ref=ghcr.io/billiken-blueprint/web:build-cache,mode=max

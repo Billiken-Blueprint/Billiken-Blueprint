@@ -1,53 +1,58 @@
 from datetime import timedelta
 from typing import Annotated
-
-from fastapi import APIRouter, HTTPException, Depends, status, Form
+from fastapi import APIRouter, Depends, Form, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
 from pydantic import BaseModel
 
-import services
-from identity.identity_user import IdentityUser, password_hash
-from identity.token import Token
+from billiken_blueprint.dependencies import IdentityUserRepo
+from billiken_blueprint.identity.identity_user import IdentityUser
+from billiken_blueprint.identity.token import Token
+from billiken_blueprint.identity.token_payload import TokenPayload
+
 
 router = APIRouter(prefix="/identity", tags=["identity"])
 
 
-def create_access_token(identity: IdentityUser):
-    expires = timedelta(minutes=15)
-    token = Token.create(data={"sub": identity.email}, expires_delta=expires)
+def create_access_token(user: IdentityUser):
+    expires = timedelta(hours=1)
+    token = Token.create(
+        payload=TokenPayload(sub=str(user.id), email=user.email), expires_delta=expires
+    )
     return token
 
 
-@router.post("/token")
+@router.post("/token", response_model=Token)
 async def login_for_access_token(
-    form_data: Annotated[OAuth2PasswordRequestForm, Depends()],
-) -> Token:
-    user = await services.identity_user_repository.get_by_email(form_data.username)
-    if not user or not user.verify_password(form_data.password):
+    form: Annotated[OAuth2PasswordRequestForm, Depends()],
+    identity_user_repo: IdentityUserRepo,
+):
+    user = await identity_user_repo.get_by_email(form.username)
+    if not user or not user.verify_password(form.password):
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Incorrect username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    token = create_access_token(identity=user)
+    token = create_access_token(user)
     return token
 
 
-@router.post("/register")
+@router.post("/register", response_model=Token)
 async def register(
-    email: Annotated[str, Form()], password: Annotated[str, Form()]
-) -> Token:
-    existing = await services.identity_user_repository.get_by_email(email)
-    if existing:
+    email: Annotated[str, Form()],
+    password: Annotated[str, Form()],
+    identity_user_repo: IdentityUserRepo,
+):
+    existing_user = await identity_user_repo.get_by_email(email)
+    if existing_user:
         raise HTTPException(
-            status_code=status.HTTP_409_CONFLICT,
-            detail="Email already registered",
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="User with this email already exists",
         )
 
-    h = password_hash.hash(password)
-    identity = IdentityUser(email=email, password_hash=h)
-    await services.identity_user_repository.save(identity)
-    token = create_access_token(identity=identity)
+    new_user = IdentityUser.create(email=email, password=password)
+    saved_user = await identity_user_repo.save(new_user)
+    token = create_access_token(saved_user)
     return token
 
 
@@ -58,7 +63,8 @@ class PasswordResetResponse(BaseModel):
 
 @router.post("/forgot-password")
 async def forgot_password(
-    email: Annotated[str, Form()]
+    email: Annotated[str, Form()],
+    identity_user_repo: IdentityUserRepo,
 ) -> PasswordResetResponse:
     """
     Endpoint to handle password reset requests.
@@ -69,7 +75,7 @@ async def forgot_password(
     
     For now, it just validates the email exists and returns success.
     """
-    user = await services.identity_user_repository.get_by_email(email)
+    user = await identity_user_repo.get_by_email(email)
     if not user:
         # Don't reveal if email exists or not (security best practice)
         # Always return success to prevent email enumeration
@@ -92,7 +98,8 @@ async def forgot_password(
 async def reset_password(
     email: Annotated[str, Form()],
     new_password: Annotated[str, Form()],
-    reset_token: Annotated[str, Form()]
+    reset_token: Annotated[str, Form()],
+    identity_user_repo: IdentityUserRepo,
 ) -> dict:
     """
     Endpoint to actually reset the password using a token.
@@ -101,7 +108,7 @@ async def reset_password(
     # TODO: Implement token validation
     # For now, just update the password if user exists
     
-    user = await services.identity_user_repository.get_by_email(email)
+    user = await identity_user_repo.get_by_email(email)
     if not user:
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -109,8 +116,7 @@ async def reset_password(
         )
     
     # Update password
-    h = password_hash.hash(new_password)
-    user.password_hash = h
-    await services.identity_user_repository.save(user)
+    user.update_password(new_password)
+    await identity_user_repo.save(user)
     
     return {"message": "Password successfully reset"}

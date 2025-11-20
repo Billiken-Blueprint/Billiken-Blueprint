@@ -1,45 +1,48 @@
-# Docker
+# Setup
 
-The project can be ran with Docker Compose. Podman not tested.
+## Docker
 
 ```bash
 docker compose build
 docker compose up
 ```
 
-Only the src folders are bind mounted for both backend and web services.
-If you edit config files or add dependencies, you will have to run `docker compose build` again.
+The compose configuration targets the dev build of the frontend and backend images.
+These run their respective dev server which listen to changes you make in your local source directories,
+which get bind-mounted into the containers.
 
-If you want, you can bind mount the backend/data directory so the database persists between container lifecycles.
+## Local
 
-# No docker
+### Backend
 
-## Backend
+Install uv
 
-For backend use uv. Previously we used pdm but it wasn't working well with docker.
+```bash
+cd backend
+uv sync
+uv run alembic upgrade head
+uv run fastapi dev server.py
+```
 
-`brew install uv`
+### Frontend
 
-`cd backend`
+Install pnpm
 
-`uv sync`
+```bash
+cd web
+pnpm install
+pnpm run start
+```
 
-`uv run alembic upgrade head` - This creates/applies migrations to the database
+# Development
 
-`chmod +x scripts/run_dev.sh`
+Backend uses SQLAlchemy and alembic. Any new models should inherit from Base and also be exported in the db_metadata package.
+Generate migrations with `uv run alembic revision --autogenerate -m "<message>"`
 
-`uv run scripts/run_dev.sh`
+# Deployment
 
-## Frontend
+Build each image with `--target prod`. Backend exposes port 8000, frontend exposes port 8080. Frontend expects
+environment variable `API_URL` which is used to reverse proxy '/api/*' requests to the backend.
 
-For frontend use pnpm. You may be able to use npm but you might run into issues installing dependencies at first.
+Both images are built automatically on push to main and are available in the repo and organization's packages.
 
-`brew install pnpm`
-
-`cd web`
-
-`pnpm install`
-
-At this point you should be able to use npm as it just uses node_modules
-
-`pnpm run start`

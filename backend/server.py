@@ -13,5 +13,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Mount all routers under /api prefix
 for router in routers:
-    app.include_router(router)
+    app.include_router(router, prefix="/api")
+
