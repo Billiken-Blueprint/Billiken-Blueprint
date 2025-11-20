@@ -3,6 +3,7 @@ import {AuthService} from '../auth-service/auth-service';
 import {FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
+import {UserInfoService} from '../user-info-service/user-info-service';
 
 interface Course {
   code: string;
@@ -125,6 +126,7 @@ export class ProfilePage implements OnInit {
     preferredNotReason: ['']
   });
   private authService = inject(AuthService);
+  private userInfoService = inject(UserInfoService);
   private router = inject(Router);
 
   constructor() {
@@ -157,21 +159,27 @@ export class ProfilePage implements OnInit {
   }
 
   loadProfile() {
-    /*
-    this.authService.getProfile().subscribe({
-      next: (profile) => {
-        this.userProfile = profile;
+    this.userInfoService.getUserInfo().subscribe({
+      next: (userInfo) => {
+        // Map UserInfo to UserProfile
+        this.userProfile = {
+          fullName: userInfo.name,
+          major: userInfo.major,
+          minor: userInfo.minor || undefined,
+          graduationYear: userInfo.graduationYear,
+          completedCourses: userInfo.completedCourses?.map(c => c.courseCode) || [],
+          totalCredits: userInfo.completedCourses?.length || 0
+        };
         this.populateForm();
       },
       error: (error) => {
         console.error('Error loading profile:', error);
-        // If no profile exists, redirect to questionnaire
+        // If no profile exists, user can still edit and create one
         if (error.status === 404) {
-          this.router.navigate(['/questionnaire']);
+          console.log('No profile found, user can create one');
         }
       }
     });
-     */
   }
 
   populateForm() {
@@ -282,35 +290,49 @@ export class ProfilePage implements OnInit {
   saveProfile() {
     if (this.profileForm.valid) {
       const formValue = this.profileForm.value;
+      
+      // Get selected course IDs
+      const selectedCourseIds: number[] = [];
+      this.completedCoursesArray.controls.forEach((control: any, index: number) => {
+        if (control.value) {
+          // For now, use index as ID (you'll need to map this to actual course IDs from backend)
+          selectedCourseIds.push(index + 1);
+        }
+      });
 
-      const updatedProfile = {
-        fullName: formValue.fullName || '',
-        age: parseInt(formValue.age || '0'),
-        dateOfBirth: formValue.dateOfBirth ? new Date(formValue.dateOfBirth) : undefined,
+      const updateBody = {
+        name: formValue.fullName || '',
         graduationYear: parseInt(formValue.graduationYear || '0'),
-        currentSemester: formValue.currentSemester || '',
         major: formValue.major || '',
-        minor: formValue.minor || '',
-        completedCourses: this.getSelectedCourses(),
-        totalCredits: this.calculateTotalCredits(),
-        unavailableTimes: this.getSelectedUnavailableTimes(),
-        unavailableReason: formValue.unavailableReason || '',
-        preferredNotTimes: this.getSelectedPreferredNotTimes(),
-        preferredNotReason: formValue.preferredNotReason || '',
-        questionnaireCompleted: true
+        minor: formValue.minor || null,
+        completedCourseIds: selectedCourseIds
       };
 
-      /*
-      this.authService.updateProfile(updatedProfile).subscribe({
-        next: (profile) => {
-          this.userProfile = profile;
+      this.userInfoService.updateUserInfo(updateBody).subscribe({
+        next: (userInfo) => {
+          // Update local profile with response
+          this.userProfile = {
+            fullName: userInfo.name,
+            major: userInfo.major,
+            minor: userInfo.minor || undefined,
+            graduationYear: userInfo.graduationYear,
+            completedCourses: userInfo.completedCourses?.map(c => c.courseCode) || [],
+            totalCredits: userInfo.completedCourses?.length || 0
+          };
           this.isEditing = false;
+          alert('Profile updated successfully!');
         },
         error: (error) => {
           console.error('Error updating profile:', error);
+          alert('Error updating profile. Please try again.');
         }
       });
-       */
+    } else {
+      // Mark all fields as touched to show validation errors
+      Object.keys(this.profileForm.controls).forEach(key => {
+        this.profileForm.get(key)?.markAsTouched();
+      });
+      alert('Please fill in all required fields correctly.');
     }
   }
 

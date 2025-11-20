@@ -1,85 +1,111 @@
-<div class="w-full h-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex flex-col">
+<div class="w-full h-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 flex flex-col relative overflow-hidden">
+  
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+    <div class="absolute w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse delay-1000"></div>
+  </div>
 
   <!-- Main Content -->
-  <main class="flex-grow px-8 py-4">
-    <div class="max-w-6xl mx-auto w-full">
+  <main class="flex-grow px-8 py-8 relative z-10">
+    <div class="max-w-7xl mx-auto w-full">
 
       <!-- Hero Section with Side-by-Side Layout -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-20 items-center mb-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-20">
         <!-- Left Side - Text Content -->
-        <div class="space-y-8 text-left">
-          <div class="inline-block bg-white/20 text-white px-5 py-3 rounded-full text-sm font-semibold font-inter">
-            ✨ Smart Scheduling Made Easy
+        <div class="space-y-8 text-left animate-fade-in-left">
+          <div class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-yellow-600/20 backdrop-blur-sm text-yellow-300 px-5 py-3 rounded-full text-sm font-semibold font-inter border border-yellow-400/30">
+            <i class="pi pi-sparkles"></i>
+            <span>Smart Scheduling Made Easy</span>
           </div>
 
-          <h1 class="text-6xl font-playfair font-bold text-white leading-tight">
+          <h1 class="text-6xl lg:text-7xl font-playfair font-bold text-white leading-tight">
             Build Your Perfect
-            <span class="text-yellow-300 block mt-2">Class Schedule</span>
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 block mt-2">Class Schedule</span>
           </h1>
 
           <p class="text-xl text-blue-100 leading-relaxed font-inter max-w-lg">
-            Intelligent course planning designed specifically for Saint Louis University students.
+            Intelligent course planning designed specifically for <span class="text-yellow-300 font-semibold">Saint Louis University</span> students.
             No more conflicts, no more stress, just the perfect semester.
           </p>
 
           <!-- Buttons -->
-          <div class="flex space-x-6 pt-6">
-            <a href="courses">
-              <button
-                class="bg-yellow-400 text-blue-900 hover:bg-yellow-300 text-lg px-8 py-4 font-bold font-inter rounded-xl flex items-center justify-center space-x-3 shadow-lg hover:shadow-xl transition-all duration-300">
-                <i class="pi pi-play"></i>
-                <span>Start Planning</span>
-              </button>
-            </a>
+          <div class="flex flex-wrap gap-4 pt-6">
+            <button
+              (click)="startPlanning()"
+              class="bg-gradient-to-r from-yellow-400 to-yellow-500 text-blue-900 hover:from-yellow-300 hover:to-yellow-400 text-lg px-10 py-4 font-bold font-inter rounded-xl flex items-center justify-center space-x-3 shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+              <i class="pi pi-calendar-plus text-xl"></i>
+              <span>Start Planning</span>
+            </button>
 
             <button
-              class="bg-white/20 backdrop-blur-sm border border-white/30 text-white hover:bg-white/30 text-lg px-8 py-4 font-inter rounded-xl flex items-center justify-center space-x-3 transition-all duration-300">
-              <i class="pi pi-eye"></i>
-              <span>See Demo</span>
+              class="bg-white/15 backdrop-blur-md border-2 border-white/30 text-white hover:bg-white/25 hover:border-white/50 text-lg px-10 py-4 font-semibold font-inter rounded-xl flex items-center justify-center space-x-3 transition-all duration-300">
+              <i class="pi pi-play-circle text-xl"></i>
+              <span>Watch Demo</span>
             </button>
+          </div>
+
+          <!-- Trust Indicators -->
+          <div class="flex items-center gap-6 pt-4">
+            <div class="flex -space-x-2">
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-white"></div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-purple-400 to-purple-600 border-2 border-white"></div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-green-400 to-green-600 border-2 border-white"></div>
+              <div class="w-10 h-10 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-white flex items-center justify-center text-xs font-bold text-blue-900">2.5K+</div>
+            </div>
+            <div class="text-blue-200 font-inter">
+              <div class="flex items-center gap-1 text-yellow-400 mb-1">
+                <i class="pi pi-star-fill text-sm"></i>
+                <i class="pi pi-star-fill text-sm"></i>
+                <i class="pi pi-star-fill text-sm"></i>
+                <i class="pi pi-star-fill text-sm"></i>
+                <i class="pi pi-star-fill text-sm"></i>
+              </div>
+              <p class="text-sm">Trusted by 2,500+ Billikens</p>
+            </div>
           </div>
         </div>
 
         <!-- Right Side - Feature Highlights -->
-        <div class="space-y-6">
+        <div class="space-y-5 animate-fade-in-right">
           <div
-            class="bg-white/15 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-white/40 hover:from-white/15 hover:to-white/10 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-2xl">
             <div class="flex items-center space-x-5">
               <div
-                class="w-14 h-14 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i class="pi pi-check text-white text-xl"></i>
+                class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <i class="pi pi-check-circle text-white text-2xl"></i>
               </div>
               <div>
-                <h3 class="text-white font-semibold text-lg font-inter mb-1">Conflict-Free Scheduling</h3>
-                <p class="text-blue-200 text-sm font-inter">Automatically prevents time conflicts</p>
+                <h3 class="text-white font-bold text-xl font-inter mb-2">Conflict-Free Scheduling</h3>
+                <p class="text-blue-200 font-inter">Automatically prevents time conflicts and finds the best fit</p>
               </div>
             </div>
           </div>
 
           <div
-            class="bg-white/15 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-white/40 hover:from-white/15 hover:to-white/10 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-2xl">
             <div class="flex items-center space-x-5">
               <div
-                class="w-14 h-14 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i class="pi pi-search text-white text-xl"></i>
+                class="w-16 h-16 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <i class="pi pi-search text-white text-2xl"></i>
               </div>
               <div>
-                <h3 class="text-white font-semibold text-lg font-inter mb-1">Smart Course Search</h3>
-                <p class="text-blue-200 text-sm font-inter">Find courses that fit your needs</p>
+                <h3 class="text-white font-bold text-xl font-inter mb-2">Smart Course Search</h3>
+                <p class="text-blue-200 font-inter">Find courses that match your schedule and preferences</p>
               </div>
             </div>
           </div>
 
           <div
-            class="bg-white/15 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:bg-white/20 transition-all duration-300">
+            class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/20 hover:border-white/40 hover:from-white/15 hover:to-white/10 transition-all duration-300 transform hover:-translate-y-2 shadow-lg hover:shadow-2xl">
             <div class="flex items-center space-x-5">
               <div
-                class="w-14 h-14 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i class="pi pi-users text-white text-xl"></i>
+                class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center flex-shrink-0 shadow-lg">
+                <i class="pi pi-graduation-cap text-white text-2xl"></i>
               </div>
               <div>
-                <h3 class="text-white font-semibold text-lg font-inter mb-1">Collaborative Planning</h3>
-                <p class="text-blue-200 text-sm font-inter">Share and get feedback from advisors</p>
+                <h3 class="text-white font-bold text-xl font-inter mb-2">Degree Progress Tracking</h3>
+                <p class="text-blue-200 font-inter">Stay on track with your major and graduation requirements</p>
               </div>
             </div>
           </div>
@@ -87,23 +113,23 @@
       </div>
 
       <!-- Bottom Stats Bar -->
-      <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-6 lg:p-10 border border-white/20">
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-12 text-center">
-          <div>
-            <div class="text-3xl font-bold text-yellow-300 font-inter mb-2">2,500+</div>
-            <div class="text-blue-200 font-inter text-sm">Active Students</div>
+      <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-3xl p-8 lg:p-12 border border-white/20 shadow-2xl">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12 text-center">
+          <div class="transform hover:scale-105 transition-all duration-300">
+            <div class="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-inter mb-3">2,500+</div>
+            <div class="text-blue-200 font-inter font-medium">Active Students</div>
           </div>
-          <div>
-            <div class="text-3xl font-bold text-yellow-300 font-inter mb-2">1,200+</div>
-            <div class="text-blue-200 font-inter text-sm">Available CoursesService</div>
+          <div class="transform hover:scale-105 transition-all duration-300">
+            <div class="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-inter mb-3">1,200+</div>
+            <div class="text-blue-200 font-inter font-medium">Available Courses</div>
           </div>
-          <div>
-            <div class="text-3xl font-bold text-yellow-300 font-inter mb-2">98%</div>
-            <div class="text-blue-200 font-inter text-sm">Success Rate</div>
+          <div class="transform hover:scale-105 transition-all duration-300">
+            <div class="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-inter mb-3">98%</div>
+            <div class="text-blue-200 font-inter font-medium">Success Rate</div>
           </div>
-          <div>
-            <div class="text-3xl font-bold text-yellow-300 font-inter mb-2">4.9/5</div>
-            <div class="text-blue-200 font-inter text-sm">Student Rating</div>
+          <div class="transform hover:scale-105 transition-all duration-300">
+            <div class="text-4xl lg:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500 font-inter mb-3">4.9/5</div>
+            <div class="text-blue-200 font-inter font-medium">Student Rating</div>
           </div>
         </div>
       </div>
@@ -112,11 +138,11 @@
   </main>
 
   <!-- Footer -->
-  <footer class="w-full bg-black/20 border-t border-white/20 flex-shrink-0">
-    <div class="max-w-6xl mx-auto px-8 py-6">
+  <footer class="w-full bg-black/20 border-t border-white/20 flex-shrink-0 relative z-10">
+    <div class="max-w-7xl mx-auto px-8 py-8">
       <div class="text-center">
         <p class="text-blue-200 font-inter text-base">
-          Made by the Billiken Blueprint Team for Saint Louis University Billikens
+          Made by the Billiken Blueprint Team for <span class="text-yellow-300 font-semibold">Saint Louis University</span> Billikens
         </p>
         <p class="text-blue-300 text-sm mt-2 font-inter">
           © 2025 Billiken Blueprint. Helping students succeed, one schedule at a time.

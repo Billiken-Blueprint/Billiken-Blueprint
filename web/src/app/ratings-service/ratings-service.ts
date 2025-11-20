@@ -45,4 +45,8 @@ export interface Rating {
   rating: number;
   canEdit: boolean;
   description: string;
+  instructorName?: string;
+  courseCode?: string;
+  courseName?: string;
+  createdAt?: string;
 }
