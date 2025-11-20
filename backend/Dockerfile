@@ -16,8 +16,9 @@ FROM base AS dev
 WORKDIR /app
 COPY --from=deps /app/.venv /app/.venv
 ENV PATH="/app/.venv/bin:${PATH}"
+ENV PYTHONPATH="/app/backend"
 COPY --from=migrations /app/data /app/data
-COPY --exclude=./backend . .
+COPY . .
 EXPOSE 8000
-VOLUME [ "/app/src" ]
+VOLUME [ "/app/backend" ]
 CMD [ "fastapi", "dev", "backend/server.py", "--host", "0.0.0.0" ]

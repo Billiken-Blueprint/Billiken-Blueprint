@@ -1,9 +1,6 @@
 {
   "/api": {
     "target": "http://backend:8000",
-    "secure": false,
-    "pathRewrite": {
-      "^/api": ""
-    }
+    "secure": false
   }
 }

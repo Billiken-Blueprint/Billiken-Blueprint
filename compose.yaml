@@ -8,6 +8,7 @@ services:
       - 4200:4200
     volumes:
       - ./web/src:/app/src
+      - ./web/proxy.compose.conf.json:/app/proxy.compose.conf.json
     command: ng serve --configuration=dev-compose --host 0.0.0.0
   backend:
     build:
@@ -17,4 +18,4 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./backend/src:/app/src
+      - ./backend/backend:/app/backend

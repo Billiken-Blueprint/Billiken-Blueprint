@@ -12,7 +12,8 @@ import {Router} from '@angular/router';
     Menubar
   ],
   templateUrl: './top-banner.html',
-  styleUrl: './top-banner.css'
+  styleUrl: './top-banner.css',
+  standalone: true
 })
 export class TopBanner implements OnInit {
   items: MenuItem[] = [
@@ -48,6 +49,7 @@ export class TopBanner implements OnInit {
 
   logout() {
     this.authService.logout();
+    this.router.navigate(['/']);
   }
 
   navigateToProfile() {

@@ -7,7 +7,7 @@
       <div class="profile-actions">
         <button
           (click)="enableEdit()"
-          class="btn btn-secondary"
+          class="btn btn-primary"
         >Edit Profile
         </button>
       </div>
@@ -61,9 +61,9 @@
           </div>
         </div>
 
-        <!-- Completed CoursesService -->
+        <!-- Completed Courses -->
         <div class="tab-section">
-          <h3>Completed CoursesService</h3>
+          <h3>Completed Courses</h3>
           <div class="divider"></div>
           <div class="info-section">
             <div *ngIf="getCompletedCoursesDisplay().length > 0; else noCourses">
@@ -85,7 +85,7 @@
           <div class="divider"></div>
           <div class="info-section">
             <div class="schedule-info">
-              <h4>Unavailable Times:</h4>
+              <h4>Unavailable Times</h4>
               <div *ngIf="getTimeSlotDisplay(userProfile.unavailableTimes || []).length > 0; else noUnavailable">
                 <div class="time-list">
                   <span *ngFor="let time of getTimeSlotDisplay(userProfile.unavailableTimes || [])"
@@ -105,7 +105,7 @@
             <div class="divider-small"></div>
 
             <div class="schedule-info">
-              <h4>Preferred Not Times:</h4>
+              <h4>Preferred Not Times</h4>
               <div *ngIf="getTimeSlotDisplay(userProfile.preferredNotTimes || []).length > 0; else noPreferred">
                 <div class="time-list">
                   <span *ngFor="let time of getTimeSlotDisplay(userProfile.preferredNotTimes || [])"
@@ -244,9 +244,9 @@
             </div>
           </div>
 
-          <!-- Completed CoursesService Tab -->
+          <!-- Completed Courses Tab -->
           <div class="tab-section">
-            <h3>Completed CoursesService</h3>
+            <h3>Completed Courses</h3>
             <div class="divider"></div>
             <div class="form-section">
               <div class="course-selection-buttons">
@@ -292,7 +292,7 @@
             <div class="divider"></div>
             <div class="form-section">
               <div class="schedule-section">
-                <h4>Times you absolutely CANNOT take classes:</h4>
+                <h4>Times you absolutely cannot take classes</h4>
                 <div class="time-slots-grid" formArrayName="unavailableTimes">
                   <div
                     *ngFor="let timeSlot of timeSlots; let i = index"
@@ -308,7 +308,7 @@
                 </div>
 
                 <div class="form-field">
-                  <label for="unavailableReason">Why can't you take classes at these times?</label>
+                  <label for="unavailableReason">Reason for unavailability</label>
                   <textarea
                     class="form-control"
                     formControlName="unavailableReason"
@@ -320,7 +320,7 @@
               </div>
 
               <div class="schedule-section">
-                <h4>Times you prefer NOT to take classes:</h4>
+                <h4>Times you prefer not to take classes</h4>
                 <div class="time-slots-grid" formArrayName="preferredNotTimes">
                   <div
                     *ngFor="let timeSlot of timeSlots; let i = index"
@@ -336,7 +336,7 @@
                 </div>
 
                 <div class="form-field">
-                  <label for="preferredNotReason">Why do you prefer not to take classes at these times?</label>
+                  <label for="preferredNotReason">Reason for preference</label>
                   <textarea
                     class="form-control"
                     formControlName="preferredNotReason"

@@ -4,10 +4,7 @@ from typing import Optional
 import jwt
 from pydantic import BaseModel
 
-from server import JWT_PRIVATE_KEY
-
-SECRET_KEY = "27e7a5811fabc16a334ba2aaca332a8d3319506e8dcc0e9724cf7c28109065c6"
-
+from config import JWT_PRIVATE_KEY
 
 class Token(BaseModel):
     access_token: str

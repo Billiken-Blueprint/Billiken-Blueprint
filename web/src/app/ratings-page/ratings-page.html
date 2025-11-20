@@ -1,72 +1,160 @@
-<div class="w-full flex-grow flex flex-col from-blue-900 via-blue-800 to-blue-600 bg-gradient-to-br items-stretch">
-  <div>
-    <p-toolbar>
-      <ng-template #start></ng-template>
-      <ng-template #end>
-        <a href="ratings/create" pButton>Create Rating</a>
-      </ng-template>
-    </p-toolbar>
+<div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
+  
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+    <div class="absolute w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse"></div>
   </div>
-  <div class="w-full flex-grow flex flex-row items-stretch">
-    <p-card class="flex-1 flex flex-col">
-      <ng-template #title>
-        <div>Professors</div>
-      </ng-template>
-      <ng-template #subtitle>
-        Selected: {{ selectedInstructor()?.name ?? 'None' }}
-      </ng-template>
-      <p-virtual-scroller
-        [itemSize]="50"
-        [items]="instructors()"
-        scrollHeight="60vh"
-      >
-        <ng-template #item let-item>
-          <button (click)="selectInstructor(item)" class="flex text-center my-2 w-full" pButton
-                  style="height: 50px;">
-            {{ item.name }}
-          </button>
-        </ng-template>
-      </p-virtual-scroller>
-    </p-card>
-    <p-card class="flex-1">
-      <ng-template #title>
-        <div>Courses</div>
-      </ng-template>
-      <ng-template #subtitle>
-        Selected: {{ selectedCourse()?.courseCode ?? 'None' }}
-      </ng-template>
-      <p-virtual-scroller
-        [itemSize]="50"
-        [items]="courses()"
-        scrollHeight="60vh"
-      >
-        <ng-template #item let-item>
-          <button (click)="selectCourse(item)" class="flex text-center my-2 w-full" pButton
-                  style="height: 50px;">
-            {{ item.courseCode }} - {{ item.title }}
-          </button>
-        </ng-template>
-      </p-virtual-scroller>
-    </p-card>
-    <p-card class="flex-3">
-      <ng-template #title>
-        <div>Ratings</div>
-      </ng-template>
-      <ng-template #subtitle>
-        Found: {{ ratings().length }}
-      </ng-template>
-      <p-virtual-scroller
-        [itemSize]="50"
-        [items]="ratings()"
-        scrollHeight="60vh"
-      >
-        <ng-template #item let-item>
-          <div class="flex text-center my-2 w-full"
-               style="height: 50px;">
-            {{ item.rating }}/5 - {{ item.description }}
+
+  <!-- Header Section -->
+  <div class="relative z-10 px-8 py-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex justify-between items-center mb-8">
+        <div>
+          <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
+            Rate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Professors</span>
+          </h1>
+          <p class="text-blue-200 text-lg font-inter">Help future Billikens make informed decisions</p>
+        </div>
+        <a href="ratings/create" 
+           class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+          <i class="pi pi-plus"></i>
+          <span>Add Rating</span>
+        </a>
+      </div>
+
+      <!-- Search & Filter Bar -->
+      <div class="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Professor</label>
+            <div class="relative">
+              <i class="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
+              <select (change)="selectInstructorById($any($event.target).value)"
+                      class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
+                <option value="">All Professors</option>
+                @for (instructor of instructors(); track instructor.id) {
+                  <option [value]="instructor.id">{{ instructor.name }}</option>
+                }
+              </select>
+            </div>
           </div>
-        </ng-template>
-      </p-virtual-scroller>
-    </p-card>
+          <div>
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Course</label>
+            <div class="relative">
+              <i class="pi pi-book absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
+              <select (change)="selectCourseById($any($event.target).value)"
+                      class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
+                <option value="">All Courses</option>
+                @for (course of courses(); track course.id) {
+                  <option [value]="course.id">{{ course.courseCode }} - {{ course.title }}</option>
+                }
+              </select>
+            </div>
+          </div>
+          <div class="flex items-end">
+            <button (click)="clearFilters()"
+                    class="w-full bg-slate-700/50 hover:bg-slate-700/70 text-white px-6 py-3 rounded-xl font-semibold font-inter border border-slate-600/50 hover:border-slate-500 transition-all duration-300 flex items-center justify-center gap-2">
+              <i class="pi pi-filter-slash"></i>
+              <span>Clear Filters</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Results Summary -->
+      <div class="mb-6">
+        <div class="flex items-center gap-4 text-blue-200 font-inter">
+          <div class="flex items-center gap-2">
+            <i class="pi pi-list"></i>
+            <span class="font-semibold">{{ ratings().length }} Reviews Found</span>
+          </div>
+          @if (selectedInstructor()) {
+            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30">
+              <i class="pi pi-user text-yellow-300"></i>
+              <span class="text-yellow-300 text-sm font-semibold">{{ selectedInstructor()?.name }}</span>
+            </div>
+          }
+          @if (selectedCourse()) {
+            <div class="flex items-center gap-2 bg-blue-400/20 px-3 py-1 rounded-full border border-blue-400/30">
+              <i class="pi pi-book text-blue-300"></i>
+              <span class="text-blue-300 text-sm font-semibold">{{ selectedCourse()?.courseCode }}</span>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ratings Grid -->
+  <div class="relative z-10 flex-grow px-8 pb-8">
+    <div class="max-w-7xl mx-auto">
+      @if (ratings().length === 0) {
+        <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+          <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
+          <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Ratings Found</h3>
+          <p class="text-blue-200 font-inter mb-6">Be the first to rate this professor or course!</p>
+          <a href="ratings/create" 
+             class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
+            <i class="pi pi-plus"></i>
+            <span>Add First Rating</span>
+          </a>
+        </div>
+      } @else {
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          @for (rating of ratings(); track rating.id) {
+            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+              <!-- Rating Header -->
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-grow">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg">
+                      <span class="text-blue-900 font-bold text-xl font-inter">{{ rating.rating }}</span>
+                    </div>
+                    <div>
+                      <h4 class="text-white font-bold text-lg font-inter">{{ rating.instructorName }}</h4>
+                      <p class="text-blue-300 text-sm font-inter">{{ rating.courseCode }} - {{ rating.courseName }}</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="flex items-center gap-1">
+                    @for (star of [1,2,3,4,5]; track star) {
+                      <i class="pi text-sm" 
+                         [class.pi-star-fill]="star <= rating.rating"
+                         [class.pi-star]="star > rating.rating"
+                         [class.text-yellow-400]="star <= rating.rating"
+                         [class.text-slate-600]="star > rating.rating"></i>
+                    }
+                  </div>
+                  <span class="text-blue-300 text-xs font-inter">{{ rating.rating }}/5</span>
+                </div>
+              </div>
+
+              <!-- Rating Content -->
+              <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
+                <p class="text-blue-100 font-inter leading-relaxed">{{ rating.description }}</p>
+              </div>
+
+              <!-- Rating Footer -->
+              <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center gap-4">
+                  <span class="text-blue-300 font-inter flex items-center gap-1">
+                    <i class="pi pi-calendar text-xs"></i>
+                    {{ rating.createdAt | date:'MMM d, yyyy' }}
+                  </span>
+                </div>
+                <div class="flex items-center gap-2">
+                  <button class="text-blue-300 hover:text-yellow-300 transition-colors duration-200 flex items-center gap-1">
+                    <i class="pi pi-thumbs-up text-sm"></i>
+                    <span class="text-xs font-inter">Helpful</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
   </div>
 </div>

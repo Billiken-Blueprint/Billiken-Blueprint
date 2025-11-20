@@ -77,7 +77,7 @@ export class QuestionnairePage implements OnInit {
       completedCourseIds: profileData.completedCourses?.map(x => x.id)
     }).subscribe({
       next: () => {
-        this.router.navigate(['/landing']);
+        this.router.navigate(['/home']);
       }
     });
   }

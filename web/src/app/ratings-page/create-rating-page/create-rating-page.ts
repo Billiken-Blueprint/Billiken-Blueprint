@@ -8,6 +8,8 @@ import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
 import {ButtonDirective} from 'primeng/button';
 import {RatingsService} from '../../ratings-service/ratings-service';
+import {Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-create-rating-page',
@@ -17,10 +19,14 @@ import {RatingsService} from '../../ratings-service/ratings-service';
     ReactiveFormsModule,
     Textarea,
     Rating,
-    ButtonDirective
+    ButtonDirective,
+    CommonModule
   ],
   templateUrl: './create-rating-page.html',
-  styleUrl: './create-rating-page.css'
+  styleUrl: './create-rating-page.css',
+  host: {
+    class: 'block w-full min-h-screen'
+  }
 })
 export class CreateRatingPage implements OnInit {
   instructors = signal<Instructor[]>([]);
@@ -28,6 +34,7 @@ export class CreateRatingPage implements OnInit {
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
   form = this.formBuilder.group({
     instructor: new FormControl<Instructor | null | undefined>(null, []),
     course: new FormControl<Course | null | undefined>(null, []),
@@ -47,13 +54,36 @@ export class CreateRatingPage implements OnInit {
     }
 
     const form = this.form.value;
+    let completedRequests = 0;
+    let totalRequests = 0;
+
+    if (form.instructor && form.instructorRating) {
+      totalRequests++;
+    }
+    if (form.course && form.courseRating) {
+      totalRequests++;
+    }
+    if (form.instructor && form.course && form.bothRating) {
+      totalRequests++;
+    }
+
+    const checkComplete = () => {
+      completedRequests++;
+      if (completedRequests === totalRequests) {
+        this.router.navigate(['/ratings']);
+      }
+    };
+
     if (form.instructor && form.instructorRating) {
       this.ratingsService.createRating({
         instructorId: form.instructor.id.toString(),
         courseId: undefined,
         rating: form.instructorRating,
         description: form.instructorDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: () => checkComplete()
+      });
     }
 
     if (form.course && form.courseRating) {
@@ -62,7 +92,10 @@ export class CreateRatingPage implements OnInit {
         courseId: form.course.id.toString(),
         rating: form.courseRating,
         description: form.courseDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: () => checkComplete()
+      });
     }
 
     if (form.instructor && form.course && form.bothRating) {
@@ -71,7 +104,10 @@ export class CreateRatingPage implements OnInit {
         courseId: form.course.id.toString(),
         rating: form.bothRating,
         description: form.bothDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: () => checkComplete()
+      });
     }
   }
 

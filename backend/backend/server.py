@@ -3,13 +3,7 @@ import asyncio
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 
-from api import identity, supported_majors
-
-with open("jwt_dev.pem", "r") as f:
-    JWT_PRIVATE_KEY = f.read()
-with open("jwt_dev.pub", "r") as f:
-    JWT_PUBLIC_KEY = f.read()
-
+from api import identity, supported_majors, instructors, courses, ratings
 
 app = FastAPI()
 
@@ -21,5 +15,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(identity.router)
-app.include_router(supported_majors.router)
+# Mount all routers under /api prefix
+app.include_router(identity.router, prefix="/api")
+app.include_router(supported_majors.router, prefix="/api")
+app.include_router(instructors.router, prefix="/api")
+app.include_router(courses.router, prefix="/api")
+app.include_router(ratings.router, prefix="/api")

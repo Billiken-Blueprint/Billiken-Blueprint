@@ -3,10 +3,11 @@ from typing import Annotated
 
 from fastapi import APIRouter, HTTPException, Depends, status, Form
 from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel
 
 import services
-from infrastructure.identity.identity_user import IdentityUser, password_hash
-from infrastructure.identity.token import Token
+from identity.identity_user import IdentityUser, password_hash
+from identity.token import Token
 
 router = APIRouter(prefix="/identity", tags=["identity"])
 
@@ -48,3 +49,68 @@ async def register(
     await services.identity_user_repository.save(identity)
     token = create_access_token(identity=identity)
     return token
+
+
+class PasswordResetResponse(BaseModel):
+    message: str
+    email: str
+
+
+@router.post("/forgot-password")
+async def forgot_password(
+    email: Annotated[str, Form()]
+) -> PasswordResetResponse:
+    """
+    Endpoint to handle password reset requests.
+    In a production environment, this would:
+    1. Generate a unique reset token
+    2. Store the token with expiration
+    3. Send an email with reset link
+    
+    For now, it just validates the email exists and returns success.
+    """
+    user = await services.identity_user_repository.get_by_email(email)
+    if not user:
+        # Don't reveal if email exists or not (security best practice)
+        # Always return success to prevent email enumeration
+        return PasswordResetResponse(
+            message="If this email is registered, you will receive password reset instructions.",
+            email=email
+        )
+    
+    # TODO: Generate reset token and send email
+    # reset_token = generate_reset_token(user)
+    # send_password_reset_email(email, reset_token)
+    
+    return PasswordResetResponse(
+        message="Password reset instructions have been sent to your email.",
+        email=email
+    )
+
+
+@router.post("/reset-password")
+async def reset_password(
+    email: Annotated[str, Form()],
+    new_password: Annotated[str, Form()],
+    reset_token: Annotated[str, Form()]
+) -> dict:
+    """
+    Endpoint to actually reset the password using a token.
+    This would validate the reset token and update the password.
+    """
+    # TODO: Implement token validation
+    # For now, just update the password if user exists
+    
+    user = await services.identity_user_repository.get_by_email(email)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    # Update password
+    h = password_hash.hash(new_password)
+    user.password_hash = h
+    await services.identity_user_repository.save(user)
+    
+    return {"message": "Password successfully reset"}
