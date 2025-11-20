@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {IftaLabel} from 'primeng/iftalabel';
 import {Select} from 'primeng/select';
-import {Instructor, InstructorsService} from '../../instructors-service/instructors-service';
-import {Course, CoursesService} from '../../courses-service/courses-service';
+import {Instructor, InstructorsService} from '../../services/instructors-service/instructors-service';
+import {Course, CoursesService} from '../../services/courses-service/courses-service';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
 import {ButtonDirective} from 'primeng/button';
-import {RatingsService} from '../../ratings-service/ratings-service';
+import {RatingsService} from '../../services/ratings-service/ratings-service';
 
 @Component({
   selector: 'app-create-rating-page',

@@ -6,8 +6,13 @@ import jwt
 from yaml import Token
 
 from billiken_blueprint import config, services
+from billiken_blueprint.domain.degree import Degree
 from billiken_blueprint.identity.token_payload import TokenPayload
 from billiken_blueprint.repositories.course_repository import CourseRepository
+from billiken_blueprint.repositories.degree_repository import DegreeRepository
+from billiken_blueprint.repositories.degree_requirements_repository import (
+    DegreeRequirementsRepository,
+)
 from billiken_blueprint.repositories.identity_user_repository import (
     IdentityUserRepository,
 )
@@ -61,6 +66,14 @@ def get_rating_repository():
     return services.rating_repository
 
 
+def get_degree_repository():
+    return services.degree_repository
+
+
+def get_degree_requirements_repository():
+    return services.degree_requirements_repository
+
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token")
 AuthToken = Annotated[str, Depends(oauth2_scheme)]
 
@@ -88,3 +101,7 @@ StudentRepo = Annotated[StudentRepository, Depends(get_student_repository)]
 CourseRepo = Annotated[CourseRepository, Depends(get_course_repository)]
 InstructorRepo = Annotated[InstructorRepository, Depends(get_instructor_repository)]
 RatingRepo = Annotated[RatingRepository, Depends(get_rating_repository)]
+DegreeRepo = Annotated[DegreeRepository, Depends(get_degree_repository)]
+DegreeRequirementsRepo = Annotated[
+    DegreeRequirementsRepository, Depends(get_degree_requirements_repository)
+]

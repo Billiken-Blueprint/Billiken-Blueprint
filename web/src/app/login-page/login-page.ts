@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {AuthService} from '../auth-service/auth-service';
+import {AuthService} from '../services/auth-service/auth-service';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -29,15 +29,6 @@ export class LoginPage {
   })
   private router = inject(Router);
 
-  protected getFieldError(field: 'email' | 'password'): string | null {
-    const control = this.credentialsForm.get(field);
-    if ((control?.dirty || control?.touched) && control?.errors) {
-      if (control.errors['required']) return 'Missing required field';
-      if (control.errors['email']) return 'Please enter a valid email address';
-    }
-    return null;
-  }
-
   login() {
     this.errorMessage.set(null);
     if (!this.credentialsForm.valid) {
@@ -62,5 +53,14 @@ export class LoginPage {
           }
         }
       })
+  }
+
+  protected getFieldError(field: 'email' | 'password'): string | null {
+    const control = this.credentialsForm.get(field);
+    if ((control?.dirty || control?.touched) && control?.errors) {
+      if (control.errors['required']) return 'Missing required field';
+      if (control.errors['email']) return 'Please enter a valid email address';
+    }
+    return null;
   }
 }

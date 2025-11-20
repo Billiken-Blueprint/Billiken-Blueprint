@@ -6,7 +6,7 @@ import Aura from '@primeuix/themes/aura';
 
 import {routes} from './app.routes';
 import {provideHttpClient, withInterceptors} from '@angular/common/http';
-import {authInterceptor} from './auth-service/auth-interceptor';
+import {authInterceptor} from './services/auth-service/auth-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [

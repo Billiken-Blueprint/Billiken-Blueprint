@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, signal, ViewEncapsulation} from '@angular/core';
-import {Instructor, InstructorsService} from '../instructors-service/instructors-service';
+import {Instructor, InstructorsService} from '../services/instructors-service/instructors-service';
 import {DataView} from 'primeng/dataview';
 import {Scroller} from 'primeng/scroller';
 import {Card} from 'primeng/card';
 import {InputText} from 'primeng/inputtext';
 import {AutoComplete} from 'primeng/autocomplete';
-import {Course, CoursesService} from '../courses-service/courses-service';
+import {Course, CoursesService} from '../services/courses-service/courses-service';
 import {ButtonDirective} from 'primeng/button';
-import {Rating, RatingsService} from '../ratings-service/ratings-service';
+import {Rating, RatingsService} from '../services/ratings-service/ratings-service';
 import {Toolbar} from 'primeng/toolbar';
 
 @Component({

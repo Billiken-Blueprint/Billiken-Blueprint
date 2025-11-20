@@ -9,6 +9,8 @@ from billiken_blueprint.repositories.course_repository import DBCourse
 from billiken_blueprint.repositories.course_section_repository import DBCourseSection
 from billiken_blueprint.repositories.instructor_repository import DBInstructor
 from billiken_blueprint.repositories.rating_repository import DBRating
+from billiken_blueprint.repositories.mc_course_repository import MCCourseDbEntity
+from billiken_blueprint.repositories.section_repository import SectionRepositoryDBEntity
 
 __all__ = [
     "Base",
@@ -18,4 +20,6 @@ __all__ = [
     "DBCourseSection",
     "DBInstructor",
     "DBRating",
+    "MCCourseDbEntity",
+    "SectionRepositoryDBEntity",
 ]

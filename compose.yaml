@@ -18,3 +18,4 @@ services:
       - "8000:8000"
     volumes:
       - ./backend/billiken_blueprint:/app/billiken_blueprint
+      - ./backend/data:/app/data

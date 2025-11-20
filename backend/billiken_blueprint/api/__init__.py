@@ -1,4 +1,12 @@
-from billiken_blueprint.api import identity, user_info, courses, instructors, ratings
+from billiken_blueprint.api import (
+    identity,
+    user_info,
+    courses,
+    instructors,
+    ratings,
+    degrees,
+    degree_requirements,
+)
 
 routers = [
     identity.router,
@@ -6,6 +14,8 @@ routers = [
     courses.router,
     instructors.router,
     ratings.router,
+    degrees.router,
+    degree_requirements.router,
 ]
 
 __all__ = ["routers"]

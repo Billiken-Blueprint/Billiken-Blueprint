@@ -1,6 +1,6 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {CreateRatingPage} from '../ratings-page/create-rating-page/create-rating-page';
+import {CreateRatingPage} from '../../ratings-page/create-rating-page/create-rating-page';
 
 @Injectable({
   providedIn: 'root'

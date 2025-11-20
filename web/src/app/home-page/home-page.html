@@ -5,12 +5,14 @@
   <div class="flex-grow flex flex-col justify-center -mt-20">
     <div class="mx-4 flex flex-col gap-8">
 
-      <p-card class="cursor-no-drop transition-all duration-200 scale-98">
-        <ng-template #title>
-          <div>View Courses (not functional)</div>
-        </ng-template>
-        <span>View courses available in the next semester.</span>
-      </p-card>
+      <a href="/schedule">
+        <p-card class="cursor-pointer transition-all duration-200 scale-98 hover:scale-100 hover:shadow-xl">
+          <ng-template #title>
+            <div>View Courses</div>
+          </ng-template>
+          <span>View courses available in the next semester.</span>
+        </p-card>
+      </a>
 
       <a href="/ratings">
         <p-card class="cursor-pointer transition-all duration-200 scale-98 hover:scale-100 hover:shadow-xl">

@@ -1,12 +1,16 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, ReactiveFormsModule, Validators} from '@angular/forms';
 import {CommonModule} from '@angular/common';
-import {Course, CoursesService} from '../courses-service/courses-service';
+import {Course, CoursesService} from '../services/courses-service/courses-service';
 import {Select} from 'primeng/select';
 import {MultiSelect} from 'primeng/multiselect';
-import {UserInfoService} from '../user-info-service/user-info-service';
+import {UserInfoService} from '../services/user-info-service/user-info-service';
 import {Router} from '@angular/router';
+import {Degree, DegreesService} from '../services/degrees-service/degrees-service';
 
+interface DegreeDisplayData extends Degree {
+  displayLabel: string;
+}
 
 @Component({
   selector: 'app-questionnaire',
@@ -26,19 +30,14 @@ export class QuestionnairePage implements OnInit {
   currentStep = 1;
   totalSteps = 3;
   courses: Course[] = [];
-  majors = [
-    'Computer Science',
-  ];
-  minors = [
-    'Computer Science',
-  ];
+  degrees: DegreeDisplayData[] = [];
   private userInfoService = inject(UserInfoService);
+  private degreesService = inject(DegreesService);
   private formBuilder = inject(FormBuilder);
   questionnaireForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     graduationYear: ['', [Validators.required, Validators.min(2024), Validators.max(2030)]],
     major: [null, Validators.required],
-    minor: [''],
     completedCourses: new FormControl([], []),
   });
   private router = inject(Router);
@@ -48,12 +47,17 @@ export class QuestionnairePage implements OnInit {
   ngOnInit(): void {
     this.coursesService.getCourses().subscribe(courses => {
       this.courses = courses;
-    })
+    });
+    this.degreesService.getDegrees().subscribe(degrees => {
+      this.degrees = degrees.map(degree => ({
+        ...degree,
+        displayLabel: `${degree.degreeType} ${degree.major} (${degree.college})`
+      }));
+    });
   }
 
 
   onSubmit() {
-    console.log(this.questionnaireForm.valid)
     if (this.questionnaireForm.invalid) {
       this.questionnaireForm.markAllAsTouched();
       return;
@@ -63,8 +67,7 @@ export class QuestionnairePage implements OnInit {
     const profileData = {
       fullName: formValue.fullName || '',
       graduationYear: parseInt(formValue.graduationYear || '0'),
-      major: formValue.major || '',
-      minor: formValue.minor || '',
+      major: formValue.major,
       completedCourses: formValue.completedCourses as Course[],
       questionnaireCompleted: true
     };
@@ -72,8 +75,7 @@ export class QuestionnairePage implements OnInit {
     this.userInfoService.updateUserInfo({
       name: profileData.fullName,
       graduationYear: profileData.graduationYear,
-      major: profileData.major,
-      minor: profileData.minor,
+      major: profileData.major!,
       completedCourseIds: profileData.completedCourses?.map(x => x.id)
     }).subscribe({
       next: () => {
@@ -104,7 +106,7 @@ export class QuestionnairePage implements OnInit {
   isCurrentStepValid(): boolean {
     switch (this.currentStep) {
       case 1: // Student Information
-        const personalControls = ['fullName', 'graduationYear', 'major', 'minor'];
+        const personalControls = ['fullName', 'graduationYear', 'major'];
         return personalControls.every(control => {
           const formControl = this.questionnaireForm.get(control);
           return formControl?.valid ?? false;
