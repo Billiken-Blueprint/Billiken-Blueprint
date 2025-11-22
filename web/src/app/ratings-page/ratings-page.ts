@@ -1,8 +1,8 @@
 import {Component, inject, OnInit, signal, ViewEncapsulation} from '@angular/core';
-import {Instructor, InstructorsService} from '../instructors-service/instructors-service';
-import {Course, CoursesService} from '../courses-service/courses-service';
-import {Rating, RatingsService} from '../ratings-service/ratings-service';
 import {CommonModule} from '@angular/common';
+import {Instructor, InstructorsService} from '../services/instructors-service/instructors-service';
+import {Course, CoursesService} from '../services/courses-service/courses-service';
+import {Rating, RatingsService} from '../services/ratings-service/ratings-service';
 
 @Component({
   selector: 'app-ratings-page',
@@ -90,19 +90,23 @@ export class RatingsPage implements OnInit {
   }
 
   // Calculate combined rating for an instructor (average of RMP and Billiken Blueprint ratings)
-  getCombinedRating(instructorId: number | null): { average: number; bbCount: number; rmpRating: number | null } | null {
+  getCombinedRating(instructorId: number | null): {
+    average: number;
+    bbCount: number;
+    rmpRating: number | null
+  } | null {
     if (!instructorId) return null;
-    
+
     const allRatings = this.ratings();
     const bbRatings = allRatings.filter(r => r.instructorId === instructorId && !r.isRmpRating);
     const rmpRating = allRatings.find(r => r.instructorId === instructorId && r.isRmpRating);
-    
+
     if (bbRatings.length === 0 && !rmpRating) return null;
-    
+
     const bbAverage = bbRatings.length > 0
       ? bbRatings.reduce((sum, r) => sum + r.rating, 0) / bbRatings.length
       : null;
-    
+
     if (bbAverage !== null && rmpRating) {
       // Average of both
       return {
@@ -125,7 +129,7 @@ export class RatingsPage implements OnInit {
         rmpRating: rmpRating.rating
       };
     }
-    
+
     return null;
   }
 }

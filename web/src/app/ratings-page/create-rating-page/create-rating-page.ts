@@ -1,13 +1,13 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
 import {Select} from 'primeng/select';
-import {Instructor, InstructorsService} from '../../instructors-service/instructors-service';
-import {Course, CoursesService} from '../../courses-service/courses-service';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
-import {RatingsService} from '../../ratings-service/ratings-service';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {Instructor, InstructorsService} from '../../services/instructors-service/instructors-service';
+import {Course, CoursesService} from '../../services/courses-service/courses-service';
+import {RatingsService} from '../../services/ratings-service/ratings-service';
 
 @Component({
   selector: 'app-create-rating-page',
@@ -31,7 +31,6 @@ export class CreateRatingPage implements OnInit {
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private formBuilder = inject(FormBuilder);
-  private router = inject(Router);
   form = this.formBuilder.group({
     instructor: new FormControl<Instructor | null | undefined>(null, []),
     course: new FormControl<Course | null | undefined>(null, []),
@@ -42,6 +41,7 @@ export class CreateRatingPage implements OnInit {
     bothRating: new FormControl<number | null | undefined>(null, []),
     bothDescription: new FormControl<string | null | undefined>(null, []),
   });
+  private router = inject(Router);
   private ratingsService = inject(RatingsService);
 
   submit() {

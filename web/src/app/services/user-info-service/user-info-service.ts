@@ -18,7 +18,6 @@ export class UserInfoService {
       name: body.name,
       graduation_year: body.graduationYear,
       major: body.major,
-      minor: body.minor,
       completed_course_ids: body.completedCourseIds,
       saved_course_codes: body.savedCourseCodes || [],
       degree_ids: []
@@ -35,7 +34,6 @@ export class UserInfoService {
           name: userInfo.name,
           graduationYear: userInfo.graduationYear,
           major: userInfo.major,
-          minor: userInfo.minor,
           completedCourseIds: userInfo.completedCourseIds || [],
           savedCourseCodes: savedCourseCodes
         });
@@ -48,7 +46,6 @@ export interface UpdateUserInfoBody {
   name: string;
   graduationYear: number;
   major: string;
-  minor: string | null | undefined;
   completedCourseIds: number[];
   savedCourseCodes?: string[];
 }

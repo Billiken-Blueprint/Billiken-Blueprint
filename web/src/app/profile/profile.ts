@@ -3,7 +3,7 @@ import {AuthService} from '../services/auth-service/auth-service';
 import {FormBuilder, ReactiveFormsModule, Validators, FormArray, FormControl} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
-import {UserInfoService} from '../user-info-service/user-info-service';
+import {UserInfoService} from '../services/user-info-service/user-info-service';
 
 interface Course {
   code: string;
@@ -290,7 +290,7 @@ export class ProfilePage implements OnInit {
   saveProfile() {
     if (this.profileForm.valid) {
       const formValue = this.profileForm.value;
-      
+
       // Get selected course IDs
       const selectedCourseIds: number[] = [];
       this.completedCoursesArray.controls.forEach((control: any, index: number) => {

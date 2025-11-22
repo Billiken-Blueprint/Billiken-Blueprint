@@ -21,8 +21,8 @@
       <div class="step-indicators">
         @for (step of [1, 2, 3]; track step) {
           <div (click)="goToStep(step)"
-               [class.completed]="step < currentStep"
                [class.active]="step === currentStep"
+               [class.completed]="step < currentStep"
                [class.upcoming]="step > currentStep"
                class="step-indicator">
             <div class="step-circle">
@@ -79,16 +79,7 @@
                   Major
                   <span class="required">*</span>
                 </label>
-                <p-select [options]="majors" formControlName="major" id="major" placeholder="Select your major"/>
-              </div>
-
-              <div class="form-group">
-                <label for="minor">
-                  <i class="pi pi-bookmark"></i>
-                  Minor
-                  <span class="optional">(Optional)</span>
-                </label>
-                <p-select [options]="minors" formControlName="minor" id="minor" placeholder="Select your minor"/>
+                <p-select [options]="degrees" formControlName="major" id="major" placeholder="Select your major"/>
               </div>
             </div>
           </div>
@@ -110,7 +101,8 @@
                 Completed Courses
               </label>
               <p-multi-select [options]="courses" fluid
-                              formControlName="completedCourses" optionLabel="courseCode" placeholder="Search and select courses">
+                              formControlName="completedCourses" optionLabel="courseCode"
+                              placeholder="Search and select courses">
                 <ng-template #item let-course>
                   <div class="course-option">
                     <strong>{{ course.courseCode }}</strong>
@@ -142,7 +134,8 @@
                   </div>
                   <div class="review-item">
                     <span class="review-label">Graduation Year</span>
-                    <span class="review-value">{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
+                    <span
+                      class="review-value">{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
                   </div>
                 </div>
               </div>
@@ -174,7 +167,9 @@
                 <div class="review-content">
                   <div class="review-item">
                     <span class="review-label">Total Courses</span>
-                    <span class="review-value highlight">{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }} completed</span>
+                    <span
+                      class="review-value highlight">{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }}
+                      completed</span>
                   </div>
                 </div>
               </div>
@@ -202,7 +197,8 @@
           </button>
         }
         @if (currentStep === totalSteps) {
-          <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary btn-complete" type="submit">
+          <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary btn-complete"
+                  type="submit">
             <i class="pi pi-check"></i>
             Complete Profile
           </button>
