@@ -152,7 +152,9 @@
                 <section *ngIf="details.expandedInstructors" class="details">
                   <div *ngFor="let inst of details.instructors || []" class="instructor-row">
                     <div class="inst-main">
-                      <p class="inst-name">{{ inst.name }}</p>
+                      <p class="inst-name" [class.cursor-pointer]="hasInstructorReviews(inst)" 
+                         [class.hover\:underline]="hasInstructorReviews(inst)"
+                         (click)="openReviewsPage(inst)">{{ inst.name }}</p>
                       <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
                       <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
                     </div>
@@ -160,8 +162,14 @@
                     <div *ngIf="inst.rating" class="inst-rating">
                       <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
                       <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
-                      <a *ngIf="inst.rating.rmpUrl" [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
-                        See reviews
+                      <button *ngIf="hasInstructorReviews(inst)" 
+                              (click)="openReviewsPage(inst); $event.stopPropagation()"
+                              class="rmp-link-button text-blue-600 hover:text-blue-800 underline cursor-pointer">
+                        View reviews
+                      </button>
+                      <a *ngIf="inst.rating.rmpUrl && !hasInstructorReviews(inst)" 
+                         [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
+                        See reviews on RMP
                       </a>
                     </div>
                   </div>
@@ -174,8 +182,8 @@
             <!-- Fallback if course details not found -->
             <div *ngIf="expandedCourseCode === course.code && !getCourseDetails(course.code)" class="mt-3">
               <p class="text-[#003DA5]/80 italic text-sm">
-                Course details coming soon.
-              </p>
+              Course details coming soon.
+            </p>
             </div>
           </div>
 
@@ -322,5 +330,4 @@
       </div>
     </section>
   </div>
-
 </div>

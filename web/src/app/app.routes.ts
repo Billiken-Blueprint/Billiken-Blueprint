@@ -8,6 +8,7 @@ import {HomePage} from './home-page/home-page';
 import {RatingsPage} from './ratings-page/ratings-page';
 import {CreateRatingPage} from './ratings-page/create-rating-page/create-rating-page';
 import { CoursePage } from './course/course-page';
+import {InstructorReviewsPage} from './instructor-reviews-page/instructor-reviews-page';
 
 export const routes: Routes = [
   {
@@ -50,5 +51,9 @@ export const routes: Routes = [
   {
     path: 'ratings/create',
     component: CreateRatingPage
+  },
+  {
+    path: 'instructors/:id/reviews',
+    component: InstructorReviewsPage
   }
 ];

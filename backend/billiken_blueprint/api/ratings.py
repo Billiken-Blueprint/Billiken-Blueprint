@@ -76,30 +76,12 @@ async def list_ratings(
             courseName=course_name,
         ))
     
-    # Add RMP ratings
-    if instructor_id:
-        # If filtering by specific instructor, add their RMP rating
-        instructor = await instructor_repo.get_by_id(instructor_id)
-        if instructor and instructor.rmp_rating is not None:
-            result.append(dict(
-                id=None,  # RMP ratings don't have database IDs
-                instructorId=instructor.id,
-                courseId=None,
-                rating=instructor.rmp_rating,
-                canEdit=False,
-                description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
-                isRmpRating=True,
-                rmpUrl=instructor.rmp_url,
-                rmpNumRatings=instructor.rmp_num_ratings,
-                instructorName=instructor.name,
-                courseCode=None,
-                courseName=None,
-            ))
-    else:
-        # If no instructor filter, show RMP ratings for all instructors that have them
-        all_instructors = await instructor_repo.get_all()
-        for instructor in all_instructors:
-            if instructor.rmp_rating is not None:
+    # Add RMP ratings (only if not filtering by course, since RMP ratings don't have course info)
+    if course_id is None:
+        if instructor_id:
+            # If filtering by specific instructor, add their RMP rating
+            instructor = await instructor_repo.get_by_id(instructor_id)
+            if instructor and instructor.rmp_rating is not None:
                 result.append(dict(
                     id=None,  # RMP ratings don't have database IDs
                     instructorId=instructor.id,
@@ -114,6 +96,25 @@ async def list_ratings(
                     courseCode=None,
                     courseName=None,
                 ))
+        else:
+            # If no instructor filter, show RMP ratings for all instructors that have them
+            all_instructors = await instructor_repo.get_all()
+            for instructor in all_instructors:
+                if instructor.rmp_rating is not None:
+                    result.append(dict(
+                        id=None,  # RMP ratings don't have database IDs
+                        instructorId=instructor.id,
+                        courseId=None,
+                        rating=instructor.rmp_rating,
+                        canEdit=False,
+                        description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                        isRmpRating=True,
+                        rmpUrl=instructor.rmp_url,
+                        rmpNumRatings=instructor.rmp_num_ratings,
+                        instructorName=instructor.name,
+                        courseCode=None,
+                        courseName=None,
+                    ))
     
     return result
 

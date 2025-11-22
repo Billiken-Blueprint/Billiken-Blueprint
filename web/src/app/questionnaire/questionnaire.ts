@@ -69,15 +69,21 @@ export class QuestionnairePage implements OnInit {
       questionnaireCompleted: true
     };
 
+    const completedCourseIds = profileData.completedCourses?.map(x => x.id).filter(id => id !== undefined) || [];
+    
     this.userInfoService.updateUserInfo({
       name: profileData.fullName,
       graduationYear: profileData.graduationYear,
       major: profileData.major,
-      minor: profileData.minor,
-      completedCourseIds: profileData.completedCourses?.map(x => x.id)
+      minor: profileData.minor || null,
+      completedCourseIds: completedCourseIds
     }).subscribe({
       next: () => {
         this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('Error submitting profile:', error);
+        alert('Failed to save profile. Please try again. If the problem persists, please contact support.');
       }
     });
   }

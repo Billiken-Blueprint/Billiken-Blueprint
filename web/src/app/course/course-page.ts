@@ -1,7 +1,8 @@
 import { Component, ViewEncapsulation, signal, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserInfoService } from '../user-info-service/user-info-service';
+import { InstructorsService, Instructor as BackendInstructor } from '../instructors-service/instructors-service';
 
 interface SimpleCourse {
   code: string;
@@ -19,6 +20,7 @@ interface Instructor {
   email?: string;
   office?: string;
   rating?: Rating;
+  id?: number; // Optional instructor ID from backend
 }
 
 interface InfoCourse {
@@ -199,6 +201,10 @@ export class CoursePage implements OnInit {
 
   savedCourses: SimpleCourse[] = [];
   private userInfoService = inject(UserInfoService);
+  private instructorsService = inject(InstructorsService);
+  private router = inject(Router);
+  
+  allInstructors = signal<BackendInstructor[]>([]);
 
   readonly courseGroups: { key: GroupKey; label: string }[] = [
     { key: 'Core_Intro', label: 'Intro to CS' },
@@ -234,6 +240,67 @@ export class CoursePage implements OnInit {
 
   ngOnInit(): void {
     this.loadSavedCourses();
+    this.loadInstructors();
+  }
+
+  loadInstructors(): void {
+    this.instructorsService.getInstructors().subscribe({
+      next: (instructors) => {
+        this.allInstructors.set(instructors);
+        // Match instructor IDs to course instructors by name
+        this.matchInstructorIds();
+      },
+      error: (err) => {
+        console.error('Error loading instructors:', err);
+      }
+    });
+  }
+
+  matchInstructorIds(): void {
+    // Update course instructors with IDs from backend
+    const instructors = this.courses();
+    const allInstructors = this.allInstructors();
+    const updated = instructors.map(course => {
+      if (course.instructors) {
+        const updatedInstructors = course.instructors.map(inst => {
+          const matched = allInstructors.find(ai => 
+            ai.name.toLowerCase() === inst.name.toLowerCase()
+          );
+          return { ...inst, id: matched?.id ?? undefined };
+        });
+        return { ...course, instructors: updatedInstructors };
+      }
+      return course;
+    });
+    this.courses.set(updated);
+  }
+
+  hasInstructorReviews(inst: Instructor): boolean {
+    if (inst.id) return true;
+    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
+  }
+
+  openReviewsPage(instructor: Instructor): void {
+    let instructorId: number | null = null;
+    
+    if (instructor.id) {
+      instructorId = instructor.id;
+    } else {
+      // Try to find instructor ID by name
+      const matched = this.allInstructors().find(ai => 
+        ai.name.toLowerCase() === instructor.name.toLowerCase()
+      );
+      if (matched) {
+        instructorId = matched.id ?? null;
+      } else {
+        console.warn('Instructor ID not found for:', instructor.name);
+        return;
+      }
+    }
+    
+    if (instructorId) {
+      this.router.navigate(['/instructors', instructorId, 'reviews']);
+    }
   }
 
   loadSavedCourses(): void {
