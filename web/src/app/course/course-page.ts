@@ -1,9 +1,8 @@
 import { Component, ViewEncapsulation, signal, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router } from '@angular/router';
 import { UserInfoService } from '../user-info-service/user-info-service';
 import { InstructorsService, Instructor as BackendInstructor } from '../instructors-service/instructors-service';
-import { InstructorReviewsModal } from '../instructor-reviews-modal/instructor-reviews-modal';
 
 interface SimpleCourse {
   code: string;
@@ -186,7 +185,7 @@ const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
 @Component({
   selector: 'app-course-page',
   standalone: true,
-  imports: [CommonModule, InstructorReviewsModal],
+  imports: [CommonModule],
   templateUrl: './course-page.html',
   styleUrls: ['./course-page.css'],
   encapsulation: ViewEncapsulation.None, // let body/html styles apply globally
@@ -203,11 +202,8 @@ export class CoursePage implements OnInit {
   savedCourses: SimpleCourse[] = [];
   private userInfoService = inject(UserInfoService);
   private instructorsService = inject(InstructorsService);
+  private router = inject(Router);
   
-  // Modal state
-  selectedInstructorName = signal<string>('');
-  selectedInstructorId = signal<number | null>(null);
-  showReviewsModal = signal<boolean>(false);
   allInstructors = signal<BackendInstructor[]>([]);
 
   readonly courseGroups: { key: GroupKey; label: string }[] = [
@@ -284,30 +280,27 @@ export class CoursePage implements OnInit {
     return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
   }
 
-  openReviewsModal(instructor: Instructor): void {
+  openReviewsPage(instructor: Instructor): void {
+    let instructorId: number | null = null;
+    
     if (instructor.id) {
-      this.selectedInstructorName.set(instructor.name);
-      this.selectedInstructorId.set(instructor.id);
-      this.showReviewsModal.set(true);
+      instructorId = instructor.id;
     } else {
       // Try to find instructor ID by name
       const matched = this.allInstructors().find(ai => 
         ai.name.toLowerCase() === instructor.name.toLowerCase()
       );
       if (matched) {
-        this.selectedInstructorName.set(instructor.name);
-        this.selectedInstructorId.set(matched.id ?? null);
-        this.showReviewsModal.set(true);
+        instructorId = matched.id ?? null;
       } else {
         console.warn('Instructor ID not found for:', instructor.name);
+        return;
       }
     }
-  }
-
-  closeReviewsModal(): void {
-    this.showReviewsModal.set(false);
-    this.selectedInstructorName.set('');
-    this.selectedInstructorId.set(null);
+    
+    if (instructorId) {
+      this.router.navigate(['/instructors', instructorId, 'reviews']);
+    }
   }
 
   loadSavedCourses(): void {

@@ -3,6 +3,7 @@ import {Instructor, InstructorsService} from '../instructors-service/instructors
 import {Course, CoursesService} from '../courses-service/courses-service';
 import {Rating, RatingsService} from '../ratings-service/ratings-service';
 import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ratings-page',
@@ -22,9 +23,11 @@ export class RatingsPage implements OnInit {
   courses = signal<Course[]>([]);
   selectedCourse = signal<Course | null>(null);
   ratings = signal<Rating[]>([]);
+  
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private ratingsService = inject(RatingsService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.instructorsService.getInstructors().subscribe(instructors => {
@@ -127,5 +130,9 @@ export class RatingsPage implements OnInit {
     }
     
     return null;
+  }
+
+  openReviewsPage(instructorId: number) {
+    this.router.navigate(['/instructors', instructorId, 'reviews']);
   }
 }

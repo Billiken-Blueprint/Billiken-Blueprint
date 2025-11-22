@@ -154,7 +154,7 @@
                     <div class="inst-main">
                       <p class="inst-name" [class.cursor-pointer]="hasInstructorReviews(inst)" 
                          [class.hover\:underline]="hasInstructorReviews(inst)"
-                         (click)="openReviewsModal(inst)">{{ inst.name }}</p>
+                         (click)="openReviewsPage(inst)">{{ inst.name }}</p>
                       <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
                       <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
                     </div>
@@ -163,7 +163,7 @@
                       <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
                       <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
                       <button *ngIf="hasInstructorReviews(inst)" 
-                              (click)="openReviewsModal(inst); $event.stopPropagation()"
+                              (click)="openReviewsPage(inst); $event.stopPropagation()"
                               class="rmp-link-button text-blue-600 hover:text-blue-800 underline cursor-pointer">
                         View reviews
                       </button>
@@ -330,12 +330,4 @@
       </div>
     </section>
   </div>
-
-  <!-- Instructor Reviews Modal -->
-  <app-instructor-reviews-modal
-    [instructorName]="selectedInstructorName()"
-    [instructorId]="selectedInstructorId()"
-    [isOpen]="showReviewsModal()"
-    (closeModal)="closeReviewsModal()">
-  </app-instructor-reviews-modal>
 </div>

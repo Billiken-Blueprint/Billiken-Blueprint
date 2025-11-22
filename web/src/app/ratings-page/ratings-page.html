@@ -70,9 +70,11 @@
             <span class="font-semibold">{{ ratings().length }} Reviews Found</span>
           </div>
           @if (selectedInstructor()) {
-            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30">
+            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30 cursor-pointer hover:bg-yellow-400/30 transition-colors"
+                 (click)="selectedInstructor() && openReviewsPage(selectedInstructor()!.id)">
               <i class="pi pi-user text-yellow-300"></i>
               <span class="text-yellow-300 text-sm font-semibold">{{ selectedInstructor()?.name }}</span>
+              <i class="pi pi-external-link text-yellow-300 text-xs ml-1"></i>
             </div>
             @if (getCombinedRating(selectedInstructor()?.id ?? null); as combined) {
               <div class="flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 px-4 py-2 rounded-xl border border-yellow-400/30">
@@ -136,7 +138,10 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-white font-bold text-lg font-inter">{{ rating.instructorName || 'Unknown Instructor' }}</h4>
+                        <h4 class="text-white font-bold text-lg font-inter cursor-pointer hover:underline"
+                            (click)="rating.instructorId && openReviewsPage(rating.instructorId)">
+                          {{ rating.instructorName || 'Unknown Instructor' }}
+                        </h4>
                         @if (rating.isRmpRating) {
                           <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
                             RMP
