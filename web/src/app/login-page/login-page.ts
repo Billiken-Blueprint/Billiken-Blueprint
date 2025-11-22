@@ -1,5 +1,5 @@
 import {Component, inject, signal} from '@angular/core';
-import {AuthService} from '../services/auth-service/auth-service';
+import {AuthService} from '../auth-service/auth-service';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
@@ -16,6 +16,10 @@ import {CommonModule} from '@angular/common';
 })
 export class LoginPage {
   protected errorMessage = signal<string | null>(null);
+  protected successMessage = signal<string | null>(null);
+  protected showForgotPassword = signal<boolean>(false);
+  protected forgotPasswordEmail = signal<string>('');
+  
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   credentialsForm = this.formBuilder.group({
@@ -28,6 +32,15 @@ export class LoginPage {
     ])
   })
   private router = inject(Router);
+
+  protected getFieldError(field: 'email' | 'password'): string | null {
+    const control = this.credentialsForm.get(field);
+    if ((control?.dirty || control?.touched) && control?.errors) {
+      if (control.errors['required']) return 'Missing required field';
+      if (control.errors['email']) return 'Please enter a valid email address';
+    }
+    return null;
+  }
 
   login() {
     this.errorMessage.set(null);
@@ -55,12 +68,40 @@ export class LoginPage {
       })
   }
 
-  protected getFieldError(field: 'email' | 'password'): string | null {
-    const control = this.credentialsForm.get(field);
-    if ((control?.dirty || control?.touched) && control?.errors) {
-      if (control.errors['required']) return 'Missing required field';
-      if (control.errors['email']) return 'Please enter a valid email address';
+  openForgotPasswordModal() {
+    this.showForgotPassword.set(true);
+    this.successMessage.set(null);
+    this.errorMessage.set(null);
+  }
+
+  closeForgotPasswordModal() {
+    this.showForgotPassword.set(false);
+    this.forgotPasswordEmail.set('');
+  }
+
+  sendPasswordReset() {
+    const email = this.forgotPasswordEmail();
+    
+    if (!email || !email.includes('@')) {
+      this.errorMessage.set('Please enter a valid email address');
+      return;
     }
-    return null;
+
+    this.authService.forgotPassword(email).subscribe({
+      next: (response) => {
+        this.successMessage.set('Password reset instructions have been sent to ' + response.email);
+        this.errorMessage.set(null);
+        
+        // Close modal after 3 seconds
+        setTimeout(() => {
+          this.closeForgotPasswordModal();
+          this.successMessage.set(null);
+        }, 3000);
+      },
+      error: (err) => {
+        this.errorMessage.set('An error occurred. Please try again.');
+        this.successMessage.set(null);
+      }
+    });
   }
 }

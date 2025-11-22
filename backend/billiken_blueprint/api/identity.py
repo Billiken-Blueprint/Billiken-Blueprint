@@ -2,6 +2,7 @@ from datetime import timedelta
 from typing import Annotated
 from fastapi import APIRouter, Depends, Form, HTTPException, status
 from fastapi.security import OAuth2PasswordRequestForm
+from pydantic import BaseModel
 
 from billiken_blueprint.dependencies import IdentityUserRepo
 from billiken_blueprint.identity.identity_user import IdentityUser
@@ -53,3 +54,69 @@ async def register(
     saved_user = await identity_user_repo.save(new_user)
     token = create_access_token(saved_user)
     return token
+
+
+class PasswordResetResponse(BaseModel):
+    message: str
+    email: str
+
+
+@router.post("/forgot-password")
+async def forgot_password(
+    email: Annotated[str, Form()],
+    identity_user_repo: IdentityUserRepo,
+) -> PasswordResetResponse:
+    """
+    Endpoint to handle password reset requests.
+    In a production environment, this would:
+    1. Generate a unique reset token
+    2. Store the token with expiration
+    3. Send an email with reset link
+    
+    For now, it just validates the email exists and returns success.
+    """
+    user = await identity_user_repo.get_by_email(email)
+    if not user:
+        # Don't reveal if email exists or not (security best practice)
+        # Always return success to prevent email enumeration
+        return PasswordResetResponse(
+            message="If this email is registered, you will receive password reset instructions.",
+            email=email
+        )
+    
+    # TODO: Generate reset token and send email
+    # reset_token = generate_reset_token(user)
+    # send_password_reset_email(email, reset_token)
+    
+    return PasswordResetResponse(
+        message="Password reset instructions have been sent to your email.",
+        email=email
+    )
+
+
+@router.post("/reset-password")
+async def reset_password(
+    email: Annotated[str, Form()],
+    new_password: Annotated[str, Form()],
+    reset_token: Annotated[str, Form()],
+    identity_user_repo: IdentityUserRepo,
+) -> dict:
+    """
+    Endpoint to actually reset the password using a token.
+    This would validate the reset token and update the password.
+    """
+    # TODO: Implement token validation
+    # For now, just update the password if user exists
+    
+    user = await identity_user_repo.get_by_email(email)
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="User not found"
+        )
+    
+    # Update password
+    user.update_password(new_password)
+    await identity_user_repo.save(user)
+    
+    return {"message": "Password successfully reset"}

@@ -3,6 +3,9 @@ import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {BehaviorSubject, tap, Observable, map} from 'rxjs';
 import {jwtDecode, JwtPayload} from 'jwt-decode';
 
+interface CustomTokenPayload extends JwtPayload {
+  email?: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +15,7 @@ export class AuthService {
 
   private loggedIn = new BehaviorSubject<boolean>(this.getLoginStatus());
   isLoggedIn$ = this.loggedIn.asObservable();
-  private tokenPayload = new BehaviorSubject<JwtPayload | null>(this.getTokenPayload());
+  private tokenPayload = new BehaviorSubject<CustomTokenPayload | null>(this.getTokenPayload());
   tokenPayload$ = this.tokenPayload.asObservable();
 
   login(credentials: { email: string, password: string }) {
@@ -60,6 +63,38 @@ export class AuthService {
     this.loggedIn.next(false);
   }
 
+  forgotPassword(email: string): Observable<{ message: string, email: string }> {
+    const form = new HttpParams()
+      .set('email', email);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http.post<{ message: string, email: string }>(
+      '/api/identity/forgot-password',
+      form.toString(),
+      { headers: headers }
+    );
+  }
+
+  resetPassword(email: string, newPassword: string, resetToken: string): Observable<{ message: string }> {
+    const form = new HttpParams()
+      .set('email', email)
+      .set('new_password', newPassword)
+      .set('reset_token', resetToken);
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+    });
+
+    return this.http.post<{ message: string }>(
+      '/api/identity/reset-password',
+      form.toString(),
+      { headers: headers }
+    );
+  }
+
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
@@ -70,17 +105,21 @@ export class AuthService {
     this.tokenPayload.next(this.getTokenPayload());
   }
 
-  private getTokenPayload(): JwtPayload | null {
+  private getTokenPayload(): CustomTokenPayload | null {
     const token = this.getToken();
     if (!token) return null;
-    const payload = jwtDecode(token);
-    console.log(Date.now())
-    console.log(payload.exp);
-    return payload;
+    try {
+      const payload = jwtDecode<CustomTokenPayload>(token);
+      return payload;
+    } catch (e) {
+      // Invalid token
+      return null;
+    }
   }
 
   private getLoginStatus() {
     const payload = this.getTokenPayload();
-    return !!payload && !!payload.exp && Date.now() / 1000 < payload.exp;
+    // payload.exp is in seconds, Date.now() is in milliseconds
+    return !!payload && !!payload.exp && Math.floor(Date.now() / 1000) < payload.exp;
   }
 }

@@ -1,25 +1,48 @@
 <div class="questionnaire-container">
   <div class="questionnaire-card">
 
+    <!-- Header with Logo/Title -->
+    <div class="header-section">
+      <div class="header-content">
+        <h1 class="main-title">Student Profile Setup</h1>
+        <p class="subtitle">Help us personalize your academic experience</p>
+      </div>
+    </div>
+
     <!-- Progress Bar -->
     <div class="progress-section">
+      <div class="progress-info">
+        <span class="progress-label">Step {{ currentStep }} of {{ totalSteps }}</span>
+        <span class="progress-percentage">{{ (currentStep / totalSteps * 100).toFixed(0) }}%</span>
+      </div>
       <div class="progress-bar">
         <div [style.width.%]="(currentStep / totalSteps) * 100" class="progress-fill"></div>
       </div>
-      <div class="step-numbers">
+      <div class="step-indicators">
         @for (step of [1, 2, 3]; track step) {
-          <span (click)="goToStep(step)"
-                [class.active]="step <= currentStep"
-                [class.current]="step === currentStep"
-                class="step-num">
-            {{ step }}
-          </span>
+          <div (click)="goToStep(step)"
+               [class.completed]="step < currentStep"
+               [class.active]="step === currentStep"
+               [class.upcoming]="step > currentStep"
+               class="step-indicator">
+            <div class="step-circle">
+              @if (step < currentStep) {
+                <i class="pi pi-check"></i>
+              } @else {
+                <span>{{ step }}</span>
+              }
+            </div>
+            <span class="step-label">{{ getStepLabel(step) }}</span>
+          </div>
         }
       </div>
     </div>
 
-    <!-- Title -->
-    <h2>{{ getStepTitle() }}</h2>
+    <!-- Main Content Title -->
+    <div class="section-header">
+      <h2 class="section-title">{{ getStepTitle() }}</h2>
+      <p class="section-description">{{ getStepDescription() }}</p>
+    </div>
 
     <!-- Scrollable Content Area -->
     <div class="content-area">
@@ -28,21 +51,45 @@
         <!-- Step 1: Personal Information -->
         @if (currentStep === 1) {
           <div class="step-section">
-            <div class="form-group">
-              <label for="fullName">Full Name *</label>
-              <input class="input-field" formControlName="fullName" id="fullName" placeholder="Enter your full name"/>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="fullName">
+                  <i class="pi pi-user"></i>
+                  Full Name
+                  <span class="required">*</span>
+                </label>
+                <input class="input-field" formControlName="fullName" id="fullName" placeholder="Enter your full name"/>
+              </div>
+
+              <div class="form-group">
+                <label for="graduationYear">
+                  <i class="pi pi-calendar"></i>
+                  Expected Graduation Year
+                  <span class="required">*</span>
+                </label>
+                <input class="input-field" formControlName="graduationYear" id="graduationYear" max="2030"
+                       min="2024" placeholder="e.g., 2026" type="number"/>
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="graduationYear">Expected Graduation Year *</label>
-              <input class="input-field" formControlName="graduationYear" id="graduationYear" max="2030"
-                     min="2024" placeholder="e.g., 2026" type="number"/>
-            </div>
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="major">
+                  <i class="pi pi-book"></i>
+                  Major
+                  <span class="required">*</span>
+                </label>
+                <p-select [options]="majors" formControlName="major" id="major" placeholder="Select your major"/>
+              </div>
 
-            <div class="form-group">
-              <label for="major">Major *</label>
-              <p-select [options]="degrees" formControlName="major" id="major" optionLabel="displayLabel"
-                        placeholder="Select your major"/>
+              <div class="form-group">
+                <label for="minor">
+                  <i class="pi pi-bookmark"></i>
+                  Minor
+                  <span class="optional">(Optional)</span>
+                </label>
+                <p-select [options]="minors" formControlName="minor" id="minor" placeholder="Select your minor"/>
+              </div>
             </div>
           </div>
         }
@@ -50,40 +97,86 @@
         <!-- Step 2: Course Selection -->
         @if (currentStep === 2) {
           <div class="step-section">
-            <p class="description">Select courses you've already taken</p>
-            <p-multi-select [options]="courses" fluid
-                            formControlName="completedCourses" optionLabel="courseCode" placeholder="Select courses">
-              <ng-template #item let-course>
-                <div><strong>{{ course.courseCode }}</strong> - ({{ course.title }})</div>
-              </ng-template>
-            </p-multi-select>
+            <div class="info-card">
+              <i class="pi pi-info-circle"></i>
+              <div>
+                <strong>Course Selection</strong>
+                <p>Select all courses you have already completed. This helps us recommend the best path forward.</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>
+                <i class="pi pi-list"></i>
+                Completed Courses
+              </label>
+              <p-multi-select [options]="courses" fluid
+                              formControlName="completedCourses" optionLabel="courseCode" placeholder="Search and select courses">
+                <ng-template #item let-course>
+                  <div class="course-option">
+                    <strong>{{ course.courseCode }}</strong>
+                    <span class="course-title">{{ course.title }}</span>
+                  </div>
+                </ng-template>
+              </p-multi-select>
+              <div class="selection-count">
+                <i class="pi pi-check-circle"></i>
+                {{ questionnaireForm.get('completedCourses')?.value?.length || 0 }} course(s) selected
+              </div>
+            </div>
           </div>
         }
 
         <!-- Step 3: Review -->
         @if (currentStep === 3) {
           <div class="step-section">
-            <h4 style="color: #1e3a8a; margin-bottom: 24px;">Review Your Information</h4>
-            <div class="review-list">
-              <div class="review-item">
-                <strong>Name:</strong>
-                <span>{{ questionnaireForm.get('fullName')?.value || 'Not provided' }}</span>
-              </div>
-              <div class="review-item">
-                <strong>Graduation Year:</strong>
-                <span>{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
-              </div>
-              <div class="review-item">
-                <strong>Major:</strong> <span>{{ questionnaireForm.get('major')?.value || 'Not provided' }}</span>
-              </div>
-              @if (questionnaireForm.get('minor')?.value) {
-                <div class="review-item">
-                  <strong>Minor:</strong> <span>{{ questionnaireForm.get('minor')?.value }}</span>
+            <div class="review-container">
+              <div class="review-card">
+                <div class="review-header">
+                  <i class="pi pi-user"></i>
+                  <h3>Personal Information</h3>
                 </div>
-              }
-              <div class="review-item">
-                <strong>Prior Courses:</strong>
-                <span>{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }} selected</span>
+                <div class="review-content">
+                  <div class="review-item">
+                    <span class="review-label">Full Name</span>
+                    <span class="review-value">{{ questionnaireForm.get('fullName')?.value || 'Not provided' }}</span>
+                  </div>
+                  <div class="review-item">
+                    <span class="review-label">Graduation Year</span>
+                    <span class="review-value">{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-header">
+                  <i class="pi pi-book"></i>
+                  <h3>Academic Program</h3>
+                </div>
+                <div class="review-content">
+                  <div class="review-item">
+                    <span class="review-label">Major</span>
+                    <span class="review-value">{{ questionnaireForm.get('major')?.value || 'Not provided' }}</span>
+                  </div>
+                  @if (questionnaireForm.get('minor')?.value) {
+                    <div class="review-item">
+                      <span class="review-label">Minor</span>
+                      <span class="review-value">{{ questionnaireForm.get('minor')?.value }}</span>
+                    </div>
+                  }
+                </div>
+              </div>
+
+              <div class="review-card">
+                <div class="review-header">
+                  <i class="pi pi-list"></i>
+                  <h3>Completed Courses</h3>
+                </div>
+                <div class="review-content">
+                  <div class="review-item">
+                    <span class="review-label">Total Courses</span>
+                    <span class="review-value highlight">{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }} completed</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -93,17 +186,25 @@
 
     <!-- Fixed Navigation at Bottom -->
     <div class="navigation">
-      @if (currentStep > 1) {
-        <button (click)="previousStep()" class="btn-secondary" type="button">Previous</button>
-      }
+      <div class="nav-left">
+        @if (currentStep > 1) {
+          <button (click)="previousStep()" class="btn-secondary" type="button">
+            <i class="pi pi-arrow-left"></i>
+            Previous
+          </button>
+        }
+      </div>
       <div class="nav-right">
         @if (currentStep < totalSteps) {
-          <button (click)="nextStep()" [disabled]="!isCurrentStepValid()" class="btn-primary" type="button">Next
+          <button (click)="nextStep()" [disabled]="!isCurrentStepValid()" class="btn-primary" type="button">
+            Next Step
+            <i class="pi pi-arrow-right"></i>
           </button>
         }
         @if (currentStep === totalSteps) {
-          <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary" type="submit">Complete
-            Profile
+          <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary btn-complete" type="submit">
+            <i class="pi pi-check"></i>
+            Complete Profile
           </button>
         }
       </div>

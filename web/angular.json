@@ -21,8 +21,7 @@
                 "input": "public"
               }
             ],
-            "styles": ["src/styles.css"],
-            "scripts": ["src/app/courses-page/courses-page.js"]
+            "styles": ["src/styles.css"]
           },
           "configurations": {
             "production": {

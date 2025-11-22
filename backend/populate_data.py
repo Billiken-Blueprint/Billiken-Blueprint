@@ -139,6 +139,8 @@ async def get_courses_with_codes():
                     )
                 )
 
+async def populate_course_prereqs():
+    
 
 async def main():
     # await get_degree_tracks()

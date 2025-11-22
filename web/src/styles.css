@@ -71,3 +71,99 @@ app-root {
   background-color: rgba(255, 255, 255, 0.3) !important;
   border-color: rgba(255, 255, 255, 0.4) !important;
 }
+
+/* PrimeNG Menu Dropdown Styles for Top Banner */
+/* Override PrimeNG default menu styles globally */
+.p-menubar {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+/* Root menu button (Email button in header) */
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+  color: white !important;
+  font-weight: 600 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1.5rem !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Dropdown submenu panel */
+.p-menubar .p-menubar-submenu,
+.p-menubar-submenu {
+  background: white !important;
+  border: 1px solid rgba(59, 130, 246, 0.2) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
+  padding: 0.5rem !important;
+  margin-top: 0.5rem !important;
+  min-width: 220px !important;
+}
+
+/* Submenu items (View Profile, Log out) */
+.p-menubar .p-menubar-submenu .p-menuitem-link,
+.p-menubar-submenu .p-menuitem-link {
+  color: #1e3a8a !important;
+  padding: 0.875rem 1rem !important;
+  border-radius: 8px !important;
+  transition: all 0.2s ease !important;
+  font-weight: 500 !important;
+  background: transparent !important;
+}
+
+.p-menubar .p-menubar-submenu .p-menuitem-link:hover,
+.p-menubar-submenu .p-menuitem-link:hover {
+  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%) !important;
+  color: #1e40af !important;
+  transform: translateX(4px) !important;
+}
+
+/* Icons in submenu */
+.p-menubar .p-menubar-submenu .p-menuitem-icon,
+.p-menubar-submenu .p-menuitem-icon {
+  color: #1e3a8a !important;
+  margin-right: 0.75rem !important;
+  font-size: 1.1rem !important;
+}
+
+.p-menubar .p-menubar-submenu .p-menuitem-link:hover .p-menuitem-icon,
+.p-menubar-submenu .p-menuitem-link:hover .p-menuitem-icon {
+  color: #2563eb !important;
+}
+
+/* Submenu text label */
+.p-menubar .p-menubar-submenu .p-menuitem-text,
+.p-menubar-submenu .p-menuitem-text {
+  color: #1e3a8a !important;
+  font-size: 0.95rem !important;
+  font-weight: 500 !important;
+}
+
+/* Dropdown arrow icon */
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link .p-submenu-icon {
+  color: white !important;
+  margin-left: 0.5rem !important;
+}
+
+/* Separator styling */
+.p-menubar .p-menubar-separator,
+.p-menubar-separator {
+  margin: 0.5rem 0 !important;
+  background: rgba(59, 130, 246, 0.2) !important;
+  height: 1px !important;
+}
+
+/* Ensure overlay panel appears correctly */
+.p-menubar-root-list .p-submenu-list {
+  z-index: 1000 !important;
+}

@@ -18,3 +18,4 @@ class Student:
     college: str
     graduation_year: int
     completed_course_ids: list[int]
+    saved_course_codes: list[str]

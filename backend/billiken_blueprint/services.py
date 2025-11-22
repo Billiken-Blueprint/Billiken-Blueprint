@@ -3,6 +3,7 @@ from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
 
 from billiken_blueprint.domain import degree, rating
 from billiken_blueprint.repositories import (
+    course_requirements_repository,
     degree_repository,
     identity_user_repository,
     mc_course_repository,
@@ -36,3 +37,6 @@ degree_requirements_repository = (
 )
 mccourse_repository = mc_course_repository.MCCourseRepository(async_sessionmaker)
 section_repository = section_repository.SectionRepository(async_sessionmaker)
+course_requirements_repository = (
+    course_requirements_repository.CourseRequirementsRepository()
+)

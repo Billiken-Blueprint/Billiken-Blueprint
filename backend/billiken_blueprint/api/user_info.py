@@ -1,4 +1,4 @@
-from os import major, minor
+from os import minor
 from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
@@ -7,7 +7,6 @@ from pydantic import BaseModel
 
 from billiken_blueprint import config, identity
 from billiken_blueprint.dependencies import AuthToken, IdentityUserRepo, StudentRepo
-from billiken_blueprint.domain import degree
 from billiken_blueprint.domain.student import Student
 
 
@@ -20,18 +19,14 @@ credentials_exception = HTTPException(
 )
 
 
-class Degree(BaseModel):
-    major: str
-    degree_type: str
-    college: str
-
-
 class UserInfoBody(BaseModel):
     name: str
     graduation_year: int
-    major: Degree
+    major: str
+    minor: Optional[str]
     degree_ids: list[int]
     completed_course_ids: list[int]
+    saved_course_codes: Optional[list[str]] = None
 
 
 @router.post("")
@@ -57,9 +52,9 @@ async def set_user_info(
         name=user_info.name,
         degree_ids=user_info.degree_ids,
         completed_course_ids=user_info.completed_course_ids,
-        major_code=user_info.major.major,
-        degree_type=user_info.major.degree_type,
-        college=user_info.major.college,
+        saved_course_codes=user_info.saved_course_codes or [],
+        major=user_info.major,
+        minor=user_info.minor,
         graduation_year=user_info.graduation_year,
     )
     student = await student_repo.save(student)
@@ -103,10 +98,8 @@ async def get_user_info(
         name=student.name,
         degreeIds=student.degree_ids,
         completedCourseIds=student.completed_course_ids,
-        major=dict(
-            major=student.major_code,
-            degreeType=student.degree_type,
-            college=student.college,
-        ),
-        graduationYear=student.graduation_year,
+        savedCourseCodes=student.saved_course_codes,
+        major=student.major,
+        minor=student.minor,
+        graduation_year=student.graduation_year,
     )

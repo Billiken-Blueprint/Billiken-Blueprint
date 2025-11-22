@@ -11,7 +11,7 @@ from billiken_blueprint.identity.identity_user import IdentityUser
 def registered_user(app_client):
     """Fixture to register a user and return the response."""
     register_response = app_client.post(
-        "/identity/register",
+        "/api/identity/register",
         headers={"Content-Type": "application/x-www-form-urlencoded"},
         data={
             "email": "testemail@example.com",
@@ -40,11 +40,11 @@ async def test_user_info_endpoint_saves_data(
     )
 
     post_response = app_client.post(
-        "user_info/", json=user_info_payload, headers=auth_headers
+        "/api/user_info/", json=user_info_payload, headers=auth_headers
     )
 
     assert post_response.is_success
-    get_response = app_client.get("user_info/", headers=auth_headers)
+    get_response = app_client.get("/api/user_info/", headers=auth_headers)
     assert get_response.is_success
     data = get_response.json()
     assert data["name"] == "Test User"
@@ -60,7 +60,7 @@ async def test_user_info_get_404_for_no_student(
     token = registered_user.json()["access_token"]
     auth_headers = {"Authorization": f"Bearer {token}"}
 
-    get_response = app_client.get("user_info/", headers=auth_headers)
+    get_response = app_client.get("/api/user_info/", headers=auth_headers)
     assert get_response.status_code == 404
 
 
@@ -84,7 +84,7 @@ async def test_user_info_upsert_updates_existing_data(
     )
 
     post_response = app_client.post(
-        "user_info/", json=initial_payload, headers=auth_headers
+        "/api/user_info/", json=initial_payload, headers=auth_headers
     )
     assert post_response.is_success
 
@@ -99,12 +99,12 @@ async def test_user_info_upsert_updates_existing_data(
     )
 
     upsert_response = app_client.post(
-        "user_info/", json=updated_payload, headers=auth_headers
+        "/api/user_info/", json=updated_payload, headers=auth_headers
     )
     assert upsert_response.is_success
 
     # Verify the data was updated
-    get_response = app_client.get("user_info/", headers=auth_headers)
+    get_response = app_client.get("/api/user_info/", headers=auth_headers)
     assert get_response.is_success
     data = get_response.json()
     assert data["name"] == "Test User Updated"

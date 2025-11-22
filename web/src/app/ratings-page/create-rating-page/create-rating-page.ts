@@ -1,33 +1,37 @@
 import {Component, inject, OnInit, signal} from '@angular/core';
-import {IftaLabel} from 'primeng/iftalabel';
 import {Select} from 'primeng/select';
-import {Instructor, InstructorsService} from '../../services/instructors-service/instructors-service';
-import {Course, CoursesService} from '../../services/courses-service/courses-service';
+import {Instructor, InstructorsService} from '../../instructors-service/instructors-service';
+import {Course, CoursesService} from '../../courses-service/courses-service';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
-import {ButtonDirective} from 'primeng/button';
-import {RatingsService} from '../../services/ratings-service/ratings-service';
+import {RatingsService} from '../../ratings-service/ratings-service';
+import {Router} from '@angular/router';
+import {CommonModule} from '@angular/common';
 
 @Component({
   selector: 'app-create-rating-page',
   imports: [
-    IftaLabel,
     Select,
     ReactiveFormsModule,
     Textarea,
     Rating,
-    ButtonDirective
+    CommonModule
   ],
   templateUrl: './create-rating-page.html',
-  styleUrl: './create-rating-page.css'
+  styleUrl: './create-rating-page.css',
+  host: {
+    class: 'block w-full min-h-screen'
+  }
 })
 export class CreateRatingPage implements OnInit {
   instructors = signal<Instructor[]>([]);
   courses = signal<FilterableCourse[]>([]);
+  errorMessage = signal<string | null>(null);
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private formBuilder = inject(FormBuilder);
+  private router = inject(Router);
   form = this.formBuilder.group({
     instructor: new FormControl<Instructor | null | undefined>(null, []),
     course: new FormControl<Course | null | undefined>(null, []),
@@ -46,14 +50,52 @@ export class CreateRatingPage implements OnInit {
       return;
     }
 
+    this.errorMessage.set(null);
     const form = this.form.value;
+    let completedRequests = 0;
+    let totalRequests = 0;
+    let hasError = false;
+
+    if (form.instructor && form.instructorRating) {
+      totalRequests++;
+    }
+    if (form.course && form.courseRating) {
+      totalRequests++;
+    }
+    if (form.instructor && form.course && form.bothRating) {
+      totalRequests++;
+    }
+
+    const checkComplete = () => {
+      completedRequests++;
+      if (completedRequests === totalRequests) {
+        if (!hasError) {
+          this.router.navigate(['/ratings']);
+        }
+      }
+    };
+
     if (form.instructor && form.instructorRating) {
       this.ratingsService.createRating({
         instructorId: form.instructor.id.toString(),
         courseId: undefined,
         rating: form.instructorRating,
         description: form.instructorDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: (error) => {
+          console.error('Error creating instructor rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
+      });
     }
 
     if (form.course && form.courseRating) {
@@ -62,7 +104,21 @@ export class CreateRatingPage implements OnInit {
         courseId: form.course.id.toString(),
         rating: form.courseRating,
         description: form.courseDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: (error) => {
+          console.error('Error creating course rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
+      });
     }
 
     if (form.instructor && form.course && form.bothRating) {
@@ -71,7 +127,21 @@ export class CreateRatingPage implements OnInit {
         courseId: form.course.id.toString(),
         rating: form.bothRating,
         description: form.bothDescription ?? ""
-      }).subscribe();
+      }).subscribe({
+        next: () => checkComplete(),
+        error: (error) => {
+          console.error('Error creating combined rating:', error);
+          hasError = true;
+          if (error.status === 400) {
+            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+          } else if (error.status === 401) {
+            this.errorMessage.set('Please log in to create a rating.');
+          } else {
+            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+          }
+          checkComplete();
+        }
+      });
     }
   }
 
