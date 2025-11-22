@@ -9,6 +9,7 @@ from billiken_blueprint.repositories import (
     course_section_repository,
     course_repository,
     rating_repository,
+    rmp_review_repository,
 )
 
 # SQLAlchemy
@@ -26,3 +27,4 @@ course_section_repository = course_section_repository.CourseSectionRepository(
 )
 course_repository = course_repository.CourseRepository(async_sessionmaker)
 rating_repository = rating_repository.RatingRepository(async_sessionmaker)
+rmp_review_repository = rmp_review_repository.RmpReviewRepository(async_sessionmaker)

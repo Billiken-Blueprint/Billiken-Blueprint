@@ -2,6 +2,8 @@ import { Component, ViewEncapsulation, signal, OnInit, inject } from '@angular/c
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { UserInfoService } from '../user-info-service/user-info-service';
+import { InstructorsService, Instructor as BackendInstructor } from '../instructors-service/instructors-service';
+import { InstructorReviewsModal } from '../instructor-reviews-modal/instructor-reviews-modal';
 
 interface SimpleCourse {
   code: string;
@@ -19,6 +21,7 @@ interface Instructor {
   email?: string;
   office?: string;
   rating?: Rating;
+  id?: number; // Optional instructor ID from backend
 }
 
 interface InfoCourse {
@@ -183,7 +186,7 @@ const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
 @Component({
   selector: 'app-course-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, InstructorReviewsModal],
   templateUrl: './course-page.html',
   styleUrls: ['./course-page.css'],
   encapsulation: ViewEncapsulation.None, // let body/html styles apply globally
@@ -199,6 +202,13 @@ export class CoursePage implements OnInit {
 
   savedCourses: SimpleCourse[] = [];
   private userInfoService = inject(UserInfoService);
+  private instructorsService = inject(InstructorsService);
+  
+  // Modal state
+  selectedInstructorName = signal<string>('');
+  selectedInstructorId = signal<number | null>(null);
+  showReviewsModal = signal<boolean>(false);
+  allInstructors = signal<BackendInstructor[]>([]);
 
   readonly courseGroups: { key: GroupKey; label: string }[] = [
     { key: 'Core_Intro', label: 'Intro to CS' },
@@ -234,6 +244,70 @@ export class CoursePage implements OnInit {
 
   ngOnInit(): void {
     this.loadSavedCourses();
+    this.loadInstructors();
+  }
+
+  loadInstructors(): void {
+    this.instructorsService.getInstructors().subscribe({
+      next: (instructors) => {
+        this.allInstructors.set(instructors);
+        // Match instructor IDs to course instructors by name
+        this.matchInstructorIds();
+      },
+      error: (err) => {
+        console.error('Error loading instructors:', err);
+      }
+    });
+  }
+
+  matchInstructorIds(): void {
+    // Update course instructors with IDs from backend
+    const instructors = this.courses();
+    const allInstructors = this.allInstructors();
+    const updated = instructors.map(course => {
+      if (course.instructors) {
+        const updatedInstructors = course.instructors.map(inst => {
+          const matched = allInstructors.find(ai => 
+            ai.name.toLowerCase() === inst.name.toLowerCase()
+          );
+          return { ...inst, id: matched?.id ?? undefined };
+        });
+        return { ...course, instructors: updatedInstructors };
+      }
+      return course;
+    });
+    this.courses.set(updated);
+  }
+
+  hasInstructorReviews(inst: Instructor): boolean {
+    if (inst.id) return true;
+    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
+  }
+
+  openReviewsModal(instructor: Instructor): void {
+    if (instructor.id) {
+      this.selectedInstructorName.set(instructor.name);
+      this.selectedInstructorId.set(instructor.id);
+      this.showReviewsModal.set(true);
+    } else {
+      // Try to find instructor ID by name
+      const matched = this.allInstructors().find(ai => 
+        ai.name.toLowerCase() === instructor.name.toLowerCase()
+      );
+      if (matched) {
+        this.selectedInstructorName.set(instructor.name);
+        this.selectedInstructorId.set(matched.id ?? null);
+        this.showReviewsModal.set(true);
+      } else {
+        console.warn('Instructor ID not found for:', instructor.name);
+      }
+    }
+  }
+
+  closeReviewsModal(): void {
+    this.showReviewsModal.set(false);
+    this.selectedInstructorName.set('');
+    this.selectedInstructorId.set(null);
   }
 
   loadSavedCourses(): void {
