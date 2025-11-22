@@ -19,7 +19,7 @@ RUN python import_rmp_ratings.py || echo "RMP import skipped (file not found or 
 
 FROM deps AS dev
 COPY --from=seeding /app/data /app/data
-COPY --exclude=./backend/billiken_blueprint ./backend/ .
+COPY ./backend/ .
 EXPOSE 8000
 VOLUME [ "/app/billiken_blueprint" ]
 CMD [ "fastapi", "dev", "server.py", "--host", "0.0.0.0" ]
