@@ -2,7 +2,7 @@ FROM ghcr.io/astral-sh/uv:python3.14-alpine AS base
 
 FROM base AS deps
 WORKDIR /app
-COPY ./pyproject.toml ./uv.lock ./
+COPY ./backend/pyproject.toml ./backend/uv.lock ./
 RUN uv sync --locked
 ENV PATH="/app/.venv/bin:${PATH}"
 
