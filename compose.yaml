@@ -12,8 +12,8 @@ services:
     command: ng serve --configuration=dev-compose --host 0.0.0.0
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: ./backend/Dockerfile
       target: dev
     ports:
       - "8000:8000"
