@@ -14,7 +14,7 @@
           <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
             Rate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Professors</span>
           </h1>
-          <p class="text-blue-200 text-lg font-inter">Help future Billikens make informed decisions</p>
+          <p class="text-blue-200 text-lg font-inter">View and rate Computer Science and Math professors</p>
         </div>
         <a href="ratings/create" 
            class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
@@ -25,7 +25,20 @@
 
       <!-- Search & Filter Bar -->
       <div class="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+          <div>
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Department</label>
+            <div class="relative">
+              <i class="pi pi-building absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
+              <select (change)="selectDepartment($any($event.target).value)"
+                      [value]="selectedDepartment()"
+                      class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
+                <option value="all">All Departments</option>
+                <option value="CSCI">Computer Science</option>
+                <option value="MATH">Mathematics</option>
+              </select>
+            </div>
+          </div>
           <div>
             <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Professor</label>
             <div class="relative">
@@ -33,7 +46,7 @@
               <select (change)="selectInstructorById($any($event.target).value)"
                       class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
                 <option value="">All Professors</option>
-                @for (instructor of instructors(); track instructor.id) {
+                @for (instructor of filteredInstructors(); track instructor.id) {
                   <option [value]="instructor.id">{{ instructor.name }}</option>
                 }
               </select>
@@ -70,9 +83,11 @@
             <span class="font-semibold">{{ ratings().length }} Reviews Found</span>
           </div>
           @if (selectedInstructor()) {
-            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30">
+            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30 cursor-pointer hover:bg-yellow-400/30 transition-colors"
+                 (click)="selectedInstructor() && openReviewsPage(selectedInstructor()!.id)">
               <i class="pi pi-user text-yellow-300"></i>
               <span class="text-yellow-300 text-sm font-semibold">{{ selectedInstructor()?.name }}</span>
+              <i class="pi pi-external-link text-yellow-300 text-xs ml-1"></i>
             </div>
             @if (getCombinedRating(selectedInstructor()?.id ?? null); as combined) {
               <div class="flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 px-4 py-2 rounded-xl border border-yellow-400/30">
@@ -95,6 +110,12 @@
             <div class="flex items-center gap-2 bg-blue-400/20 px-3 py-1 rounded-full border border-blue-400/30">
               <i class="pi pi-book text-blue-300"></i>
               <span class="text-blue-300 text-sm font-semibold">{{ selectedCourse()?.courseCode }}</span>
+            </div>
+          }
+          @if (selectedDepartment() !== 'all') {
+            <div class="flex items-center gap-2 bg-green-400/20 px-3 py-1 rounded-full border border-green-400/30">
+              <i class="pi pi-building text-green-300"></i>
+              <span class="text-green-300 text-sm font-semibold">{{ selectedDepartment() }}</span>
             </div>
           }
         </div>
@@ -136,7 +157,10 @@
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <h4 class="text-white font-bold text-lg font-inter">{{ rating.instructorName || 'Unknown Instructor' }}</h4>
+                        <h4 class="text-white font-bold text-lg font-inter cursor-pointer hover:underline"
+                            (click)="rating.instructorId && openReviewsPage(rating.instructorId)">
+                          {{ rating.instructorName || 'Unknown Instructor' }}
+                        </h4>
                         @if (rating.isRmpRating) {
                           <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
                             RMP

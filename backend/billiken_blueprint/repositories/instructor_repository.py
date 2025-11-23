@@ -25,6 +25,7 @@ class DBInstructor(Base):
     rmp_rating: Mapped[Optional[float]] = mapped_column(nullable=True)
     rmp_num_ratings: Mapped[Optional[int]] = mapped_column(nullable=True)
     rmp_url: Mapped[Optional[str]] = mapped_column(nullable=True)
+    department: Mapped[Optional[str]] = mapped_column(nullable=True)
     sections: Mapped[list["DBCourseSection"]] = relationship(
         secondary=instructor_sections_association,
         back_populates="instructors",
@@ -44,6 +45,7 @@ class InstructorRepository:
             rmp_rating=instructor.rmp_rating,
             rmp_num_ratings=instructor.rmp_num_ratings,
             rmp_url=instructor.rmp_url,
+            department=instructor.department,
         )
         conflict_stmt = insert_stmt.on_conflict_do_update(
             index_elements=[DBInstructor.id],
@@ -52,6 +54,7 @@ class InstructorRepository:
                 rmp_rating=insert_stmt.excluded.rmp_rating,
                 rmp_num_ratings=insert_stmt.excluded.rmp_num_ratings,
                 rmp_url=insert_stmt.excluded.rmp_url,
+                department=insert_stmt.excluded.department,
             ),
         ).returning(DBInstructor)
 
@@ -76,6 +79,7 @@ class InstructorRepository:
                 rmp_rating=getattr(db_instructor, 'rmp_rating', None),
                 rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
                 rmp_url=getattr(db_instructor, 'rmp_url', None),
+                department=getattr(db_instructor, 'department', None),
             )
             for db_instructor in db_instructors
         ]
@@ -90,6 +94,7 @@ class InstructorRepository:
                     rmp_rating=getattr(db_instructor, 'rmp_rating', None),
                     rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
                     rmp_url=getattr(db_instructor, 'rmp_url', None),
+                    department=getattr(db_instructor, 'department', None),
                 )
         return None
 
@@ -107,5 +112,6 @@ class InstructorRepository:
                 rmp_rating=getattr(db_instructor, 'rmp_rating', None),
                 rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
                 rmp_url=getattr(db_instructor, 'rmp_url', None),
+                department=getattr(db_instructor, 'department', None),
             )
         return None

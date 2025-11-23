@@ -10,6 +10,7 @@ import {CreateRatingPage} from './ratings-page/create-rating-page/create-rating-
 import { CoursePage } from './course/course-page';
 import {SchedulingPage} from './scheduling-page/scheduling-page';
 
+import {InstructorReviewsPage} from './instructor-reviews-page/instructor-reviews-page';
 
 export const routes: Routes = [
   {
@@ -56,5 +57,9 @@ export const routes: Routes = [
   {
     path: 'schedule',
     component: SchedulingPage
+  },
+  {
+    path: 'instructors/:id/reviews',
+    component: InstructorReviewsPage
   }
 ];

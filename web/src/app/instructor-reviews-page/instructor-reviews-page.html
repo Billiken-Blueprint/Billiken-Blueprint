@@ -1,0 +1,157 @@
+<div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
+  
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+    <div class="absolute w-96 h-96 bg-purple-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse"></div>
+  </div>
+
+  <!-- Header Section -->
+  <div class="relative z-10 px-8 py-8">
+    <div class="max-w-7xl mx-auto">
+      <div class="flex items-center gap-4 mb-8">
+        <button (click)="goBack()" 
+                class="text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2">
+          <i class="pi pi-arrow-left"></i>
+          <span class="font-inter">Back to Ratings</span>
+        </button>
+      </div>
+      
+      <div class="mb-8">
+        <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
+          Reviews for <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">{{ instructorName() || 'Loading...' }}</span>
+        </h1>
+        <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-4"></div>
+        <p class="text-blue-200 text-lg font-inter">Individual RateMyProfessor reviews with course information</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reviews Content -->
+  <div class="relative z-10 flex-grow px-8 pb-8">
+    <div class="max-w-7xl mx-auto">
+      @if (loading()) {
+        <div class="text-center py-12">
+          <i class="pi pi-spin pi-spinner text-6xl text-yellow-400 mb-4"></i>
+          <p class="text-slate-300 font-inter text-lg">Loading reviews...</p>
+        </div>
+      } @else if (error()) {
+        <div class="bg-gradient-to-br from-red-900/20 to-red-800/10 backdrop-blur-xl rounded-2xl p-12 border border-red-400/20 text-center">
+          <i class="pi pi-exclamation-triangle text-6xl text-red-400 mb-4"></i>
+          <h3 class="text-2xl font-bold text-white mb-2 font-inter">Error Loading Reviews</h3>
+          <p class="text-red-200 font-inter mb-6">{{ error() }}</p>
+          <button (click)="goBack()" 
+                  class="bg-red-500/20 hover:bg-red-500/30 text-red-200 px-6 py-3 rounded-xl font-semibold font-inter border border-red-400/50 transition-all duration-300">
+            Go Back
+          </button>
+        </div>
+      } @else if (reviews().length === 0) {
+        <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+          <i class="pi pi-inbox text-6xl text-slate-400 mb-4"></i>
+          <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Reviews Available</h3>
+          <p class="text-blue-200 font-inter mb-6">There are no individual reviews available for this instructor.</p>
+          <button (click)="goBack()" 
+                  class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 px-6 py-3 rounded-xl font-semibold font-inter border border-blue-400/50 transition-all duration-300">
+            Go Back
+          </button>
+        </div>
+      } @else {
+        <div class="space-y-6">
+          @for (review of reviews(); track review.id) {
+            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-purple-400/50 shadow-lg hover:shadow-xl transition-all duration-300">
+              <!-- Review Header -->
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-grow">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                      <span class="text-white font-bold text-xl font-inter">{{ review.quality }}</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
+                          RMP
+                        </span>
+                        @if (review.course) {
+                          <span class="text-purple-300 text-sm font-inter font-semibold">{{ review.course }}</span>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="flex items-center gap-1">
+                    @for (star of [1,2,3,4,5]; track star) {
+                      <i class="pi text-sm" 
+                         [class.pi-star-fill]="star <= review.quality"
+                         [class.pi-star]="star > review.quality"
+                         [class.text-purple-400]="star <= review.quality"
+                         [class.text-slate-600]="star > review.quality"></i>
+                    }
+                  </div>
+                  <span class="text-purple-300 text-xs font-inter">{{ review.quality }}/5</span>
+                </div>
+              </div>
+
+              <!-- Review Content -->
+              <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
+                <p class="text-purple-100 font-inter leading-relaxed">{{ review.comment }}</p>
+              </div>
+
+              <!-- Review Metadata -->
+              <div class="flex flex-wrap items-center gap-4 text-sm">
+                @if (review.difficulty !== null) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-chart-line text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter">Difficulty:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.difficulty }}/5</span>
+                  </div>
+                }
+                @if (review.grade) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-star text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter">Grade:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.grade }}</span>
+                  </div>
+                }
+                @if (review.attendance) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-calendar-check text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter">Attendance:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.attendance }}</span>
+                  </div>
+                }
+                @if (review.wouldTakeAgain !== null) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi" [class.pi-check-circle]="review.wouldTakeAgain" [class.pi-times-circle]="!review.wouldTakeAgain" 
+                       [class.text-green-400]="review.wouldTakeAgain" [class.text-red-400]="!review.wouldTakeAgain" 
+                       class="text-xs"></i>
+                    <span class="text-slate-400 font-inter">Would Take Again:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.wouldTakeAgain ? 'Yes' : 'No' }}</span>
+                  </div>
+                }
+                @if (review.reviewDate) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-calendar text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter text-xs">{{ formatDate(review.reviewDate) }}</span>
+                  </div>
+                }
+              </div>
+
+              <!-- Tags -->
+              @if (review.tags && review.tags.length > 0) {
+                <div class="mt-4 flex flex-wrap gap-2">
+                  @for (tag of review.tags; track tag) {
+                    <span class="px-2 py-1 bg-purple-500/20 text-purple-200 text-xs rounded-full border border-purple-400/30">
+                      {{ tag }}
+                    </span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</div>
+

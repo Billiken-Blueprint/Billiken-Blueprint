@@ -22,6 +22,7 @@ from billiken_blueprint.repositories.identity_user_repository import (
 from billiken_blueprint.repositories.instructor_repository import InstructorRepository
 from billiken_blueprint.repositories.mc_course_repository import MCCourseRepository
 from billiken_blueprint.repositories.rating_repository import RatingRepository
+from billiken_blueprint.repositories.rmp_review_repository import RmpReviewRepository
 from billiken_blueprint.repositories.student_repository import StudentRepository
 from billiken_blueprint.repositories.section_repository import SectionRepository
 from billiken_blueprint.repositories.course_requirements_repository import (
@@ -74,6 +75,15 @@ def get_rating_repository():
     return services.rating_repository
 
 
+def get_rmp_review_repository():
+    """Get the RMP review repository instance.
+
+    This is the single source of truth for the RMP review repository dependency.
+    Override this in tests to use a test repository.
+    """
+    return services.rmp_review_repository
+
+
 def get_degree_repository():
     return services.degree_repository
 
@@ -82,8 +92,8 @@ def get_degree_requirements_repository():
     return services.degree_requirements_repository
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token")
-AuthToken = Annotated[str, Depends(oauth2_scheme)]
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token", auto_error=False)
+AuthToken = Annotated[Optional[str], Depends(oauth2_scheme)]
 
 
 def get_auth_payload(token: AuthToken):
@@ -164,6 +174,7 @@ StudentRepo = Annotated[StudentRepository, Depends(get_student_repository)]
 CourseRepo = Annotated[CourseRepository, Depends(get_course_repository)]
 InstructorRepo = Annotated[InstructorRepository, Depends(get_instructor_repository)]
 RatingRepo = Annotated[RatingRepository, Depends(get_rating_repository)]
+RmpReviewRepo = Annotated[RmpReviewRepository, Depends(get_rmp_review_repository)]
 DegreeRepo = Annotated[DegreeRepository, Depends(get_degree_repository)]
 DegreeRequirementsRepo = Annotated[
     DegreeRequirementsRepository, Depends(get_degree_requirements_repository)

@@ -3,6 +3,7 @@ import {CommonModule} from '@angular/common';
 import {Instructor, InstructorsService} from '../services/instructors-service/instructors-service';
 import {Course, CoursesService} from '../services/courses-service/courses-service';
 import {Rating, RatingsService} from '../services/ratings-service/ratings-service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-ratings-page',
@@ -21,19 +22,45 @@ export class RatingsPage implements OnInit {
   selectedInstructor = signal<Instructor | null>(null);
   courses = signal<Course[]>([]);
   selectedCourse = signal<Course | null>(null);
+  selectedDepartment = signal<string>('all'); // 'all', 'CSCI', 'MATH'
   ratings = signal<Rating[]>([]);
+  
+  // Get filtered instructors based on selected department
+  filteredInstructors = signal<Instructor[]>([]);
+  
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private ratingsService = inject(RatingsService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.instructorsService.getInstructors().subscribe(instructors => {
       this.instructors.set(instructors);
+      this.updateFilteredInstructors();
     });
     this.coursesService.getCourses().subscribe(courses => {
       this.courses.set(courses);
     });
     this.updateRatings();
+  }
+  
+  updateFilteredInstructors(): void {
+    const department = this.selectedDepartment();
+    let instructors: Instructor[];
+    if (department === 'all') {
+      instructors = this.instructors();
+    } else {
+      instructors = this.instructors().filter(inst => inst.department === department);
+    }
+    
+    // Sort by last name alphabetically
+    const sorted = [...instructors].sort((a, b) => {
+      const aLastName = a.name.split(/\s+/).pop() || '';
+      const bLastName = b.name.split(/\s+/).pop() || '';
+      return aLastName.localeCompare(bLastName);
+    });
+    
+    this.filteredInstructors.set(sorted);
   }
 
   selectInstructor(instructor: Instructor) {
@@ -45,7 +72,9 @@ export class RatingsPage implements OnInit {
     if (id === '') {
       this.selectedInstructor.set(null);
     } else {
-      const instructor = this.instructors().find(i => i.id.toString() === id);
+      // Use filtered instructors to ensure we only select from the current department filter
+      const instructor = this.filteredInstructors().find(i => i.id.toString() === id) ||
+                         this.instructors().find(i => i.id.toString() === id);
       if (instructor) {
         this.selectInstructor(instructor);
       }
@@ -68,9 +97,24 @@ export class RatingsPage implements OnInit {
     }
   }
 
+  selectDepartment(department: string) {
+    this.selectedDepartment.set(department);
+    this.updateFilteredInstructors();
+    // Clear selected instructor if it doesn't belong to the new department
+    if (this.selectedInstructor()) {
+      const deptInstructorIds = new Set(this.filteredInstructors().map(i => i.id));
+      if (!deptInstructorIds.has(this.selectedInstructor()!.id)) {
+        this.selectedInstructor.set(null);
+      }
+    }
+    this.updateRatings();
+  }
+
   clearFilters() {
     this.selectedInstructor.set(null);
     this.selectedCourse.set(null);
+    this.selectedDepartment.set('all');
+    this.updateFilteredInstructors();
     this.updateRatings();
   }
 
@@ -79,7 +123,40 @@ export class RatingsPage implements OnInit {
     const courseId = this.selectedCourse()?.id;
     this.ratingsService.getRatings(instructorId?.toString(), courseId?.toString()).subscribe({
       next: ratings => {
-        this.ratings.set(ratings);
+        // Filter by department if selected
+        let filteredRatings = ratings;
+        const department = this.selectedDepartment();
+        if (department !== 'all') {
+          // Get all courses for the selected department
+          const deptCourses = this.courses().filter(c => c.courseCode.startsWith(department));
+          const deptCourseIds = new Set(deptCourses.map(c => c.id));
+          
+          // Get instructor IDs for the selected department (only from cs_professors_with_reviews.json or math_professors_with_reviews.json)
+          const deptInstructorIds = new Set<number>();
+          this.instructors().forEach(inst => {
+            if (inst.department === department) {
+              deptInstructorIds.add(inst.id);
+            }
+          });
+          
+          filteredRatings = ratings.filter(rating => {
+            // RMP ratings: Only include if instructor belongs to the selected department
+            if (rating.isRmpRating) {
+              if (!rating.instructorId) return false;
+              return deptInstructorIds.has(rating.instructorId);
+            }
+            // User-generated ratings: filter by course code or course ID
+            if (rating.courseCode) {
+              return rating.courseCode.startsWith(department);
+            }
+            if (rating.courseId && deptCourseIds.has(rating.courseId)) {
+              return true;
+            }
+            // If no course code or course ID, exclude it
+            return false;
+          });
+        }
+        this.ratings.set(filteredRatings);
       },
       error: (error) => {
         console.error('Error loading ratings:', error);
@@ -131,5 +208,9 @@ export class RatingsPage implements OnInit {
     }
 
     return null;
+  }
+
+  openReviewsPage(instructorId: number) {
+    this.router.navigate(['/instructors', instructorId, 'reviews']);
   }
 }

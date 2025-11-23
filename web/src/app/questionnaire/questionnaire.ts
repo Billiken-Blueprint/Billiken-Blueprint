@@ -82,6 +82,10 @@ export class QuestionnairePage implements OnInit {
     }).subscribe({
       next: () => {
         this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('Error submitting profile:', error);
+        alert('Failed to save profile. Please try again. If the problem persists, please contact support.');
       }
     });
   }
