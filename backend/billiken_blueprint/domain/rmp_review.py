@@ -7,7 +7,7 @@ from datetime import datetime
 class RmpReview:
     id: Optional[int]
     instructor_id: int
-    course: Optional[str]  # Course code/name from RMP
+    course: Optional[str]  # Course code/name from RMP (kept for backward compatibility)
     quality: float  # Rating 1-5
     difficulty: Optional[float]  # Difficulty 1-5
     comment: str
@@ -16,4 +16,5 @@ class RmpReview:
     attendance: Optional[str]
     tags: list[str]
     review_date: Optional[datetime]
+    course_id: Optional[int] = None  # Foreign key to courses table
 

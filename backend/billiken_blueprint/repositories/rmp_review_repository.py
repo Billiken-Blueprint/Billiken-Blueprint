@@ -15,6 +15,7 @@ class DBRmpReview(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     instructor_id: Mapped[int] = mapped_column(nullable=False, index=True)
     course: Mapped[Optional[str]] = mapped_column(nullable=True)
+    course_id: Mapped[Optional[int]] = mapped_column(nullable=True, index=True)
     quality: Mapped[float] = mapped_column(nullable=False)
     difficulty: Mapped[Optional[float]] = mapped_column(nullable=True)
     comment: Mapped[str] = mapped_column(nullable=False)
@@ -29,6 +30,7 @@ class DBRmpReview(Base):
             id=self.id,
             instructor_id=self.instructor_id,
             course=self.course,
+            course_id=getattr(self, 'course_id', None),
             quality=self.quality,
             difficulty=self.difficulty,
             comment=self.comment,
@@ -50,6 +52,7 @@ class RmpReviewRepository:
             id=review.id,
             instructor_id=review.instructor_id,
             course=review.course,
+            course_id=review.course_id,
             quality=review.quality,
             difficulty=review.difficulty,
             comment=review.comment,
@@ -64,6 +67,7 @@ class RmpReviewRepository:
             set_=dict(
                 instructor_id=insert_stmt.excluded.instructor_id,
                 course=insert_stmt.excluded.course,
+                course_id=insert_stmt.excluded.course_id,
                 quality=insert_stmt.excluded.quality,
                 difficulty=insert_stmt.excluded.difficulty,
                 comment=insert_stmt.excluded.comment,
@@ -90,6 +94,7 @@ class RmpReviewRepository:
                 "id": review.id,
                 "instructor_id": review.instructor_id,
                 "course": review.course,
+                "course_id": review.course_id,
                 "quality": review.quality,
                 "difficulty": review.difficulty,
                 "comment": review.comment,
@@ -108,6 +113,7 @@ class RmpReviewRepository:
             set_=dict(
                 instructor_id=insert_stmt.excluded.instructor_id,
                 course=insert_stmt.excluded.course,
+                course_id=insert_stmt.excluded.course_id,
                 quality=insert_stmt.excluded.quality,
                 difficulty=insert_stmt.excluded.difficulty,
                 comment=insert_stmt.excluded.comment,
@@ -126,6 +132,16 @@ class RmpReviewRepository:
     async def get_by_instructor_id(self, instructor_id: int) -> list[RmpReview]:
         """Retrieve all RMP reviews for a specific instructor."""
         stmt = select(DBRmpReview).where(DBRmpReview.instructor_id == instructor_id)
+
+        async with self._async_sessionmaker() as session:
+            result = await session.execute(stmt)
+            db_reviews = result.scalars().all()
+
+        return [db_review.to_rmp_review() for db_review in db_reviews]
+    
+    async def get_by_course_id(self, course_id: int) -> list[RmpReview]:
+        """Retrieve all RMP reviews for a specific course."""
+        stmt = select(DBRmpReview).where(DBRmpReview.course_id == course_id)
 
         async with self._async_sessionmaker() as session:
             result = await session.execute(stmt)
