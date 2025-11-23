@@ -8,6 +8,8 @@ from billiken_blueprint.api import (
     degree_requirements,
 )
 
+from billiken_blueprint.scheduling import schedule_router
+
 routers = [
     identity.router,
     user_info.router,
@@ -16,6 +18,7 @@ routers = [
     ratings.router,
     degrees.router,
     degree_requirements.router,
+    schedule_router.router,
 ]
 
 __all__ = ["routers"]

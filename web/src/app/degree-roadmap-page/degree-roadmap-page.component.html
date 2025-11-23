@@ -1,0 +1,78 @@
+<div class="page">
+
+  <!-- Top Roadmap Container -->
+  <div class="roadmap-container">
+    <h1>Your Degree Roadmap</h1>
+
+    <div class="roadmap-section">
+
+      <!-- Graph (Left Area Only Now) -->
+      <div class="graph">
+
+        <!-- Left Math Column -->
+        <div class="box pos-math1" [ngClass]="nodeClass('MATH 1510')">
+          MATH 1510 <span *ngIf="isRecommended('MATH 1510')">✓</span>
+        </div>
+
+        <div class="box pos-math2" [ngClass]="nodeClass('MATH 1520')">
+          MATH 1520 <span *ngIf="isRecommended('MATH 1520')">✓</span>
+        </div>
+
+        <div class="box pos-math3" [ngClass]="nodeClass('MATH 1530')">
+          MATH 1530 <span *ngIf="isRecommended('MATH 1530')">✓</span>
+        </div>
+
+        <!-- Right CS Column -->
+        <div class="box pos-cs1" [ngClass]="nodeClass('CSCI 1300')">
+          CSCI 1300 <span *ngIf="isRecommended('CSCI 1300')">✓</span>
+        </div>
+
+        <div class="box pos-cs2" [ngClass]="nodeClass('CSCI 2100')">
+          CSCI 2100 <span *ngIf="isRecommended('CSCI 2100')">✓</span>
+        </div>
+
+        <div class="box pos-cs3" [ngClass]="nodeClass('CSCI 3200')">
+          CSCI 3200 <span *ngIf="isRecommended('CSCI 3200')">✓</span>
+        </div>
+
+        <!-- Middle Column -->
+        <div class="box pos-mid1" [ngClass]="nodeClass('CSCI 3100')">
+          CSCI 3100 <span *ngIf="isRecommended('CSCI 3100')">✓</span>
+        </div>
+
+        <div class="box pos-mid2" [ngClass]="nodeClass('CSCI 4750')">
+          CSCI 4750 <span *ngIf="isRecommended('CSCI 4750')">✓</span>
+        </div>
+
+        <p class="why-ds" *ngIf="isRecommended('CSCI 4750')">
+          Because you want to do data science
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Schedule Container -->
+  <div class="schedule-container">
+
+    <div class="schedule-header">
+      <h2>Your Spring Schedule</h2>
+
+      <button (click)="fetchSchedule()">
+        {{ loading ? "Generating..." : "Autogenerate based on Instructor Reviews" }}
+      </button>
+    </div>
+
+    <div class="schedule-list">
+      <div *ngIf="recommended.length === 0" class="empty">
+        No classes added yet.
+      </div>
+
+      <ul *ngIf="recommended.length > 0">
+        <li *ngFor="let code of recommended">
+          {{ code }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
