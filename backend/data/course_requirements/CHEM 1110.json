@@ -1,0 +1,26 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CHEM",
+          "course_number": 1050,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CHEM",
+          "course_number": 1030,
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    },
+    {
+      "operator": "OR",
+      "operands": []
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "CSCI",
+      "course_number": 2510,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CSCI",
+      "course_number": 3500,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

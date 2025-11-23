@@ -1,0 +1,684 @@
+[
+  {
+    "label": "Ignite Seminar",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UIS"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UIS"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Ultimate Questions: Philosophy",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UUQP"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UUQP"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Ultimate Questions: Theology",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UUQT"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UUQT"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Collaborative Inquiry",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UCI"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UCI"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Self in Community",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "USCM"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "USCM"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Self in Contemplation",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "USCN"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "USCN"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Self in the World",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "USW"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "USW"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Aesthetics, History and Culture",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UAHC"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UAHC"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Natural and Applied Science",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UNAS"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UNAS"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Quantitative Reasoning",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UQR"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UQR"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Social and Behavioral Sciences",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "USBS"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "USBS"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Written & Visual Communication",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UWVC"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UWVC"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Oral & Visual Communication",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UOVC"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UOVC"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Creative Expression Attribute",
+    "needed": 1,
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UCE"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UCE"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Writing Intensive",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UWI"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UWI"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Identities in Context",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UIIC"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UIIC"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Global Interdependence",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UGI"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UGI"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Dignity, Ethics and a Just Society",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "UDEJ"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "UDEJ"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Reflection-in-Action",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "any_with_attribute",
+          "attributes": [
+            "URIA"
+          ]
+        },
+        {
+          "type": "course",
+          "major_code": "SEPPOINTER",
+          "course_number": "URIA"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "CALCULUS I, II, III",
+    "needed": "3",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "1510"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "1520"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "2530"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Principles of Mathematics",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "2660"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Introduction to Linear Algebra",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "3120"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Foundation of Statistics",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "3850"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Differential Equations",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "3550"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Nonlinear Dynamics and Chaos or Partial Differential Equations",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4550"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4570"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Foundations of Stat Analysis",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "3850"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Statistics",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "4800"
+        },
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "4840"
+        },
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "4870"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Introduction to Abstract Algebra",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4110"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Linear Alegebra or Number Theory",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4120"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4150"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Introduction to Analysis",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4210"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Metric Spaces or Multivariable Analysis",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4220"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4230"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Intro to Complex Variables",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4310"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Complex Analysis",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4320"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4360"
+        }
+      ],
+      "exclude": []
+    }
+  },
+  {
+    "label": "Upper Division Mathematics",
+    "needed": "2",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course_range",
+          "major_code": "MATH",
+          "course_number": "3000",
+          "end_course_number": "4999"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "3@"
+        },
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "4@"
+        },
+        {
+          "type": "course_range",
+          "major_code": "STAT",
+          "course_number": "3000",
+          "end_course_number": "4999"
+        },
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "3@"
+        },
+        {
+          "type": "course",
+          "major_code": "STAT",
+          "course_number": "4@"
+        }
+      ],
+      "exclude": [
+        {
+          "type": "course",
+          "major_code": "MATH",
+          "course_number": "3110"
+        }
+      ]
+    }
+  },
+  {
+    "label": "Computer Programming",
+    "needed": "1",
+    "course_group": {
+      "courses": [
+        {
+          "type": "course",
+          "major_code": "CSCI",
+          "course_number": "1060"
+        },
+        {
+          "type": "course",
+          "major_code": "CSCI",
+          "course_number": "1300"
+        }
+      ],
+      "exclude": []
+    }
+  }
+]

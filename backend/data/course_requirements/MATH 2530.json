@@ -1,0 +1,11 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "MATH",
+      "course_number": 1520,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}
