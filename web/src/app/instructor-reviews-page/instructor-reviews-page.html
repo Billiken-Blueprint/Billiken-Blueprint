@@ -1,5 +1,5 @@
 <div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
-  
+
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
@@ -7,28 +7,118 @@
   </div>
 
   <!-- Header Section -->
-  <div class="relative z-10 px-8 py-8">
+  <div class="relative px-8 py-8" style="z-index: 100;">
     <div class="max-w-7xl mx-auto">
       <div class="flex items-center gap-4 mb-8">
-        <button (click)="goBack()" 
+        <button (click)="goBack()"
                 class="text-white/80 hover:text-white transition-colors duration-200 flex items-center gap-2">
           <i class="pi pi-arrow-left"></i>
           <span class="font-inter">Back to Ratings</span>
         </button>
       </div>
-      
+
       <div class="mb-8">
-        <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
-          Reviews for <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">{{ instructorName() || 'Loading...' }}</span>
-        </h1>
-        <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-4"></div>
-        <p class="text-blue-200 text-lg font-inter">Individual RateMyProfessor reviews with course information</p>
+        <div class="flex items-start justify-between mb-4">
+          <div class="flex-1">
+            <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
+              Reviews for <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">{{ instructorName() || 'Loading...' }}</span>
+            </h1>
+            <div class="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full mb-4"></div>
+            <p class="text-blue-200 text-lg font-inter mb-4">Individual reviews from RateMyProfessor and Billiken Blueprint</p>
+          </div>
+          <button (click)="addRating()"
+                  class="ml-4 inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
+            <i class="pi pi-plus"></i>
+            <span>Add Rating</span>
+          </button>
+        </div>
+
+        <!-- Filter Buttons -->
+        <div class="flex flex-wrap items-center gap-4 mb-4">
+          <div class="flex items-center gap-3">
+            <span class="text-blue-200 text-sm font-inter font-semibold">Filter:</span>
+            <button (click)="setFilter('all')"
+                    [class.bg-yellow-500/30]="filterType() === 'all'"
+                    [class.border-yellow-400/50]="filterType() === 'all'"
+                    [class.bg-white/5]="filterType() !== 'all'"
+                    [class.border-white/20]="filterType() !== 'all'"
+                    class="px-4 py-2 rounded-lg border transition-all duration-200 font-inter text-sm"
+                    [class.text-yellow-300]="filterType() === 'all'"
+                    [class.text-blue-200]="filterType() !== 'all'">
+              All Reviews
+            </button>
+            <button (click)="setFilter('rmp')"
+                    [class.bg-purple-500/30]="filterType() === 'rmp'"
+                  [class.border-purple-400/50]="filterType() === 'rmp'"
+                  [class.bg-white/5]="filterType() !== 'rmp'"
+                  [class.border-white/20]="filterType() !== 'rmp'"
+                  class="px-4 py-2 rounded-lg border transition-all duration-200 font-inter text-sm"
+                  [class.text-purple-300]="filterType() === 'rmp'"
+                  [class.text-blue-200]="filterType() !== 'rmp'">
+            RateMyProfessor Rating
+          </button>
+          <button (click)="setFilter('billiken_blueprint')"
+                  [class.bg-yellow-500/30]="filterType() === 'billiken_blueprint'"
+                  [class.border-yellow-400/50]="filterType() === 'billiken_blueprint'"
+                  [class.bg-white/5]="filterType() !== 'billiken_blueprint'"
+                  [class.border-white/20]="filterType() !== 'billiken_blueprint'"
+                  class="px-4 py-2 rounded-lg border transition-all duration-200 font-inter text-sm"
+                  [class.text-yellow-300]="filterType() === 'billiken_blueprint'"
+                  [class.text-blue-200]="filterType() !== 'billiken_blueprint'">
+            Billiken Blueprint Rating
+          </button>
+        </div>
+
+        <!-- Course Filter -->
+        <div class="relative" style="z-index: 1000; max-width: 100%;">
+          <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Filter by Course:</label>
+          @if (!selectedCourse()) {
+            <div class="relative" style="max-width: 100%;">
+              <i class="pi pi-book absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300 z-10 pointer-events-none"></i>
+              <input type="text"
+                     [value]="courseSearchText()"
+                     (input)="onCourseSearchChange($event)"
+                     (focus)="onCourseFocus()"
+                     (blur)="onCourseBlur()"
+                     placeholder="Search for a course..."
+                     class="w-full pl-10 pr-4 py-2 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 placeholder-slate-400 font-inter text-sm"/>
+
+              @if (courseInputFocused() && searchFilteredCourses().length > 0) {
+                <div class="absolute w-full mt-1 bg-slate-800 border border-slate-600/50 rounded-xl max-h-60 overflow-y-auto shadow-2xl" style="z-index: 10002; position: absolute; top: 100%; left: 0; right: 0;">
+                  @for (course of searchFilteredCourses(); track course.id) {
+                    <button type="button"
+                            (click)="selectCourseFromSearch(course)"
+                            class="w-full text-left px-4 py-3 hover:bg-slate-700/70 transition-colors border-b border-slate-700/50 last:border-b-0 first:rounded-t-xl last:rounded-b-xl">
+                      <div>
+                        <span class="text-white font-inter font-semibold">{{ course.courseCode }}</span>
+                      </div>
+                    </button>
+                  }
+                </div>
+              }
+            </div>
+          }
+
+          @if (selectedCourse()) {
+            <div class="w-full px-3 py-2 bg-green-500/20 border border-green-400/50 rounded-lg flex items-center gap-2 min-w-0">
+              <div class="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+                <span class="text-green-200 font-inter text-sm font-semibold whitespace-nowrap flex-shrink-0">{{ selectedCourse()?.courseCode }}</span>
+              </div>
+              <button type="button"
+                      (click)="clearCourseSelection()"
+                      class="text-green-300 hover:text-green-200 text-xs font-inter font-semibold px-2 py-1 rounded hover:bg-green-500/20 transition-colors flex-shrink-0 whitespace-nowrap">
+                Clear
+              </button>
+            </div>
+          }
+        </div>
+      </div>
       </div>
     </div>
   </div>
 
   <!-- Reviews Content -->
-  <div class="relative z-10 flex-grow px-8 pb-8">
+  <div class="relative flex-grow px-8 pb-8" style="z-index: 0;">
     <div class="max-w-7xl mx-auto">
       @if (loading()) {
         <div class="text-center py-12">
@@ -40,7 +130,7 @@
           <i class="pi pi-exclamation-triangle text-6xl text-red-400 mb-4"></i>
           <h3 class="text-2xl font-bold text-white mb-2 font-inter">Error Loading Reviews</h3>
           <p class="text-red-200 font-inter mb-6">{{ error() }}</p>
-          <button (click)="goBack()" 
+          <button (click)="goBack()"
                   class="bg-red-500/20 hover:bg-red-500/30 text-red-200 px-6 py-3 rounded-xl font-semibold font-inter border border-red-400/50 transition-all duration-300">
             Go Back
           </button>
@@ -50,29 +140,51 @@
           <i class="pi pi-inbox text-6xl text-slate-400 mb-4"></i>
           <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Reviews Available</h3>
           <p class="text-blue-200 font-inter mb-6">There are no individual reviews available for this instructor.</p>
-          <button (click)="goBack()" 
+          <button (click)="goBack()"
                   class="bg-blue-500/20 hover:bg-blue-500/30 text-blue-200 px-6 py-3 rounded-xl font-semibold font-inter border border-blue-400/50 transition-all duration-300">
             Go Back
           </button>
         </div>
       } @else {
-        <div class="space-y-6">
-          @for (review of reviews(); track review.id) {
-            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-purple-400/50 shadow-lg hover:shadow-xl transition-all duration-300">
+        @if (filteredReviews().length === 0) {
+          <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+            <i class="pi pi-filter text-6xl text-slate-400 mb-4"></i>
+            <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Reviews Match Filter</h3>
+            <p class="text-blue-200 font-inter mb-6">No reviews match the selected filter. Try selecting a different filter option.</p>
+          </div>
+        } @else {
+          <div class="space-y-6">
+            @for (review of filteredReviews(); track review.id) {
+            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-purple-400/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                 [class.hover:border-yellow-400/50]="review.type === 'billiken_blueprint'">
               <!-- Review Header -->
               <div class="flex items-start justify-between mb-4">
                 <div class="flex-grow">
                   <div class="flex items-center gap-3 mb-2">
-                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                    <div class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+                         [class.bg-gradient-to-br]="true"
+                         [class.from-purple-400]="review.type === 'rmp'"
+                         [class.to-purple-600]="review.type === 'rmp'"
+                         [class.from-yellow-400]="review.type === 'billiken_blueprint'"
+                         [class.to-yellow-600]="review.type === 'billiken_blueprint'">
                       <span class="text-white font-bold text-xl font-inter">{{ review.quality }}</span>
                     </div>
                     <div>
                       <div class="flex items-center gap-2">
-                        <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
-                          RMP
-                        </span>
-                        @if (review.course) {
-                          <span class="text-purple-300 text-sm font-inter font-semibold">{{ review.course }}</span>
+                        @if (review.type === 'rmp') {
+                          <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
+                            RMP
+                          </span>
+                          @if (review.course) {
+                            <span class="text-purple-300 text-sm font-inter font-semibold">{{ review.course }}</span>
+                          }
+                        } @else {
+                          <span class="px-2 py-0.5 bg-yellow-500/30 text-yellow-200 text-xs font-semibold rounded-full border border-yellow-400/50">
+                            Billiken Blueprint
+                          </span>
+                          @if (review.courseCode) {
+                            <span class="text-yellow-300 text-sm font-inter font-semibold">{{ review.courseCode }}</span>
+                          }
                         }
                       </div>
                     </div>
@@ -81,64 +193,91 @@
                 <div class="flex flex-col items-end gap-1">
                   <div class="flex items-center gap-1">
                     @for (star of [1,2,3,4,5]; track star) {
-                      <i class="pi text-sm" 
+                      <i class="pi text-sm"
                          [class.pi-star-fill]="star <= review.quality"
                          [class.pi-star]="star > review.quality"
-                         [class.text-purple-400]="star <= review.quality"
+                         [class.text-purple-400]="star <= review.quality && review.type === 'rmp'"
+                         [class.text-yellow-400]="star <= review.quality && review.type === 'billiken_blueprint'"
                          [class.text-slate-600]="star > review.quality"></i>
                     }
                   </div>
-                  <span class="text-purple-300 text-xs font-inter">{{ review.quality }}/5</span>
+                  <span class="text-xs font-inter"
+                        [class.text-purple-300]="review.type === 'rmp'"
+                        [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.quality }}/5</span>
                 </div>
               </div>
 
               <!-- Review Content -->
               <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
-                <p class="text-purple-100 font-inter leading-relaxed">{{ review.comment }}</p>
+                <p class="font-inter leading-relaxed"
+                   [class.text-purple-100]="review.type === 'rmp'"
+                   [class.text-blue-100]="review.type === 'billiken_blueprint'">{{ review.comment }}</p>
               </div>
 
               <!-- Review Metadata -->
               <div class="flex flex-wrap items-center gap-4 text-sm">
-                @if (review.difficulty !== null) {
+                <!-- Date - Only shown if available -->
+                @if (getReviewDate(review)) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-calendar text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter text-xs"
+                          [class.text-purple-300]="review.type === 'rmp'"
+                          [class.text-yellow-300]="review.type === 'billiken_blueprint'"
+                          [class.font-semibold]="true">
+                      {{ getReviewDate(review) }}
+                    </span>
+                  </div>
+                }
+
+                <!-- Difficulty - Show for both RMP and Billiken Blueprint -->
+                @if (review.difficulty !== null && review.difficulty !== undefined) {
                   <div class="flex items-center gap-2">
                     <i class="pi pi-chart-line text-slate-400 text-xs"></i>
                     <span class="text-slate-400 font-inter">Difficulty:</span>
-                    <span class="text-purple-300 font-inter font-semibold">{{ review.difficulty }}/5</span>
+                    <span class="font-inter font-semibold"
+                          [class.text-purple-300]="review.type === 'rmp'"
+                          [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.difficulty }}/5</span>
                   </div>
                 }
+
+                <!-- Grade - Show for both RMP and Billiken Blueprint -->
                 @if (review.grade) {
                   <div class="flex items-center gap-2">
                     <i class="pi pi-star text-slate-400 text-xs"></i>
                     <span class="text-slate-400 font-inter">Grade:</span>
-                    <span class="text-purple-300 font-inter font-semibold">{{ review.grade }}</span>
+                    <span class="font-inter font-semibold"
+                          [class.text-purple-300]="review.type === 'rmp'"
+                          [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.grade }}</span>
                   </div>
                 }
+
+                <!-- Attendance - Show for both RMP and Billiken Blueprint -->
                 @if (review.attendance) {
                   <div class="flex items-center gap-2">
                     <i class="pi pi-calendar-check text-slate-400 text-xs"></i>
                     <span class="text-slate-400 font-inter">Attendance:</span>
-                    <span class="text-purple-300 font-inter font-semibold">{{ review.attendance }}</span>
+                    <span class="font-inter font-semibold"
+                          [class.text-purple-300]="review.type === 'rmp'"
+                          [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.attendance }}</span>
                   </div>
                 }
-                @if (review.wouldTakeAgain !== null) {
+
+                <!-- Would Take Again - Show for both RMP and Billiken Blueprint -->
+                @if (review.wouldTakeAgain !== null && review.wouldTakeAgain !== undefined) {
                   <div class="flex items-center gap-2">
-                    <i class="pi" [class.pi-check-circle]="review.wouldTakeAgain" [class.pi-times-circle]="!review.wouldTakeAgain" 
-                       [class.text-green-400]="review.wouldTakeAgain" [class.text-red-400]="!review.wouldTakeAgain" 
+                    <i class="pi" [class.pi-check-circle]="review.wouldTakeAgain" [class.pi-times-circle]="!review.wouldTakeAgain"
+                       [class.text-green-400]="review.wouldTakeAgain" [class.text-red-400]="!review.wouldTakeAgain"
                        class="text-xs"></i>
                     <span class="text-slate-400 font-inter">Would Take Again:</span>
-                    <span class="text-purple-300 font-inter font-semibold">{{ review.wouldTakeAgain ? 'Yes' : 'No' }}</span>
-                  </div>
-                }
-                @if (review.reviewDate) {
-                  <div class="flex items-center gap-2">
-                    <i class="pi pi-calendar text-slate-400 text-xs"></i>
-                    <span class="text-slate-400 font-inter text-xs">{{ formatDate(review.reviewDate) }}</span>
+                    <span class="font-inter font-semibold"
+                          [class.text-purple-300]="review.type === 'rmp'"
+                          [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.wouldTakeAgain ? 'Yes' : 'No' }}</span>
                   </div>
                 }
               </div>
 
-              <!-- Tags -->
-              @if (review.tags && review.tags.length > 0) {
+              <!-- Tags (RMP only) -->
+              @if (review.type === 'rmp' && review.tags && review.tags.length > 0) {
                 <div class="mt-4 flex flex-wrap gap-2">
                   @for (tag of review.tags; track tag) {
                     <span class="px-2 py-1 bg-purple-500/20 text-purple-200 text-xs rounded-full border border-purple-400/30">
@@ -147,9 +286,93 @@
                   }
                 </div>
               }
+
+              <!-- Edit/Delete Buttons (Billiken Blueprint only, if user owns it) -->
+              @if (review.type === 'billiken_blueprint' && review.canDelete) {
+                <div class="mt-4 flex justify-end gap-2">
+                  @if (editingReview()?.id === review.id) {
+                    <!-- Edit Mode -->
+                    <div class="w-full space-y-4">
+                      <div>
+                        <label class="block text-yellow-300 text-sm font-inter mb-2">Rating (1-5):</label>
+                        <input type="number"
+                               min="1"
+                               max="5"
+                               [(ngModel)]="editRatingValue"
+                               class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400">
+                      </div>
+                      <div>
+                        <label class="block text-yellow-300 text-sm font-inter mb-2">Review:</label>
+                        <textarea [(ngModel)]="editDescription"
+                                 class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400 min-h-[100px]"
+                                 placeholder="Write your review..."></textarea>
+                      </div>
+                      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                          <label class="block text-yellow-300 text-sm font-inter mb-2">Difficulty (1-5):</label>
+                          <input type="number"
+                                 min="1"
+                                 max="5"
+                                 [(ngModel)]="editDifficulty"
+                                 class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400"
+                                 placeholder="Optional">
+                        </div>
+                        <div>
+                          <label class="block text-yellow-300 text-sm font-inter mb-2">Would Take Again:</label>
+                          <select [(ngModel)]="editWouldTakeAgain"
+                                  class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400">
+                            <option [value]="null">Select...</option>
+                            <option [value]="true">Yes</option>
+                            <option [value]="false">No</option>
+                          </select>
+                        </div>
+                        <div>
+                          <label class="block text-yellow-300 text-sm font-inter mb-2">Grade:</label>
+                          <input type="text"
+                                 [(ngModel)]="editGrade"
+                                 class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400"
+                                 placeholder="e.g., A, B+">
+                        </div>
+                        <div>
+                          <label class="block text-yellow-300 text-sm font-inter mb-2">Attendance:</label>
+                          <select [(ngModel)]="editAttendance"
+                                  class="w-full px-4 py-2 bg-slate-700/50 border border-slate-600 rounded-lg text-white font-inter focus:outline-none focus:border-yellow-400">
+                            <option [value]="null">Select...</option>
+                            <option value="Mandatory">Mandatory</option>
+                            <option value="Not Mandatory">Not Mandatory</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="flex justify-end gap-2">
+                        <button (click)="cancelEdit()"
+                                class="px-4 py-2 bg-slate-600/50 hover:bg-slate-600/70 text-white rounded-lg border border-slate-500/50 transition-colors duration-200 font-inter text-sm">
+                          Cancel
+                        </button>
+                        <button (click)="saveEdit()"
+                                class="px-4 py-2 bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 hover:text-yellow-200 rounded-lg border border-yellow-500/30 hover:border-yellow-500/50 transition-colors duration-200 font-inter text-sm">
+                          Save Changes
+                        </button>
+                      </div>
+                    </div>
+                  } @else {
+                    <!-- View Mode -->
+                    <button (click)="editRating(review)"
+                            class="px-4 py-2 bg-yellow-500/20 hover:bg-yellow-500/30 text-yellow-300 hover:text-yellow-200 rounded-lg border border-yellow-500/30 hover:border-yellow-500/50 transition-colors duration-200 flex items-center gap-2 font-inter text-sm">
+                      <i class="pi pi-pencil text-xs"></i>
+                      <span>Edit</span>
+                    </button>
+                    <button (click)="deleteRating(review)"
+                            class="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 hover:text-red-200 rounded-lg border border-red-500/30 hover:border-red-500/50 transition-colors duration-200 flex items-center gap-2 font-inter text-sm">
+                      <i class="pi pi-trash text-xs"></i>
+                      <span>Delete</span>
+                    </button>
+                  }
+                </div>
+              }
             </div>
-          }
-        </div>
+            }
+          </div>
+        }
       }
     </div>
   </div>
