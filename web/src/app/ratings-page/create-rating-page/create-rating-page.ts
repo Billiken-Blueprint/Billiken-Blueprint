@@ -150,8 +150,8 @@ export class CreateRatingPage implements OnInit {
     this.coursesService.getCourses().subscribe(courses => {
       this.courses.set(courses.map(course => ({
         ...course,
-        filterValue: `${course.courseCode} ${course.title}`,
-        displayValue: `${course.courseCode} - (${course.title})`
+        filterValue: `${course.courseCode}`,
+        displayValue: `${course.courseCode}`
       })));
     });
   }

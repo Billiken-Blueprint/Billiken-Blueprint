@@ -10,7 +10,7 @@ export class UserInfoService {
   private http = inject(HttpClient);
 
   getUserInfo() {
-    return this.http.get<UserInfo>('/api/user_info');
+    return this.http.get<GetUserInfoResponse>('/api/user_info');
   }
 
   updateUserInfo(body: UpdateUserInfoBody) {
@@ -50,4 +50,8 @@ export interface UserInfo {
   degreeType: string;
   college: string;
   completedCourseIds: number[];
+}
+
+export interface GetUserInfoResponse extends UserInfo {
+  savedCourseCodes: string[];
 }

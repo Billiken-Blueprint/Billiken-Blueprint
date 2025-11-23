@@ -1403,9 +1403,9 @@ export class CoursePage implements OnInit {
   }
 
   loadSavedCourses(): void {
-    /*this.userInfoService.getUserInfo().subscribe({
+    this.userInfoService.getUserInfo().subscribe({
       next: (userInfo) => {
-        /*
+
         if (userInfo.savedCourseCodes && userInfo.savedCourseCodes.length > 0) {
           // Map saved course codes to SimpleCourse objects
           this.savedCourses = userInfo.savedCourseCodes
@@ -1421,14 +1421,13 @@ export class CoursePage implements OnInit {
             .filter(c => c !== null) as SimpleCourse[];
         }
 
-      }},
+      },
       error: (error) => {
         console.error('Error loading saved courses:', error);
         // If user is not logged in or no profile exists, that's okay
         // Saved courses will just be empty
       }
     });
-*/
   }
 
   isCourseSaved(course: SimpleCourse): boolean {

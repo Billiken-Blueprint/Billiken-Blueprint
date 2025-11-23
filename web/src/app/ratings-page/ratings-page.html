@@ -1,5 +1,5 @@
 <div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
-  
+
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
@@ -16,7 +16,7 @@
           </h1>
           <p class="text-blue-200 text-lg font-inter">View and rate Computer Science and Math professors</p>
         </div>
-        <a href="ratings/create" 
+        <a href="ratings/create"
            class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
           <i class="pi pi-plus"></i>
           <span>Add Rating</span>
@@ -60,7 +60,7 @@
                       class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
                 <option value="">All Courses</option>
                 @for (course of courses(); track course.id) {
-                  <option [value]="course.id">{{ course.courseCode }} - {{ course.title }}</option>
+                  <option [value]="course.id">{{ course.courseCode }}</option>
                 }
               </select>
             </div>
@@ -131,7 +131,7 @@
           <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
           <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Ratings Found</h3>
           <p class="text-blue-200 font-inter mb-6">Be the first to rate this professor or course!</p>
-          <a href="ratings/create" 
+          <a href="ratings/create"
              class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
             <i class="pi pi-plus"></i>
             <span>Add First Rating</span>
@@ -182,7 +182,7 @@
                 <div class="flex flex-col items-end gap-1">
                   <div class="flex items-center gap-1">
                     @for (star of [1,2,3,4,5]; track star) {
-                      <i class="pi text-sm" 
+                      <i class="pi text-sm"
                          [class.pi-star-fill]="star <= rating.rating"
                          [class.pi-star]="star > rating.rating"
                          [class.text-yellow-400]="star <= rating.rating && !rating.isRmpRating"
@@ -219,8 +219,8 @@
                 </div>
                 <div class="flex items-center gap-2">
                   @if (rating.isRmpRating && rating.rmpUrl) {
-                    <a [href]="rating.rmpUrl" 
-                       target="_blank" 
+                    <a [href]="rating.rmpUrl"
+                       target="_blank"
                        rel="noopener noreferrer"
                        class="text-purple-300 hover:text-purple-200 transition-colors duration-200 underline">
                       <span class="text-xs font-inter">View on Rate My Professor</span>

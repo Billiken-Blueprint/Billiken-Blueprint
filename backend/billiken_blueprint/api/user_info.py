@@ -1,3 +1,4 @@
+from ast import Await
 from os import minor
 from typing import Annotated, Optional
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -6,7 +7,13 @@ import jwt
 from pydantic import BaseModel
 
 from billiken_blueprint import config, identity
-from billiken_blueprint.dependencies import AuthToken, IdentityUserRepo, StudentRepo
+from billiken_blueprint.dependencies import (
+    AuthToken,
+    IdentityUserRepo,
+    McCourseRepo,
+    StudentRepo,
+)
+from billiken_blueprint.domain import course
 from billiken_blueprint.domain.student import Student
 
 
@@ -68,6 +75,7 @@ async def get_user_info(
     token: AuthToken,
     identity_repo: IdentityUserRepo,
     student_repo: StudentRepo,
+    course_repo: McCourseRepo,
 ):
     try:
         payload = jwt.decode(token, config.JWT_PUBLIC_KEY, algorithms=["EdDSA"])
@@ -93,11 +101,19 @@ async def get_user_info(
             detail="Student information not found",
         )
 
+    saved_courses = [
+        await course_repo.get_by_id(id) for id in student.completed_course_ids
+    ]
+    saved_course_codes = [
+        f"{c.major_code} {c.course_number}" for c in saved_courses if c is not None
+    ]
+
     return dict(
         email=identity.email,
         name=student.name,
         degreeIds=student.degree_ids,
         completedCourseIds=student.completed_course_ids,
+        savedCourseCodes=saved_course_codes,
         graduation_year=student.graduation_year,
         major_code=student.major_code,
         degree_type=student.degree_type,
