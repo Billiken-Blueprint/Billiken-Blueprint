@@ -28,14 +28,19 @@ export interface Instructor {
 
 export interface RmpReview {
   id: number;
+  type: 'rmp' | 'billiken_blueprint';
   instructorId: number;
-  course: string | null;
+  course?: string | null;
+  courseCode?: string | null;
+  courseName?: string | null;
+  courseId?: number | null;
   quality: number;
-  difficulty: number | null;
+  difficulty?: number | null;
   comment: string;
-  wouldTakeAgain: boolean | null;
-  grade: string | null;
-  attendance: string | null;
-  tags: string[];
+  wouldTakeAgain?: boolean | null;
+  grade?: string | null;
+  attendance?: string | null;
+  tags?: string[];
   reviewDate: string | null;
+  canDelete?: boolean;
 }

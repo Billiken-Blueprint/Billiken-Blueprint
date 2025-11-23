@@ -1,6 +1,7 @@
 """Import RateMyProfessor ratings and reviews from JSON file and match with instructors."""
 import asyncio
 import json
+import re
 from pathlib import Path
 from datetime import datetime
 from billiken_blueprint import services
@@ -196,10 +197,27 @@ async def import_rmp_ratings():
                             except (ValueError, TypeError):
                                 pass
                         
+                        # Try to match course code from RMP review to database course
+                        course_id = None
+                        course_string = review_data.get('course')
+                        if course_string:
+                            # Extract course code pattern (e.g., "CSCI 3100" or "CSCI3100")
+                            # Match patterns like "CSCI 3100", "CSCI3100", "MATH 1200", etc.
+                            course_code_match = re.search(r'([A-Z]+)\s*(\d{4})', course_string.upper())
+                            if course_code_match:
+                                department = course_code_match.group(1)
+                                number = course_code_match.group(2)
+                                potential_course_code = f"{department} {number}"
+                                
+                                # Try to find matching course in database
+                                db_course = await services.course_repository.get_by_code(potential_course_code)
+                                if db_course:
+                                    course_id = db_course.id
+                        
                         rmp_review = RmpReview(
                             id=None,  # Auto-increment
                             instructor_id=instructor.id,
-                            course=review_data.get('course'),
+                            course=course_string,
                             quality=review_data.get('quality', 0.0),
                             difficulty=review_data.get('difficulty'),
                             comment=review_data.get('comment', ''),
@@ -208,6 +226,7 @@ async def import_rmp_ratings():
                             attendance=review_data.get('attendance'),
                             tags=review_data.get('tags', []) or [],
                             review_date=review_date,
+                            course_id=course_id,
                         )
                         rmp_reviews.append(rmp_review)
                     
