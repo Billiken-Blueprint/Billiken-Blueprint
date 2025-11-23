@@ -6,7 +6,7 @@
 
     <div class="roadmap-section">
 
-      <!-- Graph (Left Area Only Now) -->
+      <!-- Graph -->
       <div class="graph">
 
         <!-- Left Math Column -->
@@ -52,14 +52,14 @@
     </div>
   </div>
 
-  <!-- Bottom Schedule Container -->
+  <!-- Bottom Container -->
   <div class="schedule-container">
 
     <div class="schedule-header">
       <h2>Your Spring Schedule</h2>
 
       <button (click)="fetchSchedule()">
-        {{ loading ? "Generating..." : "Autogenerate based on Instructor Reviews" }}
+        {{ loading ? "Generating..." : "Generate Schedule" }}
       </button>
     </div>
 

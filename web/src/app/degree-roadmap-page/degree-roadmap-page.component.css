@@ -10,7 +10,7 @@
 
 /* Top Section */
 .roadmap-container {
-  background: #102347; /* NAVY */
+  background: #102347;
   padding: 2rem;
   border-radius: 1rem;
   color: white;
@@ -34,7 +34,6 @@
   min-height: 480px;
 }
 
-/* Node styling */
 .box {
   position: absolute;
   background: #2d6cdf; /* SLU Blue */
@@ -51,7 +50,6 @@
   border: 2px solid #86efac;
 }
 
-/* Layout positions (same as before) */
 .pos-math1 { top: 10px; left: 20px; }
 .pos-math2 { top: 80px; left: 20px; }
 .pos-math3 { top: 150px; left: 20px; }
@@ -71,9 +69,9 @@
   color: #86efac;
 }
 
-/* Bottom Schedule Section */
+/* Bottom Section */
 .schedule-container {
-  background: #102347; /* NAVY */
+  background: #102347;
   padding: 2rem;
   border-radius: 1rem;
   color: white;
@@ -95,7 +93,7 @@
 }
 
 .schedule-list {
-  background: #0b1a33; /* deeper navy */
+  background: #0b1a33;
   border-radius: 1rem;
   padding: 1rem;
   margin-top: 1rem;

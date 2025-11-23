@@ -36,7 +36,7 @@ class ScheduleService:
             if self.prereq_service.prereqs_satisfied(course, completed_courses)
         ]
 
-        # gives scedule within a 15-credit-hour target
+        # gives schedule within a 15-credit-hour target
         recommended = recommended[:5]
 
         return recommended
