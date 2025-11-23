@@ -1,0 +1,28 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": 3010,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SPAN",
+          "course_number": 3020,
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

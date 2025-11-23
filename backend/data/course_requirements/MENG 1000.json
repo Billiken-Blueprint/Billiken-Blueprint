@@ -1,0 +1,17 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "ESCI",
+      "course_number": 1700,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "SE",
+      "course_number": 1700,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

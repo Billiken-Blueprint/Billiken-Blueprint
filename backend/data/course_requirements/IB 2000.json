@@ -1,0 +1,11 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "ECON",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

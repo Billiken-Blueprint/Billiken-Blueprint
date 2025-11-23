@@ -1,0 +1,11 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "CORE",
+      "course_number": 1005,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

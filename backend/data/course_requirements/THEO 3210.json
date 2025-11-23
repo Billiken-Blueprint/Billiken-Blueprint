@@ -1,0 +1,11 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "THEO",
+      "course_number": 1000,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

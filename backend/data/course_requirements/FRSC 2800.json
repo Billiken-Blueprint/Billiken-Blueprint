@@ -1,0 +1,11 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "FRSC",
+      "course_number": 2600,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

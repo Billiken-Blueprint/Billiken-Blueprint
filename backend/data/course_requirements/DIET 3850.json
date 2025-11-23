@@ -1,0 +1,64 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "DIET",
+          "course_number": 2080,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "BIOL",
+          "course_number": 1240,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "BIOL",
+          "course_number": 1245,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CHEM",
+          "course_number": 1120,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CHEM",
+          "course_number": 1125,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CHEM",
+          "course_number": 2410,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CHEM",
+          "course_number": 3600,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PPY",
+          "course_number": 2540,
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    },
+    {
+      "major_code": "BIOL",
+      "course_number": 3020,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

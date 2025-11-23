@@ -1,0 +1,17 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "BIOL",
+      "course_number": 1240,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "PHYS",
+      "course_number": 1610,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

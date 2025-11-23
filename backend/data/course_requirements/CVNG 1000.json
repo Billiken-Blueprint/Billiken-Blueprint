@@ -1,0 +1,17 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "CVNG",
+      "course_number": 1001,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "SE",
+      "course_number": 1700,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

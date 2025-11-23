@@ -1,0 +1,35 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "EAS",
+      "course_number": 1480,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "EAS",
+      "course_number": 1080,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "BIOL",
+      "course_number": 1340,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "EAS",
+      "course_number": 3100,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "BIOL",
+      "course_number": 1200,
+      "end_number": null,
+      "concurrent_allowed": true
+    }
+  ]
+}

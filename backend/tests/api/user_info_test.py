@@ -33,8 +33,9 @@ async def test_user_info_endpoint_saves_data(
     user_info_payload = dict(
         name="Test User",
         degree_ids=[1, 2],
-        major="Computer Science",
-        minor=None,
+        major_code="CSCI",
+        degree_type="BS",
+        college="College of Arts and Sciences",
         graduation_year=2025,
         completed_course_ids=[101, 102, 103],
     )
@@ -50,6 +51,9 @@ async def test_user_info_endpoint_saves_data(
     assert data["name"] == "Test User"
     assert set(data["degreeIds"]) == {1, 2}
     assert set(data["completedCourseIds"]) == {101, 102, 103}
+    assert data["major_code"] == "CSCI"
+    assert data["degree_type"] == "BS"
+    assert data["college"] == "College of Arts and Sciences"
 
 
 @pytest.mark.asyncio
@@ -77,8 +81,9 @@ async def test_user_info_upsert_updates_existing_data(
     initial_payload = dict(
         name="Test User",
         degree_ids=[1, 2],
-        major="Computer Science",
-        minor=None,
+        major_code="CSCI",
+        degree_type="BS",
+        college="College of Arts and Sciences",
         graduation_year=2025,
         completed_course_ids=[101, 102, 103],
     )
@@ -92,8 +97,9 @@ async def test_user_info_upsert_updates_existing_data(
     updated_payload = dict(
         name="Test User Updated",
         degree_ids=[3, 4, 5],
-        major="Mathematics",
-        minor="Statistics",
+        major_code="MATH",
+        degree_type="BA",
+        college="College of Arts and Sciences",
         graduation_year=2026,
         completed_course_ids=[201, 202],
     )
@@ -110,3 +116,6 @@ async def test_user_info_upsert_updates_existing_data(
     assert data["name"] == "Test User Updated"
     assert set(data["degreeIds"]) == {3, 4, 5}
     assert set(data["completedCourseIds"]) == {201, 202}
+    assert data["major_code"] == "MATH"
+    assert data["degree_type"] == "BA"
+    assert data["college"] == "College of Arts and Sciences"

@@ -1,0 +1,17 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "AENG",
+      "course_number": 4004,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

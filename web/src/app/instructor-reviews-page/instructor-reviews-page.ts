@@ -1,7 +1,7 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ActivatedRoute, Router } from '@angular/router';
-import { InstructorsService, RmpReview } from '../instructors-service/instructors-service';
+import {Component, inject, OnInit, signal} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {ActivatedRoute, Router} from '@angular/router';
+import {InstructorsService, RmpReview} from '../services/instructors-service/instructors-service';
 
 @Component({
   selector: 'app-instructor-reviews-page',
@@ -41,7 +41,7 @@ export class InstructorReviewsPage implements OnInit {
 
   loadInstructorName(): void {
     if (!this.instructorId()) return;
-    
+
     this.instructorsService.getInstructors().subscribe({
       next: (instructors) => {
         const instructor = instructors.find(i => i.id === this.instructorId());
@@ -82,7 +82,7 @@ export class InstructorReviewsPage implements OnInit {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
     } catch {
       return dateString;
     }

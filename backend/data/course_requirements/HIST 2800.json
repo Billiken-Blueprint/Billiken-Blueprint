@@ -1,0 +1,23 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "HIST",
+      "course_number": 1110,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "HIST",
+      "course_number": 1120,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}
