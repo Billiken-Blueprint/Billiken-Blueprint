@@ -77,7 +77,9 @@ class DegreeWorksAnyCourseWithAttribute:
         return DegreeWorksAnyCourseWithAttribute(attributes=data["attributes"])
 
     def is_satisfied_by(self, course: MinimalCourse) -> bool:
-        return any(attr in course.attributes for attr in self.attributes)
+        return any(
+            attr.degree_works_label in self.attributes for attr in course.attributes
+        )
 
 
 @dataclass
