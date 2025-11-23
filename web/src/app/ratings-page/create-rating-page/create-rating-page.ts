@@ -1,9 +1,9 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
+import {Component, computed, ElementRef, inject, OnInit, signal, ViewChild} from '@angular/core';
 import {Select} from 'primeng/select';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {Instructor, InstructorsService} from '../../services/instructors-service/instructors-service';
 import {Course, CoursesService} from '../../services/courses-service/courses-service';
@@ -28,133 +28,192 @@ export class CreateRatingPage implements OnInit {
   instructors = signal<Instructor[]>([]);
   courses = signal<FilterableCourse[]>([]);
   errorMessage = signal<string | null>(null);
+  useNewInstructor = signal<boolean>(false);
+  searchText = signal<string>('');
+  instructorSearchText = signal<string>('');
+  @ViewChild('instructorSelect') instructorSelect?: ElementRef;
+  filteredInstructors = computed(() => {
+    const search = this.instructorSearchText().toLowerCase().trim();
+    if (!search) return this.instructors();
+    return this.instructors().filter(inst =>
+      inst.name.toLowerCase().includes(search)
+    );
+  });
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
     instructor: new FormControl<Instructor | null | undefined>(null, []),
+    newInstructorName: new FormControl<string | null | undefined>(null, []),
+    newInstructorDepartment: new FormControl<string | null | undefined>(null, []),
     course: new FormControl<Course | null | undefined>(null, []),
-    instructorRating: new FormControl<number | null | undefined>(null, []),
-    instructorDescription: new FormControl<string | null | undefined>(null, []),
-    courseRating: new FormControl<number | null | undefined>(null, []),
-    courseDescription: new FormControl<string | null | undefined>(null, []),
-    bothRating: new FormControl<number | null | undefined>(null, []),
-    bothDescription: new FormControl<string | null | undefined>(null, []),
+    rating: new FormControl<number | null | undefined>(null, []),
+    description: new FormControl<string | null | undefined>(null, []),
+    difficulty: new FormControl<number | null | undefined>(null, []),
+    wouldTakeAgain: new FormControl<boolean | null | undefined>(null, []),
+    grade: new FormControl<string | null | undefined>(null, []),
+    attendance: new FormControl<string | null | undefined>(null, []),
   });
   private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private ratingsService = inject(RatingsService);
 
   submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
+    // Don't block on form.invalid since we handle validation manually for new instructors
+    // Just mark fields as touched for visual feedback
+    this.form.markAllAsTouched();
 
     this.errorMessage.set(null);
     const form = this.form.value;
-    let completedRequests = 0;
-    let totalRequests = 0;
-    let hasError = false;
 
-    if (form.instructor && form.instructorRating) {
-      totalRequests++;
-    }
-    if (form.course && form.courseRating) {
-      totalRequests++;
-    }
-    if (form.instructor && form.course && form.bothRating) {
-      totalRequests++;
+    // Validate that both instructor and course are selected
+    if (!form.course) {
+      this.errorMessage.set('Please select a course.');
+      return;
     }
 
-    const checkComplete = () => {
-      completedRequests++;
-      if (completedRequests === totalRequests) {
-        if (!hasError) {
+    if (!form.instructor && !(this.useNewInstructor() && form.newInstructorName)) {
+      this.errorMessage.set('Please select or add a professor.');
+      return;
+    }
+
+    if (!form.rating) {
+      this.errorMessage.set('Please provide a rating.');
+      return;
+    }
+
+    // Validate new instructor name and department if using new instructor
+    if (this.useNewInstructor()) {
+      if (!form.newInstructorName?.trim()) {
+        this.errorMessage.set('Please enter a professor name.');
+        return;
+      }
+      if (!form.newInstructorDepartment?.trim()) {
+        this.errorMessage.set('Please select a department for the new professor.');
+        return;
+      }
+    }
+
+    // Track instructor ID for navigation
+    let instructorIdForNavigation: number | null = null;
+    if (form.instructor) {
+      instructorIdForNavigation = form.instructor.id;
+    }
+
+    // Create single rating with both instructor and course
+    this.ratingsService.createRating({
+      instructorId: form.instructor ? form.instructor.id.toString() : undefined,
+      instructorName: this.useNewInstructor() ? form.newInstructorName ?? undefined : undefined,
+      instructorDepartment: this.useNewInstructor() ? form.newInstructorDepartment ?? undefined : undefined,
+      courseId: form.course.id.toString(),
+      rating: form.rating,
+      description: form.description ?? "",
+      difficulty: form.difficulty ?? null,
+      wouldTakeAgain: form.wouldTakeAgain ?? null,
+      grade: form.grade ?? null,
+      attendance: form.attendance ?? null,
+    }).subscribe({
+      next: (response) => {
+        console.log('Rating created successfully:', response);
+        // If we created a new instructor, use the instructorId from the response for navigation
+        if (this.useNewInstructor() && response.instructorId) {
+          instructorIdForNavigation = response.instructorId;
+        }
+
+        // Navigate to instructor's reviews page
+        if (instructorIdForNavigation) {
+          console.log('Navigating to instructor reviews page:', instructorIdForNavigation);
+          this.router.navigate(['/instructors', instructorIdForNavigation, 'reviews']).then(() => {
+            console.log('Navigation successful');
+          }).catch(err => {
+            console.error('Navigation error:', err);
+          });
+        } else {
+          console.log('Navigating to ratings page');
           this.router.navigate(['/ratings']);
         }
+      },
+      error: (error) => {
+        console.error('Error creating rating:', error);
+        if (error.status === 400) {
+          this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
+        } else if (error.status === 401) {
+          this.errorMessage.set('Please log in to create a rating.');
+        } else {
+          this.errorMessage.set('An error occurred while creating the rating. Please try again.');
+        }
       }
-    };
-
-    if (form.instructor && form.instructorRating) {
-      this.ratingsService.createRating({
-        instructorId: form.instructor.id.toString(),
-        courseId: undefined,
-        rating: form.instructorRating,
-        description: form.instructorDescription ?? ""
-      }).subscribe({
-        next: () => checkComplete(),
-        error: (error) => {
-          console.error('Error creating instructor rating:', error);
-          hasError = true;
-          if (error.status === 400) {
-            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
-          } else if (error.status === 401) {
-            this.errorMessage.set('Please log in to create a rating.');
-          } else {
-            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
-          }
-          checkComplete();
-        }
-      });
-    }
-
-    if (form.course && form.courseRating) {
-      this.ratingsService.createRating({
-        instructorId: undefined,
-        courseId: form.course.id.toString(),
-        rating: form.courseRating,
-        description: form.courseDescription ?? ""
-      }).subscribe({
-        next: () => checkComplete(),
-        error: (error) => {
-          console.error('Error creating course rating:', error);
-          hasError = true;
-          if (error.status === 400) {
-            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
-          } else if (error.status === 401) {
-            this.errorMessage.set('Please log in to create a rating.');
-          } else {
-            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
-          }
-          checkComplete();
-        }
-      });
-    }
-
-    if (form.instructor && form.course && form.bothRating) {
-      this.ratingsService.createRating({
-        instructorId: form.instructor.id.toString(),
-        courseId: form.course.id.toString(),
-        rating: form.bothRating,
-        description: form.bothDescription ?? ""
-      }).subscribe({
-        next: () => checkComplete(),
-        error: (error) => {
-          console.error('Error creating combined rating:', error);
-          hasError = true;
-          if (error.status === 400) {
-            this.errorMessage.set('Unable to create rating. Please make sure you have completed your profile.');
-          } else if (error.status === 401) {
-            this.errorMessage.set('Please log in to create a rating.');
-          } else {
-            this.errorMessage.set('An error occurred while creating the rating. Please try again.');
-          }
-          checkComplete();
-        }
-      });
-    }
+    });
   }
 
   ngOnInit(): void {
-    this.instructorsService.getInstructors().subscribe(this.instructors.set);
+    this.instructorsService.getInstructors().subscribe(instructors => {
+      this.instructors.set(instructors);
+
+      // Check for instructorId query parameter and pre-select instructor
+      this.route.queryParams.subscribe(params => {
+        const instructorIdParam = params['instructorId'];
+        if (instructorIdParam) {
+          const instructorId = parseInt(instructorIdParam, 10);
+          if (!isNaN(instructorId)) {
+            const instructor = instructors.find(inst => inst.id === instructorId);
+            if (instructor) {
+              this.form.patchValue({instructor});
+            }
+          }
+        }
+      });
+    });
+
     this.coursesService.getCourses().subscribe(courses => {
       this.courses.set(courses.map(course => ({
         ...course,
-        filterValue: `${course.courseCode} ${course.title}`,
-        displayValue: `${course.courseCode} - (${course.title})`
+        filterValue: `${course.courseCode}`,
+        displayValue: `${course.courseCode}`
       })));
     });
+
+    // Track search text in the instructor select
+    this.form.get('instructor')?.valueChanges.subscribe(() => {
+      // Reset search text when instructor is selected
+      this.instructorSearchText.set('');
+      // If an instructor is selected, make sure we're not in "new instructor" mode
+      if (this.form.get('instructor')?.value) {
+        this.useNewInstructor.set(false);
+      }
+    });
   }
+
+  getEmptyMessage(): string {
+    return 'No professors found';
+  }
+
+  getFilteredInstructorsCount(): number {
+    return this.filteredInstructors().length;
+  }
+
+  hasSearchText(): boolean {
+    return this.instructorSearchText().trim().length > 0;
+  }
+
+  getSearchText(): string {
+    return this.instructorSearchText();
+  }
+
+  onInstructorSearchChange(event: any): void {
+    const value = event?.target?.value || '';
+    this.instructorSearchText.set(value);
+    // Clear selection if user starts typing again
+    if (value && this.form.get('instructor')?.value) {
+      this.form.patchValue({instructor: null});
+    }
+  }
+
+  selectInstructor(instructor: Instructor): void {
+    this.form.patchValue({instructor});
+    this.instructorSearchText.set('');
+  }
+
 }
 
 interface FilterableCourse extends Course {

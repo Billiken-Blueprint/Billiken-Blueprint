@@ -10,17 +10,18 @@ export class UserInfoService {
   private http = inject(HttpClient);
 
   getUserInfo() {
-    return this.http.get<UserInfo>('/api/user_info');
+    return this.http.get<GetUserInfoResponse>('/api/user_info');
   }
 
   updateUserInfo(body: UpdateUserInfoBody) {
     return this.http.post<UserInfo>('/api/user_info', JSON.stringify({
       name: body.name,
       graduation_year: body.graduationYear,
-      major: body.major,
       completed_course_ids: body.completedCourseIds,
-      saved_course_codes: body.savedCourseCodes || [],
-      degree_ids: []
+      degree_ids: [],
+      major_code: body.majorCode,
+      degree_type: body.degreeType,
+      college: body.college
     }), {
       headers: {'Content-Type': 'application/json'}
     });
@@ -29,15 +30,6 @@ export class UserInfoService {
   updateSavedCourses(savedCourseCodes: string[]) {
     // Get current user info first, then update with saved courses
     return this.getUserInfo().pipe(
-      switchMap((userInfo) => {
-        return this.updateUserInfo({
-          name: userInfo.name,
-          graduationYear: userInfo.graduationYear,
-          major: userInfo.major,
-          completedCourseIds: userInfo.completedCourseIds || [],
-          savedCourseCodes: savedCourseCodes
-        });
-      })
     );
   }
 }
@@ -45,17 +37,21 @@ export class UserInfoService {
 export interface UpdateUserInfoBody {
   name: string;
   graduationYear: number;
-  major: string;
+  majorCode: string;
+  degreeType: string;
+  college: string;
   completedCourseIds: number[];
-  savedCourseCodes?: string[];
 }
 
 export interface UserInfo {
   name: string;
   graduationYear: number;
-  major: string;
-  minor: string | null | undefined;
-  completedCourses?: Course[];
-  completedCourseIds?: number[];
-  savedCourseCodes?: string[];
+  majorCode: string;
+  degreeType: string;
+  college: string;
+  completedCourseIds: number[];
+}
+
+export interface GetUserInfoResponse extends UserInfo {
+  savedCourseCodes: string[];
 }

@@ -71,6 +71,13 @@ class MCCourseRepository:
             await session.refresh(db_entity)
             return db_entity.to_domain()
 
+    async def get_by_id(self, course_id: int) -> MinimalCourse | None:
+        async with self.async_sessionmaker() as session:
+            db_entity = await session.get(MCCourseDbEntity, course_id)
+            if db_entity:
+                return db_entity.to_domain()
+            return None
+
     async def get_by_code(
         self, major_code: str, course_number: str
     ) -> MinimalCourse | None:

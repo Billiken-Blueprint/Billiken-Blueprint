@@ -1,5 +1,5 @@
 <div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
-  
+
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
@@ -14,9 +14,9 @@
           <h1 class="text-4xl lg:text-5xl font-playfair font-bold text-white mb-2">
             Rate Your <span class="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 to-yellow-500">Professors</span>
           </h1>
-          <p class="text-blue-200 text-lg font-inter">Help future Billikens make informed decisions</p>
+          <p class="text-blue-200 text-lg font-inter">View and rate Computer Science and Math professors</p>
         </div>
-        <a href="ratings/create" 
+        <a href="ratings/create"
            class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
           <i class="pi pi-plus"></i>
           <span>Add Rating</span>
@@ -24,33 +24,102 @@
       </div>
 
       <!-- Search & Filter Bar -->
-      <div class="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl mb-8">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-gradient-to-br from-white/15 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 shadow-xl mb-8 relative z-[100]">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Professor</label>
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Department</label>
             <div class="relative">
-              <i class="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
-              <select (change)="selectInstructorById($any($event.target).value)"
+              <i class="pi pi-building absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
+              <select (change)="selectDepartment($any($event.target).value)"
+                      [value]="selectedDepartment()"
                       class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
-                <option value="">All Professors</option>
-                @for (instructor of instructors(); track instructor.id) {
-                  <option [value]="instructor.id">{{ instructor.name }}</option>
-                }
+                <option value="all">All Departments</option>
+                <option value="CSCI">Computer Science</option>
+                <option value="MATH">Mathematics</option>
               </select>
             </div>
           </div>
-          <div>
-            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Select Course</label>
-            <div class="relative">
-              <i class="pi pi-book absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300"></i>
-              <select (change)="selectCourseById($any($event.target).value)"
-                      class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 font-inter">
-                <option value="">All Courses</option>
-                @for (course of courses(); track course.id) {
-                  <option [value]="course.id">{{ course.courseCode }} - {{ course.title }}</option>
+          <div class="relative">
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Search Professor</label>
+            @if (!selectedInstructor()) {
+              <div class="relative">
+                <i class="pi pi-user absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300 z-10 pointer-events-none"></i>
+                <input type="text"
+                       [value]="instructorSearchText()"
+                       (input)="onInstructorSearchChange($event)"
+                       (focus)="onInstructorFocus()"
+                       (blur)="onInstructorBlur()"
+                       placeholder="Search for a professor..."
+                       class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 placeholder-slate-400 font-inter"/>
+
+                @if (instructorInputFocused() && searchFilteredInstructors().length > 0) {
+                  <div class="absolute z-[99999] w-full mt-1 bg-slate-800 border border-slate-600/50 rounded-xl max-h-60 overflow-y-auto shadow-2xl" style="position: absolute; z-index: 99999;">
+                    @for (instructor of searchFilteredInstructors(); track instructor.id) {
+                      <button type="button"
+                              (click)="selectInstructorFromSearch(instructor)"
+                              class="w-full text-left px-4 py-3 hover:bg-slate-700/70 transition-colors border-b border-slate-700/50 last:border-b-0 first:rounded-t-xl last:rounded-b-xl">
+                        <span class="text-white font-inter">{{ instructor.name }}</span>
+                      </button>
+                    }
+                  </div>
                 }
-              </select>
-            </div>
+              </div>
+            }
+
+            @if (selectedInstructor()) {
+              <div class="px-3 py-2 bg-green-500/20 border border-green-400/50 rounded-lg flex items-center justify-between gap-2">
+                <div class="flex items-center min-w-0 flex-1">
+                  <span class="text-green-200 font-inter text-sm font-semibold truncate">{{ selectedInstructor()?.name }}</span>
+                </div>
+                <button type="button"
+                        (click)="clearInstructorSelection()"
+                        class="text-green-300 hover:text-green-200 text-xs font-inter font-semibold px-2 py-1 rounded hover:bg-green-500/20 transition-colors flex-shrink-0 whitespace-nowrap">
+                  Clear
+                </button>
+              </div>
+            }
+          </div>
+          <div class="relative">
+            <label class="block text-sm font-semibold text-blue-100 mb-2 font-inter">Search Course</label>
+            @if (!selectedCourse()) {
+              <div class="relative">
+                <i class="pi pi-book absolute left-3 top-1/2 transform -translate-y-1/2 text-blue-300 z-10 pointer-events-none"></i>
+                <input type="text"
+                       [value]="courseSearchText()"
+                       (input)="onCourseSearchChange($event)"
+                       (focus)="onCourseFocus()"
+                       (blur)="onCourseBlur()"
+                       placeholder="Search for a course..."
+                       class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 placeholder-slate-400 font-inter"/>
+
+                @if (courseInputFocused() && searchFilteredCourses().length > 0) {
+                  <div class="absolute z-[99999] w-full mt-1 bg-slate-800 border border-slate-600/50 rounded-xl max-h-60 overflow-y-auto shadow-2xl" style="position: absolute; z-index: 99999;">
+                    @for (course of searchFilteredCourses(); track course.id) {
+                      <button type="button"
+                              (click)="selectCourseFromSearch(course)"
+                              class="w-full text-left px-4 py-3 hover:bg-slate-700/70 transition-colors border-b border-slate-700/50 last:border-b-0 first:rounded-t-xl last:rounded-b-xl">
+                        <div>
+                          <span class="text-white font-inter font-semibold">{{ course.courseCode }}</span>
+                        </div>
+                      </button>
+                    }
+                  </div>
+                }
+              </div>
+            }
+
+            @if (selectedCourse()) {
+              <div class="w-full px-3 py-2 bg-green-500/20 border border-green-400/50 rounded-lg flex items-center gap-2 min-w-0">
+                <div class="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
+                  <span class="text-green-200 font-inter text-sm font-semibold whitespace-nowrap flex-shrink-0">{{ selectedCourse()?.courseCode }}</span>
+                </div>
+                <button type="button"
+                        (click)="clearCourseSelection()"
+                        class="text-green-300 hover:text-green-200 text-xs font-inter font-semibold px-2 py-1 rounded hover:bg-green-500/20 transition-colors flex-shrink-0 whitespace-nowrap">
+                  Clear
+                </button>
+              </div>
+            }
           </div>
           <div class="flex items-end">
             <button (click)="clearFilters()"
@@ -67,12 +136,14 @@
         <div class="flex items-center gap-4 text-blue-200 font-inter flex-wrap">
           <div class="flex items-center gap-2">
             <i class="pi pi-list"></i>
-            <span class="font-semibold">{{ ratings().length }} Reviews Found</span>
+            <span class="font-semibold">{{ groupedRatings().length }} Professors Found</span>
           </div>
           @if (selectedInstructor()) {
-            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30">
+            <div class="flex items-center gap-2 bg-yellow-400/20 px-3 py-1 rounded-full border border-yellow-400/30 cursor-pointer hover:bg-yellow-400/30 transition-colors"
+                 (click)="selectedInstructor() && openReviewsPage(selectedInstructor()!.id)">
               <i class="pi pi-user text-yellow-300"></i>
               <span class="text-yellow-300 text-sm font-semibold">{{ selectedInstructor()?.name }}</span>
+              <i class="pi pi-external-link text-yellow-300 text-xs ml-1"></i>
             </div>
             @if (getCombinedRating(selectedInstructor()?.id ?? null); as combined) {
               <div class="flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-purple-400/20 px-4 py-2 rounded-xl border border-yellow-400/30">
@@ -97,119 +168,291 @@
               <span class="text-blue-300 text-sm font-semibold">{{ selectedCourse()?.courseCode }}</span>
             </div>
           }
+          @if (selectedDepartment() !== 'all') {
+            <div class="flex items-center gap-2 bg-green-400/20 px-3 py-1 rounded-full border border-green-400/30">
+              <i class="pi pi-building text-green-300"></i>
+              <span class="text-green-300 text-sm font-semibold">{{ selectedDepartment() }}</span>
+            </div>
+          }
         </div>
       </div>
     </div>
   </div>
 
   <!-- Ratings Grid -->
-  <div class="relative z-10 flex-grow px-8 pb-8">
+  <div class="relative z-0 flex-grow px-8 pb-8">
     <div class="max-w-7xl mx-auto">
-      @if (ratings().length === 0) {
+      @if (selectedCourse() && !selectedInstructor()) {
+        <!-- Show individual reviews when course is selected -->
+        @if (loadingReviews()) {
+          <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+            <i class="pi pi-spin pi-spinner text-6xl text-blue-300 mb-4"></i>
+            <h3 class="text-2xl font-bold text-white mb-2 font-inter">Loading Reviews...</h3>
+          </div>
+        } @else if (individualReviews().length === 0) {
+          <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+            <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
+            <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Reviews Found</h3>
+            <p class="text-blue-200 font-inter mb-6">No reviews found for {{ selectedCourse()?.courseCode }}. Be the first to rate this course!</p>
+            <a href="ratings/create"
+               class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
+              <i class="pi pi-plus"></i>
+              <span>Add First Rating</span>
+            </a>
+          </div>
+        } @else {
+          <div class="mb-6">
+            <h2 class="text-3xl font-bold text-white mb-2 font-inter">Reviews for {{ selectedCourse()?.courseCode }}</h2>
+            <p class="text-blue-200 font-inter">{{ individualReviews().length }} review{{ individualReviews().length !== 1 ? 's' : '' }} found</p>
+          </div>
+          <div class="space-y-8">
+            @for (group of groupedIndividualReviews(); track group.instructorId) {
+              <div class="space-y-4">
+                <div class="flex items-center gap-3 mb-4">
+                  <div class="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg">
+                    <span class="text-blue-900 font-bold text-sm font-inter">{{ group.averageRating.toFixed(1) }}</span>
+                  </div>
+                  <h3 class="text-2xl font-bold text-white font-inter cursor-pointer hover:underline"
+                      (click)="openReviewsPage(group.instructorId)">
+                    {{ group.instructorName }}
+                  </h3>
+                  <span class="text-blue-300 font-inter text-sm">({{ group.reviews.length }} review{{ group.reviews.length !== 1 ? 's' : '' }})</span>
+                </div>
+                <div class="space-y-4 pl-4 border-l-2 border-blue-500/30">
+                  @for (review of group.reviews; track review.id) {
+                    <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-purple-400/50 shadow-lg hover:shadow-xl transition-all duration-300"
+                         [class.hover:border-yellow-400/50]="review.type === 'billiken_blueprint'">
+                      <!-- Review Header -->
+                      <div class="flex items-start justify-between mb-4">
+                        <div class="flex-grow">
+                          <div class="flex items-center gap-3 mb-2">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center shadow-lg"
+                                 [class.bg-gradient-to-br]="true"
+                                 [class.from-purple-400]="review.type === 'rmp'"
+                                 [class.to-purple-600]="review.type === 'rmp'"
+                                 [class.from-yellow-400]="review.type === 'billiken_blueprint'"
+                                 [class.to-yellow-600]="review.type === 'billiken_blueprint'">
+                              <span class="text-white font-bold text-xl font-inter">{{ review.quality }}</span>
+                            </div>
+                            <div>
+                              <div class="flex items-center gap-2 mb-1">
+                                @if (review.type === 'rmp') {
+                                  <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
+                                    RMP
+                                  </span>
+                                } @else {
+                                  <span class="px-2 py-0.5 bg-yellow-500/30 text-yellow-200 text-xs font-semibold rounded-full border border-yellow-400/50">
+                                    Billiken Blueprint
+                                  </span>
+                                }
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="flex flex-col items-end gap-1">
+                          <div class="flex items-center gap-1">
+                            @for (star of [1,2,3,4,5]; track star) {
+                              <i class="pi text-sm"
+                                 [class.pi-star-fill]="star <= review.quality"
+                                 [class.pi-star]="star > review.quality"
+                                 [class.text-purple-400]="star <= review.quality && review.type === 'rmp'"
+                                 [class.text-yellow-400]="star <= review.quality && review.type === 'billiken_blueprint'"
+                                 [class.text-slate-600]="star > review.quality"></i>
+                            }
+                          </div>
+                          <span class="text-xs font-inter"
+                                [class.text-purple-300]="review.type === 'rmp'"
+                                [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.quality }}/5</span>
+                        </div>
+                      </div>
+
+                      <!-- Review Content -->
+                      <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
+                        <p class="font-inter leading-relaxed"
+                           [class.text-purple-100]="review.type === 'rmp'"
+                           [class.text-blue-100]="review.type === 'billiken_blueprint'">{{ review.comment }}</p>
+                      </div>
+
+                      <!-- Review Metadata -->
+                      <div class="flex flex-wrap items-center gap-4 text-sm">
+                        @if (getReviewDate(review)) {
+                          <div class="flex items-center gap-2">
+                            <i class="pi pi-calendar text-slate-400 text-xs"></i>
+                            <span class="text-slate-400 font-inter text-xs"
+                                  [class.text-purple-300]="review.type === 'rmp'"
+                                  [class.text-yellow-300]="review.type === 'billiken_blueprint'"
+                                  [class.font-semibold]="true">
+                              {{ getReviewDate(review) }}
+                            </span>
+                          </div>
+                        }
+
+                        @if (review.difficulty !== null && review.difficulty !== undefined) {
+                          <div class="flex items-center gap-2">
+                            <i class="pi pi-chart-line text-slate-400 text-xs"></i>
+                            <span class="text-slate-400 font-inter">Difficulty:</span>
+                            <span class="font-inter font-semibold"
+                                  [class.text-purple-300]="review.type === 'rmp'"
+                                  [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.difficulty }}/5</span>
+                          </div>
+                        }
+
+                        @if (review.grade) {
+                          <div class="flex items-center gap-2">
+                            <i class="pi pi-book text-slate-400 text-xs"></i>
+                            <span class="text-slate-400 font-inter">Grade:</span>
+                            <span class="font-inter font-semibold"
+                                  [class.text-purple-300]="review.type === 'rmp'"
+                                  [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.grade }}</span>
+                          </div>
+                        }
+
+                        @if (review.attendance) {
+                          <div class="flex items-center gap-2">
+                            <i class="pi pi-users text-slate-400 text-xs"></i>
+                            <span class="text-slate-400 font-inter">Attendance:</span>
+                            <span class="font-inter font-semibold"
+                                  [class.text-purple-300]="review.type === 'rmp'"
+                                  [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.attendance }}</span>
+                          </div>
+                        }
+
+                        @if (review.wouldTakeAgain !== null && review.wouldTakeAgain !== undefined) {
+                          <div class="flex items-center gap-2">
+                            <i class="pi pi-check-circle text-slate-400 text-xs"></i>
+                            <span class="text-slate-400 font-inter">Would Take Again:</span>
+                            <span class="font-inter font-semibold"
+                                  [class.text-purple-300]="review.type === 'rmp'"
+                                  [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.wouldTakeAgain ? 'Yes' : 'No' }}</span>
+                          </div>
+                        }
+                      </div>
+                    </div>
+                  }
+                </div>
+              </div>
+            }
+          </div>
+        }
+      } @else if (ratings().length === 0) {
         <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
           <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
           <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Ratings Found</h3>
           <p class="text-blue-200 font-inter mb-6">Be the first to rate this professor or course!</p>
-          <a href="ratings/create" 
+          <a href="ratings/create"
              class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
             <i class="pi pi-plus"></i>
             <span>Add First Rating</span>
           </a>
         </div>
+      } @else if (groupedRatings().length === 0) {
+        <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-12 border border-white/20 text-center">
+          <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
+          <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Instructor Ratings Found</h3>
+          <p class="text-blue-200 font-inter mb-6">Ratings may not be associated with instructors.</p>
+        </div>
       } @else {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          @for (rating of ratings(); track rating.id || rating.instructorId) {
-            <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
-                 [class.border-purple-400]="rating.isRmpRating"
-                 [class.bg-gradient-to-br]="rating.isRmpRating"
-                 [class.from-purple-900/20]="rating.isRmpRating"
-                 [class.to-purple-800/10]="rating.isRmpRating">
-              <!-- Rating Header -->
+          @for (groupEntry of groupedRatings(); track groupEntry[0]) {
+            @let instructorId = groupEntry[0];
+            @let group = groupEntry[1];
+
+            <!-- Single Aggregated Rating Card for Instructor -->
+            @if (group.combined || group.rmpRating || group.bbRatings.length > 0) {
+              @let displayRating = getDisplayRating(group);
+              <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl rounded-2xl p-6 border border-white/20 hover:border-white/30 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 relative" style="z-index: 1;">
               <div class="flex items-start justify-between mb-4">
                 <div class="flex-grow">
                   <div class="flex items-center gap-3 mb-2">
-                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg"
-                         [class.from-purple-400]="rating.isRmpRating"
-                         [class.to-purple-600]="rating.isRmpRating">
-                      <span class="text-blue-900 font-bold text-xl font-inter"
-                            [class.text-white]="rating.isRmpRating">{{ rating.rating }}</span>
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center shadow-lg">
+                        <span class="text-blue-900 font-bold text-xl font-inter">{{ displayRating.toFixed(1) }}</span>
                     </div>
                     <div>
-                      <div class="flex items-center gap-2">
-                        <h4 class="text-white font-bold text-lg font-inter">{{ rating.instructorName || 'Unknown Instructor' }}</h4>
-                        @if (rating.isRmpRating) {
-                          <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
-                            RMP
-                          </span>
-                        } @else {
-                          <span class="px-2 py-0.5 bg-yellow-500/30 text-yellow-200 text-xs font-semibold rounded-full border border-yellow-400/50">
-                            Billiken Blueprint
-                          </span>
-                        }
-                      </div>
-                      @if (rating.courseCode && rating.courseName) {
-                        <p class="text-blue-300 text-sm font-inter">{{ rating.courseCode }} - {{ rating.courseName }}</p>
-                      } @else if (rating.isRmpRating) {
-                        <p class="text-purple-300 text-sm font-inter">Overall Rating from RateMyProfessor</p>
-                      }
+                        <div class="flex items-center gap-2">
+                          <h4 class="text-white font-bold text-lg font-inter cursor-pointer hover:underline"
+                              (click)="openReviewsPage(instructorId)">
+                            {{ group.instructor?.name || 'Unknown Instructor' }}
+                          </h4>
+                        </div>
                     </div>
                   </div>
                 </div>
                 <div class="flex flex-col items-end gap-1">
                   <div class="flex items-center gap-1">
                     @for (star of [1,2,3,4,5]; track star) {
-                      <i class="pi text-sm" 
-                         [class.pi-star-fill]="star <= rating.rating"
-                         [class.pi-star]="star > rating.rating"
-                         [class.text-yellow-400]="star <= rating.rating && !rating.isRmpRating"
-                         [class.text-purple-400]="star <= rating.rating && rating.isRmpRating"
-                         [class.text-slate-600]="star > rating.rating"></i>
+                      <i class="pi text-sm"
+                           [class.pi-star-fill]="star <= displayRating"
+                           [class.pi-star]="star > displayRating"
+                           [class.text-yellow-400]="star <= displayRating"
+                           [class.text-slate-600]="star > displayRating"></i>
                     }
                   </div>
-                  <span class="text-blue-300 text-xs font-inter"
-                        [class.text-purple-300]="rating.isRmpRating">{{ rating.rating }}/5</span>
+                    <span class="text-blue-300 text-xs font-inter">{{ displayRating.toFixed(1) }}/5</span>
                 </div>
               </div>
 
-              <!-- Rating Content -->
-              <div class="bg-slate-800/40 rounded-xl p-4 mb-4"
-                   [class.bg-purple-900/20]="rating.isRmpRating">
-                <p class="text-blue-100 font-inter leading-relaxed"
-                   [class.text-purple-100]="rating.isRmpRating">{{ rating.description }}</p>
-                @if (rating.isRmpRating && rating.rmpNumRatings) {
-                  <p class="text-purple-300 text-xs mt-2 font-inter">
-                    Based on {{ rating.rmpNumRatings }} review{{ rating.rmpNumRatings !== 1 ? 's' : '' }}
-                  </p>
-                }
+                <!-- Rating Breakdown - Three Key Ratings -->
+              <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
+                  <div class="space-y-3">
+                    <!-- Overall RMP Rating -->
+                    @if (group.rmpRating) {
+                      <div class="flex items-center justify-between p-3 bg-purple-900/20 rounded-lg border border-purple-500/30">
+                        <div class="flex items-center gap-2">
+                          <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
+                            RMP
+                          </span>
+                          <span class="text-purple-300 text-sm font-semibold font-inter">Overall RateMyProfessor Rating:</span>
+                        </div>
+                        <span class="text-white font-bold text-lg">{{ group.rmpRating.rating }}/5</span>
+                      </div>
+                    }
+                    <!-- Overall Billiken Blueprint Rating -->
+                    @if (group.bbRatings.length > 0) {
+                      @let bbAverage = getBbAverage(group.bbRatings);
+                      <div class="flex items-center justify-between p-3 bg-yellow-900/20 rounded-lg border border-yellow-500/30">
+                        <div class="flex items-center gap-2">
+                          <span class="px-2 py-0.5 bg-yellow-500/30 text-yellow-200 text-xs font-semibold rounded-full border border-yellow-400/50">
+                            Billiken Blueprint
+                          </span>
+                          <span class="text-yellow-300 text-sm font-semibold font-inter">Overall Billiken Blueprint Rating:</span>
               </div>
+                        <span class="text-white font-bold text-lg">{{ bbAverage.toFixed(1) }}/5
+                          <span class="text-xs text-slate-400">({{ group.bbRatings.length }} review{{ group.bbRatings.length !== 1 ? 's' : '' }})</span>
+                  </span>
+                      </div>
+                    }
+                    <!-- Total Average Rating -->
+                    @if (group.combined && group.combined.bbCount > 0 && group.combined.rmpRating) {
+                      <div class="flex items-center justify-between p-3 bg-gradient-to-r from-purple-900/30 to-yellow-900/30 rounded-lg border border-yellow-400/50 mt-2">
+                        <span class="text-white text-base font-bold font-inter">Total Average Rating (RMP + Billiken Blueprint):</span>
+                        <span class="text-yellow-300 font-bold text-xl">{{ group.combined.average.toFixed(1) }}/5</span>
+                      </div>
+                    } @else if (group.combined && group.combined.bbCount > 0) {
+                      <!-- Only Billiken Blueprint -->
+                      <div class="flex items-center justify-between p-3 bg-yellow-900/30 rounded-lg border border-yellow-400/50 mt-2">
+                        <span class="text-white text-base font-bold font-inter">Total Average Rating:</span>
+                        <span class="text-yellow-300 font-bold text-xl">{{ group.combined.average.toFixed(1) }}/5</span>
+                      </div>
+                    } @else if (group.combined && group.combined.rmpRating) {
+                      <!-- Only RMP -->
+                      <div class="flex items-center justify-between p-3 bg-purple-900/30 rounded-lg border border-purple-400/50 mt-2">
+                        <span class="text-white text-base font-bold font-inter">Total Average Rating:</span>
+                        <span class="text-purple-300 font-bold text-xl">{{ group.combined.average.toFixed(1) }}/5</span>
+                      </div>
+                    }
+                  </div>
+                </div>
 
-              <!-- Rating Footer -->
-              <div class="flex items-center justify-between text-sm">
-                <div class="flex items-center gap-4">
-                  @if (!rating.isRmpRating && rating.createdAt) {
-                    <span class="text-blue-300 font-inter flex items-center gap-1">
-                      <i class="pi pi-calendar text-xs"></i>
-                      {{ rating.createdAt | date:'MMM d, yyyy' }}
-                    </span>
-                  }
-                </div>
-                <div class="flex items-center gap-2">
-                  @if (rating.isRmpRating && rating.rmpUrl) {
-                    <a [href]="rating.rmpUrl" 
-                       target="_blank" 
-                       rel="noopener noreferrer"
-                       class="text-purple-300 hover:text-purple-200 transition-colors duration-200 underline">
-                      <span class="text-xs font-inter">View on Rate My Professor</span>
-                    </a>
-                  } @else {
-                    <button class="text-blue-300 hover:text-yellow-300 transition-colors duration-200 flex items-center gap-1">
-                      <i class="pi pi-thumbs-up text-sm"></i>
-                      <span class="text-xs font-inter">Helpful</span>
-                    </button>
-                  }
+                <!-- View Reviews Button -->
+                <div class="flex justify-end">
+                  <button (click)="openReviewsPage(instructorId)"
+                          class="text-blue-300 hover:text-yellow-300 transition-colors duration-200 flex items-center gap-2 font-inter text-sm">
+                    <span>View all reviews</span>
+                    <i class="pi pi-arrow-right text-xs"></i>
+                  </button>
                 </div>
               </div>
-            </div>
+            }
           }
         </div>
       }

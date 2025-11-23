@@ -1,0 +1,59 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "HIM",
+      "course_number": 3000,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "HIM",
+      "course_number": 3600,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1500,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1000,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1500,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1200,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 2500,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1000,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

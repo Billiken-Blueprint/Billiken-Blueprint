@@ -1,0 +1,11 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "SPAN",
+      "course_number": 2010,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

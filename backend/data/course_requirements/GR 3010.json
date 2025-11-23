@@ -1,0 +1,17 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "GR",
+      "course_number": 2010,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1900,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

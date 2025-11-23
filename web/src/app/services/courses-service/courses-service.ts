@@ -15,5 +15,4 @@ export class CoursesService {
 export interface Course {
   id: number;
   courseCode: string;
-  title: string;
 }

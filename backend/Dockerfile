@@ -9,12 +9,15 @@ ENV PATH="/app/.venv/bin:${PATH}"
 FROM deps AS migrations
 COPY ./backend/ .
 RUN uv pip freeze
-RUN mkdir data && alembic upgrade head
+RUN mkdir -p data && alembic upgrade head
 
 FROM migrations AS seeding
 RUN python get_courses.py
-# Copy and run RMP import script
+# Copy and run RMP import script (prioritize file with reviews)
+COPY RateMyProfessor.com-Web-Scraper/cs_professors_with_reviews.json /app/cs_professors_with_reviews.json
 COPY RateMyProfessor.com-Web-Scraper/cs_professors.json /app/cs_professors.json
+COPY RateMyProfessor.com-Web-Scraper/math_professors_with_reviews.json /app/math_professors_with_reviews.json
+COPY RateMyProfessor.com-Web-Scraper/math_professors.json /app/math_professors.json
 RUN python import_rmp_ratings.py || echo "RMP import skipped (file not found or error)"
 
 FROM deps AS dev

@@ -1,0 +1,35 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "SOC",
+      "course_number": 1100,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "SOC",
+      "course_number": 1110,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "SOC",
+      "course_number": 1120,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "ANTH",
+      "course_number": 1200,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "ANTH",
+      "course_number": 1210,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

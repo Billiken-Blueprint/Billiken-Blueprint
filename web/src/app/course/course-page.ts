@@ -1,8 +1,8 @@
 import {Component, ViewEncapsulation, signal, OnInit, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {Router} from '@angular/router';
 import {UserInfoService} from '../services/user-info-service/user-info-service';
-
+import {InstructorsService, Instructor as BackendInstructor} from '../services/instructors-service/instructors-service';
 
 interface SimpleCourse {
   code: string;
@@ -20,6 +20,7 @@ interface Instructor {
   email?: string;
   office?: string;
   rating?: Rating;
+  id?: number; // Optional instructor ID from backend
 }
 
 interface InfoCourse {
@@ -54,16 +55,16 @@ type GroupKey =
 const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
   // ---- Core Courses ----
   Core_Intro: [
-    {code: 'CSCI 1010', title: 'Introduction to Computer Science: Principles'},
-    {code: 'CSCI 1020', title: 'Introduction to Computer Science: Bioinformatics'},
-    {code: 'CSCI 1025', title: 'Introduction to Computer Science: Cybersecurity'},
-    {code: 'CSCI 1030', title: 'Introduction to Computer Science: Game Design'},
-    {code: 'CSCI 1040', title: 'Introduction to Computer Science: Mobile Computing'},
-    {code: 'CSCI 1050', title: 'Introduction to Computer Science: Multimedia'},
-    {code: 'CSCI 1060', title: 'Introduction to Computer Science: Scientific Programming'},
-    {code: 'CSCI 1070', title: 'Introduction to Computer Science: Taming Big Data'},
-    {code: 'CSCI 1080', title: 'Introduction to Computer Science: World Wide Web'},
-    {code: 'CSCI 1090', title: 'Introduction to Computer Science: Special Topics'}
+    {code: 'CSCI 1010', title: 'Intro to Computer Science: Principles'},
+    {code: 'CSCI 1020', title: 'Intro to Computer Science: Bioinformatics'},
+    {code: 'CSCI 1025', title: 'Intro to Computer Science: Cybersecurity'},
+    {code: 'CSCI 1030', title: 'Intro to Computer Science: Game Design'},
+    {code: 'CSCI 1040', title: 'Intro to Computer Science: Mobile Computing'},
+    {code: 'CSCI 1050', title: 'Intro to Computer Science: Multimedia'},
+    {code: 'CSCI 1060', title: 'Intro to Computer Science: Scientific Programming'},
+    {code: 'CSCI 1070', title: 'Intro to Computer Science: Taming Big Data'},
+    {code: 'CSCI 1080', title: 'Intro to Computer Science: World Wide Web'},
+    {code: 'CSCI 1090', title: 'Intro to Computer Science: Special Topics'}
   ],
   Core_Prog: [
     {code: 'CSCI 1300', title: 'Introduction to Object-Oriented Programming'},
@@ -106,7 +107,7 @@ const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
     {code: 'STAT 3850', title: 'Foundation of Statistics'}
   ],
   Stem_MathAdv: [
-    {code: 'MATH 2530', title: 'Calculus III (example advanced math)'},
+    {code: 'MATH 2530', title: 'Calculus III'},
     {code: 'MATH 3110', title: 'Linear Algebra (example)'},
     {code: 'MATH 3120', title: 'Advanced Linear Algebra (example)'},
     {code: 'STAT 4000', title: 'Advanced Statistics (example)'},
@@ -199,6 +200,7 @@ export class CoursePage implements OnInit {
   expandedCourseCode: string | null = null;
 
   savedCourses: SimpleCourse[] = [];
+  allInstructors = signal<BackendInstructor[]>([]);
   readonly courseGroups: { key: GroupKey; label: string }[] = [
     {key: 'Core_Intro', label: 'Intro to CS'},
     {key: 'Core_Prog', label: 'Programming & Data Structures'},
@@ -291,9 +293,14 @@ export class CoursePage implements OnInit {
       description:
         'An introduction to computer systems, from hardware to operating systems. Topics include computer architecture, instruction sets, data representation, memory systems, and how the operating system manages processes and user applications. (Offered in Fall)',
       prerequisites:
-        '(CSCI 2100)* Concurrent enrollment allowed.',
-      meetingTimes: 'MWF 2:10–3:00',
+        'CSCI 2100* * Concurrent enrollment allowed.',
+      meetingTimes: 'MWF 11am-11:50am',
       location: 'Ritter 115',
+      instructors: [
+        {
+          name: 'John Allen'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -456,9 +463,15 @@ export class CoursePage implements OnInit {
       code: 'CSCI 3910',
       title: 'Internship with Industry',
       credits: 6,
-      description: 'A work experience with an agency, firm, or organization that employs persons in this degree field. Learning plan and follow-up evaluation required. 1-6 Credits (Repeatable for credit).',
-      prerequisites: '(CORE 1000 or UUC Ignite Seminar Waiver with a minimum score of S); CORE 1500* Concurrent enrollment allowed.',
-      attributes: 'UUC:Reflection-in-Action',
+      description: 'A work experience with an agency, firm, or organization that employs persons in this degree field. Learning plan and follow-up evaluation required.',
+      prerequisites: 'CORE 1000; CORE 1500* * Concurrent enrollment allowed.',
+      attributes: 'UUC Reflection-in-Action (URIA)',
+      meetingTimes: 'Does Not Meet',
+      instructors: [
+        {
+          name: 'Jason Fritts'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -549,14 +562,21 @@ export class CoursePage implements OnInit {
       credits: 3,
       description: 'This course examines the moral, legal, and social issues raised by computers and electronic information technologies for different stakeholder groups (professionals, users, businesses, etc.). Students are expected to integrate moral theories and social analysis to address such issues as intellectual property, security, privacy, discrimination, globalization, and community.',
       prerequisites: 'PHIL 2050',
-      attributes: 'Philosophy Requirement (A&S), UUC:Dignity, Ethics & Just Soc',
+      attributes: 'Philosophy Requirement (A&S) (PHIL), UUC Dignity, Ethics, and a Just Society (Equity and Global Identities) (UDEJ)',
+      meetingTimes: 'MWF 12pm-12:50pm | MWF 1:10pm-2pm',
+      location: 'RTH 216 - Ritter Hall 216',
+      instructors: [
+        {
+          name: 'James McCollum'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
     // Additional CSCI courses from PDFs
     {
       code: 'CSCI 1010',
-      title: 'Introduction to Computer Science: Principles',
+      title: 'Intro to Computer Science: Principles',
       credits: 3,
       description: 'A broad survey of the computer science discipline, focusing on the computer\'s role in representing, storing, manipulating, organizing and communicating information. Topics include hardware, software, algorithms, operating systems, networks.',
       prerequisites: undefined,
@@ -566,7 +586,7 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1020',
-      title: 'Introduction to Computer Science: Bioinformatics',
+      title: 'Intro to Computer Science: Bioinformatics',
       credits: 3,
       description: 'An introduction to computer programming motivated by the analysis of biological data sets and the modeling of biological systems. Computing concepts to include data representation, control structures, text processing, input and output. Applications to include the representation and analysis of protein and genetic sequences, and the use of available biological data sets.',
       prerequisites: undefined,
@@ -576,7 +596,7 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1025',
-      title: 'Introduction to Computer Science: Cybersecurity',
+      title: 'Intro to Computer Science: Cybersecurity',
       credits: 3,
       description: 'An introduction to the fundamental principles of computer and network security, privacy-preserving communication techniques, and an overview of prominent attacks on computer systems, networks, and the Web. Students will gain an understanding of security and privacy, including vulnerabilities and requirements of a secure system, and will conduct a series of lab exercises to explore these topics.',
       prerequisites: undefined,
@@ -586,7 +606,7 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1030',
-      title: 'Introduction to Computer Science: Game Design',
+      title: 'Intro to Computer Science: Game Design',
       credits: 3,
       description: 'Introduces the design of computer and video games. Students learn the practical aspects of game implementation using computer game engines and 3D graphics tools, while simultaneously studying game concepts like history, genres, storylines, gameplay elements and challenges, and the design process.',
       prerequisites: undefined,
@@ -596,7 +616,7 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1040',
-      title: 'Introduction to Computer Science: Mobile Computing',
+      title: 'Intro to Computer Science: Mobile Computing',
       credits: 3,
       description: 'An introduction to programming based on the development of apps for mobile devices such as phones and tablets. Students will learn to design an effective user interface, to interact with device hardware and sensors, to store data locally and access Internet resources.',
       prerequisites: undefined,
@@ -606,7 +626,7 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1050',
-      title: 'Introduction to Computer Science: Multimedia',
+      title: 'Intro to Computer Science: Multimedia',
       credits: 3,
       description: 'An introduction to computer programming, motivated by the creation and manipulation of images, animations, and audio. Traditional software development concepts, such as data representation and control flow, are introduced for the purpose of image processing, data visualization, and the synthesis and editing of audio.',
       prerequisites: undefined,
@@ -616,27 +636,39 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1060',
-      title: 'Introduction to Computer Science: Scientific Programming',
+      title: 'Intro to Computer Science: Scientific Programming',
       credits: 3,
       description: 'Elementary computer programming concepts with an emphasis on problem solving and applications to scientific and engineering applications. Topics include data acquisition and analysis, simulation and scientific visualization.',
-      prerequisites: '(MATH 1510 or SLU Math Placement with a minimum score of 1520) * Concurrent enrollment allowed.',
-      attributes: 'CSCI Intro to Computer Science, Foreign Language BA Req (CAS), UUC:Quantitative Reasoning',
+      prerequisites: '(MATH 1510*, MATH 1320, MATH 1520, MATH 2530, or SLU Math Placement with a minimum score of 1520) * Concurrent enrollment allowed.',
+      attributes: 'CSCI Intro to Computer Science (CSIN), Foreign Language BA Req (A&S) (FLBA), UUC Quantitative Reason (Ways of Thinking) (UQR)',
+      meetingTimes: 'TTh 11am-12:15pm | MWF 11am-11:50am',
+      location: 'RTH 115 - Ritter Hall 115 | Sinquefield Science & Engineering Center, Comp Sci Lab 230',
+      instructors: [
+        {
+          name: 'Reza Tourani'
+        },
+        {
+          name: 'Nan Cen'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
     {
       code: 'CSCI 1070',
-      title: 'Introduction to Computer Science: Taming Big Data',
+      title: 'Intro to Computer Science: Taming Big Data',
       credits: 3,
       description: 'An introduction to data science and machine learning. Fundamentals of data representation and analysis will be covered, with a focus on real-world applications to business intelligence, natural language processing, and social network analysis.',
       prerequisites: undefined,
-      attributes: 'CSCI Intro to Computer Science, UUC:Quantitative Reasoning',
+      attributes: 'CSCI Intro to Computer Science (CSIN), UUC Quantitative Reason (Ways of Thinking) (UQR)',
+      meetingTimes: 'TTh 2:15pm-3:30pm',
+      location: 'RTH 115 - Ritter Hall 115',
       expandedDesc: false,
       expandedInstructors: false
     },
     {
       code: 'CSCI 1080',
-      title: 'Introduction to Computer Science: World Wide Web',
+      title: 'Intro to Computer Science: World Wide Web',
       credits: 3,
       description: 'An introduction to the technology of the web, from the structure of the Internet (web science) to the design of dynamic web pages (web development). The web science component of the class introduces notions of the web as an example of a network and use the tools of graph theory to better understand the web. The web development component introduces some of the fundamental languages and tools for web programming.',
       prerequisites: undefined,
@@ -646,9 +678,9 @@ export class CoursePage implements OnInit {
     },
     {
       code: 'CSCI 1090',
-      title: 'Introduction to Computer Science: Special Topics',
+      title: 'Intro to Computer Science: Special Topics',
       credits: 3,
-      description: '(Repeatable for credit) Special topics offerings that qualify for CSCI 10XX: Introduction to Computer Science credit.',
+      description: '(Repeatable for credit) Special topics offerings that qualify for CSCI 10XX: Intro to Computer Science credit.',
       prerequisites: undefined,
       attributes: 'CSCI Intro to Computer Science',
       expandedDesc: false,
@@ -759,8 +791,15 @@ export class CoursePage implements OnInit {
       title: 'Web Technologies',
       credits: 3,
       description: 'An overview of the client-side and server-side technologies that power the modern web. Hands-on experience with interactive web site and web application development for desktop and mobile. (Offered occasionally)',
-      prerequisites: undefined,
+      prerequisites: 'CSCI 2300',
       attributes: undefined,
+      meetingTimes: 'TTh 11am-12:15pm',
+      location: 'MH 010 - Manresa Hall 010',
+      instructors: [
+        {
+          name: 'Anas Abbood'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -789,8 +828,15 @@ export class CoursePage implements OnInit {
       title: 'Operating Systems',
       credits: 3,
       description: 'This comprehensive course delves into the fundamental theories and practical applications of operating systems as effective managers of shared computer hardware resources such as processors, memory, mass storage devices, and peripheral components. Additionally, it introduces students to the essential principles of computer networking. Through hands-on experiences, students will gain expertise in general systems programming, concurrent and parallel programming techniques, and network programming.',
-      prerequisites: undefined,
+      prerequisites: 'CSCI 2510',
       attributes: undefined,
+      meetingTimes: 'MWF 10am-10:50am',
+      location: 'PAH 111 - Padre Arrupe Hall 111',
+      instructors: [
+        {
+          name: 'Asad Rehman'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -809,8 +855,18 @@ export class CoursePage implements OnInit {
       title: 'Computer Security',
       credits: 3,
       description: 'Fundamental introduction to the broad area of computer security. Topics include access control, security policy design, network security, cryptography, ethics, securing systems, and common vulnerabilities in computer systems.',
-      prerequisites: undefined,
+      prerequisites: '(CSCI 2510 or CSCI 3500)',
       attributes: undefined,
+      meetingTimes: 'TTh 9:30am-10:45am | MWF 12pm-12:50pm',
+      location: 'Varies by section',
+      instructors: [
+        {
+          name: 'Reza Tourani'
+        },
+        {
+          name: 'Asad Rehman'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -818,9 +874,16 @@ export class CoursePage implements OnInit {
       code: 'CSCI 4550',
       title: 'Computer Networks',
       credits: 3,
-      description: 'An exploration of the underlying concepts and principles of computer networks. Topics include communication protocols such as TCP/IP, design of network architectures, and the management and security of networks. Examples of real networks will be used to reinforce and demonstrate concepts.',
-      prerequisites: undefined,
+      description: 'An exploration of the underlying concepts and principles of computer networks. Topics include communication protocols such as TCP/IP, design of network architectures, and the management and security of networks. Examples of real networks will be used to reinforce and demonstrate concepts',
+      prerequisites: '(CSCI 2510 or CSCI 3500)',
       attributes: undefined,
+      meetingTimes: 'TTh 12:45pm-2pm',
+      location: 'Sinquefield Science & Engineering Center, Comp Sci Lab 230',
+      instructors: [
+        {
+          name: 'Flavio Esposito'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -839,8 +902,15 @@ export class CoursePage implements OnInit {
       title: 'Concurrent and Parallel Programming',
       credits: 3,
       description: 'The design and implementation of software that fully leverages a single computer\'s resources. Topics include profiling and optimization of codes, multi-threaded programming, parallelism using a graphical processor unit (GPU), and efficient use of memory cache. (Offered occasionally)',
-      prerequisites: undefined,
+      prerequisites: '(CSCI 2510 or CSCI 3500)',
       attributes: undefined,
+      meetingTimes: 'TTh 11am-12:15pm',
+      location: 'Ritter Hall Room 323 (Laptop Friendly)',
+      instructors: [
+        {
+          name: 'Ted Ahn'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -859,8 +929,15 @@ export class CoursePage implements OnInit {
       title: 'Databases',
       credits: 3,
       description: 'Fundamentals of database systems. Topics include relational and NoSQL data models, structured query language, the entity-relationship model, normalization, transactions, file organization and indexes, and data security issues. The knowledge of the listed topics is applied to design and implementation of a database application.',
-      prerequisites: undefined,
+      prerequisites: 'CSCI 2100',
       attributes: undefined,
+      meetingTimes: 'MWF 1:10pm-2pm',
+      location: 'BSC 253 - Busch Student Center 253',
+      instructors: [
+        {
+          name: 'Md Mainul Islam Mamun'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -879,8 +956,15 @@ export class CoursePage implements OnInit {
       title: 'Machine Learning',
       credits: 3,
       description: 'This course introduces students to the field of machine learning with emphasis on the probabilistic models that dominate contemporary applications. Students will discover how computers can learn from examples and extract salient patterns hidden in large data sets. The course will introduce classification algorithms that predict discrete states for variables as well as regression algorithms that predict continuous values for variables. Attention will be given to both supervised and unsupervised settings in which (respectively) labeled training data is or is not available.',
-      prerequisites: 'STAT 3850',
-      attributes: undefined,
+      prerequisites: 'STAT 3850; CSCI 2100; MATH 2530',
+      attributes: 'Geospatial - Elective (GEOS)',
+      meetingTimes: 'MWF 10am-10:50am',
+      location: 'BSC 253 - Busch Student Center 253',
+      instructors: [
+        {
+          name: 'TBA'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -909,8 +993,15 @@ export class CoursePage implements OnInit {
       title: 'Big Data Analytics',
       credits: 3,
       description: 'This course will introduce basic concepts in the business analytics field, along with some popular techniques and tools. Students will have opportunities to explore and analyze large quantities of observational data in order to discover meaningful patterns and useful information to support decision making in business contexts.',
-      prerequisites: undefined,
+      prerequisites: 'CSCI 4710',
       attributes: undefined,
+      meetingTimes: 'MWF 2:10pm-3pm',
+      location: 'BSC 253 - Busch Student Center 253',
+      instructors: [
+        {
+          name: 'Md Mainul Islam Mamun'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -939,8 +1030,15 @@ export class CoursePage implements OnInit {
       title: 'Computer Vision',
       credits: 3,
       description: 'This course will introduce the fundamentals of image processing and computer vision, including image models and representation, image analysis methods such as feature extraction (color, texture, edges, shape, skeletons, etc.), image transformations, image segmentation, image understanding, motion and video analysis, and application-specific methods such as medical imaging, facial recognition, and content-based image retrieval. (Offered occasionally)',
-      prerequisites: undefined,
+      prerequisites: 'CSCI 2100',
       attributes: undefined,
+      meetingTimes: 'TTh 3:45pm-5pm',
+      location: 'Sinquefield Science & Engineering Center, Comp Sci Lab 230',
+      instructors: [
+        {
+          name: 'Hadi Akbarpour'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -980,8 +1078,24 @@ export class CoursePage implements OnInit {
       title: 'Calculus I',
       credits: 4,
       description: 'Functions; continuity; limits; the derivative; differentiation from graphical, numerical and analytical viewpoints; optimization and modeling; rates and related rates; the definite integral; antiderivatives from graphical, numerical and analytical viewpoints.',
-      prerequisites: undefined,
-      attributes: undefined,
+      prerequisites: '(Math Waiver per Advisor with a minimum score of 1400, MATH 1400 with a grade of C- or higher, or SLU Math Placement with a minimum score of 1510)',
+      attributes: 'Mathematics B.A. Req (A&S) (MTBA), Mathematics B.S Req (A&S). (MTBS), UUC Quantitative Reason (Ways of Thinking) (UQR)',
+      meetingTimes: 'MTWF 11am-11:50am | MTWF 12pm-12:50pm | MTWF 3:10pm-4pm | MWF 1:10pm-2pm | MWF 9am-9:50am | MTWF 8am-8:50am',
+      location: 'RTH 346 - Ritter Hall 346 | RTH 314 - Ritter Hall 314 | RTH 202 - Ritter Hall 202 | RTH 242 - Ritter Hall 242',
+      instructors: [
+        {
+          name: 'Theresa Jeevanjee'
+        },
+        {
+          name: 'Nirina Randrianarivony'
+        },
+        {
+          name: 'James Gill'
+        },
+        {
+          name: 'Alina Abdurakhimova'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -990,8 +1104,27 @@ export class CoursePage implements OnInit {
       title: 'Calculus II',
       credits: 4,
       description: 'Symbolic and numerical techniques of integration, improper integrals, applications using the definite integral, sequences and series, power series, Taylor series, differential equations. (Offered every Fall, Spring and Summer)',
-      prerequisites: undefined,
-      attributes: undefined,
+      prerequisites: '(Math Waiver per Advisor with a minimum score of 1510, MATH 1510 with a grade of C- or higher, AP Calculus AB with a minimum score of 4, or SLU Math Placement with a minimum score of 1520)',
+      attributes: 'Mathematics B.A. Req (A&S) (MTBA), Mathematics B.S Req (A&S). (MTBS), UUC Quantitative Reason (Ways of Thinking) (UQR)',
+      meetingTimes: 'MTWF 8am-8:50am | MTWF 10am-10:50am | MTWF 2:10pm-3pm | MWF 9am-9:50am | MTWF 3:10pm-4pm',
+      location: 'RTH 202 - Ritter Hall 202 | RTH 120 - Ritter Hall 120 | Ritter Hall Room 323 (Laptop Friendly) | RTH 327 - Ritter Hall 327 | RTH 314 - Ritter Hall 314',
+      instructors: [
+        {
+          name: 'Anneke Bart'
+        },
+        {
+          name: 'Ozlem Ugurlu'
+        },
+        {
+          name: 'Dorsa Ghoreishi'
+        },
+        {
+          name: 'Brody Johnson'
+        },
+        {
+          name: 'Ashish Srivastava'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1000,8 +1133,15 @@ export class CoursePage implements OnInit {
       title: 'Discrete Mathematics',
       credits: 3,
       description: 'Concepts of discrete mathematics used in computer science; sets, sequences, strings, symbolic logic, proofs, mathematical induction, sums and products, number systems, algorithms, complexity, graph theory, finite state machines.',
-      prerequisites: undefined,
-      attributes: undefined,
+      prerequisites: '(MATH 1200 with a grade of C- or higher, Math Waiver per Advisor with a minimum score of 1200, or SLU Math Placement with a minimum score of 1400)',
+      attributes: 'Mathematics B.A. Req (A&S) (MTBA), Mathematics B.S Req (A&S). (MTBS)',
+      meetingTimes: 'MWF 2:10pm-3pm | MWF 1:10pm-2pm',
+      location: 'RTH 229 - Ritter Hall 229',
+      instructors: [
+        {
+          name: 'Gregory Marks'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1010,8 +1150,18 @@ export class CoursePage implements OnInit {
       title: 'Calculus III',
       credits: 4,
       description: 'Three-dimensional analytic geometry, vector-valued functions, partial differentiation, multiple integration, and line integrals. (Offered every Fall and Spring)',
-      prerequisites: undefined,
-      attributes: undefined,
+      prerequisites: '(MATH 1520 with a grade of C- or higher, Math Waiver per Advisor with a minimum score of 1520, or SLU Math Placement with a minimum score of 2530)',
+      attributes: 'Geospatial - Elective (GEOS), Mathematics B.A. Req (A&S) (MTBA), Mathematics B.S Req (A&S). (MTBS), UUC Quantitative Reason (Ways of Thinking) (UQR)',
+      meetingTimes: 'MTWF 9am-9:50am | MTWF 2:10pm-3pm | MTWF 1:10pm-2pm',
+      location: 'RTH 346 - Ritter Hall 346 | RTH 120 - Ritter Hall 120 | RTH 202 - Ritter Hall 202 (1/12 to 5/12)',
+      instructors: [
+        {
+          name: 'Cody Gilbert'
+        },
+        {
+          name: 'John Kalliongis'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1019,9 +1169,19 @@ export class CoursePage implements OnInit {
       code: 'MATH 3110',
       title: 'Linear Algebra for Engineers',
       credits: 3,
-      description: 'Systems of linear equations, matrices, linear programming, determinants, vector spaces, inner product spaces, eigenvalues and eigenvectors, linear transformations, and numerical methods.',
-      prerequisites: undefined,
-      attributes: undefined,
+      description: 'Systems of linear equations, matrices, linear programming, determinants, vector spaces, inner product spaces, eigenvalues and eigenvectors, linear transformations, and numerical methods. Credit not given for both MATH 3110 and MATH 3120. Does not satisfy any requirements for the mathematics major. (Offered in Spring)',
+      prerequisites: '(MATH 1520 with a grade of C- or higher or SLU Math Placement with a minimum score of 2530)',
+      attributes: 'Geospatial - Elective (GEOS)',
+      meetingTimes: 'MWF 9am-9:50am | MWF 10am-10:50am',
+      location: 'Ritter Hall Room 323 (Laptop Friendly) | RTH 314 - Ritter Hall 314 (1/12 to 5/12)',
+      instructors: [
+        {
+          name: 'Vahan Huroyan'
+        },
+        {
+          name: 'Michael May'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1029,9 +1189,16 @@ export class CoursePage implements OnInit {
       code: 'MATH 3120',
       title: 'Introduction to Linear Algebra',
       credits: 3,
-      description: 'Systems of linear equations, matrices, linear programming, determinants, vector spaces, inner product spaces, eigenvalues and eigenvectors, linear transformations, and numerical methods.',
-      prerequisites: undefined,
+      description: 'Matrices, row operations with matrices, determinants, systems of linear equations, vector spaces, linear transformations, inner products, eigenvalues and eigenvectors. Credit not given for both MATH 3110 and MATH 3120. (Offered every Fall and Spring)',
+      prerequisites: 'MATH 2530; MATH 2660',
       attributes: undefined,
+      meetingTimes: 'MWF 12pm-12:50pm',
+      location: 'RTH 202 - Ritter Hall 202 (1/12 to 5/12)',
+      instructors: [
+        {
+          name: 'Cody Gilbert'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1059,9 +1226,19 @@ export class CoursePage implements OnInit {
       code: 'STAT 3850',
       title: 'Foundation of Statistics',
       credits: 3,
-      description: 'Introduction to statistical methods and their applications. Topics include descriptive statistics, probability, sampling distributions, estimation, hypothesis testing, and regression analysis.',
-      prerequisites: 'MATH 1520',
-      attributes: undefined,
+      description: 'Descriptive statistics, probability distributions, random variables, expectation, independence, hypothesis testing, confidence intervals, regression and ANOVA. Applications and theory. Taught using statistical software. Credit not given toward the math major or minors for both MATH 3810 and MATH 3850 / STAT 3850.',
+      prerequisites: '(MATH 1520 or SLU Math Placement with a minimum score of 2530)',
+      attributes: 'Bio-Chemical Biology Elective (CBE), Chemical Biology Elective (CBEL)',
+      meetingTimes: 'TTh 12:45pm-2pm | MWF 12pm-12:50pm',
+      location: 'Ritter Hall Room 236 (Laptop Friendly) | RTH 242 - Ritter Hall 242 (1/12 to 5/12)',
+      instructors: [
+        {
+          name: 'Philip Huling'
+        },
+        {
+          name: 'Hugo Panzo'
+        }
+      ],
       expandedDesc: false,
       expandedInstructors: false
     },
@@ -1097,10 +1274,116 @@ export class CoursePage implements OnInit {
     }
   ]);
   private userInfoService = inject(UserInfoService);
+  private instructorsService = inject(InstructorsService);
+  private router = inject(Router);
+
 
   get groupCourses(): SimpleCourse[] {
     return this.selectedGroup ? COURSE_GROUP_DATA[this.selectedGroup] ?? [] : [];
   }
+
+
+  hasLocationInfo(code: string): boolean {
+    const details = this.getCourseDetails(code);
+    return !!(details?.meetingTimes || details?.location);
+  }
+
+
+  loadInstructors(): void {
+    this.instructorsService.getInstructors().subscribe({
+      next: (instructors) => {
+        this.allInstructors.set(instructors);
+        // Match instructor IDs to course instructors by name
+        this.matchInstructorIds();
+      },
+      error: (err) => {
+        console.error('Error loading instructors:', err);
+      }
+    });
+  }
+
+  matchInstructorIds(): void {
+    // Update course instructors with IDs and ratings from backend
+    const instructors = this.courses();
+    const allInstructors = this.allInstructors();
+    const updated = instructors.map(course => {
+      if (course.instructors) {
+        const updatedInstructors = course.instructors.map(inst => {
+          // Try exact match first
+          let matched = allInstructors.find(ai =>
+            ai.name.toLowerCase() === inst.name.toLowerCase()
+          );
+          // If no exact match, try matching by last name (handles "Greg" vs "Gregory Marks")
+          if (!matched) {
+            const instNameParts = inst.name.toLowerCase().split(/\s+/);
+            matched = allInstructors.find(ai => {
+              const aiNameParts = ai.name.toLowerCase().split(/\s+/);
+              // Match if last names match
+              if (instNameParts.length > 0 && aiNameParts.length > 0 &&
+                instNameParts[instNameParts.length - 1] === aiNameParts[aiNameParts.length - 1]) {
+                // Also check if first names are similar (Greg/Gregory, Jim/James)
+                const instFirst = instNameParts[0];
+                const aiFirst = aiNameParts[0];
+                return (instFirst === aiFirst ||
+                  instFirst.startsWith(aiFirst) ||
+                  aiFirst.startsWith(instFirst) ||
+                  (instFirst === "greg" && aiFirst === "gregory") ||
+                  (aiFirst === "greg" && instFirst === "gregory") ||
+                  (instFirst === "jim" && aiFirst === "james") ||
+                  (aiFirst === "jim" && instFirst === "james"));
+              }
+              return false;
+            });
+          }
+          if (matched) {
+            // Merge backend data: keep existing email/office if set, add id and rating
+            return {
+              ...inst,
+              id: matched.id,
+              rating: matched.rmpRating !== null && matched.rmpRating !== undefined ? {
+                overall: matched.rmpRating,
+                numRatings: matched.rmpNumRatings ?? 0,
+                rmpUrl: matched.rmpUrl ?? undefined
+              } : inst.rating
+            };
+          }
+          return {...inst, id: undefined};
+        });
+        return {...course, instructors: updatedInstructors};
+      }
+      return course;
+    });
+    this.courses.set(updated);
+  }
+
+  hasInstructorReviews(inst: Instructor): boolean {
+    if (inst.id) return true;
+    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
+  }
+
+  openReviewsPage(instructor: Instructor): void {
+    let instructorId: number | null = null;
+
+    if (instructor.id) {
+      instructorId = instructor.id;
+    } else {
+      // Try to find instructor ID by name
+      const matched = this.allInstructors().find(ai =>
+        ai.name.toLowerCase() === instructor.name.toLowerCase()
+      );
+      if (matched) {
+        instructorId = matched.id ?? null;
+      } else {
+        console.warn('Instructor ID not found for:', instructor.name);
+        return;
+      }
+    }
+
+    if (instructorId) {
+      this.router.navigate(['/instructors', instructorId, 'reviews']);
+    }
+  }
+
 
   onSelectGroup(key: GroupKey): void {
     this.selectedGroup = key;
@@ -1122,6 +1405,7 @@ export class CoursePage implements OnInit {
   loadSavedCourses(): void {
     this.userInfoService.getUserInfo().subscribe({
       next: (userInfo) => {
+
         if (userInfo.savedCourseCodes && userInfo.savedCourseCodes.length > 0) {
           // Map saved course codes to SimpleCourse objects
           this.savedCourses = userInfo.savedCourseCodes
@@ -1136,6 +1420,7 @@ export class CoursePage implements OnInit {
             })
             .filter(c => c !== null) as SimpleCourse[];
         }
+
       },
       error: (error) => {
         console.error('Error loading saved courses:', error);
@@ -1186,6 +1471,7 @@ export class CoursePage implements OnInit {
     copy[index] = {...copy[index], expandedInstructors: !copy[index].expandedInstructors};
     this.courses.set(copy);
   }
+
 
   private saveCoursesToBackend(): void {
     const savedCourseCodes = this.savedCourses.map(c => c.code);

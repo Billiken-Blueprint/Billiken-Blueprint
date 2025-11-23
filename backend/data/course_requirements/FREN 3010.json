@@ -1,0 +1,17 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "FREN",
+      "course_number": 2010,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "FREN",
+      "course_number": 3000,
+      "end_number": 3999,
+      "concurrent_allowed": false
+    }
+  ]
+}

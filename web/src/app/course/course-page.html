@@ -103,15 +103,20 @@
           class="bb-course-card p-4 rounded-xl relative"
         >
           <div class="pr-10">
-            <p class="font-semibold mb-1 cursor-pointer" (click)="toggleCourseDescription(course.code)">
-              {{ course.code }} – {{ course.title }}
-            </p>
+            <div class="flex items-center mb-1">
+              <p class="font-semibold cursor-pointer" (click)="toggleCourseDescription(course.code)">
+                {{ course.code }} – {{ course.title }}
+              </p>
+              <span *ngIf="hasLocationInfo(course.code)" 
+                    class="ml-2 px-2 py-0.5 text-xs font-semibold rounded-full bg-green-100 text-green-700 border border-green-300 whitespace-nowrap">
+                Spring 2026
+              </span>
+            </div>
             
             <!-- Course details from course-info - exact format match -->
             <ng-container *ngIf="expandedCourseCode === course.code && getCourseDetails(course.code) as details">
               <article class="course-info-expanded mt-3">
                 <header class="card-head">
-                  <h2 class="title">{{ details.code }} — {{ details.title }}</h2>
                   <span class="credit-pill">{{ details.credits }} credit{{ details.credits === 1 ? '' : 's' }}</span>
                 </header>
 
@@ -152,7 +157,9 @@
                 <section *ngIf="details.expandedInstructors" class="details">
                   <div *ngFor="let inst of details.instructors || []" class="instructor-row">
                     <div class="inst-main">
-                      <p class="inst-name">{{ inst.name }}</p>
+                      <p class="inst-name" [class.cursor-pointer]="hasInstructorReviews(inst)" 
+                         [class.hover\:underline]="hasInstructorReviews(inst)"
+                         (click)="openReviewsPage(inst)">{{ inst.name }}</p>
                       <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
                       <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
                     </div>
@@ -160,8 +167,14 @@
                     <div *ngIf="inst.rating" class="inst-rating">
                       <div><strong>Overall Rating:</strong> {{ inst.rating.overall }}/5</div>
                       <div><strong>Rating Numbers:</strong> {{ inst.rating.numRatings }}</div>
-                      <a *ngIf="inst.rating.rmpUrl" [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
-                        See reviews
+                      <button *ngIf="hasInstructorReviews(inst)" 
+                              (click)="openReviewsPage(inst); $event.stopPropagation()"
+                              class="rmp-link-button text-blue-600 hover:text-blue-800 underline cursor-pointer">
+                        View reviews
+                      </button>
+                      <a *ngIf="inst.rating.rmpUrl && !hasInstructorReviews(inst)" 
+                         [href]="inst.rating.rmpUrl" class="rmp-link" rel="noopener" target="_blank">
+                        See reviews on RMP
                       </a>
                     </div>
                   </div>
@@ -174,8 +187,8 @@
             <!-- Fallback if course details not found -->
             <div *ngIf="expandedCourseCode === course.code && !getCourseDetails(course.code)" class="mt-3">
               <p class="text-[#003DA5]/80 italic text-sm">
-                Course details coming soon.
-              </p>
+              Course details coming soon.
+            </p>
             </div>
           </div>
 
@@ -322,5 +335,4 @@
       </div>
     </section>
   </div>
-
 </div>

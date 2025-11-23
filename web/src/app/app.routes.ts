@@ -11,6 +11,7 @@ import { CoursePage } from './course/course-page';
 import {SchedulingPage} from './scheduling-page/scheduling-page';
 import { DegreeRoadmapPageComponent } from './degree-roadmap-page/degree-roadmap-page.component';
 
+import {InstructorReviewsPage} from './instructor-reviews-page/instructor-reviews-page';
 
 export const routes: Routes = [
   {
@@ -61,4 +62,8 @@ export const routes: Routes = [
   { 
     path: 'degree-roadmap', 
     component: DegreeRoadmapPageComponent },
+  {
+    path: 'instructors/:id/reviews',
+    component: InstructorReviewsPage
+  }
 ];

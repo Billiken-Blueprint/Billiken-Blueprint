@@ -4,7 +4,7 @@ from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 from sqlalchemy import JSON
 
-from billiken_blueprint.domain.section import Section
+from billiken_blueprint.domain.section import Section, MeetingTime
 
 
 class SectionRepositoryDBEntity(Base):
@@ -18,6 +18,7 @@ class SectionRepositoryDBEntity(Base):
     title: Mapped[str] = mapped_column()
     course_code: Mapped[str] = mapped_column()
     semester: Mapped[str] = mapped_column()
+    meeting_times: Mapped[list[dict]] = mapped_column(JSON)
 
     def to_domain(self) -> Section:
         return Section(
@@ -29,6 +30,14 @@ class SectionRepositoryDBEntity(Base):
             title=self.title,
             course_code=self.course_code,
             semester=self.semester,
+            meeting_times=[
+                MeetingTime(
+                    day=mt["day"],
+                    start_time=mt["start_time"],
+                    end_time=mt["end_time"],
+                )
+                for mt in self.meeting_times
+            ],
         )
 
 
@@ -58,6 +67,14 @@ class SectionRepository:
                 db_entity.title = section.title
                 db_entity.course_code = section.course_code
                 db_entity.semester = section.semester
+                db_entity.meeting_times = [
+                    {
+                        "day": mt.day,
+                        "start_time": mt.start_time,
+                        "end_time": mt.end_time,
+                    }
+                    for mt in section.meeting_times
+                ]
             else:
                 db_entity = SectionRepositoryDBEntity(
                     crn=section.crn,
@@ -67,6 +84,14 @@ class SectionRepository:
                     title=section.title,
                     course_code=section.course_code,
                     semester=section.semester,
+                    meeting_times=[
+                        {
+                            "day": mt.day,
+                            "start_time": mt.start_time,
+                            "end_time": mt.end_time,
+                        }
+                        for mt in section.meeting_times
+                    ],
                 )
                 session.add(db_entity)
 

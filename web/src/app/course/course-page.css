@@ -7,7 +7,6 @@ body {
     color: #003DA5;
     min-height: 100vh;
     margin: 0;
-    padding-top: 5rem;
 }
 
 h1, h2, h3 {
@@ -16,7 +15,7 @@ h1, h2, h3 {
 }
 
 .card-container {
-    min-height: 400px;
+    min-height: 200px;
     background-color: #FFFFFF;
     box-shadow: 0 10px 30px rgba(0, 50, 165, 0.1);
     transition: all 0.3s ease-in-out;
@@ -281,7 +280,7 @@ h1, h2, h3 {
 #toolbox-toggle {
     position: fixed;
     top: 1.5rem;
-    left: 1.5rem;
+    left: 0.75rem;
     z-index: 60;
     background-color: #53C3EE;
     color: #003DA5;

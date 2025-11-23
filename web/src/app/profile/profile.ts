@@ -164,11 +164,7 @@ export class ProfilePage implements OnInit {
         // Map UserInfo to UserProfile
         this.userProfile = {
           fullName: userInfo.name,
-          major: userInfo.major,
-          minor: userInfo.minor || undefined,
           graduationYear: userInfo.graduationYear,
-          completedCourses: userInfo.completedCourses?.map(c => c.courseCode) || [],
-          totalCredits: userInfo.completedCourses?.length || 0
         };
         this.populateForm();
       },
@@ -307,26 +303,24 @@ export class ProfilePage implements OnInit {
         minor: formValue.minor || null,
         completedCourseIds: selectedCourseIds
       };
+      /*
+        this.userInfoService.updateUserInfo(updateBody).subscribe({
+          next: (userInfo) => {
+            // Update local profile with response
+            this.userProfile = {
+              fullName: userInfo.name,
+              graduationYear: userInfo.graduationYear,
+            };
+            this.isEditing = false;
+            alert('Profile updated successfully!');
+          },
+          error: (error) => {
+            console.error('Error updating profile:', error);
+            alert('Error updating profile. Please try again.');
+          }
+        });
 
-      this.userInfoService.updateUserInfo(updateBody).subscribe({
-        next: (userInfo) => {
-          // Update local profile with response
-          this.userProfile = {
-            fullName: userInfo.name,
-            major: userInfo.major,
-            minor: userInfo.minor || undefined,
-            graduationYear: userInfo.graduationYear,
-            completedCourses: userInfo.completedCourses?.map(c => c.courseCode) || [],
-            totalCredits: userInfo.completedCourses?.length || 0
-          };
-          this.isEditing = false;
-          alert('Profile updated successfully!');
-        },
-        error: (error) => {
-          console.error('Error updating profile:', error);
-          alert('Error updating profile. Please try again.');
-        }
-      });
+       */
     } else {
       // Mark all fields as touched to show validation errors
       Object.keys(this.profileForm.controls).forEach(key => {

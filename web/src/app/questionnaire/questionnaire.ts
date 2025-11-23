@@ -37,7 +37,7 @@ export class QuestionnairePage implements OnInit {
   questionnaireForm = this.formBuilder.group({
     fullName: ['', Validators.required],
     graduationYear: ['', [Validators.required, Validators.min(2024), Validators.max(2030)]],
-    major: [null, Validators.required],
+    major: new FormControl<DegreeDisplayData | null>(null, Validators.required),
     completedCourses: new FormControl([], []),
   });
   private router = inject(Router);
@@ -75,11 +75,17 @@ export class QuestionnairePage implements OnInit {
     this.userInfoService.updateUserInfo({
       name: profileData.fullName,
       graduationYear: profileData.graduationYear,
-      major: profileData.major!,
+      majorCode: profileData.major!.major,
+      degreeType: profileData.major!.degreeType,
+      college: profileData.major!.college,
       completedCourseIds: profileData.completedCourses?.map(x => x.id)
     }).subscribe({
       next: () => {
         this.router.navigate(['/home']);
+      },
+      error: (error) => {
+        console.error('Error submitting profile:', error);
+        alert('Failed to save profile. Please try again. If the problem persists, please contact support.');
       }
     });
   }

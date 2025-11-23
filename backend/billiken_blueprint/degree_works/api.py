@@ -71,8 +71,6 @@ def req_to_degree_requirement(req: dict, label: str) -> "DegreeRequirement":
     from billiken_blueprint.domain.degree import DegreeRequirement
 
     needed = req.get("classesBegin", 1)
-    print(label)
-    print(json.dumps(req, indent=2))
     course_array = req["courseArray"]
     courses = []
     for course in course_array:

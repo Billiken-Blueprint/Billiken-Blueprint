@@ -1,28 +1,176 @@
-<div class="grid grid-cols-5 grid-rows-4 gap-2 p-4 h-full flex-grow">
-  <div class="col-span-2 row-span-2">
-    <p-card class="h-full">
-      <ng-template #title>
-        <div>Projected Schedule</div>
-      </ng-template>
-    </p-card>
-  </div>
-  <div class="col-span-3 row-span-4">
-    <p-card class="h-full">
-      <ng-template #title>
-        <div>Degree Roadmap</div>
-      </ng-template>
-    </p-card>
-  </div>
-  <div class="col-span-2 row-span-2">
-    <p-card class="h-full">
-      <ng-template #title>
-        <div>AI Advisor</div>
-      </ng-template>
-      <ng-template #subtitle>
-        <div>Get matched with classes based on course descriptions and prior student reviews!</div>
-      </ng-template>
-      <textarea fluid pTextarea
-                placeholder="What do you want to do in life? What skills or technologies do you want to learn?"></textarea>
-    </p-card>
+<div class="p-8 max-w-6xl">
+  <div class="space-y-2">
+    <!-- Top-level Degree Requirements accordion -->
+    <div class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+      <button
+        (click)="toggleShowRequirements()"
+        class="w-full text-left p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-3 font-bold text-lg text-gray-900 dark:text-white"
+      >
+        <span class="text-sm">@if (showRequirements()) { ▼ } @else { ▶ }</span>
+        <span>Degree Requirements</span>
+      </button>
+
+      @if (showRequirements()) {
+      <div
+        class="bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 p-4 space-y-2"
+      >
+        @for (requirement of gradReqs(); track requirement.label; let i = $index) {
+        <div class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+          <button
+            (click)="toggleRequirement(i)"
+            class="w-full text-left p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center justify-between font-semibold text-gray-900 dark:text-white"
+          >
+            <span class="flex items-center gap-3">
+              <span class="text-sm">@if (isRequirementExpanded(i)) { ▼ } @else { ▶ }</span>
+              <span>{{ requirement.label }}</span>
+            </span>
+            <span class="text-sm text-gray-600 dark:text-gray-400"
+              >({{ requirement.satisfyingCourseCodes.length }} courses)</span
+            >
+          </button>
+
+          @if (isRequirementExpanded(i)) {
+          <div
+            class="bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 p-4 space-y-3"
+          >
+            @for (courseCode of requirement.satisfyingCourseCodes; track courseCode) {
+            <div class="border-l-4 border-gray-300 dark:border-gray-600 pl-4">
+              <button
+                (click)="toggleClass(courseCode)"
+                class="w-full text-left py-2 px-3 rounded bg-gray-50 dark:bg-gray-800 hover:bg-blue-50 dark:hover:bg-gray-700 text-gray-900 dark:text-white transition-colors flex items-center gap-2"
+              >
+                <span class="text-sm">@if (isClassExpanded(courseCode)) { ▼ } @else { ▶ }</span>
+                <span class="font-mono font-semibold">{{ courseCode }}</span>
+              </button>
+
+              @if (isClassExpanded(courseCode)) {
+              <div
+                class="mt-2 p-3 bg-gray-100 dark:bg-gray-700 rounded text-sm text-gray-700 dark:text-gray-300 italic"
+              >
+                Course details coming soon
+              </div>
+              }
+            </div>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+      }
+    </div>
+
+    <!-- Top-level Schedule accordion -->
+    <div class="border border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden">
+      <button
+        (click)="toggleShowSchedule()"
+        class="w-full text-left p-4 bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors flex items-center gap-3 font-bold text-lg text-gray-900 dark:text-white"
+      >
+        <span class="text-sm">@if (showSchedule()) { ▼ } @else { ▶ }</span>
+        <span>Your Spring 2026 Schedule</span>
+      </button>
+
+      @if (showSchedule()) {
+      <div class="bg-white dark:bg-gray-900 border-t border-gray-300 dark:border-gray-600 p-4">
+        <!-- Autogenerate button -->
+        <div class="mb-4">
+          <p-button
+            label="Autogenerate Schedule"
+            severity="primary"
+            (click)="autogenerateSchedule()"
+          ></p-button>
+        </div>
+
+        <!-- Time header -->
+        <div class="flex mb-4">
+          <div class="w-24 font-semibold text-gray-900 dark:text-white">Time</div>
+          <div class="flex-1 relative h-6">
+            @for (time of times; track time; let i = $index) { @let timePercent =
+            timePercentages[i]; @let timeRange = maxTimePercent() - minTimePercent(); @let
+            adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 :
+            -999; @if (adjustedPos >= 0 && adjustedPos <= 100) {
+            <div
+              class="absolute text-xs font-medium text-gray-700 dark:text-gray-300 w-12 text-center transform -translate-x-1/2"
+              [style.left.%]="adjustedPos"
+            >
+              {{ time }}
+            </div>
+            } }
+          </div>
+        </div>
+
+        <!-- Days rows -->
+        @for (day of days; track day; let dayIndex = $index) {
+        <div class="border-t border-gray-300 dark:border-gray-600 py-2">
+          <div class="flex">
+            <div class="w-24 font-semibold text-gray-900 dark:text-white flex items-center">
+              {{ day }}
+            </div>
+            <div
+              class="flex-1 relative h-24 border border-gray-300 dark:border-gray-600 rounded overflow-hidden bg-white dark:bg-gray-800"
+            >
+              <!-- Grid lines for each hour -->
+              @for (time of times; track time; let i = $index) { @let timePercent =
+              timePercentages[i]; @let timeRange = maxTimePercent() - minTimePercent(); @let
+              adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 :
+              -999; @if (adjustedPos >= 0 && adjustedPos <= 100) {
+              <div
+                class="absolute top-0 bottom-0 w-px bg-gray-300 dark:bg-gray-600"
+                [style.left.%]="adjustedPos"
+              ></div>
+              } }
+
+              <!-- Courses -->
+              @if (scheduleCourses()[dayIndex]?.length) { @for (course of
+              scheduleCourses()[dayIndex]; track course.courseCode) {
+              <div
+                [style.left.%]="course.leftPercent"
+                [style.width.%]="course.widthPercent"
+                class="absolute top-1 bottom-1 bg-blue-100 dark:bg-blue-900 border border-blue-300 dark:border-blue-700 rounded p-1 text-xs overflow-hidden"
+              >
+                <div class="font-semibold text-blue-900 dark:text-blue-100 truncate">
+                  {{ course.courseCode }}
+                </div>
+                <div class="text-gray-700 dark:text-gray-300 truncate text-xs">
+                  {{ course.title }}
+                </div>
+                @if (course.instructors && course.instructors.length) {
+                <div class="text-gray-600 dark:text-gray-400 text-xs">
+                  {{ course.instructors[0] }}
+                </div>
+                }
+                <div class="text-gray-600 dark:text-gray-400 text-xs mt-0.5">
+                  {{ formatTime(course.startTime) }} - {{ formatTime(course.endTime) }}
+                </div>
+              </div>
+              } }
+            </div>
+          </div>
+        </div>
+        }
+
+        <!-- Scheduled Sections Panel -->
+        @if (scheduleSections().length > 0) {
+        <div class="mt-6 pt-6 border-t border-gray-300 dark:border-gray-600">
+          <h3 class="font-semibold text-gray-900 dark:text-white mb-3">Recommended Sections</h3>
+          <div class="space-y-2">
+            @for (section of scheduleSections(); track section.courseCode) {
+            <div
+              class="p-3 bg-blue-50 dark:bg-blue-900 border border-blue-200 dark:border-blue-700 rounded text-sm text-blue-900 dark:text-blue-100"
+            >
+              <div class="font-semibold">{{ section.courseCode }}: {{ section.title }}</div>
+              @if (section.requirementLabel) {
+              <div class="text-xs text-blue-700 dark:text-blue-300 mt-1">
+                ✓ {{ section.requirementLabel }}
+              </div>
+              }
+            </div>
+            }
+          </div>
+        </div>
+        }
+      </div>
+      }
+    </div>
   </div>
 </div>

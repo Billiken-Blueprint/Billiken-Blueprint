@@ -1,0 +1,124 @@
+@if (isOpen) {
+  <div class="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4 fade-in modal-overlay" (click)="close()">
+    <div class="bg-gradient-to-br from-slate-800/95 to-slate-900/95 backdrop-blur-xl rounded-3xl p-8 md:p-10 border border-white/10 shadow-[0_20px_60px_rgba(0,0,0,0.5)] max-w-4xl w-full max-h-[90vh] overflow-y-auto modal-content" (click)="$event.stopPropagation()">
+      <div class="flex justify-between items-start mb-6">
+        <div>
+          <h3 class="text-3xl font-playfair font-bold text-white mb-2">Reviews for {{ instructorName }}</h3>
+          <div class="w-16 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 rounded-full"></div>
+        </div>
+        <button 
+          (click)="close()"
+          class="text-white/60 hover:text-white text-2xl transition-all duration-200 close-button p-1">
+          <i class="pi pi-times"></i>
+        </button>
+      </div>
+
+      @if (loading()) {
+        <div class="text-center py-12">
+          <i class="pi pi-spin pi-spinner text-4xl text-yellow-400 mb-4"></i>
+          <p class="text-slate-300 font-inter">Loading reviews...</p>
+        </div>
+      } @else if (error()) {
+        <div class="text-center py-12">
+          <i class="pi pi-exclamation-triangle text-4xl text-red-400 mb-4"></i>
+          <p class="text-slate-300 font-inter">{{ error() }}</p>
+        </div>
+      } @else if (reviews().length === 0) {
+        <div class="text-center py-12">
+          <i class="pi pi-inbox text-4xl text-slate-400 mb-4"></i>
+          <p class="text-slate-300 font-inter">No reviews available for this instructor.</p>
+        </div>
+      } @else {
+        <div class="space-y-4">
+          @for (review of reviews(); track review.id) {
+            <div class="bg-slate-700/50 rounded-xl p-6 border border-slate-600/50">
+              <!-- Review Header -->
+              <div class="flex items-start justify-between mb-4">
+                <div class="flex-grow">
+                  <div class="flex items-center gap-3 mb-2">
+                    <div class="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                      <span class="text-white font-bold text-xl font-inter">{{ review.quality }}</span>
+                    </div>
+                    <div>
+                      <div class="flex items-center gap-2">
+                        <span class="px-2 py-0.5 bg-purple-500/30 text-purple-200 text-xs font-semibold rounded-full border border-purple-400/50">
+                          RMP
+                        </span>
+                        @if (review.course) {
+                          <span class="text-purple-300 text-sm font-inter">{{ review.course }}</span>
+                        }
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="flex flex-col items-end gap-1">
+                  <div class="flex items-center gap-1">
+                    @for (star of [1,2,3,4,5]; track star) {
+                      <i class="pi text-sm" 
+                         [class.pi-star-fill]="star <= review.quality"
+                         [class.pi-star]="star > review.quality"
+                         [class.text-purple-400]="star <= review.quality"
+                         [class.text-slate-600]="star > review.quality"></i>
+                    }
+                  </div>
+                  <span class="text-purple-300 text-xs font-inter">{{ review.quality }}/5</span>
+                </div>
+              </div>
+
+              <!-- Review Content -->
+              <div class="bg-slate-800/40 rounded-xl p-4 mb-4">
+                <p class="text-purple-100 font-inter leading-relaxed">{{ review.comment }}</p>
+              </div>
+
+              <!-- Review Metadata -->
+              <div class="flex flex-wrap items-center gap-4 text-sm">
+                @if (review.difficulty !== null) {
+                  <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-inter">Difficulty:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.difficulty }}/5</span>
+                  </div>
+                }
+                @if (review.grade) {
+                  <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-inter">Grade:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.grade }}</span>
+                  </div>
+                }
+                @if (review.attendance) {
+                  <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-inter">Attendance:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.attendance }}</span>
+                  </div>
+                }
+                @if (review.wouldTakeAgain !== null) {
+                  <div class="flex items-center gap-2">
+                    <span class="text-slate-400 font-inter">Would Take Again:</span>
+                    <span class="text-purple-300 font-inter font-semibold">{{ review.wouldTakeAgain ? 'Yes' : 'No' }}</span>
+                  </div>
+                }
+                @if (review.reviewDate) {
+                  <div class="flex items-center gap-2">
+                    <i class="pi pi-calendar text-slate-400 text-xs"></i>
+                    <span class="text-slate-400 font-inter text-xs">{{ formatDate(review.reviewDate) }}</span>
+                  </div>
+                }
+              </div>
+
+              <!-- Tags -->
+              @if (review.tags && review.tags.length > 0) {
+                <div class="mt-4 flex flex-wrap gap-2">
+                  @for (tag of review.tags; track tag) {
+                    <span class="px-2 py-1 bg-purple-500/20 text-purple-200 text-xs rounded-full border border-purple-400/30">
+                      {{ tag }}
+                    </span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+}
+
