@@ -9,3 +9,4 @@ class Professor:
     rmp_rating: Optional[float] = None
     rmp_num_ratings: Optional[int] = None
     rmp_url: Optional[str] = None
+    department: Optional[str] = None

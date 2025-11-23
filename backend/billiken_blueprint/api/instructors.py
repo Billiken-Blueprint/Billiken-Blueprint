@@ -10,7 +10,17 @@ router = APIRouter(prefix="/instructors", tags=["instructors"])
 @router.get("")
 async def list_instructors(instructor_repo: InstructorRepo):
     instructors = await instructor_repo.get_all()
-    return [dict(id=instructor.id, name=instructor.name) for instructor in instructors]
+    return [
+        {
+            "id": instructor.id,
+            "name": instructor.name,
+            "rmpRating": instructor.rmp_rating,
+            "rmpNumRatings": instructor.rmp_num_ratings,
+            "rmpUrl": instructor.rmp_url,
+            "department": instructor.department,
+        }
+        for instructor in instructors
+    ]
 
 
 @router.get("/{instructor_id}/reviews")

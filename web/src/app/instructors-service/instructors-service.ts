@@ -20,6 +20,10 @@ export class InstructorsService {
 export interface Instructor {
   id: number;
   name: string;
+  rmpRating?: number | null;
+  rmpNumRatings?: number | null;
+  rmpUrl?: string | null;
+  department?: string | null;
 }
 
 export interface RmpReview {
