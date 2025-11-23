@@ -1,7 +1,7 @@
 import {Component, computed, inject, OnInit, signal, ViewEncapsulation} from '@angular/core';
-import {Instructor, InstructorsService, RmpReview} from '../instructors-service/instructors-service';
-import {Course, CoursesService} from '../courses-service/courses-service';
-import {Rating, RatingsService} from '../ratings-service/ratings-service';
+import {Instructor, InstructorsService, RmpReview} from '../services/instructors-service/instructors-service';
+import {Course, CoursesService} from '../services/courses-service/courses-service';
+import {Rating, RatingsService} from '../services/ratings-service/ratings-service';
 import {CommonModule} from '@angular/common';
 import {Router} from '@angular/router';
 import {forkJoin, of, Observable} from 'rxjs';
@@ -29,126 +29,126 @@ interface SimpleCourse {
 
 const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
   Core_Intro: [
-    { code: 'CSCI 1010', title: 'Introduction to Computer Science: Principles' },
-    { code: 'CSCI 1020', title: 'Introduction to Computer Science: Bioinformatics' },
-    { code: 'CSCI 1025', title: 'Introduction to Computer Science: Cybersecurity' },
-    { code: 'CSCI 1030', title: 'Introduction to Computer Science: Game Design' },
-    { code: 'CSCI 1040', title: 'Introduction to Computer Science: Mobile Computing' },
-    { code: 'CSCI 1050', title: 'Introduction to Computer Science: Multimedia' },
-    { code: 'CSCI 1060', title: 'Introduction to Computer Science: Scientific Programming' },
-    { code: 'CSCI 1070', title: 'Introduction to Computer Science: Taming Big Data' },
-    { code: 'CSCI 1080', title: 'Introduction to Computer Science: World Wide Web' },
-    { code: 'CSCI 1090', title: 'Introduction to Computer Science: Special Topics' }
+    {code: 'CSCI 1010', title: 'Introduction to Computer Science: Principles'},
+    {code: 'CSCI 1020', title: 'Introduction to Computer Science: Bioinformatics'},
+    {code: 'CSCI 1025', title: 'Introduction to Computer Science: Cybersecurity'},
+    {code: 'CSCI 1030', title: 'Introduction to Computer Science: Game Design'},
+    {code: 'CSCI 1040', title: 'Introduction to Computer Science: Mobile Computing'},
+    {code: 'CSCI 1050', title: 'Introduction to Computer Science: Multimedia'},
+    {code: 'CSCI 1060', title: 'Introduction to Computer Science: Scientific Programming'},
+    {code: 'CSCI 1070', title: 'Introduction to Computer Science: Taming Big Data'},
+    {code: 'CSCI 1080', title: 'Introduction to Computer Science: World Wide Web'},
+    {code: 'CSCI 1090', title: 'Introduction to Computer Science: Special Topics'}
   ],
   Core_Prog: [
-    { code: 'CSCI 1300', title: 'Introduction to Object-Oriented Programming' },
-    { code: 'CSCI 2100', title: 'Data Structures' },
-    { code: 'CSCI 2190', title: 'Computational Problem Solving' },
-    { code: 'CSCI 2300', title: 'Object-Oriented Software Design' },
-    { code: 'CSCI 3100', title: 'Algorithms' },
-    { code: 'CSCI 3200', title: 'Programming Languages' },
-    { code: 'CSCI 3250', title: 'Compilers' },
-    { code: 'CSCI 3300', title: 'Software Engineering' }
+    {code: 'CSCI 1300', title: 'Introduction to Object-Oriented Programming'},
+    {code: 'CSCI 2100', title: 'Data Structures'},
+    {code: 'CSCI 2190', title: 'Computational Problem Solving'},
+    {code: 'CSCI 2300', title: 'Object-Oriented Software Design'},
+    {code: 'CSCI 3100', title: 'Algorithms'},
+    {code: 'CSCI 3200', title: 'Programming Languages'},
+    {code: 'CSCI 3250', title: 'Compilers'},
+    {code: 'CSCI 3300', title: 'Software Engineering'}
   ],
   Core_Software: [
-    { code: 'CSCI 3710', title: 'Databases' },
-    { code: 'CSCI 3810', title: 'Game Programming' },
-    { code: 'CSCI 4120', title: 'Advanced Data Structures' },
-    { code: 'CSCI 4310', title: 'Software Architecture' },
-    { code: 'CSCI 4340', title: 'Safety-Critical Software Systems' },
-    { code: 'CSCI 4355', title: 'Human Computer Interaction' },
-    { code: 'CSCI 4360', title: 'Web Technologies' },
-    { code: 'CSCI 4370', title: 'User Interface Design' },
-    { code: 'CSCI 4380', title: 'DevOps' }
+    {code: 'CSCI 3710', title: 'Databases'},
+    {code: 'CSCI 3810', title: 'Game Programming'},
+    {code: 'CSCI 4120', title: 'Advanced Data Structures'},
+    {code: 'CSCI 4310', title: 'Software Architecture'},
+    {code: 'CSCI 4340', title: 'Safety-Critical Software Systems'},
+    {code: 'CSCI 4355', title: 'Human Computer Interaction'},
+    {code: 'CSCI 4360', title: 'Web Technologies'},
+    {code: 'CSCI 4370', title: 'User Interface Design'},
+    {code: 'CSCI 4380', title: 'DevOps'}
   ],
   Core_Systems: [
-    { code: 'CSCI 2500', title: 'Computer Organization and Systems' },
-    { code: 'CSCI 2510', title: 'Principles of Computing Systems' },
-    { code: 'CSCI 3450X', title: 'Microprocessors' },
-    { code: 'CSCI 3451X', title: 'Microprocessors Laboratory' },
-    { code: 'CSCI 4500', title: 'Operating Systems' },
-    { code: 'CSCI 4520', title: 'Internet of Things' },
-    { code: 'CSCI 4590', title: 'Wireless Sensor Networks' },
-    { code: 'CSCI 4610', title: 'Concurrent and Parallel Programming' },
-    { code: 'CSCI 4620', title: 'Distributed Computing' }
+    {code: 'CSCI 2500', title: 'Computer Organization and Systems'},
+    {code: 'CSCI 2510', title: 'Principles of Computing Systems'},
+    {code: 'CSCI 3450X', title: 'Microprocessors'},
+    {code: 'CSCI 3451X', title: 'Microprocessors Laboratory'},
+    {code: 'CSCI 4500', title: 'Operating Systems'},
+    {code: 'CSCI 4520', title: 'Internet of Things'},
+    {code: 'CSCI 4590', title: 'Wireless Sensor Networks'},
+    {code: 'CSCI 4610', title: 'Concurrent and Parallel Programming'},
+    {code: 'CSCI 4620', title: 'Distributed Computing'}
   ],
   Stem_MathCore: [
-    { code: 'MATH 1510', title: 'Calculus I' },
-    { code: 'MATH 1520', title: 'Calculus II' },
-    { code: 'MATH 1660', title: 'Discrete Mathematics' },
-    { code: 'STAT 3850', title: 'Foundation of Statistics' }
+    {code: 'MATH 1510', title: 'Calculus I'},
+    {code: 'MATH 1520', title: 'Calculus II'},
+    {code: 'MATH 1660', title: 'Discrete Mathematics'},
+    {code: 'STAT 3850', title: 'Foundation of Statistics'}
   ],
   Stem_MathAdv: [
-    { code: 'MATH 2530', title: 'Calculus III (example advanced math)' },
-    { code: 'MATH 3110', title: 'Linear Algebra (example)' },
-    { code: 'MATH 3120', title: 'Advanced Linear Algebra (example)' },
-    { code: 'STAT 4000', title: 'Advanced Statistics (example)' },
-    { code: 'MATH 3730', title: 'Numerical Methods (example)' },
-    { code: 'MATH 4100', title: 'Advanced Topics in Math (example)' },
-    { code: 'STAT 4100', title: 'Applied Statistics (example)' },
-    { code: 'STAT 4200', title: 'Probability and Statistics (example)' }
+    {code: 'MATH 2530', title: 'Calculus III (example advanced math)'},
+    {code: 'MATH 3110', title: 'Linear Algebra (example)'},
+    {code: 'MATH 3120', title: 'Advanced Linear Algebra (example)'},
+    {code: 'STAT 4000', title: 'Advanced Statistics (example)'},
+    {code: 'MATH 3730', title: 'Numerical Methods (example)'},
+    {code: 'MATH 4100', title: 'Advanced Topics in Math (example)'},
+    {code: 'STAT 4100', title: 'Applied Statistics (example)'},
+    {code: 'STAT 4200', title: 'Probability and Statistics (example)'}
   ],
   Stem_Science: [
-    { code: 'PHYS 1310', title: 'Physics I with Lab (example)' },
-    { code: 'PHYS 1320', title: 'Physics II with Lab (example)' },
-    { code: 'CHEM 1110', title: 'General Chemistry I with Lab (example)' },
-    { code: 'CHEM 1120', title: 'General Chemistry II with Lab (example)' },
-    { code: 'BIOL 1240', title: 'Principles of Biology I with Lab (example)' },
-    { code: 'BME 2000', title: 'Biomedical Engineering Computing' },
-    { code: 'CVNG 1500', title: 'Civil Engineering Computing' },
-    { code: 'SCI 2000', title: 'Science/Engineering Elective (example)' }
+    {code: 'PHYS 1310', title: 'Physics I with Lab (example)'},
+    {code: 'PHYS 1320', title: 'Physics II with Lab (example)'},
+    {code: 'CHEM 1110', title: 'General Chemistry I with Lab (example)'},
+    {code: 'CHEM 1120', title: 'General Chemistry II with Lab (example)'},
+    {code: 'BIOL 1240', title: 'Principles of Biology I with Lab (example)'},
+    {code: 'BME 2000', title: 'Biomedical Engineering Computing'},
+    {code: 'CVNG 1500', title: 'Civil Engineering Computing'},
+    {code: 'SCI 2000', title: 'Science/Engineering Elective (example)'}
   ],
   Stem_Ethics: [
-    { code: 'PHIL 3050X', title: 'Computer Ethics' },
-    { code: 'CSCI 3050', title: 'Computer Ethics (CSCI listing)' },
-    { code: 'PHIL 2050', title: 'Ethics (example prerequisite)' },
-    { code: 'PHIL 3000', title: 'Advanced Ethics & Technology (example)' }
+    {code: 'PHIL 3050X', title: 'Computer Ethics'},
+    {code: 'CSCI 3050', title: 'Computer Ethics (CSCI listing)'},
+    {code: 'PHIL 2050', title: 'Ethics (example prerequisite)'},
+    {code: 'PHIL 3000', title: 'Advanced Ethics & Technology (example)'}
   ],
   Electives_Systems: [
-    { code: 'CSCI 4500', title: 'Operating Systems' },
-    { code: 'CSCI 4520', title: 'Internet of Things' },
-    { code: 'CSCI 4530', title: 'Computer Security' },
-    { code: 'CSCI 4550', title: 'Computer Networks' },
-    { code: 'CSCI 4590', title: 'Wireless Sensor Networks' },
-    { code: 'CSCI 4610', title: 'Concurrent and Parallel Programming' },
-    { code: 'CSCI 4620', title: 'Distributed Computing' },
-    { code: 'CSCI 4870', title: 'Applied Cryptography' }
+    {code: 'CSCI 4500', title: 'Operating Systems'},
+    {code: 'CSCI 4520', title: 'Internet of Things'},
+    {code: 'CSCI 4530', title: 'Computer Security'},
+    {code: 'CSCI 4550', title: 'Computer Networks'},
+    {code: 'CSCI 4590', title: 'Wireless Sensor Networks'},
+    {code: 'CSCI 4610', title: 'Concurrent and Parallel Programming'},
+    {code: 'CSCI 4620', title: 'Distributed Computing'},
+    {code: 'CSCI 4870', title: 'Applied Cryptography'}
   ],
   Electives_AIData: [
-    { code: 'CSCI 4710', title: 'Databases' },
-    { code: 'CSCI 4740', title: 'Artificial Intelligence' },
-    { code: 'CSCI 4750', title: 'Machine Learning' },
-    { code: 'CSCI 4756', title: 'Applied Machine Learning' },
-    { code: 'CSCI 4760', title: 'Deep Learning' },
-    { code: 'CSCI 4770', title: 'Big Data Analytics' },
-    { code: 'CSCI 4780', title: 'Data Engineering' },
-    { code: 'CSCI 4830', title: 'Computer Vision' },
-    { code: 'CSCI 4845', title: 'Natural Language Processing' }
+    {code: 'CSCI 4710', title: 'Databases'},
+    {code: 'CSCI 4740', title: 'Artificial Intelligence'},
+    {code: 'CSCI 4750', title: 'Machine Learning'},
+    {code: 'CSCI 4756', title: 'Applied Machine Learning'},
+    {code: 'CSCI 4760', title: 'Deep Learning'},
+    {code: 'CSCI 4770', title: 'Big Data Analytics'},
+    {code: 'CSCI 4780', title: 'Data Engineering'},
+    {code: 'CSCI 4830', title: 'Computer Vision'},
+    {code: 'CSCI 4845', title: 'Natural Language Processing'}
   ],
   Electives_Software: [
-    { code: 'CSCI 3710', title: 'Databases' },
-    { code: 'CSCI 3810', title: 'Game Programming' },
-    { code: 'CSCI 4310', title: 'Software Architecture' },
-    { code: 'CSCI 4355', title: 'Human Computer Interaction' },
-    { code: 'CSCI 4360', title: 'Web Technologies' },
-    { code: 'CSCI 4370', title: 'User Interface Design' },
-    { code: 'CSCI 4380', title: 'DevOps' },
-    { code: 'CSCI 4820', title: 'Computer Graphics' },
-    { code: 'CSCI 4860', title: 'Autonomous Driving' }
+    {code: 'CSCI 3710', title: 'Databases'},
+    {code: 'CSCI 3810', title: 'Game Programming'},
+    {code: 'CSCI 4310', title: 'Software Architecture'},
+    {code: 'CSCI 4355', title: 'Human Computer Interaction'},
+    {code: 'CSCI 4360', title: 'Web Technologies'},
+    {code: 'CSCI 4370', title: 'User Interface Design'},
+    {code: 'CSCI 4380', title: 'DevOps'},
+    {code: 'CSCI 4820', title: 'Computer Graphics'},
+    {code: 'CSCI 4860', title: 'Autonomous Driving'}
   ],
   Electives_Capstone: [
-    { code: 'CSCI 3910', title: 'Internship with Industry' },
-    { code: 'CSCI 4910', title: 'Internship with Industry (Advanced)' },
-    { code: 'CSCI 4930', title: 'Special Topics' },
-    { code: 'CSCI 4961', title: 'Capstone Project I' },
-    { code: 'CSCI 4962', title: 'Capstone Project II' },
-    { code: 'CSCI 4980', title: 'Advanced Independent Study' },
-    { code: 'CSCI 1930', title: 'Special Topics (Lower Division)' },
-    { code: 'CSCI 1980', title: 'Independent Study (Lower Division)' },
-    { code: 'CSCI 2930', title: 'Special Topics (Middle Division)' },
-    { code: 'CSCI 2980', title: 'Independent Study (Middle Division)' },
-    { code: 'CSCI 3930', title: 'Special Topics (Upper Division)' },
-    { code: 'CSCI 3980', title: 'Independent Study (Upper Division)' }
+    {code: 'CSCI 3910', title: 'Internship with Industry'},
+    {code: 'CSCI 4910', title: 'Internship with Industry (Advanced)'},
+    {code: 'CSCI 4930', title: 'Special Topics'},
+    {code: 'CSCI 4961', title: 'Capstone Project I'},
+    {code: 'CSCI 4962', title: 'Capstone Project II'},
+    {code: 'CSCI 4980', title: 'Advanced Independent Study'},
+    {code: 'CSCI 1930', title: 'Special Topics (Lower Division)'},
+    {code: 'CSCI 1980', title: 'Independent Study (Lower Division)'},
+    {code: 'CSCI 2930', title: 'Special Topics (Middle Division)'},
+    {code: 'CSCI 2980', title: 'Independent Study (Middle Division)'},
+    {code: 'CSCI 3930', title: 'Special Topics (Upper Division)'},
+    {code: 'CSCI 3980', title: 'Independent Study (Upper Division)'}
   ]
 };
 
@@ -161,7 +161,6 @@ function getAllCoursesFromCoursePage(): Course[] {
       allCourses.push({
         id: id++,
         courseCode: course.code,
-        title: course.title
       });
     }
   }
@@ -187,18 +186,18 @@ export class RatingsPage implements OnInit {
   selectedCourse = signal<Course | null>(null);
   selectedDepartment = signal<string>('all'); // 'all', 'CSCI', 'MATH'
   ratings = signal<Rating[]>([]);
-  
+
   // Search text for filtering
   instructorSearchText = signal<string>('');
   courseSearchText = signal<string>('');
-  
+
   // Track focus state
   instructorInputFocused = signal<boolean>(false);
   courseInputFocused = signal<boolean>(false);
-  
+
   // Get filtered instructors based on selected department
   filteredInstructors = signal<Instructor[]>([]);
-  
+
   // Computed filtered lists for search
   searchFilteredInstructors = computed(() => {
     const search = this.instructorSearchText().toLowerCase().trim();
@@ -207,11 +206,11 @@ export class RatingsPage implements OnInit {
       // Show all instructors when no search text
       return deptFiltered;
     }
-    return deptFiltered.filter(inst => 
+    return deptFiltered.filter(inst =>
       inst.name.toLowerCase().includes(search)
     );
   });
-  
+
   searchFilteredCourses = computed(() => {
     const search = this.courseSearchText().toLowerCase().trim();
     const allCourses = this.courses();
@@ -219,24 +218,28 @@ export class RatingsPage implements OnInit {
       // Show all courses when no search text
       return allCourses;
     }
-    return allCourses.filter(course => 
-      course.courseCode.toLowerCase().includes(search) ||
-      course.title.toLowerCase().includes(search)
+    return allCourses.filter(course =>
+      course.courseCode.toLowerCase().includes(search)
     );
   });
-  
+
   // Group ratings by instructor for display (as array for template iteration)
-  groupedRatings = signal<Array<[number, { instructor: Instructor | null; rmpRating: Rating | null; bbRatings: Rating[]; combined: { average: number; bbCount: number; rmpRating: number | null } | null }]>>([]);
-  
+  groupedRatings = signal<Array<[number, {
+    instructor: Instructor | null;
+    rmpRating: Rating | null;
+    bbRatings: Rating[];
+    combined: { average: number; bbCount: number; rmpRating: number | null } | null
+  }]>>([]);
+
   // Individual reviews for course view
   individualReviews = signal<RmpReview[]>([]);
   loadingReviews = signal<boolean>(false);
-  
+
   // Group individual reviews by instructor
   groupedIndividualReviews = computed(() => {
     const reviews = this.individualReviews();
     const grouped = new Map<number, RmpReview[]>();
-    
+
     reviews.forEach(review => {
       const instructorId = review.instructorId;
       if (!grouped.has(instructorId)) {
@@ -244,15 +247,15 @@ export class RatingsPage implements OnInit {
       }
       grouped.get(instructorId)!.push(review);
     });
-    
+
     // Convert to array, calculate average rating, and sort by average (high to low)
     return Array.from(grouped.entries()).map(([instructorId, reviews]) => {
       const instructor = this.instructors().find(i => i.id === instructorId);
-      
+
       // Calculate average rating
       const totalRating = reviews.reduce((sum, review) => sum + review.quality, 0);
       const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
-      
+
       return {
         instructorId,
         instructorName: instructor?.name || 'Unknown Instructor',
@@ -269,7 +272,7 @@ export class RatingsPage implements OnInit {
       };
     }).sort((a, b) => b.averageRating - a.averageRating); // Sort by average rating (high to low)
   });
-  
+
   private instructorsService = inject(InstructorsService);
   private coursesService = inject(CoursesService);
   private ratingsService = inject(RatingsService);
@@ -280,38 +283,38 @@ export class RatingsPage implements OnInit {
       this.instructors.set(instructors);
       this.updateFilteredInstructors();
     });
-    
+
     // Get courses from API and merge with courses page data
     this.coursesService.getCourses().subscribe(apiCourses => {
       // Get all courses from courses page
       const coursesPageCourses = getAllCoursesFromCoursePage();
-      
+
       // Create a map of existing courses by courseCode to avoid duplicates
       const courseMap = new Map<string, Course>();
-      
+
       // Add API courses first (they have database IDs)
       for (const course of apiCourses) {
         courseMap.set(course.courseCode, course);
       }
-      
+
       // Add courses page courses (only if not already in map)
       for (const course of coursesPageCourses) {
         if (!courseMap.has(course.courseCode)) {
           courseMap.set(course.courseCode, course);
         }
       }
-      
+
       // Convert map to array and sort by course code
-      const allCourses = Array.from(courseMap.values()).sort((a, b) => 
+      const allCourses = Array.from(courseMap.values()).sort((a, b) =>
         a.courseCode.localeCompare(b.courseCode)
       );
-      
+
       this.courses.set(allCourses);
     });
-    
+
     this.updateRatings();
   }
-  
+
   updateFilteredInstructors(): void {
     const department = this.selectedDepartment();
     let instructors: Instructor[];
@@ -320,14 +323,14 @@ export class RatingsPage implements OnInit {
     } else {
       instructors = this.instructors().filter(inst => inst.department === department);
     }
-    
+
     // Sort by last name alphabetically
     const sorted = [...instructors].sort((a, b) => {
       const aLastName = a.name.split(/\s+/).pop() || '';
       const bLastName = b.name.split(/\s+/).pop() || '';
       return aLastName.localeCompare(bLastName);
     });
-    
+
     this.filteredInstructors.set(sorted);
   }
 
@@ -344,25 +347,25 @@ export class RatingsPage implements OnInit {
       this.selectedInstructor.set(null);
     }
   }
-  
+
   onInstructorFocus(): void {
     this.instructorInputFocused.set(true);
   }
-  
+
   onInstructorBlur(): void {
     // Delay to allow click events to fire first
     setTimeout(() => {
       this.instructorInputFocused.set(false);
     }, 200);
   }
-  
+
   selectInstructorFromSearch(instructor: Instructor): void {
     this.selectedInstructor.set(instructor);
     this.instructorSearchText.set(''); // Clear search text
     this.instructorInputFocused.set(false); // Hide dropdown
     this.updateRatings();
   }
-  
+
   onCourseSearchChange(event: any): void {
     const value = event?.target?.value || '';
     this.courseSearchText.set(value);
@@ -371,32 +374,32 @@ export class RatingsPage implements OnInit {
       this.selectedCourse.set(null);
     }
   }
-  
+
   onCourseFocus(): void {
     this.courseInputFocused.set(true);
   }
-  
+
   onCourseBlur(): void {
     // Delay to allow click events to fire first
     setTimeout(() => {
       this.courseInputFocused.set(false);
     }, 200);
   }
-  
+
   selectCourseFromSearch(course: Course): void {
     this.selectedCourse.set(course);
     this.courseSearchText.set(''); // Clear search text
     this.courseInputFocused.set(false); // Hide dropdown
     this.updateRatings();
   }
-  
+
   clearInstructorSelection(): void {
     this.selectedInstructor.set(null);
     this.instructorSearchText.set('');
     this.instructorInputFocused.set(false);
     this.updateRatings();
   }
-  
+
   clearCourseSelection(): void {
     this.selectedCourse.set(null);
     this.courseSearchText.set('');
@@ -432,13 +435,13 @@ export class RatingsPage implements OnInit {
   updateRatings() {
     const instructorId = this.selectedInstructor()?.id;
     const courseId = this.selectedCourse()?.id;
-    
+
     // If course is selected but no instructor, show individual reviews
     if (courseId && !instructorId) {
       this.loadIndividualReviewsForCourse(courseId);
       return;
     }
-    
+
     this.ratingsService.getRatings(instructorId?.toString(), courseId?.toString()).subscribe({
       next: ratings => {
         // Filter by department if selected
@@ -448,7 +451,7 @@ export class RatingsPage implements OnInit {
           // Get all courses for the selected department
           const deptCourses = this.courses().filter(c => c.courseCode.startsWith(department));
           const deptCourseIds = new Set(deptCourses.map(c => c.id));
-          
+
           // Get instructor IDs for the selected department (only from cs_professors_with_reviews.json or math_professors_with_reviews.json)
           const deptInstructorIds = new Set<number>();
           this.instructors().forEach(inst => {
@@ -456,7 +459,7 @@ export class RatingsPage implements OnInit {
               deptInstructorIds.add(inst.id);
             }
           });
-          
+
           filteredRatings = ratings.filter(rating => {
             // RMP ratings: Only include if instructor belongs to the selected department
             if (rating.isRmpRating) {
@@ -474,7 +477,7 @@ export class RatingsPage implements OnInit {
             return false;
           });
         }
-        
+
         // Additional client-side filtering by course if selected (in case backend doesn't filter correctly)
         if (courseId) {
           filteredRatings = filteredRatings.filter(rating => {
@@ -494,7 +497,7 @@ export class RatingsPage implements OnInit {
             return false;
           });
         }
-        
+
         this.ratings.set(filteredRatings);
         this.updateGroupedRatings(filteredRatings);
         // Clear individual reviews when showing grouped view
@@ -509,7 +512,7 @@ export class RatingsPage implements OnInit {
       }
     });
   }
-  
+
   loadIndividualReviewsForCourse(courseId: number): void {
     this.loadingReviews.set(true);
     const course = this.courses().find(c => c.id === courseId);
@@ -518,10 +521,10 @@ export class RatingsPage implements OnInit {
       this.loadingReviews.set(false);
       return;
     }
-    
+
     const normalizedCourseCode = course.courseCode.replace(/\s+/g, '').replace(/-/g, '').toUpperCase();
     console.log(`Loading reviews for course: ${course.courseCode} (normalized: ${normalizedCourseCode})`);
-    
+
     // Get all instructors who have ratings for this course
     // This includes both BB ratings and RMP ratings that match the course
     this.ratingsService.getRatings(null, courseId.toString()).subscribe({
@@ -529,13 +532,13 @@ export class RatingsPage implements OnInit {
         console.log(`Found ${ratings.length} ratings for course ${course.courseCode}`);
         const instructorIds = new Set<number>();
         const filteredReviews: RmpReview[] = [];
-        
+
         // First, convert BB ratings from the API response to RmpReview format
         ratings.forEach(rating => {
           if (rating.instructorId) {
             instructorIds.add(rating.instructorId);
           }
-          
+
           // Include BB ratings directly (they already have courseId matching from backend)
           if (!rating.isRmpRating && rating.courseId === courseId) {
             filteredReviews.push({
@@ -558,11 +561,11 @@ export class RatingsPage implements OnInit {
             console.log(`Added BB rating: ${rating.id} for course ${course.courseCode}`);
           }
         });
-        
+
         // Only fetch from instructors who have ratings for this course
         // Reviews without course_id will be filtered out, but that's correct - they need to be updated
         console.log(`Will fetch RMP reviews from ${instructorIds.size} instructors for course ${course.courseCode}`);
-        
+
         if (instructorIds.size === 0) {
           // No instructors to fetch RMP reviews from, but we might have BB ratings already
           console.log(`No instructors to fetch RMP reviews from. Total reviews so far: ${filteredReviews.length}`);
@@ -581,7 +584,7 @@ export class RatingsPage implements OnInit {
           this.loadingReviews.set(false);
           return;
         }
-        
+
         // Fetch individual reviews for each instructor using forkJoin (for RMP reviews)
         const reviewObservables: Observable<RmpReview[]>[] = Array.from(instructorIds).map(id =>
           this.instructorsService.getInstructorReviews(id).pipe(
@@ -591,13 +594,13 @@ export class RatingsPage implements OnInit {
             })
           )
         );
-        
+
         forkJoin(reviewObservables).subscribe({
           next: (allReviews) => {
             console.log(`Received reviews from ${allReviews.length} instructors`);
             // Flatten and filter reviews for this course - STRICT filtering
             // Only add RMP reviews (BB ratings already added above)
-            
+
             allReviews.forEach((reviews, index) => {
               const instructorId = Array.from(instructorIds)[index];
               console.log(`Processing ${reviews.length} reviews from instructor ${instructorId}`);
@@ -617,7 +620,7 @@ export class RatingsPage implements OnInit {
                 }
               });
             });
-            
+
             // Sort by date (newest first)
             filteredReviews.sort((a, b) => {
               if (a.reviewDate && b.reviewDate) {
@@ -629,7 +632,7 @@ export class RatingsPage implements OnInit {
               const bId = b.id || 0;
               return bId - aId;
             });
-            
+
             console.log(`Filtered to ${filteredReviews.length} reviews for course ${course.courseCode}`);
             this.individualReviews.set(filteredReviews);
             this.loadingReviews.set(false);
@@ -648,36 +651,41 @@ export class RatingsPage implements OnInit {
       }
     });
   }
-  
+
   formatDate(dateString: string | null): string {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
     } catch {
       return dateString;
     }
   }
-  
+
   getReviewDate(review: RmpReview): string | null {
     if (review.reviewDate) {
       return this.formatDate(review.reviewDate);
     }
     return null;
   }
-  
+
   getInstructorName(instructorId: number): string {
     const instructor = this.instructors().find(i => i.id === instructorId);
     return instructor?.name || 'Unknown Instructor';
   }
-  
+
   updateGroupedRatings(ratings: Rating[]): void {
-    const grouped = new Map<number, { instructor: Instructor | null; rmpRating: Rating | null; bbRatings: Rating[]; combined: { average: number; bbCount: number; rmpRating: number | null } | null }>();
-    
+    const grouped = new Map<number, {
+      instructor: Instructor | null;
+      rmpRating: Rating | null;
+      bbRatings: Rating[];
+      combined: { average: number; bbCount: number; rmpRating: number | null } | null
+    }>();
+
     // Group ratings by instructor
     for (const rating of ratings) {
       if (!rating.instructorId) continue;
-      
+
       if (!grouped.has(rating.instructorId)) {
         const instructor = this.instructors().find(i => i.id === rating.instructorId) || null;
         grouped.set(rating.instructorId, {
@@ -687,7 +695,7 @@ export class RatingsPage implements OnInit {
           combined: null
         });
       }
-      
+
       const group = grouped.get(rating.instructorId)!;
       if (rating.isRmpRating) {
         group.rmpRating = rating;
@@ -695,28 +703,33 @@ export class RatingsPage implements OnInit {
         group.bbRatings.push(rating);
       }
     }
-    
+
     // Calculate combined ratings for each group
     for (const [instructorId, group] of grouped.entries()) {
       group.combined = this.calculateCombinedRatingForGroup(group);
     }
-    
+
     // Convert Map to array for template iteration
     const groupedArray = Array.from(grouped.entries());
     console.log('Grouped ratings:', groupedArray.length, 'instructors from', ratings.length, 'ratings');
     this.groupedRatings.set(groupedArray);
   }
-  
-  calculateCombinedRatingForGroup(group: { instructor: Instructor | null; rmpRating: Rating | null; bbRatings: Rating[]; combined: { average: number; bbCount: number; rmpRating: number | null } | null }): { average: number; bbCount: number; rmpRating: number | null } | null {
+
+  calculateCombinedRatingForGroup(group: {
+    instructor: Instructor | null;
+    rmpRating: Rating | null;
+    bbRatings: Rating[];
+    combined: { average: number; bbCount: number; rmpRating: number | null } | null
+  }): { average: number; bbCount: number; rmpRating: number | null } | null {
     const bbRatings = group.bbRatings;
     const rmpRating = group.rmpRating;
-    
+
     if (bbRatings.length === 0 && !rmpRating) return null;
-    
+
     const bbAverage = bbRatings.length > 0
       ? bbRatings.reduce((sum, r) => sum + r.rating, 0) / bbRatings.length
       : null;
-    
+
     if (bbAverage !== null && rmpRating) {
       // Average of both
       return {
@@ -739,24 +752,28 @@ export class RatingsPage implements OnInit {
         rmpRating: rmpRating.rating
       };
     }
-    
+
     return null;
   }
 
   // Calculate combined rating for an instructor (average of RMP and Billiken Blueprint ratings)
-  getCombinedRating(instructorId: number | null): { average: number; bbCount: number; rmpRating: number | null } | null {
+  getCombinedRating(instructorId: number | null): {
+    average: number;
+    bbCount: number;
+    rmpRating: number | null
+  } | null {
     if (!instructorId) return null;
-    
+
     const allRatings = this.ratings();
     const bbRatings = allRatings.filter(r => r.instructorId === instructorId && !r.isRmpRating);
     const rmpRating = allRatings.find(r => r.instructorId === instructorId && r.isRmpRating);
-    
+
     if (bbRatings.length === 0 && !rmpRating) return null;
-    
+
     const bbAverage = bbRatings.length > 0
       ? bbRatings.reduce((sum, r) => sum + r.rating, 0) / bbRatings.length
       : null;
-    
+
     if (bbAverage !== null && rmpRating) {
       // Average of both
       return {
@@ -779,7 +796,7 @@ export class RatingsPage implements OnInit {
         rmpRating: rmpRating.rating
       };
     }
-    
+
     return null;
   }
 
@@ -788,7 +805,12 @@ export class RatingsPage implements OnInit {
   }
 
   // Helper methods for template calculations
-  getDisplayRating(group: { instructor: Instructor | null; rmpRating: Rating | null; bbRatings: Rating[]; combined: { average: number; bbCount: number; rmpRating: number | null } | null }): number {
+  getDisplayRating(group: {
+    instructor: Instructor | null;
+    rmpRating: Rating | null;
+    bbRatings: Rating[];
+    combined: { average: number; bbCount: number; rmpRating: number | null } | null
+  }): number {
     if (group.combined) {
       return group.combined.average;
     }

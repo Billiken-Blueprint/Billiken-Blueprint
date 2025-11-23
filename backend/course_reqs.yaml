@@ -1,0 +1,65 @@
+courses:
+
+  - code: CSCI 1060
+    reqs:
+      operator: OR
+      operands:
+        - code: MATH 1510
+          concurrent: true
+        - code: MATH 1320
+        - code: MATH 1520
+        - code: MATH 2530
+        - code: MATH 2540
+
+  - code: CSCI 1070
+
+  - code: CSCI 1300
+    reqs:
+      operator: AND
+      operands:
+        - operator: OR
+          operands:
+            - code: CSCI 1010
+              to: 1090
+            - code: BME 2000
+            - code: CVNG 1500
+            - code: MATH 3850
+            - code: ECE 1001
+            - code: GIS 4090
+        - operator: OR
+          operands:
+            - code: MATH 1200
+            - code: MATH 1320
+              to: 4999
+
+  - code: CSCI 2100
+    reqs:
+      operator: AND
+      operands:
+        - code: CSCI 1300
+          concurrent: true
+        - code: MATH 1660
+
+  - code: CSCI 2300
+    reqs:
+      - operator: OR
+        operands:
+         - code: CSCI 2100
+
+  - code: CSCI 2500
+    reqs:
+      - operator: OR
+        operands:
+          - code: CSCI 2100
+            concurrent: true
+
+  - code: CSCI 2510
+    reqs:
+      - operator: OR
+        operands:
+          - code: CSCI 2100
+          - operator: AND
+            operands:
+              - code: ECE 2205
+              - code: ECE 3217
+              - code: ECE 3225

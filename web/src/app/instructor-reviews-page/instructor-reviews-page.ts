@@ -1,10 +1,10 @@
-import { Component, computed, inject, OnInit, signal, ViewEncapsulation } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { InstructorsService, RmpReview } from '../instructors-service/instructors-service';
-import { RatingsService } from '../ratings-service/ratings-service';
-import { CoursesService, Course } from '../courses-service/courses-service';
+import {Component, computed, inject, OnInit, signal, ViewEncapsulation} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {FormsModule} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {InstructorsService, RmpReview} from '../services/instructors-service/instructors-service';
+import {RatingsService} from '../services/ratings-service/ratings-service';
+import {CoursesService, Course} from '../services/courses-service/courses-service';
 
 @Component({
   selector: 'app-instructor-reviews-page',
@@ -32,7 +32,16 @@ export class InstructorReviewsPage implements OnInit {
   courses = signal<Course[]>([]);
   courseSearchText = signal<string>('');
   courseInputFocused = signal<boolean>(false);
-
+  searchFilteredCourses = computed(() => {
+    const search = this.courseSearchText().toLowerCase().trim();
+    const allCourses = this.courses();
+    if (!search) {
+      return allCourses;
+    }
+    return allCourses.filter(course =>
+      course.courseCode.toLowerCase().includes(search)
+    );
+  });
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private instructorsService = inject(InstructorsService);
@@ -55,7 +64,7 @@ export class InstructorReviewsPage implements OnInit {
         this.error.set('No instructor ID provided');
       }
     });
-    
+
     // Load courses for filtering
     this.coursesService.getCourses().subscribe({
       next: (courses) => {
@@ -66,19 +75,7 @@ export class InstructorReviewsPage implements OnInit {
       }
     });
   }
-  
-  searchFilteredCourses = computed(() => {
-    const search = this.courseSearchText().toLowerCase().trim();
-    const allCourses = this.courses();
-    if (!search) {
-      return allCourses;
-    }
-    return allCourses.filter(course => 
-      course.courseCode.toLowerCase().includes(search) ||
-      course.title.toLowerCase().includes(search)
-    );
-  });
-  
+
   onCourseSearchChange(event: any): void {
     const value = event?.target?.value || '';
     this.courseSearchText.set(value);
@@ -86,23 +83,23 @@ export class InstructorReviewsPage implements OnInit {
       this.selectedCourse.set(null);
     }
   }
-  
+
   onCourseFocus(): void {
     this.courseInputFocused.set(true);
   }
-  
+
   onCourseBlur(): void {
     setTimeout(() => {
       this.courseInputFocused.set(false);
     }, 200);
   }
-  
+
   selectCourseFromSearch(course: Course): void {
     this.selectedCourse.set(course);
     this.courseSearchText.set('');
     this.courseInputFocused.set(false);
   }
-  
+
   clearCourseSelection(): void {
     this.selectedCourse.set(null);
     this.courseSearchText.set('');
@@ -111,7 +108,7 @@ export class InstructorReviewsPage implements OnInit {
 
   loadInstructorName(): void {
     if (!this.instructorId()) return;
-    
+
     this.instructorsService.getInstructors().subscribe({
       next: (instructors) => {
         const instructor = instructors.find(i => i.id === this.instructorId());
@@ -172,7 +169,7 @@ export class InstructorReviewsPage implements OnInit {
   addRating(): void {
     if (this.instructorId()) {
       this.router.navigate(['/ratings/create'], {
-        queryParams: { instructorId: this.instructorId() }
+        queryParams: {instructorId: this.instructorId()}
       });
     }
   }
@@ -181,7 +178,7 @@ export class InstructorReviewsPage implements OnInit {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
     } catch {
       return dateString;
     }
@@ -277,12 +274,12 @@ export class InstructorReviewsPage implements OnInit {
   filteredReviews(): RmpReview[] {
     const filter = this.filterType();
     let filtered = this.reviews();
-    
+
     // Filter by type
     if (filter !== 'all') {
       filtered = filtered.filter(review => review.type === filter);
     }
-    
+
     // Filter by course if selected
     const selectedCourse = this.selectedCourse();
     if (selectedCourse) {
@@ -295,8 +292,8 @@ export class InstructorReviewsPage implements OnInit {
         if (review.type === 'rmp' && review.course) {
           const normalizedCourseCode = selectedCourse.courseCode.replace(/\s+/g, '').toUpperCase();
           const normalizedReviewCourse = review.course.replace(/\s+/g, '').toUpperCase();
-          return normalizedReviewCourse.includes(normalizedCourseCode) || 
-                 normalizedCourseCode.includes(normalizedReviewCourse);
+          return normalizedReviewCourse.includes(normalizedCourseCode) ||
+            normalizedCourseCode.includes(normalizedReviewCourse);
         }
         // For Billiken Blueprint reviews, check courseCode
         if (review.type === 'billiken_blueprint' && review.courseCode) {
@@ -305,7 +302,7 @@ export class InstructorReviewsPage implements OnInit {
         return false;
       });
     }
-    
+
     // Already sorted by loadReviews, but ensure sorting is maintained
     return filtered;
   }

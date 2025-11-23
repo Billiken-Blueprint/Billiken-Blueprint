@@ -1,8 +1,8 @@
-import { Component, ViewEncapsulation, signal, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
-import { UserInfoService } from '../user-info-service/user-info-service';
-import { InstructorsService, Instructor as BackendInstructor } from '../instructors-service/instructors-service';
+import {Component, ViewEncapsulation, signal, OnInit, inject} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {Router} from '@angular/router';
+import {UserInfoService} from '../services/user-info-service/user-info-service';
+import {InstructorsService, Instructor as BackendInstructor} from '../services/instructors-service/instructors-service';
 
 interface SimpleCourse {
   code: string;
@@ -55,130 +55,130 @@ type GroupKey =
 const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
   // ---- Core Courses ----
   Core_Intro: [
-    { code: 'CSCI 1010', title: 'Intro to Computer Science: Principles' },
-    { code: 'CSCI 1020', title: 'Intro to Computer Science: Bioinformatics' },
-    { code: 'CSCI 1025', title: 'Intro to Computer Science: Cybersecurity' },
-    { code: 'CSCI 1030', title: 'Intro to Computer Science: Game Design' },
-    { code: 'CSCI 1040', title: 'Intro to Computer Science: Mobile Computing' },
-    { code: 'CSCI 1050', title: 'Intro to Computer Science: Multimedia' },
-    { code: 'CSCI 1060', title: 'Intro to Computer Science: Scientific Programming' },
-    { code: 'CSCI 1070', title: 'Intro to Computer Science: Taming Big Data' },
-    { code: 'CSCI 1080', title: 'Intro to Computer Science: World Wide Web' },
-    { code: 'CSCI 1090', title: 'Intro to Computer Science: Special Topics' }
+    {code: 'CSCI 1010', title: 'Intro to Computer Science: Principles'},
+    {code: 'CSCI 1020', title: 'Intro to Computer Science: Bioinformatics'},
+    {code: 'CSCI 1025', title: 'Intro to Computer Science: Cybersecurity'},
+    {code: 'CSCI 1030', title: 'Intro to Computer Science: Game Design'},
+    {code: 'CSCI 1040', title: 'Intro to Computer Science: Mobile Computing'},
+    {code: 'CSCI 1050', title: 'Intro to Computer Science: Multimedia'},
+    {code: 'CSCI 1060', title: 'Intro to Computer Science: Scientific Programming'},
+    {code: 'CSCI 1070', title: 'Intro to Computer Science: Taming Big Data'},
+    {code: 'CSCI 1080', title: 'Intro to Computer Science: World Wide Web'},
+    {code: 'CSCI 1090', title: 'Intro to Computer Science: Special Topics'}
   ],
   Core_Prog: [
-    { code: 'CSCI 1300', title: 'Introduction to Object-Oriented Programming' },
-    { code: 'CSCI 2100', title: 'Data Structures' },
-    { code: 'CSCI 2190', title: 'Computational Problem Solving' },
-    { code: 'CSCI 2300', title: 'Object-Oriented Software Design' },
-    { code: 'CSCI 3100', title: 'Algorithms' },
-    { code: 'CSCI 3200', title: 'Programming Languages' },
-    { code: 'CSCI 3250', title: 'Compilers' },
-    { code: 'CSCI 3300', title: 'Software Engineering' }
+    {code: 'CSCI 1300', title: 'Introduction to Object-Oriented Programming'},
+    {code: 'CSCI 2100', title: 'Data Structures'},
+    {code: 'CSCI 2190', title: 'Computational Problem Solving'},
+    {code: 'CSCI 2300', title: 'Object-Oriented Software Design'},
+    {code: 'CSCI 3100', title: 'Algorithms'},
+    {code: 'CSCI 3200', title: 'Programming Languages'},
+    {code: 'CSCI 3250', title: 'Compilers'},
+    {code: 'CSCI 3300', title: 'Software Engineering'}
   ],
   Core_Software: [
-    { code: 'CSCI 3710', title: 'Databases' },
-    { code: 'CSCI 3810', title: 'Game Programming' },
-    { code: 'CSCI 4120', title: 'Advanced Data Structures' },
-    { code: 'CSCI 4310', title: 'Software Architecture' },
-    { code: 'CSCI 4340', title: 'Safety-Critical Software Systems' },
-    { code: 'CSCI 4355', title: 'Human Computer Interaction' },
-    { code: 'CSCI 4360', title: 'Web Technologies' },
-    { code: 'CSCI 4370', title: 'User Interface Design' },
-    { code: 'CSCI 4380', title: 'DevOps' }
+    {code: 'CSCI 3710', title: 'Databases'},
+    {code: 'CSCI 3810', title: 'Game Programming'},
+    {code: 'CSCI 4120', title: 'Advanced Data Structures'},
+    {code: 'CSCI 4310', title: 'Software Architecture'},
+    {code: 'CSCI 4340', title: 'Safety-Critical Software Systems'},
+    {code: 'CSCI 4355', title: 'Human Computer Interaction'},
+    {code: 'CSCI 4360', title: 'Web Technologies'},
+    {code: 'CSCI 4370', title: 'User Interface Design'},
+    {code: 'CSCI 4380', title: 'DevOps'}
   ],
   Core_Systems: [
-    { code: 'CSCI 2500', title: 'Computer Organization and Systems' },
-    { code: 'CSCI 2510', title: 'Principles of Computing Systems' },
-    { code: 'CSCI 3450X', title: 'Microprocessors' },
-    { code: 'CSCI 3451X', title: 'Microprocessors Laboratory' },
-    { code: 'CSCI 4500', title: 'Operating Systems' },
-    { code: 'CSCI 4520', title: 'Internet of Things' },
-    { code: 'CSCI 4590', title: 'Wireless Sensor Networks' },
-    { code: 'CSCI 4610', title: 'Concurrent and Parallel Programming' },
-    { code: 'CSCI 4620', title: 'Distributed Computing' }
+    {code: 'CSCI 2500', title: 'Computer Organization and Systems'},
+    {code: 'CSCI 2510', title: 'Principles of Computing Systems'},
+    {code: 'CSCI 3450X', title: 'Microprocessors'},
+    {code: 'CSCI 3451X', title: 'Microprocessors Laboratory'},
+    {code: 'CSCI 4500', title: 'Operating Systems'},
+    {code: 'CSCI 4520', title: 'Internet of Things'},
+    {code: 'CSCI 4590', title: 'Wireless Sensor Networks'},
+    {code: 'CSCI 4610', title: 'Concurrent and Parallel Programming'},
+    {code: 'CSCI 4620', title: 'Distributed Computing'}
   ],
 
   // ---- STEM & Ethics ----
   Stem_MathCore: [
-    { code: 'MATH 1510', title: 'Calculus I' },
-    { code: 'MATH 1520', title: 'Calculus II' },
-    { code: 'MATH 1660', title: 'Discrete Mathematics' },
-    { code: 'STAT 3850', title: 'Foundation of Statistics' }
+    {code: 'MATH 1510', title: 'Calculus I'},
+    {code: 'MATH 1520', title: 'Calculus II'},
+    {code: 'MATH 1660', title: 'Discrete Mathematics'},
+    {code: 'STAT 3850', title: 'Foundation of Statistics'}
   ],
   Stem_MathAdv: [
-    { code: 'MATH 2530', title: 'Calculus III' },
-    { code: 'MATH 3110', title: 'Linear Algebra (example)' },
-    { code: 'MATH 3120', title: 'Advanced Linear Algebra (example)' },
-    { code: 'STAT 4000', title: 'Advanced Statistics (example)' },
-    { code: 'MATH 3730', title: 'Numerical Methods (example)' },
-    { code: 'MATH 4100', title: 'Advanced Topics in Math (example)' },
-    { code: 'STAT 4100', title: 'Applied Statistics (example)' },
-    { code: 'STAT 4200', title: 'Probability and Statistics (example)' }
+    {code: 'MATH 2530', title: 'Calculus III'},
+    {code: 'MATH 3110', title: 'Linear Algebra (example)'},
+    {code: 'MATH 3120', title: 'Advanced Linear Algebra (example)'},
+    {code: 'STAT 4000', title: 'Advanced Statistics (example)'},
+    {code: 'MATH 3730', title: 'Numerical Methods (example)'},
+    {code: 'MATH 4100', title: 'Advanced Topics in Math (example)'},
+    {code: 'STAT 4100', title: 'Applied Statistics (example)'},
+    {code: 'STAT 4200', title: 'Probability and Statistics (example)'}
   ],
   Stem_Science: [
-    { code: 'PHYS 1310', title: 'Physics I with Lab (example)' },
-    { code: 'PHYS 1320', title: 'Physics II with Lab (example)' },
-    { code: 'CHEM 1110', title: 'General Chemistry I with Lab (example)' },
-    { code: 'CHEM 1120', title: 'General Chemistry II with Lab (example)' },
-    { code: 'BIOL 1240', title: 'Principles of Biology I with Lab (example)' },
-    { code: 'BME 2000', title: 'Biomedical Engineering Computing' },
-    { code: 'CVNG 1500', title: 'Civil Engineering Computing' },
-    { code: 'SCI 2000', title: 'Science/Engineering Elective (example)' }
+    {code: 'PHYS 1310', title: 'Physics I with Lab (example)'},
+    {code: 'PHYS 1320', title: 'Physics II with Lab (example)'},
+    {code: 'CHEM 1110', title: 'General Chemistry I with Lab (example)'},
+    {code: 'CHEM 1120', title: 'General Chemistry II with Lab (example)'},
+    {code: 'BIOL 1240', title: 'Principles of Biology I with Lab (example)'},
+    {code: 'BME 2000', title: 'Biomedical Engineering Computing'},
+    {code: 'CVNG 1500', title: 'Civil Engineering Computing'},
+    {code: 'SCI 2000', title: 'Science/Engineering Elective (example)'}
   ],
   Stem_Ethics: [
-    { code: 'PHIL 3050X', title: 'Computer Ethics' },
-    { code: 'CSCI 3050', title: 'Computer Ethics (CSCI listing)' },
-    { code: 'PHIL 2050', title: 'Ethics (example prerequisite)' },
-    { code: 'PHIL 3000', title: 'Advanced Ethics & Technology (example)' }
+    {code: 'PHIL 3050X', title: 'Computer Ethics'},
+    {code: 'CSCI 3050', title: 'Computer Ethics (CSCI listing)'},
+    {code: 'PHIL 2050', title: 'Ethics (example prerequisite)'},
+    {code: 'PHIL 3000', title: 'Advanced Ethics & Technology (example)'}
   ],
 
   // ---- Electives ----
   Electives_Systems: [
-    { code: 'CSCI 4500', title: 'Operating Systems' },
-    { code: 'CSCI 4520', title: 'Internet of Things' },
-    { code: 'CSCI 4530', title: 'Computer Security' },
-    { code: 'CSCI 4550', title: 'Computer Networks' },
-    { code: 'CSCI 4590', title: 'Wireless Sensor Networks' },
-    { code: 'CSCI 4610', title: 'Concurrent and Parallel Programming' },
-    { code: 'CSCI 4620', title: 'Distributed Computing' },
-    { code: 'CSCI 4870', title: 'Applied Cryptography' }
+    {code: 'CSCI 4500', title: 'Operating Systems'},
+    {code: 'CSCI 4520', title: 'Internet of Things'},
+    {code: 'CSCI 4530', title: 'Computer Security'},
+    {code: 'CSCI 4550', title: 'Computer Networks'},
+    {code: 'CSCI 4590', title: 'Wireless Sensor Networks'},
+    {code: 'CSCI 4610', title: 'Concurrent and Parallel Programming'},
+    {code: 'CSCI 4620', title: 'Distributed Computing'},
+    {code: 'CSCI 4870', title: 'Applied Cryptography'}
   ],
   Electives_AIData: [
-    { code: 'CSCI 4710', title: 'Databases' },
-    { code: 'CSCI 4740', title: 'Artificial Intelligence' },
-    { code: 'CSCI 4750', title: 'Machine Learning' },
-    { code: 'CSCI 4756', title: 'Applied Machine Learning' },
-    { code: 'CSCI 4760', title: 'Deep Learning' },
-    { code: 'CSCI 4770', title: 'Big Data Analytics' },
-    { code: 'CSCI 4780', title: 'Data Engineering' },
-    { code: 'CSCI 4830', title: 'Computer Vision' },
-    { code: 'CSCI 4845', title: 'Natural Language Processing' }
+    {code: 'CSCI 4710', title: 'Databases'},
+    {code: 'CSCI 4740', title: 'Artificial Intelligence'},
+    {code: 'CSCI 4750', title: 'Machine Learning'},
+    {code: 'CSCI 4756', title: 'Applied Machine Learning'},
+    {code: 'CSCI 4760', title: 'Deep Learning'},
+    {code: 'CSCI 4770', title: 'Big Data Analytics'},
+    {code: 'CSCI 4780', title: 'Data Engineering'},
+    {code: 'CSCI 4830', title: 'Computer Vision'},
+    {code: 'CSCI 4845', title: 'Natural Language Processing'}
   ],
   Electives_Software: [
-    { code: 'CSCI 3710', title: 'Databases' },
-    { code: 'CSCI 3810', title: 'Game Programming' },
-    { code: 'CSCI 4310', title: 'Software Architecture' },
-    { code: 'CSCI 4355', title: 'Human Computer Interaction' },
-    { code: 'CSCI 4360', title: 'Web Technologies' },
-    { code: 'CSCI 4370', title: 'User Interface Design' },
-    { code: 'CSCI 4380', title: 'DevOps' },
-    { code: 'CSCI 4820', title: 'Computer Graphics' },
-    { code: 'CSCI 4860', title: 'Autonomous Driving' }
+    {code: 'CSCI 3710', title: 'Databases'},
+    {code: 'CSCI 3810', title: 'Game Programming'},
+    {code: 'CSCI 4310', title: 'Software Architecture'},
+    {code: 'CSCI 4355', title: 'Human Computer Interaction'},
+    {code: 'CSCI 4360', title: 'Web Technologies'},
+    {code: 'CSCI 4370', title: 'User Interface Design'},
+    {code: 'CSCI 4380', title: 'DevOps'},
+    {code: 'CSCI 4820', title: 'Computer Graphics'},
+    {code: 'CSCI 4860', title: 'Autonomous Driving'}
   ],
   Electives_Capstone: [
-    { code: 'CSCI 3910', title: 'Internship with Industry' },
-    { code: 'CSCI 4910', title: 'Internship with Industry (Advanced)' },
-    { code: 'CSCI 4930', title: 'Special Topics' },
-    { code: 'CSCI 4961', title: 'Capstone Project I' },
-    { code: 'CSCI 4962', title: 'Capstone Project II' },
-    { code: 'CSCI 4980', title: 'Advanced Independent Study' },
-    { code: 'CSCI 1930', title: 'Special Topics (Lower Division)' },
-    { code: 'CSCI 1980', title: 'Independent Study (Lower Division)' },
-    { code: 'CSCI 2930', title: 'Special Topics (Middle Division)' },
-    { code: 'CSCI 2980', title: 'Independent Study (Middle Division)' },
-    { code: 'CSCI 3930', title: 'Special Topics (Upper Division)' },
-    { code: 'CSCI 3980', title: 'Independent Study (Upper Division)' }
+    {code: 'CSCI 3910', title: 'Internship with Industry'},
+    {code: 'CSCI 4910', title: 'Internship with Industry (Advanced)'},
+    {code: 'CSCI 4930', title: 'Special Topics'},
+    {code: 'CSCI 4961', title: 'Capstone Project I'},
+    {code: 'CSCI 4962', title: 'Capstone Project II'},
+    {code: 'CSCI 4980', title: 'Advanced Independent Study'},
+    {code: 'CSCI 1930', title: 'Special Topics (Lower Division)'},
+    {code: 'CSCI 1980', title: 'Independent Study (Lower Division)'},
+    {code: 'CSCI 2930', title: 'Special Topics (Middle Division)'},
+    {code: 'CSCI 2980', title: 'Independent Study (Middle Division)'},
+    {code: 'CSCI 3930', title: 'Special Topics (Upper Division)'},
+    {code: 'CSCI 3980', title: 'Independent Study (Upper Division)'}
   ]
 };
 
@@ -189,7 +189,7 @@ const COURSE_GROUP_DATA: Record<GroupKey, SimpleCourse[]> = {
   templateUrl: './course-page.html',
   styleUrls: ['./course-page.css'],
   encapsulation: ViewEncapsulation.None, // let body/html styles apply globally
-  host: { 'class': 'block min-h-screen w-full' }
+  host: {'class': 'block min-h-screen w-full'}
 })
 export class CoursePage implements OnInit {
   // === courses-page toolbox + groups state ===
@@ -200,211 +200,21 @@ export class CoursePage implements OnInit {
   expandedCourseCode: string | null = null;
 
   savedCourses: SimpleCourse[] = [];
-  private userInfoService = inject(UserInfoService);
-  private instructorsService = inject(InstructorsService);
-  private router = inject(Router);
-  
   allInstructors = signal<BackendInstructor[]>([]);
-
   readonly courseGroups: { key: GroupKey; label: string }[] = [
-    { key: 'Core_Intro', label: 'Intro to CS' },
-    { key: 'Core_Prog', label: 'Programming & Data Structures' },
-    { key: 'Core_Software', label: 'Software Design & Engineering' },
-    { key: 'Core_Systems', label: 'Systems & Architecture' },
-    { key: 'Stem_MathCore', label: 'Math Core' },
-    { key: 'Stem_MathAdv', label: 'Advanced Math & Stats' },
-    { key: 'Stem_Science', label: 'Science & Engineering' },
-    { key: 'Stem_Ethics', label: 'Ethics' },
-    { key: 'Electives_Systems', label: 'Systems Electives' },
-    { key: 'Electives_AIData', label: 'AI & Data Science' },
-    { key: 'Electives_Software', label: 'Software & UX' },
-    { key: 'Electives_Capstone', label: 'Capstone & Experience' }
+    {key: 'Core_Intro', label: 'Intro to CS'},
+    {key: 'Core_Prog', label: 'Programming & Data Structures'},
+    {key: 'Core_Software', label: 'Software Design & Engineering'},
+    {key: 'Core_Systems', label: 'Systems & Architecture'},
+    {key: 'Stem_MathCore', label: 'Math Core'},
+    {key: 'Stem_MathAdv', label: 'Advanced Math & Stats'},
+    {key: 'Stem_Science', label: 'Science & Engineering'},
+    {key: 'Stem_Ethics', label: 'Ethics'},
+    {key: 'Electives_Systems', label: 'Systems Electives'},
+    {key: 'Electives_AIData', label: 'AI & Data Science'},
+    {key: 'Electives_Software', label: 'Software & UX'},
+    {key: 'Electives_Capstone', label: 'Capstone & Experience'}
   ];
-
-  get groupCourses(): SimpleCourse[] {
-    return this.selectedGroup ? COURSE_GROUP_DATA[this.selectedGroup] ?? [] : [];
-  }
-
-  onSelectGroup(key: GroupKey): void {
-    this.selectedGroup = key;
-    this.expandedCourseCode = null;
-  }
-
-  toggleCourseDescription(code: string): void {
-    this.expandedCourseCode = this.expandedCourseCode === code ? null : code;
-  }
-
-  getCourseDetails(code: string): InfoCourse | undefined {
-    return this.courses().find(c => c.code === code);
-  }
-
-  hasLocationInfo(code: string): boolean {
-    const details = this.getCourseDetails(code);
-    return !!(details?.meetingTimes || details?.location);
-  }
-
-  ngOnInit(): void {
-    this.loadSavedCourses();
-    this.loadInstructors();
-  }
-
-  loadInstructors(): void {
-    this.instructorsService.getInstructors().subscribe({
-      next: (instructors) => {
-        this.allInstructors.set(instructors);
-        // Match instructor IDs to course instructors by name
-        this.matchInstructorIds();
-      },
-      error: (err) => {
-        console.error('Error loading instructors:', err);
-      }
-    });
-  }
-
-  matchInstructorIds(): void {
-    // Update course instructors with IDs and ratings from backend
-    const instructors = this.courses();
-    const allInstructors = this.allInstructors();
-    const updated = instructors.map(course => {
-      if (course.instructors) {
-        const updatedInstructors = course.instructors.map(inst => {
-          // Try exact match first
-          let matched = allInstructors.find(ai => 
-            ai.name.toLowerCase() === inst.name.toLowerCase()
-          );
-          // If no exact match, try matching by last name (handles "Greg" vs "Gregory Marks")
-          if (!matched) {
-            const instNameParts = inst.name.toLowerCase().split(/\s+/);
-            matched = allInstructors.find(ai => {
-              const aiNameParts = ai.name.toLowerCase().split(/\s+/);
-              // Match if last names match
-              if (instNameParts.length > 0 && aiNameParts.length > 0 &&
-                  instNameParts[instNameParts.length - 1] === aiNameParts[aiNameParts.length - 1]) {
-                // Also check if first names are similar (Greg/Gregory, Jim/James)
-                const instFirst = instNameParts[0];
-                const aiFirst = aiNameParts[0];
-                return (instFirst === aiFirst || 
-                        instFirst.startsWith(aiFirst) || 
-                        aiFirst.startsWith(instFirst) ||
-                        (instFirst === "greg" && aiFirst === "gregory") ||
-                        (aiFirst === "greg" && instFirst === "gregory") ||
-                        (instFirst === "jim" && aiFirst === "james") ||
-                        (aiFirst === "jim" && instFirst === "james"));
-              }
-              return false;
-            });
-          }
-          if (matched) {
-            // Merge backend data: keep existing email/office if set, add id and rating
-            return {
-              ...inst,
-              id: matched.id,
-              rating: matched.rmpRating !== null && matched.rmpRating !== undefined ? {
-                overall: matched.rmpRating,
-                numRatings: matched.rmpNumRatings ?? 0,
-                rmpUrl: matched.rmpUrl ?? undefined
-              } : inst.rating
-            };
-          }
-          return { ...inst, id: undefined };
-        });
-        return { ...course, instructors: updatedInstructors };
-      }
-      return course;
-    });
-    this.courses.set(updated);
-  }
-
-  hasInstructorReviews(inst: Instructor): boolean {
-    if (inst.id) return true;
-    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
-  }
-
-  openReviewsPage(instructor: Instructor): void {
-    let instructorId: number | null = null;
-    
-    if (instructor.id) {
-      instructorId = instructor.id;
-    } else {
-      // Try to find instructor ID by name
-      const matched = this.allInstructors().find(ai => 
-        ai.name.toLowerCase() === instructor.name.toLowerCase()
-      );
-      if (matched) {
-        instructorId = matched.id ?? null;
-      } else {
-        console.warn('Instructor ID not found for:', instructor.name);
-        return;
-      }
-    }
-    
-    if (instructorId) {
-      this.router.navigate(['/instructors', instructorId, 'reviews']);
-    }
-  }
-
-  loadSavedCourses(): void {
-    this.userInfoService.getUserInfo().subscribe({
-      next: (userInfo) => {
-        if (userInfo.savedCourseCodes && userInfo.savedCourseCodes.length > 0) {
-          // Map saved course codes to SimpleCourse objects
-          this.savedCourses = userInfo.savedCourseCodes
-            .map(code => {
-              // Find the course in all groups
-              for (const group of Object.values(COURSE_GROUP_DATA)) {
-                const course = group.find(c => c.code === code);
-                if (course) return course;
-              }
-              // If not found in groups, create a simple entry
-              return { code, title: code };
-            })
-            .filter(c => c !== null) as SimpleCourse[];
-        }
-      },
-      error: (error) => {
-        console.error('Error loading saved courses:', error);
-        // If user is not logged in or no profile exists, that's okay
-        // Saved courses will just be empty
-      }
-    });
-  }
-
-  isCourseSaved(course: SimpleCourse): boolean {
-    return this.savedCourses.some(c => c.code === course.code);
-  }
-
-  addCourse(course: SimpleCourse, event?: MouseEvent): void {
-    event?.stopPropagation();
-    if (!this.isCourseSaved(course)) {
-      this.savedCourses.push(course);
-      this.saveCoursesToBackend();
-    }
-  }
-
-  removeCourse(course: SimpleCourse): void {
-    this.savedCourses = this.savedCourses.filter(c => c.code !== course.code);
-    this.saveCoursesToBackend();
-  }
-
-  clearSaved(): void {
-    this.savedCourses = [];
-    this.saveCoursesToBackend();
-  }
-
-  private saveCoursesToBackend(): void {
-    const savedCourseCodes = this.savedCourses.map(c => c.code);
-    this.userInfoService.updateSavedCourses(savedCourseCodes).subscribe({
-      next: () => {
-        // Successfully saved
-      },
-      error: (error) => {
-        console.error('Error saving courses:', error);
-        // Don't show error to user - courses are still in memory
-        // They'll be lost on refresh, but that's acceptable for now
-      }
-    });
-  }
-
   // === course-info state (merged from course-info.ts) ===
   courses = signal<InfoCourse[]>([
     {
@@ -423,13 +233,13 @@ export class CoursePage implements OnInit {
           name: 'David Letscher',
           email: 'david.letscher@slu.edu',
           office: 'Ritter 359',
-          rating: { overall: 2.7, numRatings: 52, rmpUrl: 'https://www.ratemyprofessors.com/professor/325024' }
+          rating: {overall: 2.7, numRatings: 52, rmpUrl: 'https://www.ratemyprofessors.com/professor/325024'}
         },
         {
           name: 'Michael Liljegren',
           email: 'mike.liljegren@slu.edu',
           office: 'Ritter',
-          rating: { overall: 4.4, numRatings: 7, rmpUrl: 'https://www.ratemyprofessors.com/professor/2999302' }
+          rating: {overall: 4.4, numRatings: 7, rmpUrl: 'https://www.ratemyprofessors.com/professor/2999302'}
         },
       ],
       expandedDesc: false,
@@ -450,7 +260,7 @@ export class CoursePage implements OnInit {
           name: 'Michael Goldwasser',
           email: 'michael.goldwasser@slu.edu',
           office: 'Ritter 217',
-          rating: { overall: 4.2, numRatings: 24, rmpUrl: 'https://www.ratemyprofessors.com/professor/278739' }
+          rating: {overall: 4.2, numRatings: 24, rmpUrl: 'https://www.ratemyprofessors.com/professor/278739'}
         }
       ],
       expandedDesc: false,
@@ -476,10 +286,10 @@ export class CoursePage implements OnInit {
       expandedDesc: false,
       expandedInstructors: false
     },
-    { 
+    {
       code: 'CSCI 2500',
-      title: 'Computer Organization and Systems', 
-      credits: 3, 
+      title: 'Computer Organization and Systems',
+      credits: 3,
       description:
         'An introduction to computer systems, from hardware to operating systems. Topics include computer architecture, instruction sets, data representation, memory systems, and how the operating system manages processes and user applications. (Offered in Fall)',
       prerequisites:
@@ -491,8 +301,8 @@ export class CoursePage implements OnInit {
           name: 'John Allen'
         }
       ],
-      expandedDesc: false, 
-      expandedInstructors: false 
+      expandedDesc: false,
+      expandedInstructors: false
     },
     {
       code: 'CSCI 2510',
@@ -509,15 +319,15 @@ export class CoursePage implements OnInit {
           name: 'Qinglei Cao',
           email: 'qinglei.cao@slu.edu',
           office: 'Ritter',
-          rating: { overall: 2.9, numRatings: 7, rmpUrl: 'https://www.ratemyprofessors.com/professor/3010174' }
+          rating: {overall: 2.9, numRatings: 7, rmpUrl: 'https://www.ratemyprofessors.com/professor/3010174'}
         }
       ],
-      expandedDesc: false, 
-      expandedInstructors: false 
+      expandedDesc: false,
+      expandedInstructors: false
     },
-    { 
-      code: 'CSCI 3100', 
-      title: 'Algorithms', 
+    {
+      code: 'CSCI 3100',
+      title: 'Algorithms',
       credits: 3,
       description: 'Introduction to analysis and complexity of algorithms. Big-O notation. Running time analysis of algorithms for traversing graphs and trees, searching and sorting. Recursive versus iterative algorithms. Complexity, completeness, computability.',
       prerequisites:
@@ -529,18 +339,18 @@ export class CoursePage implements OnInit {
           name: 'Michael Goldwasser',
           email: 'michael.goldwasser@slu.edu',
           office: 'Ritter 217',
-          rating: { overall: 4.2, numRatings: 24, rmpUrl: 'https://www.ratemyprofessors.com/professor/278739' }
+          rating: {overall: 4.2, numRatings: 24, rmpUrl: 'https://www.ratemyprofessors.com/professor/278739'}
         }
       ],
       expandedDesc: false,
       expandedInstructors: false
     },
-    { 
-      code: 'CSCI 3200', 
-      title: 'Programming Languages', 
+    {
+      code: 'CSCI 3200',
+      title: 'Programming Languages',
       credits: 3,
       description: 'Overview of programming languages: procedural and functional languages. Exposure to functional languages. Analysis of solution strategies to variable binding and function calls. Problem solving paradigms and linguistic issues.',
-      prerequisites:'CSCI 2300',
+      prerequisites: 'CSCI 2300',
       meetingTimes: 'TTh 12:45-2:00',
       location: 'MDD 2096',
       instructors: [
@@ -548,16 +358,16 @@ export class CoursePage implements OnInit {
           name: 'David Letscher',
           email: 'david.letscher@slu.edu',
           office: 'Ritter 359',
-          rating: { overall: 2.7, numRatings: 52, rmpUrl: 'https://www.ratemyprofessors.com/professor/325024' }
+          rating: {overall: 2.7, numRatings: 52, rmpUrl: 'https://www.ratemyprofessors.com/professor/325024'}
         },
       ],
-      expandedDesc: false, 
-      expandedInstructors: false 
+      expandedDesc: false,
+      expandedInstructors: false
     },
-    { 
-      code: 'CSCI 3300', 
-      title: 'Software Engineering', 
-      credits: 3, 
+    {
+      code: 'CSCI 3300',
+      title: 'Software Engineering',
+      credits: 3,
       description: 'Theory and practice of software engineering. Design and implementation of software systems. Levels of abstraction as a technique in program design. Organized around major group programming projects.',
       prerequisites: 'CSCI 2300',
       meetingTimes: 'TTh 3:45-5:00',
@@ -569,13 +379,13 @@ export class CoursePage implements OnInit {
           office: 'MDD 2010',
         },
       ],
-      expandedDesc: false, 
-      expandedInstructors: false 
+      expandedDesc: false,
+      expandedInstructors: false
     },
-    { 
-      code: 'CSCI 4961', 
-      title: 'Capstone Project I', 
-      credits: 2, 
+    {
+      code: 'CSCI 4961',
+      title: 'Capstone Project I',
+      credits: 2,
       description: 'The first part of a two-course sequence serving as a concluding achievement for graduating students. In this course, students develop a proposal, collect and formalize specifications, become acquainted with necessary technologies, and create and present a detailed design for completing the project.',
       prerequisites: 'CSCI 2300; (CSCI 2510 or ECE 3127)',
       meetingTimes: 'M 4:10-5:40',
@@ -588,12 +398,12 @@ export class CoursePage implements OnInit {
         }
       ],
       expandedDesc: false,
-      expandedInstructors: false 
+      expandedInstructors: false
     },
-    { 
-      code: 'CSCI 4962', 
-      title: 'Capstone Project II', 
-      credits: 2, 
+    {
+      code: 'CSCI 4962',
+      title: 'Capstone Project II',
+      credits: 2,
       description: 'The continuation of CSCI 4961. In the second part of the sequence, students complete their project based upon the design that was developed during the first part of the sequence. Students must demonstrate continued progress throughout the semester and make a preliminary and final presentation of their results.',
       prerequisites: 'CSCI 4961',
       meetingTimes: 'M 4:10-5:40',
@@ -604,9 +414,9 @@ export class CoursePage implements OnInit {
           email: 'NA',
           office: 'NA',
         }
-      ],     
-      expandedDesc: false, 
-      expandedInstructors: false 
+      ],
+      expandedDesc: false,
+      expandedInstructors: false
     },
     // Capstone & Experience courses
     {
@@ -1463,6 +1273,184 @@ export class CoursePage implements OnInit {
       expandedInstructors: false
     }
   ]);
+  private userInfoService = inject(UserInfoService);
+  private instructorsService = inject(InstructorsService);
+  private router = inject(Router);
+
+
+  get groupCourses(): SimpleCourse[] {
+    return this.selectedGroup ? COURSE_GROUP_DATA[this.selectedGroup] ?? [] : [];
+  }
+
+
+  hasLocationInfo(code: string): boolean {
+    const details = this.getCourseDetails(code);
+    return !!(details?.meetingTimes || details?.location);
+  }
+
+
+  loadInstructors(): void {
+    this.instructorsService.getInstructors().subscribe({
+      next: (instructors) => {
+        this.allInstructors.set(instructors);
+        // Match instructor IDs to course instructors by name
+        this.matchInstructorIds();
+      },
+      error: (err) => {
+        console.error('Error loading instructors:', err);
+      }
+    });
+  }
+
+  matchInstructorIds(): void {
+    // Update course instructors with IDs and ratings from backend
+    const instructors = this.courses();
+    const allInstructors = this.allInstructors();
+    const updated = instructors.map(course => {
+      if (course.instructors) {
+        const updatedInstructors = course.instructors.map(inst => {
+          // Try exact match first
+          let matched = allInstructors.find(ai =>
+            ai.name.toLowerCase() === inst.name.toLowerCase()
+          );
+          // If no exact match, try matching by last name (handles "Greg" vs "Gregory Marks")
+          if (!matched) {
+            const instNameParts = inst.name.toLowerCase().split(/\s+/);
+            matched = allInstructors.find(ai => {
+              const aiNameParts = ai.name.toLowerCase().split(/\s+/);
+              // Match if last names match
+              if (instNameParts.length > 0 && aiNameParts.length > 0 &&
+                instNameParts[instNameParts.length - 1] === aiNameParts[aiNameParts.length - 1]) {
+                // Also check if first names are similar (Greg/Gregory, Jim/James)
+                const instFirst = instNameParts[0];
+                const aiFirst = aiNameParts[0];
+                return (instFirst === aiFirst ||
+                  instFirst.startsWith(aiFirst) ||
+                  aiFirst.startsWith(instFirst) ||
+                  (instFirst === "greg" && aiFirst === "gregory") ||
+                  (aiFirst === "greg" && instFirst === "gregory") ||
+                  (instFirst === "jim" && aiFirst === "james") ||
+                  (aiFirst === "jim" && instFirst === "james"));
+              }
+              return false;
+            });
+          }
+          if (matched) {
+            // Merge backend data: keep existing email/office if set, add id and rating
+            return {
+              ...inst,
+              id: matched.id,
+              rating: matched.rmpRating !== null && matched.rmpRating !== undefined ? {
+                overall: matched.rmpRating,
+                numRatings: matched.rmpNumRatings ?? 0,
+                rmpUrl: matched.rmpUrl ?? undefined
+              } : inst.rating
+            };
+          }
+          return {...inst, id: undefined};
+        });
+        return {...course, instructors: updatedInstructors};
+      }
+      return course;
+    });
+    this.courses.set(updated);
+  }
+
+  hasInstructorReviews(inst: Instructor): boolean {
+    if (inst.id) return true;
+    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
+  }
+
+  openReviewsPage(instructor: Instructor): void {
+    let instructorId: number | null = null;
+
+    if (instructor.id) {
+      instructorId = instructor.id;
+    } else {
+      // Try to find instructor ID by name
+      const matched = this.allInstructors().find(ai =>
+        ai.name.toLowerCase() === instructor.name.toLowerCase()
+      );
+      if (matched) {
+        instructorId = matched.id ?? null;
+      } else {
+        console.warn('Instructor ID not found for:', instructor.name);
+        return;
+      }
+    }
+
+    if (instructorId) {
+      this.router.navigate(['/instructors', instructorId, 'reviews']);
+    }
+  }
+
+
+  onSelectGroup(key: GroupKey): void {
+    this.selectedGroup = key;
+    this.expandedCourseCode = null;
+  }
+
+  toggleCourseDescription(code: string): void {
+    this.expandedCourseCode = this.expandedCourseCode === code ? null : code;
+  }
+
+  getCourseDetails(code: string): InfoCourse | undefined {
+    return this.courses().find(c => c.code === code);
+  }
+
+  ngOnInit(): void {
+    this.loadSavedCourses();
+  }
+
+  loadSavedCourses(): void {
+    this.userInfoService.getUserInfo().subscribe({
+      next: (userInfo) => {
+
+        if (userInfo.savedCourseCodes && userInfo.savedCourseCodes.length > 0) {
+          // Map saved course codes to SimpleCourse objects
+          this.savedCourses = userInfo.savedCourseCodes
+            .map(code => {
+              // Find the course in all groups
+              for (const group of Object.values(COURSE_GROUP_DATA)) {
+                const course = group.find(c => c.code === code);
+                if (course) return course;
+              }
+              // If not found in groups, create a simple entry
+              return {code, title: code};
+            })
+            .filter(c => c !== null) as SimpleCourse[];
+        }
+
+      },
+      error: (error) => {
+        console.error('Error loading saved courses:', error);
+        // If user is not logged in or no profile exists, that's okay
+        // Saved courses will just be empty
+      }
+    });
+  }
+
+  isCourseSaved(course: SimpleCourse): boolean {
+    return this.savedCourses.some(c => c.code === course.code);
+  }
+
+  addCourse(course: SimpleCourse, event?: MouseEvent): void {
+    event?.stopPropagation();
+    if (!this.isCourseSaved(course)) {
+      this.savedCourses.push(course);
+      this.saveCoursesToBackend();
+    }
+  }
+
+  removeCourse(course: SimpleCourse): void {
+    this.savedCourses = this.savedCourses.filter(c => c.code !== course.code);
+    this.saveCoursesToBackend();
+  }
+
+  clearSaved(): void {
+    this.savedCourses = [];
+    this.saveCoursesToBackend();
+  }
 
   getCourseIndex(code: string): number {
     return this.courses().findIndex(c => c.code === code);
@@ -1472,7 +1460,7 @@ export class CoursePage implements OnInit {
     const index = this.getCourseIndex(code);
     if (index === -1) return;
     const copy = [...this.courses()];
-    copy[index] = { ...copy[index], expandedDesc: !copy[index].expandedDesc };
+    copy[index] = {...copy[index], expandedDesc: !copy[index].expandedDesc};
     this.courses.set(copy);
   }
 
@@ -1480,7 +1468,22 @@ export class CoursePage implements OnInit {
     const index = this.getCourseIndex(code);
     if (index === -1) return;
     const copy = [...this.courses()];
-    copy[index] = { ...copy[index], expandedInstructors: !copy[index].expandedInstructors };
+    copy[index] = {...copy[index], expandedInstructors: !copy[index].expandedInstructors};
     this.courses.set(copy);
+  }
+
+
+  private saveCoursesToBackend(): void {
+    const savedCourseCodes = this.savedCourses.map(c => c.code);
+    this.userInfoService.updateSavedCourses(savedCourseCodes).subscribe({
+      next: () => {
+        // Successfully saved
+      },
+      error: (error) => {
+        console.error('Error saving courses:', error);
+        // Don't show error to user - courses are still in memory
+        // They'll be lost on refresh, but that's acceptable for now
+      }
+    });
   }
 }

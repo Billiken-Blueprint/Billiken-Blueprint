@@ -1,7 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {AuthService} from '../auth-service/auth-service';
 import {Router} from '@angular/router';
+import {AuthService} from '../services/auth-service/auth-service';
 
 @Component({
   selector: 'app-landing-page',
@@ -21,7 +21,7 @@ export class LandingPage {
   startPlanning() {
     // Check if user is logged in
     const isLoggedIn = this.authService.getToken() !== null;
-    
+
     if (isLoggedIn) {
       // User is logged in, go to home page
       this.router.navigate(['/home']);

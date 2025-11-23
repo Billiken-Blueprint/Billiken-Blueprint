@@ -11,11 +11,13 @@ from billiken_blueprint.base import Base
 from billiken_blueprint.dependencies import (
     get_identity_user_repository,
     get_student_repository,
+    get_mc_course_repository,
 )
 from billiken_blueprint.repositories.identity_user_repository import (
     IdentityUserRepository,
 )
 from billiken_blueprint.repositories.student_repository import StudentRepository
+from billiken_blueprint.repositories.mc_course_repository import MCCourseRepository
 from server import app
 
 
@@ -63,13 +65,20 @@ def student_repository(async_sessionmaker):
 
 
 @pytest.fixture(scope="function")
-def app_client(identity_user_repository, student_repository):
+def mc_course_repository(async_sessionmaker):
+    """Create a test mc_course repository using in-memory database."""
+    return MCCourseRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def app_client(identity_user_repository, student_repository, mc_course_repository):
     """Create a FastAPI test client with overridden dependencies."""
     # Override the dependencies to use test repositories
     app.dependency_overrides[get_identity_user_repository] = (
         lambda: identity_user_repository
     )
     app.dependency_overrides[get_student_repository] = lambda: student_repository
+    app.dependency_overrides[get_mc_course_repository] = lambda: mc_course_repository
 
     test_client = TestClient(app)
     yield test_client

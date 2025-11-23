@@ -1,5 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
-import {AuthService} from '../auth-service/auth-service';
+import {AuthService} from '../services/auth-service/auth-service';
 import {AsyncPipe} from '@angular/common';
 import {Menubar} from 'primeng/menubar';
 import {MenuItem, MenuItemCommandEvent} from 'primeng/api';
@@ -34,9 +34,9 @@ export class TopBanner implements OnInit {
     }
   ]
   private authService = inject(AuthService);
-  private router = inject(Router);
   tokenPayload = this.authService.tokenPayload$;
   isLoggedIn = this.authService.isLoggedIn$;
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.tokenPayload.subscribe({

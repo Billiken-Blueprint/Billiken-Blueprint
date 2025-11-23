@@ -1,8 +1,8 @@
 import {Component, inject, signal} from '@angular/core';
-import {AuthService} from '../auth-service/auth-service';
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {AuthService} from '../services/auth-service/auth-service';
 
 @Component({
   selector: 'app-login-page',
@@ -19,7 +19,7 @@ export class LoginPage {
   protected successMessage = signal<string | null>(null);
   protected showForgotPassword = signal<boolean>(false);
   protected forgotPasswordEmail = signal<string>('');
-  
+
   private authService = inject(AuthService);
   private formBuilder = inject(FormBuilder);
   credentialsForm = this.formBuilder.group({
@@ -32,15 +32,6 @@ export class LoginPage {
     ])
   })
   private router = inject(Router);
-
-  protected getFieldError(field: 'email' | 'password'): string | null {
-    const control = this.credentialsForm.get(field);
-    if ((control?.dirty || control?.touched) && control?.errors) {
-      if (control.errors['required']) return 'Missing required field';
-      if (control.errors['email']) return 'Please enter a valid email address';
-    }
-    return null;
-  }
 
   login() {
     this.errorMessage.set(null);
@@ -81,7 +72,7 @@ export class LoginPage {
 
   sendPasswordReset() {
     const email = this.forgotPasswordEmail();
-    
+
     if (!email || !email.includes('@')) {
       this.errorMessage.set('Please enter a valid email address');
       return;
@@ -91,7 +82,7 @@ export class LoginPage {
       next: (response) => {
         this.successMessage.set('Password reset instructions have been sent to ' + response.email);
         this.errorMessage.set(null);
-        
+
         // Close modal after 3 seconds
         setTimeout(() => {
           this.closeForgotPasswordModal();
@@ -103,5 +94,14 @@ export class LoginPage {
         this.successMessage.set(null);
       }
     });
+  }
+
+  protected getFieldError(field: 'email' | 'password'): string | null {
+    const control = this.credentialsForm.get(field);
+    if ((control?.dirty || control?.touched) && control?.errors) {
+      if (control.errors['required']) return 'Missing required field';
+      if (control.errors['email']) return 'Please enter a valid email address';
+    }
+    return null;
   }
 }

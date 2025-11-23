@@ -1,5 +1,5 @@
 <div class="w-full min-h-full flex flex-col bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600 relative overflow-hidden">
-  
+
   <!-- Animated Background Elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
@@ -16,7 +16,7 @@
           </h1>
           <p class="text-blue-200 text-lg font-inter">View and rate Computer Science and Math professors</p>
         </div>
-        <a href="ratings/create" 
+        <a href="ratings/create"
            class="bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter flex items-center gap-2 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
           <i class="pi pi-plus"></i>
           <span>Add Rating</span>
@@ -51,7 +51,7 @@
                        (blur)="onInstructorBlur()"
                        placeholder="Search for a professor..."
                        class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 placeholder-slate-400 font-inter"/>
-                
+
                 @if (instructorInputFocused() && searchFilteredInstructors().length > 0) {
                   <div class="absolute z-[99999] w-full mt-1 bg-slate-800 border border-slate-600/50 rounded-xl max-h-60 overflow-y-auto shadow-2xl" style="position: absolute; z-index: 99999;">
                     @for (instructor of searchFilteredInstructors(); track instructor.id) {
@@ -65,7 +65,7 @@
                 }
               </div>
             }
-            
+
             @if (selectedInstructor()) {
               <div class="px-3 py-2 bg-green-500/20 border border-green-400/50 rounded-lg flex items-center justify-between gap-2">
                 <div class="flex items-center min-w-0 flex-1">
@@ -91,7 +91,7 @@
                        (blur)="onCourseBlur()"
                        placeholder="Search for a course..."
                        class="w-full pl-10 pr-4 py-3 bg-slate-700/50 border border-slate-600/50 text-white rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30 transition-all duration-200 placeholder-slate-400 font-inter"/>
-                
+
                 @if (courseInputFocused() && searchFilteredCourses().length > 0) {
                   <div class="absolute z-[99999] w-full mt-1 bg-slate-800 border border-slate-600/50 rounded-xl max-h-60 overflow-y-auto shadow-2xl" style="position: absolute; z-index: 99999;">
                     @for (course of searchFilteredCourses(); track course.id) {
@@ -100,7 +100,6 @@
                               class="w-full text-left px-4 py-3 hover:bg-slate-700/70 transition-colors border-b border-slate-700/50 last:border-b-0 first:rounded-t-xl last:rounded-b-xl">
                         <div>
                           <span class="text-white font-inter font-semibold">{{ course.courseCode }}</span>
-                          <span class="text-slate-300 font-inter text-sm ml-2">- {{ course.title }}</span>
                         </div>
                       </button>
                     }
@@ -108,15 +107,11 @@
                 }
               </div>
             }
-            
+
             @if (selectedCourse()) {
               <div class="w-full px-3 py-2 bg-green-500/20 border border-green-400/50 rounded-lg flex items-center gap-2 min-w-0">
                 <div class="flex items-center gap-1.5 min-w-0 flex-1 overflow-hidden">
                   <span class="text-green-200 font-inter text-sm font-semibold whitespace-nowrap flex-shrink-0">{{ selectedCourse()?.courseCode }}</span>
-                  @if (selectedCourse()?.title) {
-                    <span class="text-green-300/70 font-inter text-xs whitespace-nowrap flex-shrink-0">•</span>
-                    <span class="text-green-300/80 font-inter text-xs truncate min-w-0 block">{{ selectedCourse()?.title }}</span>
-                  }
                 </div>
                 <button type="button"
                         (click)="clearCourseSelection()"
@@ -199,7 +194,7 @@
             <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
             <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Reviews Found</h3>
             <p class="text-blue-200 font-inter mb-6">No reviews found for {{ selectedCourse()?.courseCode }}. Be the first to rate this course!</p>
-            <a href="ratings/create" 
+            <a href="ratings/create"
                class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
               <i class="pi pi-plus"></i>
               <span>Add First Rating</span>
@@ -257,7 +252,7 @@
                         <div class="flex flex-col items-end gap-1">
                           <div class="flex items-center gap-1">
                             @for (star of [1,2,3,4,5]; track star) {
-                              <i class="pi text-sm" 
+                              <i class="pi text-sm"
                                  [class.pi-star-fill]="star <= review.quality"
                                  [class.pi-star]="star > review.quality"
                                  [class.text-purple-400]="star <= review.quality && review.type === 'rmp'"
@@ -291,7 +286,7 @@
                             </span>
                           </div>
                         }
-                        
+
                         @if (review.difficulty !== null && review.difficulty !== undefined) {
                           <div class="flex items-center gap-2">
                             <i class="pi pi-chart-line text-slate-400 text-xs"></i>
@@ -301,7 +296,7 @@
                                   [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.difficulty }}/5</span>
                           </div>
                         }
-                        
+
                         @if (review.grade) {
                           <div class="flex items-center gap-2">
                             <i class="pi pi-book text-slate-400 text-xs"></i>
@@ -311,7 +306,7 @@
                                   [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.grade }}</span>
                           </div>
                         }
-                        
+
                         @if (review.attendance) {
                           <div class="flex items-center gap-2">
                             <i class="pi pi-users text-slate-400 text-xs"></i>
@@ -321,7 +316,7 @@
                                   [class.text-yellow-300]="review.type === 'billiken_blueprint'">{{ review.attendance }}</span>
                           </div>
                         }
-                        
+
                         @if (review.wouldTakeAgain !== null && review.wouldTakeAgain !== undefined) {
                           <div class="flex items-center gap-2">
                             <i class="pi pi-check-circle text-slate-400 text-xs"></i>
@@ -344,7 +339,7 @@
           <i class="pi pi-inbox text-6xl text-blue-300 mb-4"></i>
           <h3 class="text-2xl font-bold text-white mb-2 font-inter">No Ratings Found</h3>
           <p class="text-blue-200 font-inter mb-6">Be the first to rate this professor or course!</p>
-          <a href="ratings/create" 
+          <a href="ratings/create"
              class="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-300 hover:to-yellow-400 text-blue-900 px-6 py-3 rounded-xl font-bold font-inter shadow-lg hover:shadow-xl transition-all duration-300">
             <i class="pi pi-plus"></i>
             <span>Add First Rating</span>
@@ -361,7 +356,7 @@
           @for (groupEntry of groupedRatings(); track groupEntry[0]) {
             @let instructorId = groupEntry[0];
             @let group = groupEntry[1];
-            
+
             <!-- Single Aggregated Rating Card for Instructor -->
             @if (group.combined || group.rmpRating || group.bbRatings.length > 0) {
               @let displayRating = getDisplayRating(group);
@@ -385,7 +380,7 @@
                 <div class="flex flex-col items-end gap-1">
                   <div class="flex items-center gap-1">
                     @for (star of [1,2,3,4,5]; track star) {
-                      <i class="pi text-sm" 
+                      <i class="pi text-sm"
                            [class.pi-star-fill]="star <= displayRating"
                            [class.pi-star]="star > displayRating"
                            [class.text-yellow-400]="star <= displayRating"
@@ -421,7 +416,7 @@
                           </span>
                           <span class="text-yellow-300 text-sm font-semibold font-inter">Overall Billiken Blueprint Rating:</span>
               </div>
-                        <span class="text-white font-bold text-lg">{{ bbAverage.toFixed(1) }}/5 
+                        <span class="text-white font-bold text-lg">{{ bbAverage.toFixed(1) }}/5
                           <span class="text-xs text-slate-400">({{ group.bbRatings.length }} review{{ group.bbRatings.length !== 1 ? 's' : '' }})</span>
                   </span>
                       </div>
@@ -447,7 +442,7 @@
                     }
                   </div>
                 </div>
-                
+
                 <!-- View Reviews Button -->
                 <div class="flex justify-end">
                   <button (click)="openReviewsPage(instructorId)"

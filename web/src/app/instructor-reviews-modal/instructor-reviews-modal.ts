@@ -1,6 +1,6 @@
-import { Component, inject, Input, Output, EventEmitter, OnInit, OnChanges, signal } from '@angular/core';
-import { CommonModule, DatePipe } from '@angular/common';
-import { InstructorsService, RmpReview } from '../instructors-service/instructors-service';
+import {Component, inject, Input, Output, EventEmitter, OnInit, OnChanges, signal} from '@angular/core';
+import {CommonModule, DatePipe} from '@angular/common';
+import {InstructorsService, RmpReview} from '../services/instructors-service/instructors-service';
 
 @Component({
   selector: 'app-instructor-reviews-modal',
@@ -60,7 +60,7 @@ export class InstructorReviewsModal implements OnInit, OnChanges {
     if (!dateString) return '';
     try {
       const date = new Date(dateString);
-      return date.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+      return date.toLocaleDateString('en-US', {year: 'numeric', month: 'short', day: 'numeric'});
     } catch {
       return dateString;
     }

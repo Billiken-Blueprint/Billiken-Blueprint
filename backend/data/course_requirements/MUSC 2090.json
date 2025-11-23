@@ -1,0 +1,113 @@
+{
+  "operator": "OR",
+  "operands": [
+    {
+      "major_code": "MUSC",
+      "course_number": 1010,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1020,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1030,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1040,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1050,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1060,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1070,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2010,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2020,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2030,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2040,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2050,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2060,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2070,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1260,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 1270,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2500,
+      "end_number": null,
+      "concurrent_allowed": true
+    },
+    {
+      "major_code": "MUSC",
+      "course_number": 2510,
+      "end_number": null,
+      "concurrent_allowed": true
+    }
+  ]
+}
