@@ -148,6 +148,16 @@ class RmpReviewRepository:
             db_reviews = result.scalars().all()
 
         return [db_review.to_rmp_review() for db_review in db_reviews]
+    
+    async def get_all(self) -> list[RmpReview]:
+        """Retrieve all RMP reviews."""
+        stmt = select(DBRmpReview)
+
+        async with self._async_sessionmaker() as session:
+            result = await session.execute(stmt)
+            db_reviews = result.scalars().all()
+
+        return [db_review.to_rmp_review() for db_review in db_reviews]
 
     async def delete_by_instructor_id(self, instructor_id: int) -> None:
         """Delete all RMP reviews for a specific instructor."""
