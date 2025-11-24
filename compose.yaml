@@ -20,4 +20,4 @@ services:
     volumes:
       - ./backend/billiken_blueprint:/app/billiken_blueprint
       - ./backend/data:/app/data
-      - ./RateMyProfessor.com-Web-Scraper:/app/RateMyProfessor.com-Web-Scraper:ro
+      - ./RateMyProfessor.com-Web-Scraper:/RateMyProfessor.com-Web-Scraper:ro
