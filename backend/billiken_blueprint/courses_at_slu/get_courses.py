@@ -1,5 +1,7 @@
 import json
+import time
 import urllib.parse
+from dataclasses import dataclass
 
 import httpx
 
@@ -23,21 +25,36 @@ headers = {
 }
 
 
-async def get_courses(keyword: str, semester: str):
+async def get_courses(keyword: str | None, semester: str, attribute_tag: str | None):
     url = f"https://courses.slu.edu/api/?page=fose&route=search&keyword={keyword}"
+    criteria = []
+    if keyword:
+        criteria.append({"field": "keyword", "value": keyword})
+    if attribute_tag:
+        criteria.append({"field": attribute_tag, "value": "Y"})
     payload = {
         "other": {"srcdb": semester},
-        "criteria": [{"field": "keyword", "value": keyword}],
+        "criteria": criteria,
     }
     payload = urllib.parse.quote(json.dumps(payload))
 
-    async with httpx.AsyncClient() as client:
-        response = await client.post(url, headers=headers, content=payload)
-        response.raise_for_status()
-        data = response.json()
-        courses = [
-            Course(code=course["code"], title=course["title"], crn=course["crn"])
-            for course in data.get("results", [])
-        ]
+    with open("response_cache.json", "r") as f:
+        cached = json.load(f)
+    if payload in cached:
+        data = cached[payload]
+    else:
+        time.sleep(3)
+        async with httpx.AsyncClient() as client:
+            response = await client.post(url, headers=headers, content=payload)
+            response.raise_for_status()
+            data = response.json()
+            with open("response_cache.json", "w") as f:
+                cached[payload] = data
+                json.dump(cached, f, indent=4)
+
+    courses = [
+        Course(code=course["code"], title=course["title"], crn=course["crn"])
+        for course in data.get("results", [])
+    ]
 
     return courses

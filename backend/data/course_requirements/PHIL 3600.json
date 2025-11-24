@@ -1,0 +1,58 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "PHIL",
+          "course_number": 1050,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": 1700,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": 1707,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": 1753,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": 1757,
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": 1700,
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1000,
+      "end_number": null,
+      "concurrent_allowed": false
+    },
+    {
+      "major_code": "CORE",
+      "course_number": 1500,
+      "end_number": null,
+      "concurrent_allowed": true
+    }
+  ]
+}

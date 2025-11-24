@@ -16,10 +16,11 @@ class DBStudent(Base):
     name: Mapped[str] = mapped_column()
     degree_ids: Mapped[list[int]] = mapped_column(JSON)
     completed_course_ids: Mapped[list[int]] = mapped_column(JSON)
-    saved_course_codes: Mapped[list[str]] = mapped_column(JSON, default=list)
+
     graduation_year: Mapped[int] = mapped_column()
-    major: Mapped[str] = mapped_column()
-    minor: Mapped[Optional[str]] = mapped_column(nullable=True)
+    major_code: Mapped[str] = mapped_column()
+    degree_type: Mapped[str] = mapped_column()
+    college: Mapped[str] = mapped_column()
 
 
 class StudentRepository:
@@ -32,9 +33,9 @@ class StudentRepository:
             name=student.name,
             degree_ids=student.degree_ids,
             completed_course_ids=student.completed_course_ids,
-            saved_course_codes=student.saved_course_codes,
-            major=student.major,
-            minor=student.minor,
+            major_code=student.major_code,
+            degree_type=student.degree_type,
+            college=student.college,
             graduation_year=student.graduation_year,
         )
         conflict_stmt = insert_stmt.on_conflict_do_update(
@@ -43,9 +44,9 @@ class StudentRepository:
                 name=insert_stmt.excluded.name,
                 degree_ids=insert_stmt.excluded.degree_ids,
                 completed_course_ids=insert_stmt.excluded.completed_course_ids,
-                saved_course_codes=insert_stmt.excluded.saved_course_codes,
-                major=insert_stmt.excluded.major,
-                minor=insert_stmt.excluded.minor,
+                major_code=insert_stmt.excluded.major_code,
+                degree_type=insert_stmt.excluded.degree_type,
+                college=insert_stmt.excluded.college,
                 graduation_year=insert_stmt.excluded.graduation_year,
             ),
         ).returning(DBStudent)
@@ -65,8 +66,8 @@ class StudentRepository:
                 name=result.name,
                 degree_ids=result.degree_ids,
                 completed_course_ids=result.completed_course_ids,
-                saved_course_codes=getattr(result, 'saved_course_codes', []),
-                major=result.major,
-                minor=result.minor,
+                major_code=result.major_code,
+                degree_type=result.degree_type,
+                college=result.college,
                 graduation_year=result.graduation_year,
             )

@@ -1,13 +1,13 @@
 import {Component, computed, ElementRef, inject, OnInit, signal, ViewChild} from '@angular/core';
 import {Select} from 'primeng/select';
-import {Instructor, InstructorsService} from '../../instructors-service/instructors-service';
-import {Course, CoursesService} from '../../courses-service/courses-service';
 import {FormBuilder, FormControl, ReactiveFormsModule} from '@angular/forms';
 import {Textarea} from 'primeng/textarea';
 import {Rating} from 'primeng/rating';
-import {RatingsService} from '../../ratings-service/ratings-service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CommonModule} from '@angular/common';
+import {Instructor, InstructorsService} from '../../services/instructors-service/instructors-service';
+import {Course, CoursesService} from '../../services/courses-service/courses-service';
+import {RatingsService} from '../../services/ratings-service/ratings-service';
 
 @Component({
   selector: 'app-create-rating-page',
@@ -28,16 +28,20 @@ export class CreateRatingPage implements OnInit {
   instructors = signal<Instructor[]>([]);
   courses = signal<FilterableCourse[]>([]);
   errorMessage = signal<string | null>(null);
-  private instructorsService = inject(InstructorsService);
-  private coursesService = inject(CoursesService);
-  private formBuilder = inject(FormBuilder);
-  private router = inject(Router);
-  private route = inject(ActivatedRoute);
   useNewInstructor = signal<boolean>(false);
   searchText = signal<string>('');
   instructorSearchText = signal<string>('');
   @ViewChild('instructorSelect') instructorSelect?: ElementRef;
-  
+  filteredInstructors = computed(() => {
+    const search = this.instructorSearchText().toLowerCase().trim();
+    if (!search) return this.instructors();
+    return this.instructors().filter(inst =>
+      inst.name.toLowerCase().includes(search)
+    );
+  });
+  private instructorsService = inject(InstructorsService);
+  private coursesService = inject(CoursesService);
+  private formBuilder = inject(FormBuilder);
   form = this.formBuilder.group({
     instructor: new FormControl<Instructor | null | undefined>(null, []),
     newInstructorName: new FormControl<string | null | undefined>(null, []),
@@ -50,6 +54,8 @@ export class CreateRatingPage implements OnInit {
     grade: new FormControl<string | null | undefined>(null, []),
     attendance: new FormControl<string | null | undefined>(null, []),
   });
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
   private ratingsService = inject(RatingsService);
 
   submit() {
@@ -59,23 +65,23 @@ export class CreateRatingPage implements OnInit {
 
     this.errorMessage.set(null);
     const form = this.form.value;
-    
+
     // Validate that both instructor and course are selected
     if (!form.course) {
       this.errorMessage.set('Please select a course.');
       return;
     }
-    
+
     if (!form.instructor && !(this.useNewInstructor() && form.newInstructorName)) {
       this.errorMessage.set('Please select or add a professor.');
       return;
     }
-    
+
     if (!form.rating) {
       this.errorMessage.set('Please provide a rating.');
       return;
     }
-    
+
     // Validate new instructor name and department if using new instructor
     if (this.useNewInstructor()) {
       if (!form.newInstructorName?.trim()) {
@@ -87,13 +93,13 @@ export class CreateRatingPage implements OnInit {
         return;
       }
     }
-    
+
     // Track instructor ID for navigation
     let instructorIdForNavigation: number | null = null;
     if (form.instructor) {
       instructorIdForNavigation = form.instructor.id;
     }
-    
+
     // Create single rating with both instructor and course
     this.ratingsService.createRating({
       instructorId: form.instructor ? form.instructor.id.toString() : undefined,
@@ -113,7 +119,7 @@ export class CreateRatingPage implements OnInit {
         if (this.useNewInstructor() && response.instructorId) {
           instructorIdForNavigation = response.instructorId;
         }
-        
+
         // Navigate to instructor's reviews page
         if (instructorIdForNavigation) {
           console.log('Navigating to instructor reviews page:', instructorIdForNavigation);
@@ -143,7 +149,7 @@ export class CreateRatingPage implements OnInit {
   ngOnInit(): void {
     this.instructorsService.getInstructors().subscribe(instructors => {
       this.instructors.set(instructors);
-      
+
       // Check for instructorId query parameter and pre-select instructor
       this.route.queryParams.subscribe(params => {
         const instructorIdParam = params['instructorId'];
@@ -152,21 +158,21 @@ export class CreateRatingPage implements OnInit {
           if (!isNaN(instructorId)) {
             const instructor = instructors.find(inst => inst.id === instructorId);
             if (instructor) {
-              this.form.patchValue({ instructor });
+              this.form.patchValue({instructor});
             }
           }
         }
       });
     });
-    
+
     this.coursesService.getCourses().subscribe(courses => {
       this.courses.set(courses.map(course => ({
         ...course,
-        filterValue: `${course.courseCode} ${course.title}`,
-        displayValue: `${course.courseCode} - (${course.title})`
+        filterValue: `${course.courseCode}`,
+        displayValue: `${course.courseCode}`
       })));
     });
-    
+
     // Track search text in the instructor select
     this.form.get('instructor')?.valueChanges.subscribe(() => {
       // Reset search text when instructor is selected
@@ -177,23 +183,23 @@ export class CreateRatingPage implements OnInit {
       }
     });
   }
-  
+
   getEmptyMessage(): string {
     return 'No professors found';
   }
-  
+
   getFilteredInstructorsCount(): number {
     return this.filteredInstructors().length;
   }
-  
+
   hasSearchText(): boolean {
     return this.instructorSearchText().trim().length > 0;
   }
-  
+
   getSearchText(): string {
     return this.instructorSearchText();
   }
-  
+
   onInstructorSearchChange(event: any): void {
     const value = event?.target?.value || '';
     this.instructorSearchText.set(value);
@@ -202,19 +208,11 @@ export class CreateRatingPage implements OnInit {
       this.form.patchValue({instructor: null});
     }
   }
-  
+
   selectInstructor(instructor: Instructor): void {
     this.form.patchValue({instructor});
     this.instructorSearchText.set('');
   }
-  
-  filteredInstructors = computed(() => {
-    const search = this.instructorSearchText().toLowerCase().trim();
-    if (!search) return this.instructors();
-    return this.instructors().filter(inst => 
-      inst.name.toLowerCase().includes(search)
-    );
-  });
 
 }
 

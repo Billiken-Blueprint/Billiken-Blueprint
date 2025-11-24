@@ -1,0 +1,11 @@
+{
+  "operator": "AND",
+  "operands": [
+    {
+      "major_code": "PSY",
+      "course_number": 1010,
+      "end_number": null,
+      "concurrent_allowed": false
+    }
+  ]
+}

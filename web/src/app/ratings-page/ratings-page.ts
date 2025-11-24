@@ -640,18 +640,12 @@ export class RatingsPage implements OnInit {
                 if (review.type === 'rmp') {
                   let matches = false;
                   
-                  // If instructor has a rating for this course (from API), include all their RMP reviews
-                  // The backend API already filtered to instructors who have reviews for this course
-                  if (instructorHasCourseRating) {
-                    matches = true;
-                    console.log(`Including RMP review: ${review.type} review ${review.id} (instructor ${instructorId} has rating for course ${course.courseCode})`);
-                  }
-                  // Also try to match by courseId (most reliable) - but this is secondary since backend already filtered
-                  else if (review.courseId === courseId) {
+                  // Priority 1: Match by courseId (most reliable)
+                  if (review.courseId === courseId) {
                     matches = true;
                     console.log(`Matched RMP review by courseId: ${review.type} review ${review.id} for course ${course.courseCode}`);
                   } 
-                  // Fallback: match by course code string if courseId is not available
+                  // Priority 2: Match by course code string if courseId is not available
                   else if (!review.courseId && (review.course || review.courseCode)) {
                     const reviewCourseCode = (review.courseCode || review.course || '').replace(/\s+/g, '').replace(/-/g, '').toUpperCase();
                     if (reviewCourseCode && normalizedCourseCode && 
@@ -660,6 +654,12 @@ export class RatingsPage implements OnInit {
                       console.log(`Matched RMP review by course code: ${review.type} review ${review.id} (${review.course || review.courseCode}) for course ${course.courseCode}`);
                     }
                   }
+                  // Priority 3: If review has no course info, only include if instructor has a rating for this course
+                  // This handles legacy RMP reviews that haven't been updated with course_id yet
+                  else if (!review.courseId && !review.course && !review.courseCode && instructorHasCourseRating) {
+                    matches = true;
+                    console.log(`Including RMP review without course info: ${review.type} review ${review.id} (instructor ${instructorId} has rating for course ${course.courseCode})`);
+                  }
                   
                   if (matches) {
                     filteredReviews.push(review);
@@ -667,8 +667,10 @@ export class RatingsPage implements OnInit {
                     // Log why review was rejected
                     if (review.courseId !== null && review.courseId !== undefined) {
                       console.log(`Rejected review: ${review.type} review ${review.id} has courseId ${review.courseId}, expected ${courseId}`);
+                    } else if (review.course || review.courseCode) {
+                      console.log(`Rejected review: ${review.type} review ${review.id} has course code that doesn't match (course: ${review.course || review.courseCode || 'none'})`);
                     } else {
-                      console.log(`Rejected review: ${review.type} review ${review.id} has no courseId and course code doesn't match (course: ${review.course || review.courseCode || 'none'})`);
+                      console.log(`Rejected review: ${review.type} review ${review.id} has no course info and instructor doesn't have rating for course ${course.courseCode}`);
                     }
                   }
                 }

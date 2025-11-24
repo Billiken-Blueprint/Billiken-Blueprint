@@ -57,7 +57,12 @@ async def get_section(course_code: str, crn: str, crns: list[str], semester: str
                 json.dump(cached, f, indent=4)
 
     all_data = data["allInGroup"]
-    all_data_this = [x for x in all_data if x["crn"] == crn][0]
+    try:
+        all_data_this = [x for x in all_data if x["crn"] == crn][0]
+    except IndexError:
+        with open("error_res.json", "w+") as f:
+            json.dump(data, f, indent=4)
+        raise
     meeting_times = json.loads(all_data_this["meetingTimes"])
 
     try:
