@@ -5,11 +5,13 @@ from starlette.middleware.cors import CORSMiddleware
 from billiken_blueprint.api import routers
 import asyncio
 from check_and_import_rmp import check_and_import_if_needed
+from check_and_seed_courses import check_and_seed_courses_if_needed
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    # Startup: Check and import RMP data if needed
+    # Startup: Check and seed courses if needed, then check and import RMP data if needed
+    await check_and_seed_courses_if_needed()
     await check_and_import_if_needed()
     yield
     # Shutdown (if needed)
