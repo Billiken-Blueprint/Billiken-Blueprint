@@ -37,13 +37,8 @@ async def get_section(course_code: str, crn: str, crns: list[str], semester: str
     )
     payload = urllib.parse.quote(json.dumps(payload))
 
-    # Try to load cache, create empty dict if file doesn't exist
-    try:
-        with open("response_cache.json", "r") as f:
-            cached = json.load(f)
-    except FileNotFoundError:
-        cached = {}
-    
+    with open("response_cache.json", "r") as f:
+        cached = json.load(f)
     if payload in cached:
         data = cached[payload]
     else:

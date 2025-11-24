@@ -238,10 +238,7 @@ async def import_rmp_ratings():
                         print(f"  → Imported {len(rmp_reviews)} reviews for {instructor.name}")
                 except Exception as e:
                     # Skip reviews import if table doesn't exist or other error
-                    print(f"  → Error importing reviews for {instructor.name}: {str(e)}")
-                    import traceback
-                    traceback.print_exc()
-                    # Don't fail the entire import if one instructor's reviews fail
+                    print(f"  → Skipped reviews import for {instructor.name} (table may not exist)")
         else:
             not_matched.append(name)
             print(f"✗ No match found and could not create: {name}")

@@ -168,20 +168,9 @@ async def list_ratings(
                 ))
     elif course_id and target_course_code:
         # If filtering by course but not instructor, find all instructors with RMP reviews for this course
-        # First, try to get reviews by course_id (most reliable)
+        # Use course_id to directly query RMP reviews
         rmp_reviews_for_course = await rmp_review_repo.get_by_course_id(course_id)
         instructor_ids_with_reviews = set(review.instructor_id for review in rmp_reviews_for_course)
-        
-        # Also find reviews that match by course string (for reviews without course_id set)
-        # Get all RMP reviews and filter by course code string
-        all_rmp_reviews = await rmp_review_repo.get_all()
-        for review in all_rmp_reviews:
-            # Skip if already found by course_id
-            if review.instructor_id in instructor_ids_with_reviews:
-                continue
-            # Check if course string matches
-            if review.course and course_code_matches(review.course, normalized_target):
-                instructor_ids_with_reviews.add(review.instructor_id)
         
         for instructor_id in instructor_ids_with_reviews:
             instructor = await instructor_repo.get_by_id(instructor_id)
