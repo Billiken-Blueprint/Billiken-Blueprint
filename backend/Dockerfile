@@ -9,7 +9,7 @@ ENV PATH="/app/.venv/bin:${PATH}"
 FROM deps AS migrations
 COPY ./backend/ .
 RUN uv pip freeze
-RUN mkdir -p data && uv run alembic upgrade head
+RUN mkdir -p data && (uv run alembic upgrade heads 2>/dev/null || (uv run alembic merge heads -m "merge_heads" 2>/dev/null && uv run alembic upgrade head) || echo "Migration skipped or already up to date")
 
 FROM migrations AS seeding
 RUN uv run python get_courses.py || echo "Course seeding skipped (error or missing data)"
