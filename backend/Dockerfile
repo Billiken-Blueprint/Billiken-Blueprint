@@ -19,6 +19,8 @@ COPY RateMyProfessor.com-Web-Scraper/cs_professors.json /app/cs_professors.json
 COPY RateMyProfessor.com-Web-Scraper/math_professors_with_reviews.json /app/math_professors_with_reviews.json
 COPY RateMyProfessor.com-Web-Scraper/math_professors.json /app/math_professors.json
 RUN uv run python import_rmp_ratings.py || echo "RMP import skipped (file not found or error)"
+# Update RMP review course_ids by matching course codes (optional, won't fail build if it errors)
+RUN uv run python update_rmp_review_course_ids.py || echo "RMP course_id update skipped (error or no reviews to update)"
 
 FROM deps AS dev
 COPY --from=seeding /app/data /app/data

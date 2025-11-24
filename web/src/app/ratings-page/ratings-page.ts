@@ -235,6 +235,10 @@ export class RatingsPage implements OnInit {
   // Group individual reviews by instructor
   groupedIndividualReviews = computed(() => {
     const reviews = this.individualReviews();
+    if (reviews.length === 0) {
+      return [];
+    }
+    
     const grouped = new Map<number, RmpReview[]>();
     
     reviews.forEach(review => {
@@ -246,18 +250,19 @@ export class RatingsPage implements OnInit {
     });
     
     // Convert to array, calculate average rating, and sort by average (high to low)
-    return Array.from(grouped.entries()).map(([instructorId, reviews]) => {
+    const groupedArray = Array.from(grouped.entries()).map(([instructorId, reviews]) => {
       const instructor = this.instructors().find(i => i.id === instructorId);
       
-      // Calculate average rating
-      const totalRating = reviews.reduce((sum, review) => sum + review.quality, 0);
-      const averageRating = reviews.length > 0 ? totalRating / reviews.length : 0;
+      // Calculate average rating - ensure quality is a valid number
+      const validReviews = reviews.filter(r => r.quality != null && !isNaN(r.quality));
+      const totalRating = validReviews.reduce((sum, review) => sum + (review.quality || 0), 0);
+      const averageRating = validReviews.length > 0 ? totalRating / validReviews.length : 0;
       
       return {
         instructorId,
         instructorName: instructor?.name || 'Unknown Instructor',
         averageRating,
-        reviews: reviews.sort((a, b) => {
+        reviews: [...reviews].sort((a, b) => {
           // Sort by date (newest first)
           if (a.reviewDate && b.reviewDate) {
             return new Date(b.reviewDate).getTime() - new Date(a.reviewDate).getTime();
@@ -267,7 +272,17 @@ export class RatingsPage implements OnInit {
           return (b.id || 0) - (a.id || 0);
         })
       };
-    }).sort((a, b) => b.averageRating - a.averageRating); // Sort by average rating (high to low)
+    });
+    
+    // Sort by average rating (high to low) - ensure stable sort
+    return groupedArray.sort((a, b) => {
+      const diff = b.averageRating - a.averageRating;
+      // If averages are equal, sort by number of reviews (more reviews first)
+      if (Math.abs(diff) < 0.01) {
+        return b.reviews.length - a.reviews.length;
+      }
+      return diff;
+    });
   });
   
   private instructorsService = inject(InstructorsService);
@@ -531,9 +546,22 @@ export class RatingsPage implements OnInit {
         const filteredReviews: RmpReview[] = [];
         
         // First, convert BB ratings from the API response to RmpReview format
+        // Also track which instructors have ratings for this course (including RMP ratings)
+        const instructorsWithCourseRatings = new Set<number>();
+        
         ratings.forEach(rating => {
           if (rating.instructorId) {
             instructorIds.add(rating.instructorId);
+            // Track instructors who have any rating (BB or RMP) for this course
+            // RMP ratings from API have courseId set when filtering by course
+            if (rating.courseId === courseId) {
+              instructorsWithCourseRatings.add(rating.instructorId);
+              console.log(`Instructor ${rating.instructorId} has rating for course ${course.courseCode} (isRmpRating: ${rating.isRmpRating})`);
+            }
+            // Also track RMP ratings even if courseId doesn't match (they're included by backend for this course)
+            if (rating.isRmpRating && rating.courseId === courseId) {
+              instructorsWithCourseRatings.add(rating.instructorId);
+            }
           }
           
           // Include BB ratings directly (they already have courseId matching from backend)
@@ -557,7 +585,11 @@ export class RatingsPage implements OnInit {
             });
             console.log(`Added BB rating: ${rating.id} for course ${course.courseCode}`);
           }
+          // Note: RMP ratings from API are summary ratings, not individual reviews
+          // We'll fetch individual RMP reviews below
         });
+        
+        console.log(`Instructors with course ratings: ${Array.from(instructorsWithCourseRatings).join(', ')}`);
         
         // Only fetch from instructors who have ratings for this course
         // Reviews without course_id will be filtered out, but that's correct - they need to be updated
@@ -595,24 +627,49 @@ export class RatingsPage implements OnInit {
         forkJoin(reviewObservables).subscribe({
           next: (allReviews) => {
             console.log(`Received reviews from ${allReviews.length} instructors`);
-            // Flatten and filter reviews for this course - STRICT filtering
+            // Flatten and filter reviews for this course
             // Only add RMP reviews (BB ratings already added above)
             
             allReviews.forEach((reviews, index) => {
               const instructorId = Array.from(instructorIds)[index];
-              console.log(`Processing ${reviews.length} reviews from instructor ${instructorId}`);
+              const instructorHasCourseRating = instructorsWithCourseRatings.has(instructorId);
+              console.log(`Processing ${reviews.length} reviews from instructor ${instructorId} (has course rating: ${instructorHasCourseRating})`);
+              
               reviews.forEach(review => {
-                // ONLY use courseId matching - no fallbacks to prevent false matches
                 // Only add RMP reviews (BB ratings already added from API response)
-                if (review.type === 'rmp' && review.courseId === courseId) {
-                  console.log(`Matched RMP review by courseId: ${review.type} review ${review.id} for course ${course.courseCode}`);
-                  filteredReviews.push(review);
-                } else {
-                  // Reject any review that doesn't have matching courseId
-                  if (review.courseId !== null && review.courseId !== undefined) {
-                    console.log(`Rejected review: ${review.type} review ${review.id} has courseId ${review.courseId}, expected ${courseId}`);
+                if (review.type === 'rmp') {
+                  let matches = false;
+                  
+                  // If instructor has a rating for this course (from API), include all their RMP reviews
+                  // The backend API already filtered to instructors who have reviews for this course
+                  if (instructorHasCourseRating) {
+                    matches = true;
+                    console.log(`Including RMP review: ${review.type} review ${review.id} (instructor ${instructorId} has rating for course ${course.courseCode})`);
+                  }
+                  // Also try to match by courseId (most reliable) - but this is secondary since backend already filtered
+                  else if (review.courseId === courseId) {
+                    matches = true;
+                    console.log(`Matched RMP review by courseId: ${review.type} review ${review.id} for course ${course.courseCode}`);
+                  } 
+                  // Fallback: match by course code string if courseId is not available
+                  else if (!review.courseId && (review.course || review.courseCode)) {
+                    const reviewCourseCode = (review.courseCode || review.course || '').replace(/\s+/g, '').replace(/-/g, '').toUpperCase();
+                    if (reviewCourseCode && normalizedCourseCode && 
+                        (reviewCourseCode.includes(normalizedCourseCode) || normalizedCourseCode.includes(reviewCourseCode))) {
+                      matches = true;
+                      console.log(`Matched RMP review by course code: ${review.type} review ${review.id} (${review.course || review.courseCode}) for course ${course.courseCode}`);
+                    }
+                  }
+                  
+                  if (matches) {
+                    filteredReviews.push(review);
                   } else {
-                    console.log(`Rejected review: ${review.type} review ${review.id} has no courseId (course: ${review.course || review.courseCode || 'none'})`);
+                    // Log why review was rejected
+                    if (review.courseId !== null && review.courseId !== undefined) {
+                      console.log(`Rejected review: ${review.type} review ${review.id} has courseId ${review.courseId}, expected ${courseId}`);
+                    } else {
+                      console.log(`Rejected review: ${review.type} review ${review.id} has no courseId and course code doesn't match (course: ${review.course || review.courseCode || 'none'})`);
+                    }
                   }
                 }
               });

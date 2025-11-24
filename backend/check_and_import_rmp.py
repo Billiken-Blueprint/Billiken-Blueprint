@@ -58,6 +58,16 @@ async def check_and_import_if_needed():
         from import_rmp_ratings import import_rmp_ratings
         await import_rmp_ratings()
         print("✓ RMP data import completed")
+        
+        # Try to update RMP review course_ids after import
+        try:
+            from update_rmp_review_course_ids import update_rmp_review_course_ids
+            print("📝 Updating RMP review course_ids...")
+            await update_rmp_review_course_ids()
+            print("✓ RMP course_id update completed")
+        except Exception as e:
+            print(f"⚠ Error updating RMP course_ids: {e}")
+            print("  Reviews will still work but may be slower (matching by course string)")
     except Exception as e:
         print(f"⚠ Error importing RMP data: {e}")
         print("  You can manually run: uv run python import_rmp_ratings.py")
