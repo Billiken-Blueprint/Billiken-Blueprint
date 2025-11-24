@@ -26,8 +26,8 @@ RUN uv run python import_rmp_ratings.py || echo "RMP import skipped (file not fo
 FROM deps AS dev
 COPY --from=seeding /app/data /app/data
 COPY ./backend/ .
-# Note: RMP JSON files will be imported on startup if missing (see server.py)
-# They can be on host filesystem in RateMyProfessor.com-Web-Scraper/ directory
+# Note: RMP JSON files are available via volume mount from host (see compose.yaml)
+# or will be imported on startup if found in RateMyProfessor.com-Web-Scraper/ directory
 EXPOSE 8000
 VOLUME [ "/app/billiken_blueprint" ]
 CMD [ "uv", "run", "fastapi", "dev", "server.py", "--host", "0.0.0.0" ]
