@@ -1,0 +1,106 @@
+.page {
+  width: 100%;
+  background: #d4d4d4;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+/* Top Section */
+.roadmap-container {
+  background: #102347;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.roadmap-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+
+/* Graph area */
+.roadmap-section {
+  display: flex;
+  justify-content: center;
+}
+
+.graph {
+  width: 480px;
+  position: relative;
+  min-height: 480px;
+}
+
+.box {
+  position: absolute;
+  background: #2d6cdf; /* SLU Blue */
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.node.recommended {
+  background: #16a34a !important;
+  border: 2px solid #86efac;
+}
+
+.pos-math1 { top: 10px; left: 20px; }
+.pos-math2 { top: 80px; left: 20px; }
+.pos-math3 { top: 150px; left: 20px; }
+
+.pos-cs1 { top: 10px; right: 20px; }
+.pos-cs2 { top: 80px; right: 20px; }
+.pos-cs3 { top: 150px; right: 20px; }
+
+.pos-mid1 { top: 260px; left: 50%; transform: translateX(-50%); }
+.pos-mid2 { top: 340px; left: 50%; transform: translateX(-50%); }
+
+.why-ds {
+  position: absolute;
+  top: 390px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #86efac;
+}
+
+/* Bottom Section */
+.schedule-container {
+  background: #102347;
+  padding: 2rem;
+  border-radius: 1rem;
+  color: white;
+}
+
+.schedule-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.schedule-header button {
+  background: #4ade80;
+  color: black;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  border: none;
+}
+
+.schedule-list {
+  background: #0b1a33;
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-top: 1rem;
+  min-height: 200px;
+}
+
+.empty {
+  color: #aaa;
+  font-style: italic;
+}
