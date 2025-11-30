@@ -12,7 +12,6 @@ class TestStudentRepository:
         student = Student(
             id=None,
             name="John Doe",
-            degree_ids=[1, 2],
             degree_id=1,
             graduation_year=2025,
             completed_course_ids=[101, 102, 103],
@@ -22,7 +21,6 @@ class TestStudentRepository:
 
         assert saved.id is not None
         assert saved.name == "John Doe"
-        assert saved.degree_ids == [1, 2]
         assert saved.graduation_year == 2025
 
     async def test_save_and_update_student(self, student_repository: StudentRepository):
@@ -31,7 +29,6 @@ class TestStudentRepository:
         student = Student(
             id=None,
             name="Jane Smith",
-            degree_ids=[1],
             degree_id=1,
             graduation_year=2026,
             completed_course_ids=[201, 202],
@@ -43,7 +40,6 @@ class TestStudentRepository:
         updated_student = Student(
             id=student_id,
             name="Jane Smith",
-            degree_ids=[1, 2],
             degree_id=2,
             graduation_year=2026,
             completed_course_ids=[201, 202, 203, 204],
@@ -51,7 +47,6 @@ class TestStudentRepository:
         result = await student_repository.save(updated_student)
 
         assert result.id == student_id
-        assert len(result.degree_ids) == 2
         assert len(result.completed_course_ids) == 4
 
     async def test_get_by_id(self, student_repository: StudentRepository):
@@ -60,7 +55,6 @@ class TestStudentRepository:
         student = Student(
             id=None,
             name="Bob Johnson",
-            degree_ids=[3],
             degree_id=3,
             graduation_year=2024,
             completed_course_ids=[301, 302],
@@ -89,7 +83,6 @@ class TestStudentRepository:
         student = Student(
             id=None,
             name="Alice Williams",
-            degree_ids=[],
             degree_id=1,
             graduation_year=2027,
             completed_course_ids=[],
@@ -98,7 +91,6 @@ class TestStudentRepository:
         saved = await student_repository.save(student)
 
         assert saved.id is not None
-        assert saved.degree_ids == []
         assert saved.completed_course_ids == []
 
     async def test_save_student_with_many_courses(
@@ -109,7 +101,6 @@ class TestStudentRepository:
         student = Student(
             id=None,
             name="Charlie Brown",
-            degree_ids=[1, 2, 3],
             degree_id=1,
             graduation_year=2023,
             completed_course_ids=many_courses,
