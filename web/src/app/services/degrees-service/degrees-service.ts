@@ -8,12 +8,16 @@ export class DegreesService {
   private http = inject(HttpClient);
 
   getDegrees() {
-    return this.http.get<Degree[]>('/api/degrees');
+    return this.http.get<GetDegreesResponse>('/api/degrees');
   }
 }
 
 export interface Degree {
+  id: number | null;
+  name: string;
   major: string;
   degreeType: string;
   college: string;
 }
+
+export type GetDegreesResponse = Degree[];

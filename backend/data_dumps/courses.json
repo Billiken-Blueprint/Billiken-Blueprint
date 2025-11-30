@@ -1,0 +1,8947 @@
+[
+  {
+    "id": 1,
+    "major_code": "CORE",
+    "course_number": "1000",
+    "attribute_ids": [
+      1
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 2,
+    "major_code": "DPT",
+    "course_number": "1212",
+    "attribute_ids": [
+      1
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 3,
+    "major_code": "NURS",
+    "course_number": "1430",
+    "attribute_ids": [
+      1
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 4,
+    "major_code": "NURS",
+    "course_number": "2495",
+    "attribute_ids": [
+      1
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 5,
+    "major_code": "SE",
+    "course_number": "1700",
+    "attribute_ids": [
+      1
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 6,
+    "major_code": "HCE",
+    "course_number": "1700",
+    "attribute_ids": [
+      2,
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 7,
+    "major_code": "PHIL",
+    "course_number": "1700",
+    "attribute_ids": [
+      2
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 8,
+    "major_code": "PHIL",
+    "course_number": "1705",
+    "attribute_ids": [
+      2
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 9,
+    "major_code": "POLS",
+    "course_number": "2700",
+    "attribute_ids": [
+      2
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 10,
+    "major_code": "CATH",
+    "course_number": "2000",
+    "attribute_ids": [
+      3
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 11,
+    "major_code": "HCE",
+    "course_number": "1600",
+    "attribute_ids": [
+      3,
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 12,
+    "major_code": "SERV",
+    "course_number": "1000",
+    "attribute_ids": [
+      3
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 13,
+    "major_code": "THEO",
+    "course_number": "1600",
+    "attribute_ids": [
+      3
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 14,
+    "major_code": "THEO",
+    "course_number": "1605",
+    "attribute_ids": [
+      3,
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 15,
+    "major_code": "THEO",
+    "course_number": "1650",
+    "attribute_ids": [
+      3
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 16,
+    "major_code": "THEO",
+    "course_number": "1659",
+    "attribute_ids": [
+      3
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 17,
+    "major_code": "AAM",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 18,
+    "major_code": "ARTH",
+    "course_number": "3770",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 19,
+    "major_code": "ARTH",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 20,
+    "major_code": "ASCI",
+    "course_number": "4350",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 21,
+    "major_code": "ASTD",
+    "course_number": "3550",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 22,
+    "major_code": "BIOL",
+    "course_number": "4939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 23,
+    "major_code": "CATH",
+    "course_number": "4960",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 24,
+    "major_code": "CCJ",
+    "course_number": "3800X",
+    "attribute_ids": [
+      4,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "major_code": "CMM",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 26,
+    "major_code": "CMM",
+    "course_number": "4840",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 27,
+    "major_code": "CORE",
+    "course_number": "4000",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 28,
+    "major_code": "CORE",
+    "course_number": "4101",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 29,
+    "major_code": "CORE",
+    "course_number": "4939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 30,
+    "major_code": "CVNG",
+    "course_number": "4510",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 31,
+    "major_code": "EAS",
+    "course_number": "4939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 32,
+    "major_code": "EDUC",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 33,
+    "major_code": "ENGL",
+    "course_number": "3150",
+    "attribute_ids": [
+      4,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 34,
+    "major_code": "ENGL",
+    "course_number": "3564",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 35,
+    "major_code": "ENGL",
+    "course_number": "3630",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "ENGL",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 36,
+    "major_code": "FRSC",
+    "course_number": "3150X",
+    "attribute_ids": [
+      4,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 37,
+    "major_code": "HCE",
+    "course_number": "4520",
+    "attribute_ids": [
+      4,
+      18,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HCE",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 38,
+    "major_code": "HIST",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 39,
+    "major_code": "HMP",
+    "course_number": "3800",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 40,
+    "major_code": "HR",
+    "course_number": "4000",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 41,
+    "major_code": "HSCI",
+    "course_number": "3700",
+    "attribute_ids": [
+      4,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "ENGL",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "STAT",
+          "course_number": "1300",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 42,
+    "major_code": "IPE",
+    "course_number": "4900",
+    "attribute_ids": [
+      4,
+      15,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "IPE",
+          "course_number": "4200",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "IPE",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 43,
+    "major_code": "LLC",
+    "course_number": "3050",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 44,
+    "major_code": "MENG",
+    "course_number": "4024",
+    "attribute_ids": [
+      4,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "MENG",
+          "course_number": "3010",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MENG",
+          "course_number": "4450",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 45,
+    "major_code": "MGT",
+    "course_number": "3200",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "MGT",
+          "course_number": "3000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 46,
+    "major_code": "NEUR",
+    "course_number": "4939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 47,
+    "major_code": "PHIL",
+    "course_number": "3600",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "PHIL",
+              "course_number": "1050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1707",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1753",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1757",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CORE",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 48,
+    "major_code": "PHIL",
+    "course_number": "3700",
+    "attribute_ids": [
+      4,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 49,
+    "major_code": "PHIL",
+    "course_number": "4150",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "PHIL",
+              "course_number": "1050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1707",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1753",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1757",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CORE",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 50,
+    "major_code": "POLS",
+    "course_number": "3770X",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 51,
+    "major_code": "POLS",
+    "course_number": "3800X",
+    "attribute_ids": [
+      4,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 52,
+    "major_code": "POLS",
+    "course_number": "3880X",
+    "attribute_ids": [
+      4,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 53,
+    "major_code": "POLS",
+    "course_number": "4662",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 54,
+    "major_code": "SERV",
+    "course_number": "3000",
+    "attribute_ids": [
+      4,
+      6,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 55,
+    "major_code": "SLHS",
+    "course_number": "4650",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 56,
+    "major_code": "SOC",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 57,
+    "major_code": "SPAN",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 58,
+    "major_code": "SPAN",
+    "course_number": "4150",
+    "attribute_ids": [
+      4,
+      18,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3021",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 59,
+    "major_code": "THEO",
+    "course_number": "3815",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "THEO",
+              "course_number": "1600",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "THEO",
+              "course_number": "1000",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 60,
+    "major_code": "THEO",
+    "course_number": "3905",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 61,
+    "major_code": "THEO",
+    "course_number": "3939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 62,
+    "major_code": "THEO",
+    "course_number": "4939",
+    "attribute_ids": [
+      4
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 63,
+    "major_code": "WGST",
+    "course_number": "3510",
+    "attribute_ids": [
+      4,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 64,
+    "major_code": "WGST",
+    "course_number": "3800",
+    "attribute_ids": [
+      4,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 65,
+    "major_code": "BIZ",
+    "course_number": "1000",
+    "attribute_ids": [
+      5
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 66,
+    "major_code": "CORE",
+    "course_number": "1500",
+    "attribute_ids": [
+      5
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 67,
+    "major_code": "ECE",
+    "course_number": "1001",
+    "attribute_ids": [
+      5
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 68,
+    "major_code": "NURS",
+    "course_number": "2505",
+    "attribute_ids": [
+      5
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 69,
+    "major_code": "CORE",
+    "course_number": "2500",
+    "attribute_ids": [
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 70,
+    "major_code": "CORE",
+    "course_number": "2510",
+    "attribute_ids": [
+      6,
+      19
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 71,
+    "major_code": "DPT",
+    "course_number": "2213",
+    "attribute_ids": [
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 72,
+    "major_code": "EDL",
+    "course_number": "3892",
+    "attribute_ids": [
+      6,
+      11,
+      19
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 73,
+    "major_code": "HR",
+    "course_number": "4810",
+    "attribute_ids": [
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 74,
+    "major_code": "HR",
+    "course_number": "4820",
+    "attribute_ids": [
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 75,
+    "major_code": "THEO",
+    "course_number": "2210",
+    "attribute_ids": [
+      6,
+      8
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "THEO",
+              "course_number": "1000",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "THEO",
+              "course_number": "1600",
+              "end_number": 1699,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 76,
+    "major_code": "THEO",
+    "course_number": "2430",
+    "attribute_ids": [
+      6
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "THEO",
+              "course_number": "1000",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "THEO",
+              "course_number": "1600",
+              "end_number": 1699,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 77,
+    "major_code": "THEO",
+    "course_number": "2515",
+    "attribute_ids": [
+      6,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "THEO",
+              "course_number": "1000",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "THEO",
+              "course_number": "1600",
+              "end_number": 1699,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 78,
+    "major_code": "ART",
+    "course_number": "4850",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 79,
+    "major_code": "ASCI",
+    "course_number": "4900",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 80,
+    "major_code": "BIZ",
+    "course_number": "3000",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 81,
+    "major_code": "CMM",
+    "course_number": "4500",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 82,
+    "major_code": "CORE",
+    "course_number": "3500",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 83,
+    "major_code": "DPT",
+    "course_number": "3214",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 84,
+    "major_code": "EDUC",
+    "course_number": "4500",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "EDUC",
+          "course_number": "4200",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 85,
+    "major_code": "FRSC",
+    "course_number": "4750",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 86,
+    "major_code": "FSCI",
+    "course_number": "3700",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "FSCI",
+          "course_number": "3550",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 87,
+    "major_code": "HIM",
+    "course_number": "4530",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HIM",
+          "course_number": "3000",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "HIM",
+          "course_number": "3600",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 88,
+    "major_code": "HR",
+    "course_number": "4860",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 89,
+    "major_code": "HUM",
+    "course_number": "3510",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 90,
+    "major_code": "MAT",
+    "course_number": "3000",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 91,
+    "major_code": "MLS",
+    "course_number": "4611",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "BLS",
+              "course_number": "4120",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BLS",
+              "course_number": "4130",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BLS",
+              "course_number": "4220",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BLS",
+              "course_number": "4420",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "3150",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "3400",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "4250",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "4350",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "4520",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "4541",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MLS",
+              "course_number": "4550",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 92,
+    "major_code": "MRI",
+    "course_number": "4750",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 93,
+    "major_code": "NMT",
+    "course_number": "4880",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 94,
+    "major_code": "NURS",
+    "course_number": "3457",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "NURS",
+          "course_number": "3447",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 95,
+    "major_code": "NURS",
+    "course_number": "4400",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "NURS",
+          "course_number": "4100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 96,
+    "major_code": "NURS",
+    "course_number": "4405",
+    "attribute_ids": [
+      7,
+      19
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "NURS",
+              "course_number": "4305",
+              "end_number": null,
+              "concurrent_allowed": true
+            },
+            {
+              "major_code": "NURS",
+              "course_number": "4355",
+              "end_number": null,
+              "concurrent_allowed": true
+            },
+            {
+              "major_code": "NURS",
+              "course_number": "3575",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 97,
+    "major_code": "XRT",
+    "course_number": "4800",
+    "attribute_ids": [
+      7
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 98,
+    "major_code": "AAM",
+    "course_number": "2010",
+    "attribute_ids": [
+      8,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 99,
+    "major_code": "AAM",
+    "course_number": "3300X",
+    "attribute_ids": [
+      8,
+      15,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 100,
+    "major_code": "ARTH",
+    "course_number": "1010",
+    "attribute_ids": [
+      8,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 101,
+    "major_code": "ARTH",
+    "course_number": "1090",
+    "attribute_ids": [
+      8,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 102,
+    "major_code": "ARTH",
+    "course_number": "3880",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 103,
+    "major_code": "ASTD",
+    "course_number": "1000",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 104,
+    "major_code": "ASTD",
+    "course_number": "2550",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 105,
+    "major_code": "ASTD",
+    "course_number": "2700X",
+    "attribute_ids": [
+      8,
+      16,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 106,
+    "major_code": "CMM",
+    "course_number": "3460",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CMM",
+          "course_number": "2800",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 107,
+    "major_code": "ENGL",
+    "course_number": "2250",
+    "attribute_ids": [
+      8,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 108,
+    "major_code": "ENGL",
+    "course_number": "2450",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 109,
+    "major_code": "ENGL",
+    "course_number": "2650",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 110,
+    "major_code": "ENGL",
+    "course_number": "2750",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 111,
+    "major_code": "ENGL",
+    "course_number": "3140",
+    "attribute_ids": [
+      8,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 112,
+    "major_code": "ENGL",
+    "course_number": "3220",
+    "attribute_ids": [
+      8,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 113,
+    "major_code": "ENGL",
+    "course_number": "3250",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 114,
+    "major_code": "ENGL",
+    "course_number": "3280",
+    "attribute_ids": [
+      8,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 115,
+    "major_code": "ENGL",
+    "course_number": "3470",
+    "attribute_ids": [
+      8,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 116,
+    "major_code": "ENGL",
+    "course_number": "3520",
+    "attribute_ids": [
+      8,
+      15,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 117,
+    "major_code": "ENGL",
+    "course_number": "3625",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 118,
+    "major_code": "HCE",
+    "course_number": "2090",
+    "attribute_ids": [
+      8,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HCE",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 119,
+    "major_code": "HCE",
+    "course_number": "3240",
+    "attribute_ids": [
+      8,
+      17,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 120,
+    "major_code": "HIST",
+    "course_number": "1000",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 121,
+    "major_code": "HIST",
+    "course_number": "1110",
+    "attribute_ids": [
+      8,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 122,
+    "major_code": "HIST",
+    "course_number": "1120",
+    "attribute_ids": [
+      8,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 123,
+    "major_code": "HIST",
+    "course_number": "1121",
+    "attribute_ids": [
+      8,
+      17,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 124,
+    "major_code": "HIST",
+    "course_number": "1600",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 125,
+    "major_code": "HIST",
+    "course_number": "1610",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 126,
+    "major_code": "HIST",
+    "course_number": "1645",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 127,
+    "major_code": "HIST",
+    "course_number": "1730",
+    "attribute_ids": [
+      8,
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 128,
+    "major_code": "HIST",
+    "course_number": "3060",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 129,
+    "major_code": "HIST",
+    "course_number": "3070",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 130,
+    "major_code": "LLC",
+    "course_number": "1010",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 131,
+    "major_code": "MUSC",
+    "course_number": "1170",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 132,
+    "major_code": "PHIL",
+    "course_number": "4500",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PHIL",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 133,
+    "major_code": "SPAN",
+    "course_number": "3010",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 134,
+    "major_code": "SPAN",
+    "course_number": "4200",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3021",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 135,
+    "major_code": "SPAN",
+    "course_number": "4790",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3021",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SPAN",
+          "course_number": "3021",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 136,
+    "major_code": "THEO",
+    "course_number": "2755",
+    "attribute_ids": [
+      8,
+      17
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "THEO",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 137,
+    "major_code": "THEO",
+    "course_number": "3115",
+    "attribute_ids": [
+      8,
+      18
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "THEO",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 138,
+    "major_code": "THEO",
+    "course_number": "3210",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "THEO",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 139,
+    "major_code": "THEO",
+    "course_number": "3350",
+    "attribute_ids": [
+      8,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "THEO",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 140,
+    "major_code": "THR",
+    "course_number": "1500",
+    "attribute_ids": [
+      8
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 141,
+    "major_code": "THR",
+    "course_number": "2700",
+    "attribute_ids": [
+      8,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 142,
+    "major_code": "WGST",
+    "course_number": "2700",
+    "attribute_ids": [
+      8,
+      16,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 143,
+    "major_code": "BIOL",
+    "course_number": "1200",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 144,
+    "major_code": "BIOL",
+    "course_number": "1240",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 145,
+    "major_code": "BIOL",
+    "course_number": "1340",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 146,
+    "major_code": "BIOL",
+    "course_number": "1460",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 147,
+    "major_code": "CHEM",
+    "course_number": "1000",
+    "attribute_ids": [
+      9,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 148,
+    "major_code": "CHEM",
+    "course_number": "1050",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 149,
+    "major_code": "CHEM",
+    "course_number": "1110",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "CHEM",
+              "course_number": "1050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CHEM",
+              "course_number": "1030",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "operator": "OR",
+          "operands": []
+        }
+      ]
+    }
+  },
+  {
+    "id": 150,
+    "major_code": "CIS",
+    "course_number": "1375",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 151,
+    "major_code": "DIET",
+    "course_number": "2080",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 152,
+    "major_code": "EAS",
+    "course_number": "1090",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 153,
+    "major_code": "EAS",
+    "course_number": "1170",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 154,
+    "major_code": "EAS",
+    "course_number": "1420",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 155,
+    "major_code": "EAS",
+    "course_number": "1430",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 156,
+    "major_code": "EAS",
+    "course_number": "1450",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 157,
+    "major_code": "EAS",
+    "course_number": "2700",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 158,
+    "major_code": "FRSC",
+    "course_number": "2600",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 159,
+    "major_code": "PHYS",
+    "course_number": "1610",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1520",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1400",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 160,
+    "major_code": "PUBH",
+    "course_number": "4100",
+    "attribute_ids": [
+      9
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": []
+    }
+  },
+  {
+    "id": 161,
+    "major_code": "CIS",
+    "course_number": "2775",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 162,
+    "major_code": "CIS",
+    "course_number": "2875",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 163,
+    "major_code": "CSCI",
+    "course_number": "1060",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1320",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1520",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "2530",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 164,
+    "major_code": "CSCI",
+    "course_number": "1070",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 165,
+    "major_code": "LING",
+    "course_number": "2000",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 166,
+    "major_code": "MATH",
+    "course_number": "1270",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 167,
+    "major_code": "MATH",
+    "course_number": "1320",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 168,
+    "major_code": "MATH",
+    "course_number": "1400",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 169,
+    "major_code": "MATH",
+    "course_number": "1510",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1400",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 170,
+    "major_code": "MATH",
+    "course_number": "1520",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 171,
+    "major_code": "MATH",
+    "course_number": "2530",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1520",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 172,
+    "major_code": "MATH",
+    "course_number": "2660",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 173,
+    "major_code": "PHIL",
+    "course_number": "4040",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "PHIL",
+              "course_number": "1050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1705",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1707",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1753",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1757",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 174,
+    "major_code": "POLS",
+    "course_number": "2000",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "POLS",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "POLS",
+          "course_number": "1001",
+          "end_number": 4999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 175,
+    "major_code": "PSY",
+    "course_number": "2050",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 176,
+    "major_code": "SOC",
+    "course_number": "2000",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "SOC",
+          "course_number": "1100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SOC",
+          "course_number": "1110",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SOC",
+          "course_number": "1120",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "ANTH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "ANTH",
+          "course_number": "1210",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 177,
+    "major_code": "SOC",
+    "course_number": "2010",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 178,
+    "major_code": "STAT",
+    "course_number": "1100",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "260",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1400",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1320",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "265",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 179,
+    "major_code": "STAT",
+    "course_number": "1300",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 180,
+    "major_code": "STAT",
+    "course_number": "2300",
+    "attribute_ids": [
+      10
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "STAT",
+          "course_number": "1300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 181,
+    "major_code": "AAM",
+    "course_number": "3310X",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": []
+    }
+  },
+  {
+    "id": 182,
+    "major_code": "ANTH",
+    "course_number": "1210",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 183,
+    "major_code": "ANTH",
+    "course_number": "2080",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 184,
+    "major_code": "ANTH",
+    "course_number": "2200",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 185,
+    "major_code": "ANTH",
+    "course_number": "3220",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 186,
+    "major_code": "ANTH",
+    "course_number": "3410",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 187,
+    "major_code": "ASTD",
+    "course_number": "2110",
+    "attribute_ids": [
+      11,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 188,
+    "major_code": "ASTD",
+    "course_number": "2650",
+    "attribute_ids": [
+      11,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 189,
+    "major_code": "CCJ",
+    "course_number": "1010",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 190,
+    "major_code": "CCJ",
+    "course_number": "2150",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 191,
+    "major_code": "CCJ",
+    "course_number": "4050",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": []
+    }
+  },
+  {
+    "id": 192,
+    "major_code": "CMM",
+    "course_number": "1000",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 193,
+    "major_code": "CMM",
+    "course_number": "2400",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 194,
+    "major_code": "CMM",
+    "course_number": "3300",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": []
+    }
+  },
+  {
+    "id": 195,
+    "major_code": "CMM",
+    "course_number": "4010X",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 196,
+    "major_code": "CMM",
+    "course_number": "4460",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 197,
+    "major_code": "CORE",
+    "course_number": "3605",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 198,
+    "major_code": "ECON",
+    "course_number": "1900",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MATH",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1320",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1400",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1520",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "2530",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 199,
+    "major_code": "EDUC",
+    "course_number": "1200",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 200,
+    "major_code": "ENGL",
+    "course_number": "4110",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 201,
+    "major_code": "FRSC",
+    "course_number": "2800",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "FRSC",
+          "course_number": "2600",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 202,
+    "major_code": "LING",
+    "course_number": "1000",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 203,
+    "major_code": "POLS",
+    "course_number": "1100",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 204,
+    "major_code": "POLS",
+    "course_number": "1150",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 205,
+    "major_code": "POLS",
+    "course_number": "1600",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 206,
+    "major_code": "POLS",
+    "course_number": "2300",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 207,
+    "major_code": "POLS",
+    "course_number": "2600",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 208,
+    "major_code": "POLS",
+    "course_number": "2651X",
+    "attribute_ids": [
+      11,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 209,
+    "major_code": "POLS",
+    "course_number": "4650",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "POLS",
+          "course_number": "1600",
+          "end_number": 1699,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "POLS",
+          "course_number": "2600",
+          "end_number": 2699,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "POLS",
+          "course_number": "3600",
+          "end_number": 3699,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "POLS",
+          "course_number": "2820",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "POLS",
+          "course_number": "3810",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 210,
+    "major_code": "PSY",
+    "course_number": "1010",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 211,
+    "major_code": "PSY",
+    "course_number": "3100",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 212,
+    "major_code": "PSY",
+    "course_number": "3120",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 213,
+    "major_code": "PSY",
+    "course_number": "3210",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 214,
+    "major_code": "PSY",
+    "course_number": "3300",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 215,
+    "major_code": "PSY",
+    "course_number": "3460",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PSY",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 216,
+    "major_code": "SOC",
+    "course_number": "1110",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 217,
+    "major_code": "SOC",
+    "course_number": "1120",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 218,
+    "major_code": "SOC",
+    "course_number": "1500",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 219,
+    "major_code": "SOC",
+    "course_number": "2080X",
+    "attribute_ids": [
+      11,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 220,
+    "major_code": "SOC",
+    "course_number": "2630",
+    "attribute_ids": [
+      11,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 221,
+    "major_code": "SPAN",
+    "course_number": "4020",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3000",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SPAN",
+          "course_number": "3010",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SPAN",
+          "course_number": "3020",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 222,
+    "major_code": "SPAN",
+    "course_number": "4030",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3021",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 223,
+    "major_code": "SWRK",
+    "course_number": "1000",
+    "attribute_ids": [
+      11,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 224,
+    "major_code": "SWRK",
+    "course_number": "2300",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 225,
+    "major_code": "SWRK",
+    "course_number": "3700",
+    "attribute_ids": [
+      11
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": []
+    }
+  },
+  {
+    "id": 226,
+    "major_code": "WGST",
+    "course_number": "3300X",
+    "attribute_ids": [
+      11,
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 227,
+    "major_code": "EAP",
+    "course_number": "1900",
+    "attribute_ids": [
+      12
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "EAP",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "ENGL",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "ENGL",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 228,
+    "major_code": "ENGL",
+    "course_number": "1900",
+    "attribute_ids": [
+      12
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "ENGL",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 229,
+    "major_code": "ENGL",
+    "course_number": "1903",
+    "attribute_ids": [
+      12
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 230,
+    "major_code": "ENGL",
+    "course_number": "1920",
+    "attribute_ids": [
+      12
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "ENGL",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 231,
+    "major_code": "CMM",
+    "course_number": "1200",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 232,
+    "major_code": "CMM",
+    "course_number": "1210",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 233,
+    "major_code": "CMM",
+    "course_number": "1220",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 234,
+    "major_code": "CMM",
+    "course_number": "1230",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 235,
+    "major_code": "CMM",
+    "course_number": "1250",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 236,
+    "major_code": "DIET",
+    "course_number": "3850",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "DIET",
+              "course_number": "2080",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BIOL",
+              "course_number": "1240",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BIOL",
+              "course_number": "1245",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CHEM",
+              "course_number": "1120",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CHEM",
+              "course_number": "1125",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CHEM",
+              "course_number": "2410",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CHEM",
+              "course_number": "3600",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PPY",
+              "course_number": "2540",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "BIOL",
+          "course_number": "3020",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 237,
+    "major_code": "FREN",
+    "course_number": "3010",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "FREN",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "FREN",
+          "course_number": "3000",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 238,
+    "major_code": "HIST",
+    "course_number": "1200",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 239,
+    "major_code": "LLC",
+    "course_number": "1250",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 240,
+    "major_code": "LLC",
+    "course_number": "1255",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 241,
+    "major_code": "PUBH",
+    "course_number": "2800",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 242,
+    "major_code": "SPAN",
+    "course_number": "3020",
+    "attribute_ids": [
+      13
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "SPAN",
+          "course_number": "3010",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 243,
+    "major_code": "AENG",
+    "course_number": "4014",
+    "attribute_ids": [
+      14,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "AENG",
+          "course_number": "4004",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 244,
+    "major_code": "ART",
+    "course_number": "1450",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 245,
+    "major_code": "ART",
+    "course_number": "2000",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 246,
+    "major_code": "ART",
+    "course_number": "2025",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 247,
+    "major_code": "ART",
+    "course_number": "2100",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 248,
+    "major_code": "ART",
+    "course_number": "2150",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 249,
+    "major_code": "ART",
+    "course_number": "2200",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 250,
+    "major_code": "ART",
+    "course_number": "2300",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 251,
+    "major_code": "ART",
+    "course_number": "2400",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 252,
+    "major_code": "ART",
+    "course_number": "2450",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 253,
+    "major_code": "ART",
+    "course_number": "2480",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 254,
+    "major_code": "ART",
+    "course_number": "2500",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 255,
+    "major_code": "ART",
+    "course_number": "2650",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 256,
+    "major_code": "ART",
+    "course_number": "2700",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 257,
+    "major_code": "ART",
+    "course_number": "2790",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 258,
+    "major_code": "BME",
+    "course_number": "4960",
+    "attribute_ids": [
+      14,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "BME",
+          "course_number": "4950",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 259,
+    "major_code": "CMM",
+    "course_number": "1500",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 260,
+    "major_code": "CMM",
+    "course_number": "2510",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 261,
+    "major_code": "CMM",
+    "course_number": "2550",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 262,
+    "major_code": "CVNG",
+    "course_number": "1000",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CVNG",
+          "course_number": "1001",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "SE",
+          "course_number": "1700",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 263,
+    "major_code": "DANC",
+    "course_number": "2000",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 264,
+    "major_code": "DANC",
+    "course_number": "2100",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 265,
+    "major_code": "DANC",
+    "course_number": "2300",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 266,
+    "major_code": "DANC",
+    "course_number": "2650",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 267,
+    "major_code": "DANC",
+    "course_number": "2660",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 268,
+    "major_code": "DANC",
+    "course_number": "2670",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 269,
+    "major_code": "DANC",
+    "course_number": "2680",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 270,
+    "major_code": "DIET",
+    "course_number": "2510",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 271,
+    "major_code": "DIET",
+    "course_number": "2750",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 272,
+    "major_code": "ECE",
+    "course_number": "4810",
+    "attribute_ids": [
+      14,
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "ECE",
+          "course_number": "4800",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 273,
+    "major_code": "ENGL",
+    "course_number": "3050",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 274,
+    "major_code": "ENGL",
+    "course_number": "3060",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 275,
+    "major_code": "ENGL",
+    "course_number": "3080",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 276,
+    "major_code": "ENGL",
+    "course_number": "3100",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 277,
+    "major_code": "MENG",
+    "course_number": "1000",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "ESCI",
+          "course_number": "1700",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "SE",
+          "course_number": "1700",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 278,
+    "major_code": "MUSC",
+    "course_number": "1400",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 279,
+    "major_code": "MUSC",
+    "course_number": "1402",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 280,
+    "major_code": "MUSC",
+    "course_number": "2090",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "MUSC",
+          "course_number": "1010",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1020",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1030",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1040",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1050",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1060",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1070",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2020",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2030",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2040",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2060",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2070",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1260",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "1270",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "MUSC",
+          "course_number": "2510",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 281,
+    "major_code": "MUSC",
+    "course_number": "2430",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 282,
+    "major_code": "MUSC",
+    "course_number": "3400",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 283,
+    "major_code": "SPAN",
+    "course_number": "4180",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 284,
+    "major_code": "THR",
+    "course_number": "2500",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 285,
+    "major_code": "THR",
+    "course_number": "2530",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 286,
+    "major_code": "THR",
+    "course_number": "2560",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 287,
+    "major_code": "THR",
+    "course_number": "3560",
+    "attribute_ids": [
+      14
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 288,
+    "major_code": "AAM",
+    "course_number": "3221",
+    "attribute_ids": [
+      15,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 289,
+    "major_code": "ARTH",
+    "course_number": "2030",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 290,
+    "major_code": "CCJ",
+    "course_number": "4800",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "CCJ",
+              "course_number": "1010",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CCJ",
+              "course_number": "3700",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "CCJ",
+              "course_number": "2050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CCJ",
+              "course_number": "2100",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 291,
+    "major_code": "CMM",
+    "course_number": "2100",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 292,
+    "major_code": "EAP",
+    "course_number": "2850",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "EAP",
+              "course_number": "1900",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "ENGL",
+              "course_number": "1900",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 293,
+    "major_code": "ENGL",
+    "course_number": "3490",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 294,
+    "major_code": "ENGL",
+    "course_number": "3560",
+    "attribute_ids": [
+      15,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 295,
+    "major_code": "ENGL",
+    "course_number": "3650",
+    "attribute_ids": [
+      15,
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 296,
+    "major_code": "ENGL",
+    "course_number": "3670",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 297,
+    "major_code": "ENGL",
+    "course_number": "3700",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 298,
+    "major_code": "ENGL",
+    "course_number": "3854",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 299,
+    "major_code": "ENGL",
+    "course_number": "3875",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 300,
+    "major_code": "ENGL",
+    "course_number": "4000",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 301,
+    "major_code": "ENGL",
+    "course_number": "4035",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 302,
+    "major_code": "ENGL",
+    "course_number": "4120",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 303,
+    "major_code": "GR",
+    "course_number": "3010",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "GR",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 304,
+    "major_code": "HIST",
+    "course_number": "2800",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HIST",
+          "course_number": "1110",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "HIST",
+          "course_number": "1120",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 305,
+    "major_code": "HIST",
+    "course_number": "3305",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 306,
+    "major_code": "HIST",
+    "course_number": "3480",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 307,
+    "major_code": "HUM",
+    "course_number": "4100",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HUM",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 308,
+    "major_code": "NEUR",
+    "course_number": "3555",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "NEUR",
+          "course_number": "3400",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 309,
+    "major_code": "NURS",
+    "course_number": "4147",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 310,
+    "major_code": "ORLD",
+    "course_number": "4800",
+    "attribute_ids": [
+      15,
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 311,
+    "major_code": "PHIL",
+    "course_number": "2030X",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 312,
+    "major_code": "SLHS",
+    "course_number": "4060",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "SLHS",
+          "course_number": "4050",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 313,
+    "major_code": "SLHS",
+    "course_number": "4800",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 314,
+    "major_code": "SPAN",
+    "course_number": "3030",
+    "attribute_ids": [
+      15
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "SPAN",
+              "course_number": "3010",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "SPAN",
+              "course_number": "3020",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 315,
+    "major_code": "AAM",
+    "course_number": "2000",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 316,
+    "major_code": "CCJ",
+    "course_number": "3500",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 317,
+    "major_code": "CHIN",
+    "course_number": "3150",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 318,
+    "major_code": "EAS",
+    "course_number": "4420",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "EAS",
+          "course_number": "1480",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "EAS",
+          "course_number": "1080",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "BIOL",
+          "course_number": "1340",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "EAS",
+          "course_number": "3100",
+          "end_number": null,
+          "concurrent_allowed": true
+        },
+        {
+          "major_code": "BIOL",
+          "course_number": "1200",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 319,
+    "major_code": "EDI",
+    "course_number": "4220",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 320,
+    "major_code": "EDUC",
+    "course_number": "1030",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 321,
+    "major_code": "HCE",
+    "course_number": "2010",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 322,
+    "major_code": "HCE",
+    "course_number": "3030",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 323,
+    "major_code": "IPE",
+    "course_number": "2100",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 324,
+    "major_code": "LING",
+    "course_number": "3020",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 325,
+    "major_code": "NURS",
+    "course_number": "3485",
+    "attribute_ids": [
+      16
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "NURS",
+          "course_number": "3575",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 326,
+    "major_code": "ORLD",
+    "course_number": "4000",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "ORLD",
+          "course_number": "3800",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 327,
+    "major_code": "PHIL",
+    "course_number": "4810",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "PHIL",
+              "course_number": "1050",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1707",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1753",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "PHIL",
+              "course_number": "1757",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CORE",
+              "course_number": "1700",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 328,
+    "major_code": "POLS",
+    "course_number": "1510",
+    "attribute_ids": [
+      16,
+      17,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 329,
+    "major_code": "POLS",
+    "course_number": "2510",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 330,
+    "major_code": "POLS",
+    "course_number": "2590",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 331,
+    "major_code": "POLS",
+    "course_number": "2820",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 332,
+    "major_code": "POLS",
+    "course_number": "3770",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 333,
+    "major_code": "SLHS",
+    "course_number": "3000",
+    "attribute_ids": [
+      16,
+      17,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 334,
+    "major_code": "THEO",
+    "course_number": "2710",
+    "attribute_ids": [
+      16,
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 335,
+    "major_code": "WGST",
+    "course_number": "3775X",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 336,
+    "major_code": "WGST",
+    "course_number": "4810X",
+    "attribute_ids": [
+      16,
+      18
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "PHIL",
+          "course_number": "1050",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "1700",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "1707",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "1753",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHIL",
+          "course_number": "1757",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1700",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 337,
+    "major_code": "AEP",
+    "course_number": "1410",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 338,
+    "major_code": "ARTH",
+    "course_number": "2270",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 339,
+    "major_code": "FREN",
+    "course_number": "4180",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "FREN",
+          "course_number": "3000",
+          "end_number": 3999,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 340,
+    "major_code": "HIST",
+    "course_number": "3420",
+    "attribute_ids": [
+      17,
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 341,
+    "major_code": "HSCI",
+    "course_number": "3800",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "STAT",
+          "course_number": "1300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 342,
+    "major_code": "IB",
+    "course_number": "2000",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "ECON",
+          "course_number": "1900",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 343,
+    "major_code": "SPAN",
+    "course_number": "3040",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "SPAN",
+              "course_number": "3010",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "SPAN",
+              "course_number": "3020",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 344,
+    "major_code": "THEO",
+    "course_number": "2930",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 345,
+    "major_code": "WGST",
+    "course_number": "2300",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 346,
+    "major_code": "WGST",
+    "course_number": "3100",
+    "attribute_ids": [
+      17
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 347,
+    "major_code": "ANTH",
+    "course_number": "2470",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 348,
+    "major_code": "BME",
+    "course_number": "2200",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "BIOL",
+          "course_number": "1240",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "PHYS",
+          "course_number": "1610",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 349,
+    "major_code": "CSCI",
+    "course_number": "3050",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PHIL",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 350,
+    "major_code": "EDUC",
+    "course_number": "1300",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 351,
+    "major_code": "EMGT",
+    "course_number": "1500",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 352,
+    "major_code": "HCE",
+    "course_number": "4220",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "HCE",
+          "course_number": "2010",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 353,
+    "major_code": "HIST",
+    "course_number": "3340",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 354,
+    "major_code": "HR",
+    "course_number": "2800",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 355,
+    "major_code": "IPE",
+    "course_number": "4200",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "IPE",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "IPE",
+          "course_number": "1100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "NURS",
+          "course_number": "3100",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 356,
+    "major_code": "NURS",
+    "course_number": "4814",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "NURS",
+          "course_number": "3360",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 357,
+    "major_code": "PHIL",
+    "course_number": "2050",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 358,
+    "major_code": "PHIL",
+    "course_number": "2055",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1005",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 359,
+    "major_code": "PHIL",
+    "course_number": "3050X",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "PHIL",
+          "course_number": "2050",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 360,
+    "major_code": "POLS",
+    "course_number": "3130",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 361,
+    "major_code": "POLS",
+    "course_number": "3567",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 362,
+    "major_code": "POLS",
+    "course_number": "3850X",
+    "attribute_ids": [
+      18,
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 363,
+    "major_code": "PUBH",
+    "course_number": "3100",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 364,
+    "major_code": "SOC",
+    "course_number": "1600",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 365,
+    "major_code": "SOC",
+    "course_number": "1700",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 366,
+    "major_code": "SWRK",
+    "course_number": "3100",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 367,
+    "major_code": "WGST",
+    "course_number": "1900",
+    "attribute_ids": [
+      18
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 368,
+    "major_code": "WGST",
+    "course_number": "3850",
+    "attribute_ids": [
+      18,
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 369,
+    "major_code": "AAM",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 370,
+    "major_code": "AAM",
+    "course_number": "3913",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 371,
+    "major_code": "ACCT",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 372,
+    "major_code": "AENG",
+    "course_number": "2910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 373,
+    "major_code": "AENG",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 374,
+    "major_code": "AENG",
+    "course_number": "3915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 375,
+    "major_code": "AENG",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 376,
+    "major_code": "AENG",
+    "course_number": "4915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 377,
+    "major_code": "ART",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 378,
+    "major_code": "ARTH",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 379,
+    "major_code": "AS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 380,
+    "major_code": "ASCI",
+    "course_number": "2910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 381,
+    "major_code": "ASCI",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 382,
+    "major_code": "ASCI",
+    "course_number": "3915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 383,
+    "major_code": "ASCI",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 384,
+    "major_code": "ASCI",
+    "course_number": "4915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 385,
+    "major_code": "ASTD",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 386,
+    "major_code": "BIOL",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 387,
+    "major_code": "BIOL",
+    "course_number": "4911",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 388,
+    "major_code": "BIOL",
+    "course_number": "4912",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 389,
+    "major_code": "BIZ",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 390,
+    "major_code": "BLS",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 391,
+    "major_code": "BME",
+    "course_number": "2910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 392,
+    "major_code": "BME",
+    "course_number": "3915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 393,
+    "major_code": "BTM",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 394,
+    "major_code": "CCJ",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 395,
+    "major_code": "CIS",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 396,
+    "major_code": "CMM",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 397,
+    "major_code": "CORE",
+    "course_number": "4510",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 398,
+    "major_code": "CORE",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 399,
+    "major_code": "CSCI",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CORE",
+          "course_number": "1000",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CORE",
+          "course_number": "1500",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 400,
+    "major_code": "CVNG",
+    "course_number": "4915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 401,
+    "major_code": "EAS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 402,
+    "major_code": "EDI",
+    "course_number": "4350",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 403,
+    "major_code": "EMGT",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 404,
+    "major_code": "ENGL",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 405,
+    "major_code": "EXSC",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 406,
+    "major_code": "FIN",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 407,
+    "major_code": "FMST",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 408,
+    "major_code": "FRSC",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 409,
+    "major_code": "HIST",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 410,
+    "major_code": "HIST",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 411,
+    "major_code": "HR",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 412,
+    "major_code": "HSCI",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 413,
+    "major_code": "HSCI",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 414,
+    "major_code": "HUM",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 415,
+    "major_code": "IB",
+    "course_number": "4900",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 416,
+    "major_code": "IB",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 417,
+    "major_code": "INTN",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 418,
+    "major_code": "ISTD",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 419,
+    "major_code": "LLC",
+    "course_number": "3210",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 420,
+    "major_code": "MENG",
+    "course_number": "2910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 421,
+    "major_code": "MENG",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 422,
+    "major_code": "MENG",
+    "course_number": "3915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 423,
+    "major_code": "MENG",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 424,
+    "major_code": "MENG",
+    "course_number": "4915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 425,
+    "major_code": "MGT",
+    "course_number": "4912",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 426,
+    "major_code": "MGT",
+    "course_number": "4914",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 427,
+    "major_code": "MKT",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 428,
+    "major_code": "MLS",
+    "course_number": "4770",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 429,
+    "major_code": "MRI",
+    "course_number": "4700",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 430,
+    "major_code": "NURS",
+    "course_number": "4350",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 431,
+    "major_code": "NURS",
+    "course_number": "4815",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 432,
+    "major_code": "NURS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 433,
+    "major_code": "PHYS",
+    "course_number": "2910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 434,
+    "major_code": "PHYS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 435,
+    "major_code": "PHYS",
+    "course_number": "4915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 436,
+    "major_code": "PLS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 437,
+    "major_code": "PMGT",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 438,
+    "major_code": "POLS",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 439,
+    "major_code": "POLS",
+    "course_number": "3911",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 440,
+    "major_code": "POLS",
+    "course_number": "3912",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 441,
+    "major_code": "POLS",
+    "course_number": "3914",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 442,
+    "major_code": "POLS",
+    "course_number": "3915",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 443,
+    "major_code": "POLS",
+    "course_number": "3918",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 444,
+    "major_code": "POLS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 445,
+    "major_code": "PPHS",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 446,
+    "major_code": "PST",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 447,
+    "major_code": "PSY",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 448,
+    "major_code": "PUBH",
+    "course_number": "3910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 449,
+    "major_code": "SLHS",
+    "course_number": "4700",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 450,
+    "major_code": "SOC",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 451,
+    "major_code": "SPAN",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 452,
+    "major_code": "SSI",
+    "course_number": "4800",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 453,
+    "major_code": "SWRK",
+    "course_number": "4200",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 454,
+    "major_code": "SWRK",
+    "course_number": "4250",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 455,
+    "major_code": "THR",
+    "course_number": "4910",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 456,
+    "major_code": "WGST",
+    "course_number": "4919",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 457,
+    "major_code": "XRT",
+    "course_number": "4350",
+    "attribute_ids": [
+      19
+    ],
+    "prerequisites": null
+  },
+  {
+    "id": 458,
+    "major_code": "CSCI",
+    "course_number": "1300",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "CSCI",
+              "course_number": "1010",
+              "end_number": 1090,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "BME",
+              "course_number": "2000",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "CVNG",
+              "course_number": "1500",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MATH",
+              "course_number": "3850",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "STAT",
+              "course_number": "3850",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "ECE",
+              "course_number": "1001",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "GIS",
+              "course_number": "4090",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "MATH",
+              "course_number": "1200",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MATH",
+              "course_number": "1320",
+              "end_number": 4999,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 459,
+    "major_code": "CSCI",
+    "course_number": "2100",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "1300",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1660",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 460,
+    "major_code": "CSCI",
+    "course_number": "2300",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 461,
+    "major_code": "CSCI",
+    "course_number": "2500",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": true
+        }
+      ]
+    }
+  },
+  {
+    "id": 462,
+    "major_code": "CSCI",
+    "course_number": "2510",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2500",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "operator": "AND",
+          "operands": [
+            {
+              "major_code": "ECE",
+              "course_number": "2205",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "ECE",
+              "course_number": "3217",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "ECE",
+              "course_number": "3225",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 463,
+    "major_code": "CSCI",
+    "course_number": "3100",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "1660",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "MATH",
+              "course_number": "1510",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MATH",
+              "course_number": "1520",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "MATH",
+              "course_number": "2530",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 464,
+    "major_code": "CSCI",
+    "course_number": "3200",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 465,
+    "major_code": "CSCI",
+    "course_number": "3300",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 466,
+    "major_code": "CSCI",
+    "course_number": "3980",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 467,
+    "major_code": "CSCI",
+    "course_number": "4360",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 468,
+    "major_code": "CSCI",
+    "course_number": "4500",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2510",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 469,
+    "major_code": "CSCI",
+    "course_number": "4530",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CSCI",
+          "course_number": "3500",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 470,
+    "major_code": "CSCI",
+    "course_number": "4550",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CSCI",
+          "course_number": "3500",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 471,
+    "major_code": "CSCI",
+    "course_number": "4610",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "OR",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2510",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CSCI",
+          "course_number": "3500",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 472,
+    "major_code": "CSCI",
+    "course_number": "4710",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 473,
+    "major_code": "CSCI",
+    "course_number": "4740",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 474,
+    "major_code": "CSCI",
+    "course_number": "4750",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "STAT",
+          "course_number": "3850",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "MATH",
+          "course_number": "2530",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 475,
+    "major_code": "CSCI",
+    "course_number": "4770",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "4710",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 476,
+    "major_code": "CSCI",
+    "course_number": "4830",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2100",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 477,
+    "major_code": "CSCI",
+    "course_number": "4930",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 478,
+    "major_code": "CSCI",
+    "course_number": "4961",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "2300",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "operator": "OR",
+          "operands": [
+            {
+              "major_code": "CSCI",
+              "course_number": "2510",
+              "end_number": null,
+              "concurrent_allowed": false
+            },
+            {
+              "major_code": "ECE",
+              "course_number": "3127",
+              "end_number": null,
+              "concurrent_allowed": false
+            }
+          ]
+        }
+      ]
+    }
+  },
+  {
+    "id": 479,
+    "major_code": "CSCI",
+    "course_number": "4962",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "4961",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 480,
+    "major_code": "CSCI",
+    "course_number": "5010",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 481,
+    "major_code": "CSCI",
+    "course_number": "5011",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 482,
+    "major_code": "CSCI",
+    "course_number": "5020",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 483,
+    "major_code": "CSCI",
+    "course_number": "5030",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "5020",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 484,
+    "major_code": "CSCI",
+    "course_number": "5050",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 485,
+    "major_code": "CSCI",
+    "course_number": "5090",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 486,
+    "major_code": "CSCI",
+    "course_number": "5300",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "5030",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 487,
+    "major_code": "CSCI",
+    "course_number": "5530",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 488,
+    "major_code": "CSCI",
+    "course_number": "5550",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 489,
+    "major_code": "CSCI",
+    "course_number": "5610",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 490,
+    "major_code": "CSCI",
+    "course_number": "5710",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 491,
+    "major_code": "CSCI",
+    "course_number": "5750",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 492,
+    "major_code": "CSCI",
+    "course_number": "5770",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "5710",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 493,
+    "major_code": "CSCI",
+    "course_number": "5830",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 494,
+    "major_code": "CSCI",
+    "course_number": "5910",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 495,
+    "major_code": "CSCI",
+    "course_number": "5930",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 496,
+    "major_code": "CSCI",
+    "course_number": "5960",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "5300",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 497,
+    "major_code": "CSCI",
+    "course_number": "5961",
+    "attribute_ids": [],
+    "prerequisites": {
+      "operator": "AND",
+      "operands": [
+        {
+          "major_code": "CSCI",
+          "course_number": "5740",
+          "end_number": null,
+          "concurrent_allowed": false
+        },
+        {
+          "major_code": "CSCI",
+          "course_number": "5750",
+          "end_number": null,
+          "concurrent_allowed": false
+        }
+      ]
+    }
+  },
+  {
+    "id": 498,
+    "major_code": "CSCI",
+    "course_number": "5970",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 499,
+    "major_code": "CSCI",
+    "course_number": "5980",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 500,
+    "major_code": "CSCI",
+    "course_number": "5990",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 501,
+    "major_code": "CSCI",
+    "course_number": "6990",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 502,
+    "major_code": "MATH",
+    "course_number": "1000",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 503,
+    "major_code": "MATH",
+    "course_number": "1200",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 504,
+    "major_code": "MATH",
+    "course_number": "1660",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 505,
+    "major_code": "MATH",
+    "course_number": "2930",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 506,
+    "major_code": "MATH",
+    "course_number": "3110",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 507,
+    "major_code": "MATH",
+    "course_number": "3120",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 508,
+    "major_code": "MATH",
+    "course_number": "3240",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 509,
+    "major_code": "MATH",
+    "course_number": "3270",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 510,
+    "major_code": "MATH",
+    "course_number": "3550",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 511,
+    "major_code": "MATH",
+    "course_number": "4230",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 512,
+    "major_code": "MATH",
+    "course_number": "4550",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 513,
+    "major_code": "MATH",
+    "course_number": "4930",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 514,
+    "major_code": "MATH",
+    "course_number": "4980",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 515,
+    "major_code": "MATH",
+    "course_number": "5023",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 516,
+    "major_code": "MATH",
+    "course_number": "5120",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 517,
+    "major_code": "MATH",
+    "course_number": "5210",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 518,
+    "major_code": "MATH",
+    "course_number": "5350",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 519,
+    "major_code": "MATH",
+    "course_number": "5930",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 520,
+    "major_code": "MATH",
+    "course_number": "5980",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 521,
+    "major_code": "MATH",
+    "course_number": "5990",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 522,
+    "major_code": "MATH",
+    "course_number": "6980",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 523,
+    "major_code": "MATH",
+    "course_number": "6990",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 524,
+    "major_code": "BCB",
+    "course_number": "5910",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 525,
+    "major_code": "EDUC",
+    "course_number": "2200",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 526,
+    "major_code": "EDUC",
+    "course_number": "3600",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 527,
+    "major_code": "MLS",
+    "course_number": "3150",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 528,
+    "major_code": "STAT",
+    "course_number": "3850",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 529,
+    "major_code": "STAT",
+    "course_number": "4840",
+    "attribute_ids": [],
+    "prerequisites": null
+  },
+  {
+    "id": 530,
+    "major_code": "STAT",
+    "course_number": "4870",
+    "attribute_ids": [],
+    "prerequisites": null
+  }
+]

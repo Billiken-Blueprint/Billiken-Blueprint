@@ -14,13 +14,10 @@ class DBStudent(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column()
-    degree_ids: Mapped[list[int]] = mapped_column(JSON)
     completed_course_ids: Mapped[list[int]] = mapped_column(JSON)
 
     graduation_year: Mapped[int] = mapped_column()
-    major_code: Mapped[str] = mapped_column()
-    degree_type: Mapped[str] = mapped_column()
-    college: Mapped[str] = mapped_column()
+    degree_id: Mapped[int] = mapped_column(default=1)
 
 
 class StudentRepository:
@@ -31,23 +28,17 @@ class StudentRepository:
         insert_stmt = insert(DBStudent).values(
             id=student.id,
             name=student.name,
-            degree_ids=student.degree_ids,
             completed_course_ids=student.completed_course_ids,
-            major_code=student.major_code,
-            degree_type=student.degree_type,
-            college=student.college,
+            degree_id=student.degree_id,
             graduation_year=student.graduation_year,
         )
         conflict_stmt = insert_stmt.on_conflict_do_update(
             index_elements=[DBStudent.id],
             set_=dict(
                 name=insert_stmt.excluded.name,
-                degree_ids=insert_stmt.excluded.degree_ids,
                 completed_course_ids=insert_stmt.excluded.completed_course_ids,
-                major_code=insert_stmt.excluded.major_code,
-                degree_type=insert_stmt.excluded.degree_type,
-                college=insert_stmt.excluded.college,
                 graduation_year=insert_stmt.excluded.graduation_year,
+                degree_id=insert_stmt.excluded.degree_id,
             ),
         ).returning(DBStudent)
 
@@ -64,10 +55,7 @@ class StudentRepository:
             return Student(
                 id=result.id,
                 name=result.name,
-                degree_ids=result.degree_ids,
                 completed_course_ids=result.completed_course_ids,
-                major_code=result.major_code,
-                degree_type=result.degree_type,
-                college=result.college,
+                degree_id=result.degree_id,
                 graduation_year=result.graduation_year,
             )

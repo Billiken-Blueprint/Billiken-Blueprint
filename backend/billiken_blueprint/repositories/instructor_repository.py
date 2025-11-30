@@ -7,14 +7,6 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 
 from billiken_blueprint.domain.instructor import Professor
 from billiken_blueprint.repositories.course_repository import DBCourse
-from billiken_blueprint.repositories.instructor_section_association import (
-    instructor_sections_association,
-)
-
-if TYPE_CHECKING:
-    from billiken_blueprint.repositories.course_section_repository import (
-        DBCourseSection,
-    )
 
 
 class DBInstructor(Base):
@@ -26,11 +18,6 @@ class DBInstructor(Base):
     rmp_num_ratings: Mapped[Optional[int]] = mapped_column(nullable=True)
     rmp_url: Mapped[Optional[str]] = mapped_column(nullable=True)
     department: Mapped[Optional[str]] = mapped_column(nullable=True)
-    sections: Mapped[list["DBCourseSection"]] = relationship(
-        secondary=instructor_sections_association,
-        back_populates="instructors",
-        lazy="select",
-    )
 
 
 class InstructorRepository:
@@ -76,10 +63,10 @@ class InstructorRepository:
             Professor(
                 id=db_instructor.id,
                 name=db_instructor.name,
-                rmp_rating=getattr(db_instructor, 'rmp_rating', None),
-                rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
-                rmp_url=getattr(db_instructor, 'rmp_url', None),
-                department=getattr(db_instructor, 'department', None),
+                rmp_rating=getattr(db_instructor, "rmp_rating", None),
+                rmp_num_ratings=getattr(db_instructor, "rmp_num_ratings", None),
+                rmp_url=getattr(db_instructor, "rmp_url", None),
+                department=getattr(db_instructor, "department", None),
             )
             for db_instructor in db_instructors
         ]
@@ -91,10 +78,10 @@ class InstructorRepository:
                 return Professor(
                     id=db_instructor.id,
                     name=db_instructor.name,
-                    rmp_rating=getattr(db_instructor, 'rmp_rating', None),
-                    rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
-                    rmp_url=getattr(db_instructor, 'rmp_url', None),
-                    department=getattr(db_instructor, 'department', None),
+                    rmp_rating=getattr(db_instructor, "rmp_rating", None),
+                    rmp_num_ratings=getattr(db_instructor, "rmp_num_ratings", None),
+                    rmp_url=getattr(db_instructor, "rmp_url", None),
+                    department=getattr(db_instructor, "department", None),
                 )
         return None
 
@@ -109,9 +96,9 @@ class InstructorRepository:
             return Professor(
                 id=db_instructor.id,
                 name=db_instructor.name,
-                rmp_rating=getattr(db_instructor, 'rmp_rating', None),
-                rmp_num_ratings=getattr(db_instructor, 'rmp_num_ratings', None),
-                rmp_url=getattr(db_instructor, 'rmp_url', None),
-                department=getattr(db_instructor, 'department', None),
+                rmp_rating=getattr(db_instructor, "rmp_rating", None),
+                rmp_num_ratings=getattr(db_instructor, "rmp_num_ratings", None),
+                rmp_url=getattr(db_instructor, "rmp_url", None),
+                department=getattr(db_instructor, "department", None),
             )
         return None

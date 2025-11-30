@@ -1,33 +1,27 @@
 from typing import Annotated, Optional
 
-from fastapi import Depends, HTTPException, status, Security
+from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
-from fastapi.security.api_key import APIKeyHeader
 import jwt
-from yaml import Token
 
 from billiken_blueprint import config, services
-from billiken_blueprint.domain.degree import Degree
+from billiken_blueprint.domain.courses.course_attribute import CourseAttribute
 from billiken_blueprint.domain.student import Student
 from billiken_blueprint.identity.identity_user import IdentityUser
 from billiken_blueprint.identity.token_payload import TokenPayload
+from billiken_blueprint.repositories.course_attribute_repository import (
+    CourseAttributeRepository,
+)
 from billiken_blueprint.repositories.course_repository import CourseRepository
 from billiken_blueprint.repositories.degree_repository import DegreeRepository
-from billiken_blueprint.repositories.degree_requirements_repository import (
-    DegreeRequirementsRepository,
-)
 from billiken_blueprint.repositories.identity_user_repository import (
     IdentityUserRepository,
 )
 from billiken_blueprint.repositories.instructor_repository import InstructorRepository
-from billiken_blueprint.repositories.mc_course_repository import MCCourseRepository
 from billiken_blueprint.repositories.rating_repository import RatingRepository
 from billiken_blueprint.repositories.rmp_review_repository import RmpReviewRepository
 from billiken_blueprint.repositories.student_repository import StudentRepository
 from billiken_blueprint.repositories.section_repository import SectionRepository
-from billiken_blueprint.repositories.course_requirements_repository import (
-    CourseRequirementsRepository,
-)
 
 
 def get_identity_user_repository() -> IdentityUserRepository:
@@ -88,10 +82,6 @@ def get_degree_repository():
     return services.degree_repository
 
 
-def get_degree_requirements_repository():
-    return services.degree_requirements_repository
-
-
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="identity/token", auto_error=False)
 AuthToken = Annotated[Optional[str], Depends(oauth2_scheme)]
 
@@ -117,6 +107,15 @@ def get_auth_payload(token: AuthToken):
 AuthPayload = Annotated[TokenPayload, Depends(get_auth_payload)]
 
 
+def get_course_attribute_repository():
+    return services.course_attribute_repository
+
+
+CourseAttributeRepo = Annotated[
+    CourseAttributeRepository, Depends(get_course_attribute_repository)
+]
+
+
 def get_optional_auth_payload(token: Optional[str] = Depends(oauth2_scheme)):
     """Get auth payload if token is provided, otherwise return None."""
     if token is None:
@@ -139,15 +138,6 @@ OptionalAuthPayload = Annotated[
 ]
 
 
-def get_mc_course_repository() -> MCCourseRepository:
-    """Get the MC course repository instance.
-
-    This is the single source of truth for the MC course repository dependency.
-    Override this in tests to use a test repository.
-    """
-    return services.mccourse_repository
-
-
 def get_section_repository() -> SectionRepository:
     """Get the section repository instance.
 
@@ -155,15 +145,6 @@ def get_section_repository() -> SectionRepository:
     Override this in tests to use a test repository.
     """
     return services.section_repository
-
-
-def get_course_requirements_repository() -> CourseRequirementsRepository:
-    """Get the course requirements repository instance.
-
-    This is the single source of truth for the course requirements repository dependency.
-    Override this in tests to use a test repository.
-    """
-    return services.course_requirements_repository
 
 
 # Common type annotations for use in route functions
@@ -176,14 +157,7 @@ InstructorRepo = Annotated[InstructorRepository, Depends(get_instructor_reposito
 RatingRepo = Annotated[RatingRepository, Depends(get_rating_repository)]
 RmpReviewRepo = Annotated[RmpReviewRepository, Depends(get_rmp_review_repository)]
 DegreeRepo = Annotated[DegreeRepository, Depends(get_degree_repository)]
-DegreeRequirementsRepo = Annotated[
-    DegreeRequirementsRepository, Depends(get_degree_requirements_repository)
-]
-McCourseRepo = Annotated[MCCourseRepository, Depends(get_mc_course_repository)]
 SectionRepo = Annotated[SectionRepository, Depends(get_section_repository)]
-CourseRequirementsRepo = Annotated[
-    CourseRequirementsRepository, Depends(get_course_requirements_repository)
-]
 
 
 async def get_current_identity(auth: AuthPayload, repo: IdentityUserRepo):

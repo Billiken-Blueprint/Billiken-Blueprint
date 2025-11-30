@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 import json
 from operator import ne
-from typing import TYPE_CHECKING
 
 import httpx
 
@@ -11,9 +10,7 @@ from billiken_blueprint.degree_works.course import (
     DegreeWorksCourseRange,
     DegreeWorksCourse,
 )
-
-if TYPE_CHECKING:
-    from billiken_blueprint.domain.degree import DegreeRequirement
+from billiken_blueprint.domain.degrees.degree_requirement import DegreeRequirement
 
 
 class Majors:
@@ -68,7 +65,6 @@ class DegreeWorksDegrees:
 
 
 def req_to_degree_requirement(req: dict, label: str) -> "DegreeRequirement":
-    from billiken_blueprint.domain.degree import DegreeRequirement
 
     needed = req.get("classesBegin", 1)
     course_array = req["courseArray"]
@@ -109,7 +105,7 @@ def req_to_degree_requirement(req: dict, label: str) -> "DegreeRequirement":
     return DegreeRequirement(
         label=label,
         needed=needed,
-        course_group=DegreeWorksCourseGroup(courses=courses, exclude=exclude),
+        course_rules=DegreeWorksCourseGroup(courses=courses, exclude=exclude),
     )
 
 

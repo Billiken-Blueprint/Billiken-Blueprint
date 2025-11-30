@@ -24,3 +24,6 @@ class IdentityUser(Base):
     def create(email: str, password: str) -> "IdentityUser":
         hashed_password = password_hash.hash(password)
         return IdentityUser(email=email, password_hash=hashed_password)
+
+
+DBIdentityUser = IdentityUser

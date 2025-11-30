@@ -1,13 +1,13 @@
 import select
 from typing import Optional
-from datetime import datetime
+from datetime import datetime, timezone
 from sqlalchemy.dialects.sqlite import insert
 from sqlalchemy import delete, desc, select
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.domain.rating import Rating
+from billiken_blueprint.domain.ratings.rating import Rating
 
 
 class DBRating(Base):
@@ -27,11 +27,11 @@ class DBRating(Base):
 
     def to_rating(self) -> Rating:
         # Handle case where columns might not exist yet
-        created_at = getattr(self, 'created_at', None)
-        difficulty = getattr(self, 'difficulty', None)
-        would_take_again = getattr(self, 'would_take_again', None)
-        grade = getattr(self, 'grade', None)
-        attendance = getattr(self, 'attendance', None)
+        created_at = getattr(self, "created_at", None)
+        difficulty = getattr(self, "difficulty", None)
+        would_take_again = getattr(self, "would_take_again", None)
+        grade = getattr(self, "grade", None)
+        attendance = getattr(self, "attendance", None)
         return Rating(
             id=self.id,
             course_id=self.course_id,
@@ -56,8 +56,8 @@ class RatingRepository:
         # Set created_at to current time if it's a new rating (id is None) and created_at is not set
         created_at = rating.created_at
         if rating.id is None and created_at is None:
-            created_at = datetime.utcnow()
-        
+            created_at = datetime.now(timezone.utc)
+
         insert_stmt = insert(DBRating).values(
             id=rating.id,
             course_id=rating.course_id,

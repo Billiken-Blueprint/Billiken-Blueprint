@@ -1,26 +1,18 @@
-from dataclasses import dataclass
-import numbers
 from typing import Optional
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
-from sqlalchemy import desc
 
 from billiken_blueprint.dependencies import (
     AuthPayload,
-    AuthToken,
     RmpReviewRepo,
     OptionalAuthPayload,
     IdentityUserRepo,
     InstructorRepo,
     RatingRepo,
     CourseRepo,
-    StudentRepo,
-    StudentRepo,
 )
-from billiken_blueprint.domain import instructor
 from billiken_blueprint.domain.instructor import Professor
-from billiken_blueprint.domain.rating import Rating
-from billiken_blueprint.identity.token_payload import TokenPayload
+from billiken_blueprint.domain.ratings.rating import Rating
 
 
 router = APIRouter(prefix="/ratings", tags=["ratings"])
@@ -46,52 +38,54 @@ async def list_ratings(
     ratings = await rating_repo.get_all(
         instructor_id=instructor_id, course_id=course_id
     )
-    
+
     # Get course info if filtering by course
     target_course_code = None
     if course_id:
         db_course = await course_repo.get_by_id(course_id)
         if db_course:
-            course = db_course.to_course()
-            target_course_code = course.course_code
-    
+            course = db_course
+            target_course_code = course.major_code + " " + course.course_number
+
     # Build result with instructor and course names
     result = []
     for rating in ratings:
         instructor_name = None
         course_code = None
         course_name = None
-        
+
         if rating.professor_id:
             instructor = await instructor_repo.get_by_id(rating.professor_id)
             if instructor:
                 instructor_name = instructor.name
-        
+
         if rating.course_id:
             db_course = await course_repo.get_by_id(rating.course_id)
             if db_course:
-                course = db_course.to_course()
-                course_code = course.course_code
-                course_name = course.title
-        
-        result.append(dict(
-            id=rating.id,
-            instructorId=rating.professor_id,
-            courseId=rating.course_id,
-            rating=rating.rating_value,
-            canEdit=(student_id == rating.student_id),
-            description=rating.description,
-            isRmpRating=False,
-            instructorName=instructor_name,
-            courseCode=course_code,
-            courseName=course_name,
-            createdAt=rating.created_at.isoformat() if rating.created_at else None,
-            difficulty=rating.difficulty,
-            wouldTakeAgain=rating.would_take_again,
-            grade=rating.grade,
-            attendance=rating.attendance,
-        ))
-    
+                course = db_course
+                course_code = course.major_code + " " + course.course_number
+                course_name = None
+
+        result.append(
+            dict(
+                id=rating.id,
+                instructorId=rating.professor_id,
+                courseId=rating.course_id,
+                rating=rating.rating_value,
+                canEdit=(student_id == rating.student_id),
+                description=rating.description,
+                isRmpRating=False,
+                instructorName=instructor_name,
+                courseCode=course_code,
+                courseName=course_name,
+                createdAt=rating.created_at.isoformat() if rating.created_at else None,
+                difficulty=rating.difficulty,
+                wouldTakeAgain=rating.would_take_again,
+                grade=rating.grade,
+                attendance=rating.attendance,
+            )
+        )
+
     # Helper function to normalize course codes for matching
     def normalize_course_code(course_code: str) -> str:
         """Normalize course code by removing spaces and converting to uppercase."""
@@ -99,7 +93,7 @@ async def list_ratings(
             return ""
         # Remove all spaces and convert to uppercase
         return course_code.replace(" ", "").replace("-", "").upper()
-    
+
     # Helper function to check if a course code matches
     def course_code_matches(review_course: Optional[str], target: str) -> bool:
         """Check if a review's course field matches the target course code."""
@@ -108,12 +102,12 @@ async def list_ratings(
         normalized_review = normalize_course_code(review_course)
         # Check if target is contained in review course (handles formats like "CSCI3100" or "CSCI 3100 - Algorithms")
         return target in normalized_review or normalized_review in target
-    
+
     # Normalize target course code if filtering by course
     normalized_target = None
     if target_course_code:
         normalized_target = normalize_course_code(target_course_code)
-    
+
     # Add RMP ratings
     if instructor_id:
         # If filtering by specific instructor, add their RMP rating
@@ -150,65 +144,73 @@ async def list_ratings(
                     include_rmp = course_matched
                 else:
                     include_rmp = True
-            
+
             if include_rmp:
-                result.append(dict(
-                    id=None,  # RMP ratings don't have database IDs
-                    instructorId=instructor.id,
-                    courseId=course_id if course_id else None,
-                    rating=instructor.rmp_rating,
-                    canEdit=False,
-                    description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
-                    isRmpRating=True,
-                    rmpUrl=instructor.rmp_url,
-                    rmpNumRatings=instructor.rmp_num_ratings,
-                    instructorName=instructor.name,
-                    courseCode=target_course_code if target_course_code else None,
-                    courseName=None,
-                ))
+                result.append(
+                    dict(
+                        id=None,  # RMP ratings don't have database IDs
+                        instructorId=instructor.id,
+                        courseId=course_id if course_id else None,
+                        rating=instructor.rmp_rating,
+                        canEdit=False,
+                        description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                        isRmpRating=True,
+                        rmpUrl=instructor.rmp_url,
+                        rmpNumRatings=instructor.rmp_num_ratings,
+                        instructorName=instructor.name,
+                        courseCode=target_course_code if target_course_code else None,
+                        courseName=None,
+                    )
+                )
     elif course_id and target_course_code:
         # If filtering by course but not instructor, find all instructors with RMP reviews for this course
         # Use course_id to directly query RMP reviews
         rmp_reviews_for_course = await rmp_review_repo.get_by_course_id(course_id)
-        instructor_ids_with_reviews = set(review.instructor_id for review in rmp_reviews_for_course)
-        
+        instructor_ids_with_reviews = set(
+            review.instructor_id for review in rmp_reviews_for_course
+        )
+
         for instructor_id in instructor_ids_with_reviews:
             instructor = await instructor_repo.get_by_id(instructor_id)
             if instructor and instructor.rmp_rating is not None:
-                result.append(dict(
-                    id=None,  # RMP ratings don't have database IDs
-                    instructorId=instructor.id,
-                    courseId=course_id,
-                    rating=instructor.rmp_rating,
-                    canEdit=False,
-                    description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
-                    isRmpRating=True,
-                    rmpUrl=instructor.rmp_url,
-                    rmpNumRatings=instructor.rmp_num_ratings,
-                    instructorName=instructor.name,
-                    courseCode=target_course_code,
-                    courseName=None,
-                ))
+                result.append(
+                    dict(
+                        id=None,  # RMP ratings don't have database IDs
+                        instructorId=instructor.id,
+                        courseId=course_id,
+                        rating=instructor.rmp_rating,
+                        canEdit=False,
+                        description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                        isRmpRating=True,
+                        rmpUrl=instructor.rmp_url,
+                        rmpNumRatings=instructor.rmp_num_ratings,
+                        instructorName=instructor.name,
+                        courseCode=target_course_code,
+                        courseName=None,
+                    )
+                )
     else:
         # If no filters, show RMP ratings for all instructors that have them
         all_instructors = await instructor_repo.get_all()
         for instructor in all_instructors:
             if instructor.rmp_rating is not None:
-                result.append(dict(
-                    id=None,  # RMP ratings don't have database IDs
-                    instructorId=instructor.id,
-                    courseId=None,
-                    rating=instructor.rmp_rating,
-                    canEdit=False,
-                    description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
-                    isRmpRating=True,
-                    rmpUrl=instructor.rmp_url,
-                    rmpNumRatings=instructor.rmp_num_ratings,
-                    instructorName=instructor.name,
-                    courseCode=None,
-                    courseName=None,
-                ))
-    
+                result.append(
+                    dict(
+                        id=None,  # RMP ratings don't have database IDs
+                        instructorId=instructor.id,
+                        courseId=None,
+                        rating=instructor.rmp_rating,
+                        canEdit=False,
+                        description=f"RateMyProfessor rating based on {instructor.rmp_num_ratings} reviews",
+                        isRmpRating=True,
+                        rmpUrl=instructor.rmp_url,
+                        rmpNumRatings=instructor.rmp_num_ratings,
+                        instructorName=instructor.name,
+                        courseCode=None,
+                        courseName=None,
+                    )
+                )
+
     return result
 
 
@@ -244,7 +246,9 @@ async def create_rating(
     professor_id = body.instructor_id
     if not professor_id and body.instructor_name:
         # Check if instructor already exists by name
-        existing_instructor = await instructor_repo.get_by_name(body.instructor_name.strip())
+        existing_instructor = await instructor_repo.get_by_name(
+            body.instructor_name.strip()
+        )
         if existing_instructor:
             professor_id = existing_instructor.id
         else:
@@ -252,14 +256,17 @@ async def create_rating(
             new_instructor = Professor(
                 id=None,
                 name=body.instructor_name.strip(),
-                department=body.instructor_department if body.instructor_department else None,
+                department=(
+                    body.instructor_department if body.instructor_department else None
+                ),
             )
             saved_instructor = await instructor_repo.save(new_instructor)
             professor_id = saved_instructor.id
 
     if not professor_id:
         raise HTTPException(
-            status_code=400, detail="Either instructor_id or instructor_name must be provided."
+            status_code=400,
+            detail="Either instructor_id or instructor_name must be provided.",
         )
 
     rating = Rating(
@@ -300,38 +307,56 @@ async def update_rating(
             status_code=400, detail="User does not have an associated student record."
         )
     student_id = user_identity.student_id
-    
+
     # Get the rating to verify ownership
     ratings = await rating_repo.get_all()
     existing_rating = next((r for r in ratings if r.id == rating_id), None)
-    
+
     if not existing_rating:
         raise HTTPException(
             status_code=404, detail=f"Rating with id {rating_id} not found"
         )
-    
+
     if existing_rating.student_id != student_id:
         raise HTTPException(
             status_code=403, detail="You can only update your own ratings"
         )
-    
+
     # Update the rating - preserve existing course_id and professor_id if not provided
     updated_rating = Rating(
         id=rating_id,
-        course_id=body.course_id if body.course_id is not None else existing_rating.course_id,
-        professor_id=body.instructor_id if body.instructor_id is not None else existing_rating.professor_id,
+        course_id=(
+            body.course_id if body.course_id is not None else existing_rating.course_id
+        ),
+        professor_id=(
+            body.instructor_id
+            if body.instructor_id is not None
+            else existing_rating.professor_id
+        ),
         student_id=student_id,
         rating_value=body.rating,
         description=body.description,
-        difficulty=body.difficulty if body.difficulty is not None else existing_rating.difficulty,
-        would_take_again=body.would_take_again if body.would_take_again is not None else existing_rating.would_take_again,
+        difficulty=(
+            body.difficulty
+            if body.difficulty is not None
+            else existing_rating.difficulty
+        ),
+        would_take_again=(
+            body.would_take_again
+            if body.would_take_again is not None
+            else existing_rating.would_take_again
+        ),
         grade=body.grade if body.grade is not None else existing_rating.grade,
-        attendance=body.attendance if body.attendance is not None else existing_rating.attendance,
+        attendance=(
+            body.attendance
+            if body.attendance is not None
+            else existing_rating.attendance
+        ),
         created_at=existing_rating.created_at,  # Preserve original creation time
     )
-    
+
     saved_rating = await rating_repo.save(updated_rating)
-    
+
     return {
         "id": saved_rating.id,
         "instructorId": saved_rating.professor_id,
@@ -355,20 +380,20 @@ async def delete_rating(
             status_code=400, detail="User does not have an associated student record."
         )
     student_id = user_identity.student_id
-    
+
     # Get the rating to verify ownership
     ratings = await rating_repo.get_all()
     rating = next((r for r in ratings if r.id == rating_id), None)
-    
+
     if not rating:
         raise HTTPException(
             status_code=404, detail=f"Rating with id {rating_id} not found"
         )
-    
+
     if rating.student_id != student_id:
         raise HTTPException(
             status_code=403, detail="You can only delete your own ratings"
         )
-    
+
     await rating_repo.delete(rating_id)
     return {"message": "Rating deleted successfully"}

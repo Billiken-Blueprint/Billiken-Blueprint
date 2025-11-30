@@ -1,7 +1,5 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {switchMap} from 'rxjs/operators';
-import {Course} from '../courses-service/courses-service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +11,12 @@ export class UserInfoService {
     return this.http.get<GetUserInfoResponse>('/api/user_info');
   }
 
-  updateUserInfo(body: UpdateUserInfoBody) {
-    return this.http.post<UserInfo>('/api/user_info', JSON.stringify({
+  setUserInfo(body: SetUserInfoBody) {
+    return this.http.post('/api/user_info', JSON.stringify({
       name: body.name,
       graduation_year: body.graduationYear,
       completed_course_ids: body.completedCourseIds,
-      degree_ids: [],
-      major_code: body.majorCode,
-      degree_type: body.degreeType,
-      college: body.college
+      degree_id: body.degreeId
     }), {
       headers: {'Content-Type': 'application/json'}
     });
@@ -34,24 +29,19 @@ export class UserInfoService {
   }
 }
 
-export interface UpdateUserInfoBody {
+
+export interface SetUserInfoBody {
   name: string;
   graduationYear: number;
-  majorCode: string;
-  degreeType: string;
-  college: string;
   completedCourseIds: number[];
+  degreeId: number;
 }
 
-export interface UserInfo {
+export interface GetUserInfoResponse {
   name: string;
-  graduationYear: number;
-  majorCode: string;
-  degreeType: string;
-  college: string;
   completedCourseIds: number[];
-}
-
-export interface GetUserInfoResponse extends UserInfo {
   savedCourseCodes: string[];
+  graduationYear: number;
+  degreeId: number;
 }
+
