@@ -78,6 +78,23 @@ class CourseRepository:
                 return None
             return db_course.to_domain()
 
+    async def get_by_code(self, course_code: str) -> Course | None:
+        """Retrieve a course by its code (e.g., 'CSCI 1000')."""
+        major_code, course_number = course_code.split()
+        async with self.async_sessionmaker() as session:
+            result = await session.execute(
+                select(DBCourse)
+                .where(
+                    DBCourse.major_code == major_code,
+                    DBCourse.course_number == course_number,
+                )
+                .limit(1)
+            )
+            db_course = result.scalars().first()
+            if db_course is None:
+                return None
+            return db_course.to_domain()
+
     async def get_all(self) -> list[Course]:
         async with self.async_sessionmaker() as session:
             result = await session.execute(select(DBCourse))

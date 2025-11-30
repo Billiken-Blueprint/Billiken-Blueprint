@@ -5,6 +5,12 @@ import json
 import re
 from pathlib import Path
 from datetime import datetime
+from pathlib import Path
+import sys
+
+# Add the parent directory to the path so we can import billiken_blueprint
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 from billiken_blueprint import services
 from billiken_blueprint.domain.instructor import Professor
 from billiken_blueprint.domain.ratings.rmp_review import RmpReview
@@ -16,6 +22,8 @@ async def import_rmp_ratings():
 
     # Define possible paths for CS professors (prioritize files with reviews)
     cs_possible_paths = [
+        Path("data_dumps/cs_professors_with_reviews.json"),
+        Path("data_dumps/cs_professors.json"),
         script_dir / "cs_professors_with_reviews.json",
         script_dir / "cs_professors.json",
         script_dir.parent
@@ -28,6 +36,8 @@ async def import_rmp_ratings():
 
     # Define possible paths for Math professors
     math_possible_paths = [
+        Path("data_dumps/math_professors_with_reviews.json"),
+        Path("data_dumps/math_professors.json"),
         script_dir / "math_professors_with_reviews.json",
         script_dir / "math_professors.json",
         script_dir.parent
