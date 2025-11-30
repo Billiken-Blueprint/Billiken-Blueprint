@@ -1,0 +1,116 @@
+[
+  {
+    "id": 1,
+    "name": "Ignite Seminar",
+    "degree_works_label": "UIS",
+    "courses_at_slu_label": "uuc_attr_UIS"
+  },
+  {
+    "id": 2,
+    "name": "Ultimate Questions: Philosophy",
+    "degree_works_label": "UUQP",
+    "courses_at_slu_label": "uuc_attr_UUQP"
+  },
+  {
+    "id": 3,
+    "name": "Ultimate Questions: Theology",
+    "degree_works_label": "UUQT",
+    "courses_at_slu_label": "uuc_attr_UUQT"
+  },
+  {
+    "id": 4,
+    "name": "Collaborative Inquiry",
+    "degree_works_label": "UCI",
+    "courses_at_slu_label": "uuc_attr_UCI"
+  },
+  {
+    "id": 5,
+    "name": "Self in Community",
+    "degree_works_label": "USCM",
+    "courses_at_slu_label": "uuc_attr_USCM"
+  },
+  {
+    "id": 6,
+    "name": "Self in Contemplation",
+    "degree_works_label": "USCN",
+    "courses_at_slu_label": "uscn"
+  },
+  {
+    "id": 7,
+    "name": "Self in the World",
+    "degree_works_label": "USW",
+    "courses_at_slu_label": "uuc_attr_USW"
+  },
+  {
+    "id": 8,
+    "name": "Aesthetics, History and Culture",
+    "degree_works_label": "UAHC",
+    "courses_at_slu_label": "uuc_attr_UAHC"
+  },
+  {
+    "id": 9,
+    "name": "Natural and Applied Sciences",
+    "degree_works_label": "UNAS",
+    "courses_at_slu_label": "uuc_attr_UNAS"
+  },
+  {
+    "id": 10,
+    "name": "Quantitative Reasoning",
+    "degree_works_label": "UQR",
+    "courses_at_slu_label": "uuc_attr_UQR"
+  },
+  {
+    "id": 11,
+    "name": "Social and Behavioral Sciences",
+    "degree_works_label": "USBD",
+    "courses_at_slu_label": "uuc_attr_USBS"
+  },
+  {
+    "id": 12,
+    "name": "Written & Visual Communication",
+    "degree_works_label": "UWVC",
+    "courses_at_slu_label": "uuc_attr_UWVC"
+  },
+  {
+    "id": 13,
+    "name": "Oral & Visual Communication",
+    "degree_works_label": "UOVC",
+    "courses_at_slu_label": "uuc_attr_UOVC"
+  },
+  {
+    "id": 14,
+    "name": "Creative Expression",
+    "degree_works_label": "UCE",
+    "courses_at_slu_label": "uuc_attr_UCE"
+  },
+  {
+    "id": 15,
+    "name": "Writing Intensive",
+    "degree_works_label": "UWI",
+    "courses_at_slu_label": "writing_intensive"
+  },
+  {
+    "id": 16,
+    "name": "Identities in Context",
+    "degree_works_label": "UIIC",
+    "courses_at_slu_label": "identities_in_context"
+  },
+  {
+    "id": 17,
+    "name": "Global Interdependence",
+    "degree_works_label": "UGI",
+    "courses_at_slu_label": "global_interdependence"
+  },
+  {
+    "id": 18,
+    "name": "Diversity, Ethics, and a Just Society",
+    "degree_works_label": "UDEJ",
+    "courses_at_slu_label": "just_society"
+  },
+  {
+    "id": 19,
+    "name": "Reflection in Action",
+    "degree_works_label": "URIA",
+    "courses_at_slu_label": "reflection_in_action"
+  }
+]

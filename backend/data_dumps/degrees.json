@@ -1,0 +1,39 @@
+[
+  {
+    "id": 1,
+    "name": "Bachelor of Arts in Computer Science",
+    "degree_works_major_code": "CS",
+    "degree_works_degree_type": "BA",
+    "degree_works_college_code": "SSE",
+    "requirements": [
+      {
+        "label": "Updated",
+        "needed": 1,
+        "course_rules": {
+          "courses": [
+            {
+              "$type": "code",
+              "major_code": "CSCI",
+              "course_number": "1000"
+            }
+          ],
+          "exclude": []
+        }
+      },
+      {
+        "label": "New",
+        "needed": 2,
+        "course_rules": {
+          "courses": [
+            {
+              "$type": "code",
+              "major_code": "CSCI",
+              "course_number": "1000"
+            }
+          ],
+          "exclude": []
+        }
+      }
+    ]
+  }
+]

@@ -7,7 +7,7 @@ from sqlalchemy import JSON
 from billiken_blueprint.domain.section import Section, MeetingTime
 
 
-class SectionRepositoryDBEntity(Base):
+class DBSection(Base):
     __tablename__ = "sections"
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
@@ -49,12 +49,12 @@ class SectionRepository:
         async with self.async_sessionmaker() as session:
             db_entity = None
             if section.id is not None:
-                db_entity = await session.get(SectionRepositoryDBEntity, section.id)
+                db_entity = await session.get(DBSection, section.id)
 
             if db_entity is None:
-                stmt = sqlalchemy.select(SectionRepositoryDBEntity).where(
-                    SectionRepositoryDBEntity.crn == section.crn,
-                    SectionRepositoryDBEntity.semester == section.semester,
+                stmt = sqlalchemy.select(DBSection).where(
+                    DBSection.crn == section.crn,
+                    DBSection.semester == section.semester,
                 )
                 result = await session.execute(stmt)
                 db_entity = result.scalar_one_or_none()
@@ -76,7 +76,7 @@ class SectionRepository:
                     for mt in section.meeting_times
                 ]
             else:
-                db_entity = SectionRepositoryDBEntity(
+                db_entity = DBSection(
                     crn=section.crn,
                     instructor_names=section.instructor_names,
                     campus_code=section.campus_code,
@@ -102,15 +102,13 @@ class SectionRepository:
 
     async def get_all(self) -> list[Section]:
         async with self.async_sessionmaker() as session:
-            result = await session.execute(sqlalchemy.select(SectionRepositoryDBEntity))
+            result = await session.execute(sqlalchemy.select(DBSection))
             db_entities = result.scalars().all()
             return [db_entity.to_domain() for db_entity in db_entities]
 
     async def get_all_for_semester(self, semester: str) -> list[Section]:
         async with self.async_sessionmaker() as session:
-            stmt = sqlalchemy.select(SectionRepositoryDBEntity).where(
-                SectionRepositoryDBEntity.semester == semester
-            )
+            stmt = sqlalchemy.select(DBSection).where(DBSection.semester == semester)
             result = await session.execute(stmt)
             db_entities = result.scalars().all()
             return [db_entity.to_domain() for db_entity in db_entities]
@@ -119,9 +117,9 @@ class SectionRepository:
         self, code: str, semester: str
     ) -> list[Section]:
         async with self.async_sessionmaker() as session:
-            stmt = sqlalchemy.select(SectionRepositoryDBEntity).where(
-                SectionRepositoryDBEntity.course_code == code,
-                SectionRepositoryDBEntity.semester == semester,
+            stmt = sqlalchemy.select(DBSection).where(
+                DBSection.course_code == code,
+                DBSection.semester == semester,
             )
             result = await session.execute(stmt)
             db_entities = result.scalars().all()

@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 from datetime import datetime
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.domain.rmp_review import RmpReview
+from billiken_blueprint.domain.ratings.rmp_review import RmpReview
 
 
 class DBRmpReview(Base):
@@ -30,7 +30,7 @@ class DBRmpReview(Base):
             id=self.id,
             instructor_id=self.instructor_id,
             course=self.course,
-            course_id=getattr(self, 'course_id', None),
+            course_id=getattr(self, "course_id", None),
             quality=self.quality,
             difficulty=self.difficulty,
             comment=self.comment,
@@ -88,7 +88,7 @@ class RmpReviewRepository:
         """Save multiple RMP reviews in a single transaction."""
         if not reviews:
             return
-        
+
         values = [
             {
                 "id": review.id,
@@ -106,7 +106,7 @@ class RmpReviewRepository:
             }
             for review in reviews
         ]
-        
+
         insert_stmt = insert(DBRmpReview).values(values)
         conflict_stmt = insert_stmt.on_conflict_do_update(
             index_elements=[DBRmpReview.id],
@@ -138,7 +138,7 @@ class RmpReviewRepository:
             db_reviews = result.scalars().all()
 
         return [db_review.to_rmp_review() for db_review in db_reviews]
-    
+
     async def get_by_course_id(self, course_id: int) -> list[RmpReview]:
         """Retrieve all RMP reviews for a specific course."""
         stmt = select(DBRmpReview).where(DBRmpReview.course_id == course_id)
@@ -151,9 +151,10 @@ class RmpReviewRepository:
 
     async def delete_by_instructor_id(self, instructor_id: int) -> None:
         """Delete all RMP reviews for a specific instructor."""
-        delete_stmt = delete(DBRmpReview).where(DBRmpReview.instructor_id == instructor_id)
+        delete_stmt = delete(DBRmpReview).where(
+            DBRmpReview.instructor_id == instructor_id
+        )
 
         async with self._async_sessionmaker() as session:
             await session.execute(delete_stmt)
             await session.commit()
-

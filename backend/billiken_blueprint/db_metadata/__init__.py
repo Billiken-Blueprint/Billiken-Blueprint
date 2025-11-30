@@ -3,25 +3,27 @@ This metadata package exists to be imported by Alembic to simplify database migr
 """
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.identity.identity_user import IdentityUser
+from billiken_blueprint.identity.identity_user import DBIdentityUser
 from billiken_blueprint.repositories.student_repository import DBStudent
 from billiken_blueprint.repositories.course_repository import DBCourse
-from billiken_blueprint.repositories.course_section_repository import DBCourseSection
 from billiken_blueprint.repositories.instructor_repository import DBInstructor
 from billiken_blueprint.repositories.rating_repository import DBRating
-from billiken_blueprint.repositories.mc_course_repository import MCCourseDbEntity
-from billiken_blueprint.repositories.section_repository import SectionRepositoryDBEntity
+from billiken_blueprint.repositories.section_repository import DBSection
 from billiken_blueprint.repositories.rmp_review_repository import DBRmpReview
+from billiken_blueprint.repositories.degree_repository import DBDegree
+from billiken_blueprint.repositories.course_attribute_repository import (
+    DBCourseAttribute,
+)
 
 __all__ = [
     "Base",
-    "IdentityUser",
+    "DBIdentityUser",
     "DBStudent",
     "DBCourse",
-    "DBCourseSection",
     "DBInstructor",
     "DBRating",
-    "MCCourseDbEntity",
-    "SectionRepositoryDBEntity",
+    "DBSection",
     "DBRmpReview",
+    "DBDegree",
+    "DBCourseAttribute",
 ]

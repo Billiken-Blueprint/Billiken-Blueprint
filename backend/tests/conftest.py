@@ -8,16 +8,19 @@ from sqlalchemy.ext.asyncio import (
 )
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.dependencies import (
-    get_identity_user_repository,
-    get_student_repository,
-    get_mc_course_repository,
-)
 from billiken_blueprint.repositories.identity_user_repository import (
     IdentityUserRepository,
 )
 from billiken_blueprint.repositories.student_repository import StudentRepository
-from billiken_blueprint.repositories.mc_course_repository import MCCourseRepository
+from billiken_blueprint.repositories.course_repository import CourseRepository
+from billiken_blueprint.repositories.instructor_repository import InstructorRepository
+from billiken_blueprint.repositories.degree_repository import DegreeRepository
+from billiken_blueprint.repositories.section_repository import SectionRepository
+from billiken_blueprint.repositories.rating_repository import RatingRepository
+from billiken_blueprint.repositories.course_attribute_repository import (
+    CourseAttributeRepository,
+)
+from billiken_blueprint.repositories.rmp_review_repository import RmpReviewRepository
 from server import app
 
 
@@ -65,21 +68,51 @@ def student_repository(async_sessionmaker):
 
 
 @pytest.fixture(scope="function")
-def mc_course_repository(async_sessionmaker):
-    """Create a test mc_course repository using in-memory database."""
-    return MCCourseRepository(async_sessionmaker)
+def course_repository(async_sessionmaker):
+    """Create a test course repository using in-memory database."""
+    return CourseRepository(async_sessionmaker)
 
 
 @pytest.fixture(scope="function")
-def app_client(identity_user_repository, student_repository, mc_course_repository):
-    """Create a FastAPI test client with overridden dependencies."""
-    # Override the dependencies to use test repositories
-    app.dependency_overrides[get_identity_user_repository] = (
-        lambda: identity_user_repository
-    )
-    app.dependency_overrides[get_student_repository] = lambda: student_repository
-    app.dependency_overrides[get_mc_course_repository] = lambda: mc_course_repository
+def instructor_repository(async_sessionmaker):
+    """Create a test instructor repository using in-memory database."""
+    return InstructorRepository(async_sessionmaker)
 
+
+@pytest.fixture(scope="function")
+def degree_repository(async_sessionmaker):
+    """Create a test degree repository using in-memory database."""
+    return DegreeRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def section_repository(async_sessionmaker):
+    """Create a test section repository using in-memory database."""
+    return SectionRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def rating_repository(async_sessionmaker):
+    """Create a test rating repository using in-memory database."""
+    return RatingRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def course_attribute_repository(async_sessionmaker):
+    """Create a test course attribute repository using in-memory database."""
+    return CourseAttributeRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def rmp_review_repository(async_sessionmaker):
+    """Create a test RMP review repository using in-memory database."""
+    return RmpReviewRepository(async_sessionmaker)
+
+
+@pytest.fixture(scope="function")
+def app_client(identity_user_repository, student_repository):
+    """Create a FastAPI test client with overridden dependencies."""
+    # This fixture is optional and can be extended to override specific dependencies
     test_client = TestClient(app)
     yield test_client
 

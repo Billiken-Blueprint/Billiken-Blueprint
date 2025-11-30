@@ -51,7 +51,7 @@ export class QuestionnairePage implements OnInit {
     this.degreesService.getDegrees().subscribe(degrees => {
       this.degrees = degrees.map(degree => ({
         ...degree,
-        displayLabel: `${degree.degreeType} ${degree.major} (${degree.college})`
+        displayLabel: degree.name
       }));
     });
   }
@@ -72,12 +72,10 @@ export class QuestionnairePage implements OnInit {
       questionnaireCompleted: true
     };
 
-    this.userInfoService.updateUserInfo({
+    this.userInfoService.setUserInfo({
       name: profileData.fullName,
       graduationYear: profileData.graduationYear,
-      majorCode: profileData.major!.major,
-      degreeType: profileData.major!.degreeType,
-      college: profileData.major!.college,
+      degreeId: profileData.major!.id!,
       completedCourseIds: profileData.completedCourses?.map(x => x.id)
     }).subscribe({
       next: () => {

@@ -1,98 +1,102 @@
-from typing import Optional
-from sqlalchemy import select
-from sqlalchemy.dialects.sqlite import insert
-from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
-from sqlalchemy.orm import Mapped, mapped_column
+import sqlalchemy
+from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
+from sqlalchemy.orm import mapped_column, Mapped
+from sqlalchemy import JSON, select
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.domain.course import Course
+from billiken_blueprint.domain.courses.course import Course
+from billiken_blueprint.domain.courses.course_prerequisite import (
+    NestedCoursePrerequisite,
+)
 
 
 class DBCourse(Base):
     __tablename__ = "courses"
 
-    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    code: Mapped[str] = mapped_column(index=True, unique=True)
-    name: Mapped[str] = mapped_column()
-    description: Mapped[str] = mapped_column()
+    __table_args__ = (
+        sqlalchemy.UniqueConstraint(
+            "major_code", "course_number", name="uix_major_course_number"
+        ),
+    )
 
-    def to_course(self) -> Course:
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    attribute_ids: Mapped[list[int]] = mapped_column(JSON, nullable=False)
+    prerequisites: Mapped[dict] = mapped_column(JSON, nullable=True)
+    major_code: Mapped[str] = mapped_column(nullable=False)
+    course_number: Mapped[str] = mapped_column(nullable=False)
+
+    def to_domain(self) -> Course:
         return Course(
             id=self.id,
-            course_code=self.code,
-            title=self.name,
-            description=self.description,
-            major=self.code.split()[0],
-            course_number=self.code.split()[1],
+            attribute_ids=self.attribute_ids,
+            prerequisites=(
+                NestedCoursePrerequisite.from_dict(self.prerequisites)
+                if self.prerequisites
+                else None
+            ),
+            major_code=self.major_code,
+            course_number=self.course_number,
         )
 
 
 class CourseRepository:
     def __init__(self, async_sessionmaker: async_sessionmaker[AsyncSession]) -> None:
-        self._async_sessionmaker = async_sessionmaker
+        self.async_sessionmaker = async_sessionmaker
 
-    async def save(self, course: Course) -> DBCourse:
-        """Save or update a course in the database and return the persisted course."""
-        insert_stmt = insert(DBCourse).values(
-            id=course.id,
-            code=course.course_code,
-            name=course.title,
-            description=course.description,
-        )
-        conflict_stmt = insert_stmt.on_conflict_do_update(
-            index_elements=[DBCourse.code],
-            set_=dict(
-                name=insert_stmt.excluded.name,
-                description=insert_stmt.excluded.description,
-            ),
-        ).returning(DBCourse)
-
-        async with self._async_sessionmaker() as session:
-            result = await session.execute(conflict_stmt)
+    async def save(self, course: Course) -> Course:
+        async with self.async_sessionmaker() as session:
+            db_course = None
+            if course.id is not None:
+                db_course = await session.get(DBCourse, course.id)
+            if db_course is not None:
+                # Update existing course
+                db_course.attribute_ids = course.attribute_ids
+                db_course.prerequisites = (
+                    course.prerequisites.to_dict() if course.prerequisites else None
+                )  # type: ignore
+                db_course.major_code = course.major_code
+                db_course.course_number = course.course_number
+            else:
+                # Create new course
+                db_course = DBCourse(
+                    id=course.id,
+                    attribute_ids=course.attribute_ids,
+                    prerequisites=(
+                        course.prerequisites.to_dict() if course.prerequisites else None
+                    ),
+                    major_code=course.major_code,
+                    course_number=course.course_number,
+                )
+                session.add(db_course)
             await session.commit()
-            db_course = result.scalar_one()
-            return db_course
+            return db_course.to_domain()
+
+    async def get_by_id(self, course_id: int) -> Course | None:
+        async with self.async_sessionmaker() as session:
+            db_course = await session.get(DBCourse, course_id)
+            if db_course is None:
+                return None
+            return db_course.to_domain()
+
+    async def get_by_code(self, course_code: str) -> Course | None:
+        """Retrieve a course by its code (e.g., 'CSCI 1000')."""
+        major_code, course_number = course_code.split()
+        async with self.async_sessionmaker() as session:
+            result = await session.execute(
+                select(DBCourse)
+                .where(
+                    DBCourse.major_code == major_code,
+                    DBCourse.course_number == course_number,
+                )
+                .limit(1)
+            )
+            db_course = result.scalars().first()
+            if db_course is None:
+                return None
+            return db_course.to_domain()
 
     async def get_all(self) -> list[Course]:
-        """Retrieve all courses from the database."""
-        stmt = select(DBCourse)
-
-        async with self._async_sessionmaker() as session:
-            result = await session.execute(stmt)
+        async with self.async_sessionmaker() as session:
+            result = await session.execute(select(DBCourse))
             db_courses = result.scalars().all()
-
-        return [db_course.to_course() for db_course in db_courses]
-
-    async def get_by_code(self, course_code: str) -> Optional[DBCourse]:
-        """Retrieve a course by its course code."""
-        stmt = select(DBCourse).where(DBCourse.code == course_code)
-
-        async with self._async_sessionmaker() as session:
-            result = await session.execute(stmt)
-            db_course = result.scalar_one_or_none()
-
-        if db_course is None:
-            return None
-
-        return db_course
-
-    async def get_by_id(self, course_id: int) -> Optional[DBCourse]:
-        """Retrieve a course by its ID."""
-        stmt = select(DBCourse).where(DBCourse.id == course_id)
-
-        async with self._async_sessionmaker() as session:
-            result = await session.execute(stmt)
-            db_course = result.scalar_one_or_none()
-
-        if db_course is None:
-            return None
-
-        return db_course
-
-    async def delete(self, course_id: int) -> None:
-        """Delete a course by its ID."""
-        async with self._async_sessionmaker() as session:
-            db_course = await session.get(DBCourse, course_id)
-            if db_course is not None:
-                await session.delete(db_course)
-                await session.commit()
+            return [db_course.to_domain() for db_course in db_courses]

@@ -8,7 +8,7 @@ export class CoursesService {
   private http = inject(HttpClient);
 
   getCourses() {
-    return this.http.get<Course[]>('/api/courses');
+    return this.http.get<GetCoursesResponse>('/api/courses');
   }
 }
 
@@ -16,3 +16,5 @@ export interface Course {
   id: number;
   courseCode: string;
 }
+
+export type GetCoursesResponse = Course[];

@@ -1,0 +1,1642 @@
+[
+  {
+    "id": 1,
+    "name": "Nan Cen",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3017096",
+    "department": "CSCI"
+  },
+  {
+    "id": 2,
+    "name": "Atanas Karaguiozov",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3005607",
+    "department": "CSCI"
+  },
+  {
+    "id": 3,
+    "name": "John Allen",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 4,
+    "name": "David Letscher",
+    "rmp_rating": 2.7,
+    "rmp_num_ratings": 20,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/325024",
+    "department": "MATH"
+  },
+  {
+    "id": 5,
+    "name": "Anas Abbood",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 6,
+    "name": "Michael Liljegren",
+    "rmp_rating": 4.4,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2999302",
+    "department": "CSCI"
+  },
+  {
+    "id": 7,
+    "name": "Michael Goldwasser",
+    "rmp_rating": 4.2,
+    "rmp_num_ratings": 24,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/278739",
+    "department": "CSCI"
+  },
+  {
+    "id": 8,
+    "name": "Jorge Mart\u00ednez Ladr\u00f3n de Guevara",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 9,
+    "name": "Fairouz Medjahed",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 10,
+    "name": "Qinglei Cao",
+    "rmp_rating": 2.9,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3010174",
+    "department": "CSCI"
+  },
+  {
+    "id": 11,
+    "name": "Asad Rehman",
+    "rmp_rating": 1.2,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2934055",
+    "department": "CSCI"
+  },
+  {
+    "id": 12,
+    "name": "James McCollum",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 13,
+    "name": "Renzo Llorente",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 14,
+    "name": "Ankit Agrawal",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 15,
+    "name": "Jason Fritts",
+    "rmp_rating": 4.1,
+    "rmp_num_ratings": 19,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/758149",
+    "department": "CSCI"
+  },
+  {
+    "id": 16,
+    "name": "Abigail Stylianou",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 17,
+    "name": "Reza Tourani",
+    "rmp_rating": 4.7,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2426527",
+    "department": "CSCI"
+  },
+  {
+    "id": 18,
+    "name": "Flavio Esposito",
+    "rmp_rating": 4.2,
+    "rmp_num_ratings": 13,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2381513",
+    "department": "CSCI"
+  },
+  {
+    "id": 19,
+    "name": "Ted Ahn",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2351201",
+    "department": "CSCI"
+  },
+  {
+    "id": 20,
+    "name": "Md Mainul Islam Mamun",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 21,
+    "name": "Jie Hou",
+    "rmp_rating": 4.9,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2545304",
+    "department": "CSCI"
+  },
+  {
+    "id": 22,
+    "name": "Hadi Akbarpour",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3121956",
+    "department": "CSCI"
+  },
+  {
+    "id": 23,
+    "name": "Min Choi",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 24,
+    "name": "Daniel Shown",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2800986",
+    "department": "CSCI"
+  },
+  {
+    "id": 25,
+    "name": "Bahareh Rahmani",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 26,
+    "name": "Vasit Sagan",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": null,
+    "department": null
+  },
+  {
+    "id": 27,
+    "name": "Ekaterina Holdener",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 11,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2495692",
+    "department": "CSCI"
+  },
+  {
+    "id": 28,
+    "name": "Thomas Johnson",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3050550",
+    "department": "CSCI"
+  },
+  {
+    "id": 29,
+    "name": "Wei Wang",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2867001",
+    "department": "CSCI"
+  },
+  {
+    "id": 30,
+    "name": "Mainul Mamun",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2883494",
+    "department": "CSCI"
+  },
+  {
+    "id": 31,
+    "name": "Alexis McKenzie",
+    "rmp_rating": 3.6,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2955708",
+    "department": "CSCI"
+  },
+  {
+    "id": 32,
+    "name": "Allison Richardet",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3036772",
+    "department": "CSCI"
+  },
+  {
+    "id": 33,
+    "name": "David Ferry",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 19,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2199472",
+    "department": "CSCI"
+  },
+  {
+    "id": 34,
+    "name": "Abby Stylianou",
+    "rmp_rating": 2.5,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2656616",
+    "department": "CSCI"
+  },
+  {
+    "id": 35,
+    "name": "Patrick Cuba",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2983467",
+    "department": "CSCI"
+  },
+  {
+    "id": 36,
+    "name": "Judy Etchison",
+    "rmp_rating": 3.3,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2115336",
+    "department": "CSCI"
+  },
+  {
+    "id": 37,
+    "name": "Kevin Scannell",
+    "rmp_rating": 4.7,
+    "rmp_num_ratings": 14,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1200581",
+    "department": "CSCI"
+  },
+  {
+    "id": 38,
+    "name": "Sallie Taylor",
+    "rmp_rating": 2.8,
+    "rmp_num_ratings": 23,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/486726",
+    "department": "CSCI"
+  },
+  {
+    "id": 39,
+    "name": "Erin W. Chambers",
+    "rmp_rating": 4.6,
+    "rmp_num_ratings": 13,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1394460",
+    "department": "CSCI"
+  },
+  {
+    "id": 40,
+    "name": "Jacob Sukhodolsky",
+    "rmp_rating": 2.2,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1618449",
+    "department": "CSCI"
+  },
+  {
+    "id": 41,
+    "name": "Srikanth Mudigonda",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2350440",
+    "department": "CSCI"
+  },
+  {
+    "id": 42,
+    "name": "Jacob Sukhodulsky",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/340634",
+    "department": "CSCI"
+  },
+  {
+    "id": 43,
+    "name": "Richard Seibel",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2088198",
+    "department": "CSCI"
+  },
+  {
+    "id": 44,
+    "name": "Samuel Young",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2103272",
+    "department": "CSCI"
+  },
+  {
+    "id": 45,
+    "name": "Stephen Blythe",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/112803",
+    "department": "CSCI"
+  },
+  {
+    "id": 46,
+    "name": "Asai Asaithambi",
+    "rmp_rating": 3.9,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/104285",
+    "department": "CSCI"
+  },
+  {
+    "id": 47,
+    "name": "Eric Mier",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3109418",
+    "department": "CSCI"
+  },
+  {
+    "id": 48,
+    "name": "Shivali Chhabra",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3052754",
+    "department": "MATH"
+  },
+  {
+    "id": 49,
+    "name": "Nirina Randrianarivony",
+    "rmp_rating": 3.9,
+    "rmp_num_ratings": 44,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1214401",
+    "department": "MATH"
+  },
+  {
+    "id": 50,
+    "name": "R. Alex Fajardo",
+    "rmp_rating": 2.8,
+    "rmp_num_ratings": 39,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1835928",
+    "department": "MATH"
+  },
+  {
+    "id": 51,
+    "name": "Benjamin Hutz",
+    "rmp_rating": 3.4,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2093429",
+    "department": "MATH"
+  },
+  {
+    "id": 52,
+    "name": "Robert Monjo",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3058509",
+    "department": "MATH"
+  },
+  {
+    "id": 53,
+    "name": "Bruce Washington",
+    "rmp_rating": 1.7,
+    "rmp_num_ratings": 46,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1648717",
+    "department": "MATH"
+  },
+  {
+    "id": 54,
+    "name": "John Kalliongis",
+    "rmp_rating": 4.1,
+    "rmp_num_ratings": 53,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/93516",
+    "department": "MATH"
+  },
+  {
+    "id": 55,
+    "name": "Greg Marks",
+    "rmp_rating": 3.3,
+    "rmp_num_ratings": 96,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/187077",
+    "department": "MATH"
+  },
+  {
+    "id": 56,
+    "name": "James Gill",
+    "rmp_rating": 3.2,
+    "rmp_num_ratings": 22,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1910447",
+    "department": "MATH"
+  },
+  {
+    "id": 57,
+    "name": "Asma Zangana",
+    "rmp_rating": 3.8,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2137593",
+    "department": "MATH"
+  },
+  {
+    "id": 58,
+    "name": "Michael May",
+    "rmp_rating": 1.6,
+    "rmp_num_ratings": 54,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/715302",
+    "department": "MATH"
+  },
+  {
+    "id": 59,
+    "name": "Phil Huling",
+    "rmp_rating": 2.6,
+    "rmp_num_ratings": 58,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/988723",
+    "department": "MATH"
+  },
+  {
+    "id": 60,
+    "name": "Bryan Clair",
+    "rmp_rating": 4.2,
+    "rmp_num_ratings": 28,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/278738",
+    "department": "MATH"
+  },
+  {
+    "id": 61,
+    "name": "Cody Gilbert",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 15,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2958508",
+    "department": "MATH"
+  },
+  {
+    "id": 62,
+    "name": "Ozlem Ugurlu",
+    "rmp_rating": 4.8,
+    "rmp_num_ratings": 14,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2920321",
+    "department": "MATH"
+  },
+  {
+    "id": 63,
+    "name": "Kimberly Druschel",
+    "rmp_rating": 3.2,
+    "rmp_num_ratings": 45,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/95191",
+    "department": "MATH"
+  },
+  {
+    "id": 64,
+    "name": "Michael Landry",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3006372",
+    "department": "MATH"
+  },
+  {
+    "id": 65,
+    "name": "Russel Blyth",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 50,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/95516",
+    "department": "MATH"
+  },
+  {
+    "id": 66,
+    "name": "Ana Portilla",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2863758",
+    "department": "MATH"
+  },
+  {
+    "id": 67,
+    "name": "Michelle Kreienkamp",
+    "rmp_rating": 4.8,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2852335",
+    "department": "MATH"
+  },
+  {
+    "id": 68,
+    "name": "Natalie Shivers",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 67,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1970518",
+    "department": "MATH"
+  },
+  {
+    "id": 69,
+    "name": "Anneke Bart",
+    "rmp_rating": 4.3,
+    "rmp_num_ratings": 40,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/148404",
+    "department": "MATH"
+  },
+  {
+    "id": 70,
+    "name": "Hugo Panzo",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3070005",
+    "department": "MATH"
+  },
+  {
+    "id": 71,
+    "name": "Ashish Srivastava",
+    "rmp_rating": 3.4,
+    "rmp_num_ratings": 34,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1057670",
+    "department": "MATH"
+  },
+  {
+    "id": 72,
+    "name": "Ella Sachs",
+    "rmp_rating": 1.9,
+    "rmp_num_ratings": 50,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/175789",
+    "department": "MATH"
+  },
+  {
+    "id": 73,
+    "name": "Alina Abdurakhimova",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2904894",
+    "department": "MATH"
+  },
+  {
+    "id": 74,
+    "name": "Seth Stahlheber",
+    "rmp_rating": 4.8,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2905980",
+    "department": "MATH"
+  },
+  {
+    "id": 75,
+    "name": "Brody Johnson",
+    "rmp_rating": 4.6,
+    "rmp_num_ratings": 57,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/288104",
+    "department": "MATH"
+  },
+  {
+    "id": 76,
+    "name": "Jamal Adbul-Hafidh",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2093923",
+    "department": "MATH"
+  },
+  {
+    "id": 77,
+    "name": "Stacey Harris",
+    "rmp_rating": 2.2,
+    "rmp_num_ratings": 39,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/66532",
+    "department": "MATH"
+  },
+  {
+    "id": 78,
+    "name": "Jamal Abdul-Hafidh",
+    "rmp_rating": 3.2,
+    "rmp_num_ratings": 25,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2373198",
+    "department": "MATH"
+  },
+  {
+    "id": 79,
+    "name": "Julianne Rainbolt",
+    "rmp_rating": 2.6,
+    "rmp_num_ratings": 31,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/297865",
+    "department": "MATH"
+  },
+  {
+    "id": 80,
+    "name": "Daniel Freeman",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 13,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1751951",
+    "department": "MATH"
+  },
+  {
+    "id": 81,
+    "name": "Caden Beddingfield",
+    "rmp_rating": 1.8,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2780903",
+    "department": "MATH"
+  },
+  {
+    "id": 82,
+    "name": "Daniel Rowe",
+    "rmp_rating": 4.8,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2964646",
+    "department": "MATH"
+  },
+  {
+    "id": 83,
+    "name": "Darrin Speegle",
+    "rmp_rating": 4.1,
+    "rmp_num_ratings": 21,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/445533",
+    "department": "MATH"
+  },
+  {
+    "id": 84,
+    "name": "Ryan Landvoy",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3004008",
+    "department": "MATH"
+  },
+  {
+    "id": 85,
+    "name": "Kelly Ballard",
+    "rmp_rating": 4.7,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2945429",
+    "department": "MATH"
+  },
+  {
+    "id": 86,
+    "name": "Sarah Morris",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2955207",
+    "department": "MATH"
+  },
+  {
+    "id": 87,
+    "name": "Craig Rollins",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3003096",
+    "department": "MATH"
+  },
+  {
+    "id": 88,
+    "name": "Elodie Pozzi",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 10,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2295419",
+    "department": "MATH"
+  },
+  {
+    "id": 89,
+    "name": "Geoffrey Kangogo",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2971370",
+    "department": "MATH"
+  },
+  {
+    "id": 90,
+    "name": "James Hebda",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 15,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/63462",
+    "department": "MATH"
+  },
+  {
+    "id": 91,
+    "name": "Olivia Frank",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2970114",
+    "department": "MATH"
+  },
+  {
+    "id": 92,
+    "name": "Lauren Miller",
+    "rmp_rating": 4.6,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2555180",
+    "department": "MATH"
+  },
+  {
+    "id": 93,
+    "name": "\u00c1lvaro Ill\u00e1n Rubio",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2947025",
+    "department": "MATH"
+  },
+  {
+    "id": 94,
+    "name": "Christian Geske",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2856379",
+    "department": "MATH"
+  },
+  {
+    "id": 95,
+    "name": "Isaac Collins",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2910215",
+    "department": "MATH"
+  },
+  {
+    "id": 96,
+    "name": "James J. Munden",
+    "rmp_rating": 2.5,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1388058",
+    "department": "MATH"
+  },
+  {
+    "id": 97,
+    "name": "Kevin Menos",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1748266",
+    "department": "MATH"
+  },
+  {
+    "id": 98,
+    "name": "Oday Hazaimah",
+    "rmp_rating": 3.1,
+    "rmp_num_ratings": 10,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2769934",
+    "department": "MATH"
+  },
+  {
+    "id": 99,
+    "name": "Jeff Mueller",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2852623",
+    "department": "MATH"
+  },
+  {
+    "id": 100,
+    "name": "Logan Clark",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2635386",
+    "department": "MATH"
+  },
+  {
+    "id": 101,
+    "name": "Yunge Wang",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2880994",
+    "department": "MATH"
+  },
+  {
+    "id": 102,
+    "name": "Dal Yu",
+    "rmp_rating": 3.2,
+    "rmp_num_ratings": 29,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1963797",
+    "department": "MATH"
+  },
+  {
+    "id": 103,
+    "name": "Kathleen Kramer",
+    "rmp_rating": 4.7,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2482732",
+    "department": "MATH"
+  },
+  {
+    "id": 104,
+    "name": "Virginia Pasken",
+    "rmp_rating": 2.7,
+    "rmp_num_ratings": 46,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1036165",
+    "department": "MATH"
+  },
+  {
+    "id": 105,
+    "name": "Aruna Bandara",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2533632",
+    "department": "MATH"
+  },
+  {
+    "id": 106,
+    "name": "James Coughlin",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 15,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2364139",
+    "department": "MATH"
+  },
+  {
+    "id": 107,
+    "name": "Rebecca Miller",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2559149",
+    "department": "MATH"
+  },
+  {
+    "id": 108,
+    "name": "James Grothe",
+    "rmp_rating": 4.1,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2079641",
+    "department": "MATH"
+  },
+  {
+    "id": 109,
+    "name": "Philip Huling",
+    "rmp_rating": 2.5,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2153177",
+    "department": "MATH"
+  },
+  {
+    "id": 110,
+    "name": "Sweta Prasad",
+    "rmp_rating": 1.8,
+    "rmp_num_ratings": 19,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1810087",
+    "department": "MATH"
+  },
+  {
+    "id": 111,
+    "name": "Zach Sarvis",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2762044",
+    "department": "MATH"
+  },
+  {
+    "id": 112,
+    "name": "Anupama Singh",
+    "rmp_rating": 1.1,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2715864",
+    "department": "MATH"
+  },
+  {
+    "id": 113,
+    "name": "Mary Vansuch",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2744877",
+    "department": "MATH"
+  },
+  {
+    "id": 114,
+    "name": "Holly Bernstein",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2757653",
+    "department": "MATH"
+  },
+  {
+    "id": 115,
+    "name": "Bradley Currey",
+    "rmp_rating": 3.4,
+    "rmp_num_ratings": 27,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/133467",
+    "department": "MATH"
+  },
+  {
+    "id": 116,
+    "name": "Seth Arnold",
+    "rmp_rating": 1.8,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2338889",
+    "department": "MATH"
+  },
+  {
+    "id": 117,
+    "name": "Sarah Aljohani",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2489532",
+    "department": "MATH"
+  },
+  {
+    "id": 118,
+    "name": "Paul Durham",
+    "rmp_rating": 4.6,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2641047",
+    "department": "MATH"
+  },
+  {
+    "id": 119,
+    "name": "Monica Metzger",
+    "rmp_rating": 1.3,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2655546",
+    "department": "MATH"
+  },
+  {
+    "id": 120,
+    "name": "Terry Tomazic",
+    "rmp_rating": 2.4,
+    "rmp_num_ratings": 15,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/271192",
+    "department": "MATH"
+  },
+  {
+    "id": 121,
+    "name": "Simon McCreary-Ellis",
+    "rmp_rating": 1.5,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2533865",
+    "department": "MATH"
+  },
+  {
+    "id": 122,
+    "name": "Anitha Srinivasan",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2624572",
+    "department": "MATH"
+  },
+  {
+    "id": 123,
+    "name": "Charles Burnette",
+    "rmp_rating": 4.3,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2421295",
+    "department": "MATH"
+  },
+  {
+    "id": 124,
+    "name": "Monalisa Munsi",
+    "rmp_rating": 1.2,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2358524",
+    "department": "MATH"
+  },
+  {
+    "id": 125,
+    "name": "Dennis Wacker",
+    "rmp_rating": 3.8,
+    "rmp_num_ratings": 47,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/244382",
+    "department": "MATH"
+  },
+  {
+    "id": 126,
+    "name": "Charles McCauley",
+    "rmp_rating": 1.5,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2183262",
+    "department": "MATH"
+  },
+  {
+    "id": 127,
+    "name": "Michael Tsau",
+    "rmp_rating": 4.4,
+    "rmp_num_ratings": 40,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/63148",
+    "department": "MATH"
+  },
+  {
+    "id": 128,
+    "name": "Brent Wessel",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1960813",
+    "department": "MATH"
+  },
+  {
+    "id": 129,
+    "name": "Rob Steward",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2485773",
+    "department": "MATH"
+  },
+  {
+    "id": 130,
+    "name": "Katherine Radler",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2184849",
+    "department": "MATH"
+  },
+  {
+    "id": 131,
+    "name": "Sadita Salihovic",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2467596",
+    "department": "MATH"
+  },
+  {
+    "id": 132,
+    "name": "Seth Wolbert",
+    "rmp_rating": 3.1,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2285601",
+    "department": "MATH"
+  },
+  {
+    "id": 133,
+    "name": "Ben Peet",
+    "rmp_rating": 4.7,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2090044",
+    "department": "MATH"
+  },
+  {
+    "id": 134,
+    "name": "James Mixco",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2241791",
+    "department": "MATH"
+  },
+  {
+    "id": 135,
+    "name": "CJ Halverson",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2292298",
+    "department": "MATH"
+  },
+  {
+    "id": 136,
+    "name": "Sean Corrigan",
+    "rmp_rating": 4.3,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2004562",
+    "department": "MATH"
+  },
+  {
+    "id": 137,
+    "name": "Sam Stoll",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 54,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/601632",
+    "department": "MATH"
+  },
+  {
+    "id": 138,
+    "name": "Christopher Halverson",
+    "rmp_rating": 2.2,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2043837",
+    "department": "MATH"
+  },
+  {
+    "id": 139,
+    "name": "Haijun Gon",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1887563",
+    "department": "MATH"
+  },
+  {
+    "id": 140,
+    "name": "Carlos Vega",
+    "rmp_rating": 3.9,
+    "rmp_num_ratings": 16,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2013197",
+    "department": "MATH"
+  },
+  {
+    "id": 141,
+    "name": "Rosanna Speller",
+    "rmp_rating": 3.3,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1930667",
+    "department": "MATH"
+  },
+  {
+    "id": 142,
+    "name": "Theresa Jeevanjee",
+    "rmp_rating": 2.9,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1987951",
+    "department": "MATH"
+  },
+  {
+    "id": 143,
+    "name": "Gerrit Smith",
+    "rmp_rating": 1.2,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1805791",
+    "department": "MATH"
+  },
+  {
+    "id": 144,
+    "name": "Joseph Eisner",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2203266",
+    "department": "MATH"
+  },
+  {
+    "id": 145,
+    "name": "Samuel Stoll",
+    "rmp_rating": 1.5,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2145314",
+    "department": "MATH"
+  },
+  {
+    "id": 146,
+    "name": "Michael Lamar",
+    "rmp_rating": 3.7,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1502722",
+    "department": "MATH"
+  },
+  {
+    "id": 147,
+    "name": "Sean Nemetz",
+    "rmp_rating": 2.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2076430",
+    "department": "MATH"
+  },
+  {
+    "id": 148,
+    "name": "Paul Taylor",
+    "rmp_rating": 2.9,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1783589",
+    "department": "MATH"
+  },
+  {
+    "id": 149,
+    "name": "Feroz Siddique",
+    "rmp_rating": 3.2,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1624195",
+    "department": "MATH"
+  },
+  {
+    "id": 150,
+    "name": "Darren Garbuz",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1622478",
+    "department": "MATH"
+  },
+  {
+    "id": 151,
+    "name": "Carolyn Sur",
+    "rmp_rating": 1.5,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1548093",
+    "department": "MATH"
+  },
+  {
+    "id": 152,
+    "name": "Imre Tuba",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1952327",
+    "department": "MATH"
+  },
+  {
+    "id": 153,
+    "name": "Tanya Lloyd-Hepburn",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1356815",
+    "department": "MATH"
+  },
+  {
+    "id": 154,
+    "name": "Tori Reany",
+    "rmp_rating": 4.1,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1869294",
+    "department": "MATH"
+  },
+  {
+    "id": 155,
+    "name": "Michael French",
+    "rmp_rating": 4.4,
+    "rmp_num_ratings": 13,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1358515",
+    "department": "MATH"
+  },
+  {
+    "id": 156,
+    "name": "Alan Von Herrmann",
+    "rmp_rating": 3.3,
+    "rmp_num_ratings": 14,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1845137",
+    "department": "MATH"
+  },
+  {
+    "id": 157,
+    "name": "David Jackson",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 44,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/320039",
+    "department": "MATH"
+  },
+  {
+    "id": 158,
+    "name": "Margaret Stock",
+    "rmp_rating": 3.4,
+    "rmp_num_ratings": 6,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1416922",
+    "department": "MATH"
+  },
+  {
+    "id": 159,
+    "name": "Aileen Murphy",
+    "rmp_rating": 2.1,
+    "rmp_num_ratings": 25,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1318799",
+    "department": "MATH"
+  },
+  {
+    "id": 160,
+    "name": "Hisako Matsuo",
+    "rmp_rating": 4.9,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/831820",
+    "department": "MATH"
+  },
+  {
+    "id": 161,
+    "name": "Lynne Nisbet",
+    "rmp_rating": 3.6,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1444997",
+    "department": "MATH"
+  },
+  {
+    "id": 162,
+    "name": "Jesse Prince-Lubawy",
+    "rmp_rating": 4.3,
+    "rmp_num_ratings": 9,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1434042",
+    "department": "MATH"
+  },
+  {
+    "id": 163,
+    "name": "Daniel Bossaller",
+    "rmp_rating": 3.3,
+    "rmp_num_ratings": 2,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1753743",
+    "department": "MATH"
+  },
+  {
+    "id": 164,
+    "name": "Melanie McCabe",
+    "rmp_rating": 1.5,
+    "rmp_num_ratings": 10,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1723943",
+    "department": "MATH"
+  },
+  {
+    "id": 165,
+    "name": "Lucas Sabalka",
+    "rmp_rating": 2.3,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1785749",
+    "department": "MATH"
+  },
+  {
+    "id": 166,
+    "name": "Christine Stevens",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 13,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/319322",
+    "department": "MATH"
+  },
+  {
+    "id": 167,
+    "name": "Rebecca Kalhorn",
+    "rmp_rating": 3.1,
+    "rmp_num_ratings": 10,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1540798",
+    "department": "MATH"
+  },
+  {
+    "id": 168,
+    "name": "Megan M. Witt",
+    "rmp_rating": 3.9,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1610302",
+    "department": "MATH"
+  },
+  {
+    "id": 169,
+    "name": "Michael Bakale",
+    "rmp_rating": 1.4,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/897468",
+    "department": "MATH"
+  },
+  {
+    "id": 170,
+    "name": "Timothy Delicath",
+    "rmp_rating": 3.8,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/799082",
+    "department": "MATH"
+  },
+  {
+    "id": 171,
+    "name": "Charles Ford",
+    "rmp_rating": 1.7,
+    "rmp_num_ratings": 41,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/389300",
+    "department": "MATH"
+  },
+  {
+    "id": 172,
+    "name": "Adam Allan",
+    "rmp_rating": 2.1,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1642809",
+    "department": "MATH"
+  },
+  {
+    "id": 173,
+    "name": "Jeffrey Breeding-Allison",
+    "rmp_rating": 3.4,
+    "rmp_num_ratings": 7,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1650266",
+    "department": "MATH"
+  },
+  {
+    "id": 174,
+    "name": "Wah-Kwan KU",
+    "rmp_rating": 4.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1649770",
+    "department": "MATH"
+  },
+  {
+    "id": 175,
+    "name": "Katherine Taylor Paullin",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1656675",
+    "department": "MATH"
+  },
+  {
+    "id": 176,
+    "name": "Stephanie Thomas",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1477298",
+    "department": "MATH"
+  },
+  {
+    "id": 177,
+    "name": "Mari Wantanabe",
+    "rmp_rating": 1.4,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1547144",
+    "department": "MATH"
+  },
+  {
+    "id": 178,
+    "name": "John Cantwell",
+    "rmp_rating": 2.8,
+    "rmp_num_ratings": 29,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/93521",
+    "department": "MATH"
+  },
+  {
+    "id": 179,
+    "name": "Delano Wegener",
+    "rmp_rating": 2.1,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1010609",
+    "department": "MATH"
+  },
+  {
+    "id": 180,
+    "name": "Mark Pedigo",
+    "rmp_rating": 4.6,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/881668",
+    "department": "MATH"
+  },
+  {
+    "id": 181,
+    "name": "Mari Watanabe",
+    "rmp_rating": 1.0,
+    "rmp_num_ratings": 3,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1513015",
+    "department": "MATH"
+  },
+  {
+    "id": 182,
+    "name": "Katee Whitney",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1518111",
+    "department": "MATH"
+  },
+  {
+    "id": 183,
+    "name": "Roxie Randolph",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 14,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/509090",
+    "department": "MATH"
+  },
+  {
+    "id": 184,
+    "name": "April Waugh",
+    "rmp_rating": 3.6,
+    "rmp_num_ratings": 4,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/945526",
+    "department": "MATH"
+  },
+  {
+    "id": 185,
+    "name": "Paul Koester",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 5,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1214402",
+    "department": "MATH"
+  },
+  {
+    "id": 186,
+    "name": "Doug Runge",
+    "rmp_rating": 5.0,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1309844",
+    "department": "MATH"
+  },
+  {
+    "id": 187,
+    "name": "Hongming Ding",
+    "rmp_rating": 3.0,
+    "rmp_num_ratings": 49,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/297561",
+    "department": "MATH"
+  },
+  {
+    "id": 188,
+    "name": "Alexis Forman",
+    "rmp_rating": 2.7,
+    "rmp_num_ratings": 12,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/110204",
+    "department": "MATH"
+  },
+  {
+    "id": 189,
+    "name": "Sharlene Allen",
+    "rmp_rating": 4.5,
+    "rmp_num_ratings": 1,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1930677",
+    "department": "MATH"
+  },
+  {
+    "id": 190,
+    "name": "Yue Gong",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2336886",
+    "department": "MATH"
+  },
+  {
+    "id": 191,
+    "name": "Ana Granados",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3058506",
+    "department": "MATH"
+  },
+  {
+    "id": 192,
+    "name": "Alaina Manning",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1671854",
+    "department": "MATH"
+  },
+  {
+    "id": 193,
+    "name": "John Taylor",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2006889",
+    "department": "MATH"
+  },
+  {
+    "id": 194,
+    "name": "Javier Gonzalez-Pizarro",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3045076",
+    "department": "MATH"
+  },
+  {
+    "id": 195,
+    "name": "Kyle Sykes",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1949157",
+    "department": "MATH"
+  },
+  {
+    "id": 196,
+    "name": "Susan Hidalgo",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2879407",
+    "department": "MATH"
+  },
+  {
+    "id": 197,
+    "name": "Andrew Eisenberg",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2461567",
+    "department": "MATH"
+  },
+  {
+    "id": 198,
+    "name": "Jim Gill",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2530781",
+    "department": "MATH"
+  },
+  {
+    "id": 199,
+    "name": "April Garrison",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1436636",
+    "department": "MATH"
+  },
+  {
+    "id": 200,
+    "name": "Kathy Bates",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/1404158",
+    "department": "MATH"
+  },
+  {
+    "id": 201,
+    "name": "Chirashree Chatterjee",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2160786",
+    "department": "MATH"
+  },
+  {
+    "id": 202,
+    "name": "Maverick Huang",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/3097755",
+    "department": "MATH"
+  },
+  {
+    "id": 203,
+    "name": "Maria Felix",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2855873",
+    "department": "MATH"
+  },
+  {
+    "id": 204,
+    "name": "Sheila Munsell",
+    "rmp_rating": null,
+    "rmp_num_ratings": null,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2793908",
+    "department": "MATH"
+  },
+  {
+    "id": 205,
+    "name": "Ted Ahn",
+    "rmp_rating": 3.5,
+    "rmp_num_ratings": 8,
+    "rmp_url": "https://www.ratemyprofessors.com/professor/2351201",
+    "department": "CSCI"
+  }
+]

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import Generator, Sequence
 
-from billiken_blueprint.domain.course import MinimalCourse
+from billiken_blueprint.domain.courses.course import Course
 
 
 @dataclass
@@ -9,7 +9,7 @@ class DegreeWorksCourse:
     major_code: str
     course_number: str
 
-    def is_satisfied_by(self, course: MinimalCourse) -> bool:
+    def is_satisfied_by(self, course: Course) -> bool:
         return (
             course.major_code == self.major_code
             and course.course_number == self.course_number
@@ -36,7 +36,7 @@ class DegreeWorksCourseRange:
     course_number: str
     end_course_number: str
 
-    def is_satisfied_by(self, course: MinimalCourse) -> bool:
+    def is_satisfied_by(self, course: Course) -> bool:
         if course.major_code != self.major_code:
             return False
         return (
@@ -110,12 +110,10 @@ class DegreeWorksCourseGroup:
             "exclude": [course.to_dict() for course in self.exclude],
         }
 
-    def is_satisfied_by(self, course: MinimalCourse) -> bool:
+    def is_satisfied_by(self, course: Course) -> bool:
         return not any(excl.is_satisfied_by(course) for excl in self.exclude) and any(
             c.is_satisfied_by(course) for c in self.courses
         )
 
-    def filter_satisfying_courses(
-        self, courses: Sequence[MinimalCourse]
-    ) -> Generator[MinimalCourse]:
+    def filter_satisfying_courses(self, courses: Sequence[Course]) -> Generator[Course]:
         return (course for course in courses if self.is_satisfied_by(course))
