@@ -8,6 +8,17 @@ class MeetingTime:
     start_time: str
     end_time: str
 
+    def overlaps(self, other: "MeetingTime") -> bool:
+        if self.day != other.day:
+            return False
+        
+        start1 = int(self.start_time)
+        end1 = int(self.end_time)
+        start2 = int(other.start_time)
+        end2 = int(other.end_time)
+
+        return max(start1, start2) < min(end1, end2)
+
 
 @dataclass
 class Section:
@@ -20,6 +31,11 @@ class Section:
     course_code: str
     semester: str
     meeting_times: list[MeetingTime]
+
+    def overlaps(self, other: "Section") -> bool:
+        return any(
+            mt1.overlaps(mt2) for mt1 in self.meeting_times for mt2 in other.meeting_times
+        )
 
     def to_dict(self) -> dict:
         return {

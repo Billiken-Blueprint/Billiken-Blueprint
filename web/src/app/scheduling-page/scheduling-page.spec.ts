@@ -1,5 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideZonelessChangeDetection } from '@angular/core';
+import { of } from 'rxjs';
+import { SchedulingService } from '../services/scheduling-service/scheduling-service';
 import { SchedulingPage } from './scheduling-page';
 
 describe('SchedulingPage', () => {
@@ -7,10 +9,19 @@ describe('SchedulingPage', () => {
   let fixture: ComponentFixture<SchedulingPage>;
 
   beforeEach(async () => {
+    const schedulingServiceMock = {
+      getRequirements: () => of([]),
+      autoGenerateSchedule: () => of({ sections: [], requirementsCovered: 0 })
+    };
+
     await TestBed.configureTestingModule({
-      imports: [SchedulingPage]
+      imports: [SchedulingPage],
+      providers: [
+        provideZonelessChangeDetection(),
+        { provide: SchedulingService, useValue: schedulingServiceMock }
+      ]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(SchedulingPage);
     component = fixture.componentInstance;

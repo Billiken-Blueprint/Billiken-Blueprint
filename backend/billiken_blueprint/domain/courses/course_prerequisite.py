@@ -36,9 +36,12 @@ class CourseCoursePrerequisite:
             course_num = int(course.course_number)
         except ValueError:
             return course.course_number == self.course_number
+        if self.end_number is None:
+            return course_num == int(self.course_number)
+        
         if course_num < int(self.course_number):
             return False
-        if self.end_number is not None and course_num > self.end_number:
+        if course_num > self.end_number:
             return False
         return True
 
