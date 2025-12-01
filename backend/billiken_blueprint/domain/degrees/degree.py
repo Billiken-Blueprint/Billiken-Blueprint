@@ -27,6 +27,17 @@ class Degree(DegreeWorksDegree):
     name: str
     requirements: Sequence[DegreeRequirement]
 
+    MAJOR_CODE_MAPPING = {
+        "CS": "CSCI",
+        # Add other mappings as needed
+    }
+
+    @property
+    def course_major_code(self) -> str:
+        return self.MAJOR_CODE_MAPPING.get(
+            self.degree_works_major_code, self.degree_works_major_code
+        )
+
     def to_dict(self) -> dict:
         return {
             "id": self.id,
@@ -83,21 +94,28 @@ class Degree(DegreeWorksDegree):
         # Score courses based on how many courses they are prerequisites for.
         course_scores = {}
         course_eq_scores = {}
+        course_to_requirements = {}
+
         for req in unfulfilled_reqs:
             courses = req.filter_for_untaken_satisfying_courses(
                 all_courses, taken_courses
             )
             for course in courses:
-                if course.prerequisites is None:
-                    continue
-                for prereq in course.prerequisites.filter_for_satisfying_courses(
-                    all_courses
-                ):
-                    course_scores[prereq] = course_scores.get(prereq, 0) + 1
-                    if prereq in equivalency_map:
-                        course_eq_scores[equivalency_map[prereq]] = (
-                            course_eq_scores.get(equivalency_map[prereq], 0) + 1
-                        )
+                if course not in course_to_requirements:
+                    course_to_requirements[course] = []
+                course_to_requirements[course].append(req.label)
+
+                if course.prerequisites is not None:
+                    for prereq in course.prerequisites.filter_for_satisfying_courses(
+                        all_courses
+                    ):
+                        if prereq.major_code == "SPAN" and prereq.course_number == "3939":
+                            print(course.major_code, course.course_number)
+                        course_scores[prereq] = course_scores.get(prereq, 0) + 1
+                        if prereq in equivalency_map:
+                            course_eq_scores[equivalency_map[prereq]] = (
+                                course_eq_scores.get(equivalency_map[prereq], 0) + 1
+                            )
                 course_scores[course] = course_scores.get(course, 0) + 1
                 if course in equivalency_map:
                     course_eq_scores[equivalency_map[course]] = (
@@ -108,6 +126,16 @@ class Degree(DegreeWorksDegree):
             if group_num in course_eq_scores:
                 course_scores[code] = course_eq_scores[group_num]
 
+        if course_scores:
+            max_score = max(course_scores.values())
+            for course in course_scores:
+                try:
+                    course_num = int(course.course_number.replace("X", ""))
+                    if course_num >= 3000 and course.major_code != self.course_major_code:
+                        course_scores[course] -= max_score
+                except ValueError:
+                    pass
+
         # Score sections based on their course scores.
         course_codes_to_course = {
             f"{c.major_code} {c.course_number}": c for c in course_scores.keys()
@@ -116,14 +144,99 @@ class Degree(DegreeWorksDegree):
             section
             for section in all_sections
             if section.course_code in course_codes_to_course
+            and course_codes_to_course[section.course_code] not in set(taken_courses)
         ]
+        
         sections_sorted = sorted(
             sections,
             key=lambda s: course_scores[course_codes_to_course[s.course_code]],
             reverse=True,
         )
 
+        #for section in sections_sorted:
+            #print(section.course_code, course_scores[course_codes_to_course[section.course_code])
+
+        # Filter out sections where prerequisites are not satisfied
+        sections_sorted = [
+            section
+            for section in sections_sorted
+            if (
+                course := course_codes_to_course[section.course_code]
+            ).prerequisites is None
+            or course.prerequisites.is_satisfied_by(taken_courses)
+        ]
+
         return [
-            SectionWithRequirementsFulfilled(section=section)
+            SectionWithRequirementsFulfilled(
+                section=section,
+                fulfilled_requirements=course_to_requirements.get(
+                    course_codes_to_course[section.course_code], []
+                )
+            )
             for section in sections_sorted
         ]
+
+    def get_schedule(
+        self,
+        taken_courses: Sequence[CourseWithAttributes],
+        all_courses: Sequence[CourseWithAttributes],
+        all_sections: Sequence[Section],
+        course_equivalencies: Sequence[Sequence[CourseCode]],
+    ) -> Sequence[SectionWithRequirementsFulfilled]:
+        recommended_sections = self.get_recommended_sections(
+            taken_courses, all_courses, all_sections, course_equivalencies
+        )
+        
+        # Calculate remaining needed for each requirement
+        requirements_status = {}
+        for req in self.requirements:
+            satisfied_count = 0
+            for course in taken_courses:
+                if req.course_rules.is_satisfied_by(course):
+                    satisfied_count += 1
+            requirements_status[req.label] = max(0, req.needed - satisfied_count)
+
+        schedule: Sequence[SectionWithRequirementsFulfilled] = []
+        added_course_codes = set()
+        
+        # Dynamic greedy selection
+        for _ in range(6):
+            best_section_wrapper = None
+            best_score = 0
+            
+            for rec in recommended_sections:
+                section = rec.section
+                
+                # Skip if already added
+                if section.course_code in added_course_codes:
+                    continue
+                
+                # Skip if overlaps with current schedule
+                if any(section.overlaps(s.section) for s in schedule):
+                    continue
+                
+                # Calculate dynamic score: how many *currently needed* requirements does it satisfy?
+                score = 0
+                for req_label in rec.fulfilled_requirements:
+                    if requirements_status.get(req_label, 0) > 0:
+                        score += 1
+                
+                # We want the section that satisfies the MOST needed requirements
+                if score > best_score:
+                    best_score = score
+                    best_section_wrapper = rec
+            
+            # If we found a useful section, add it
+            if best_section_wrapper and best_score > 0:
+                schedule.append(best_section_wrapper)
+                added_course_codes.add(best_section_wrapper.section.course_code)
+                
+                # Decrement needed counts
+                for req_label in best_section_wrapper.fulfilled_requirements:
+                    if requirements_status.get(req_label, 0) > 0:
+                        requirements_status[req_label] -= 1
+            else:
+                # No more useful sections found
+                break
+        
+        return schedule

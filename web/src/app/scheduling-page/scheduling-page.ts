@@ -1,7 +1,7 @@
-import {Component, inject, OnInit, signal} from '@angular/core';
-import {GraduationRequirement, SchedulingService, AutogenerateScheduleResponse} from '../services/scheduling-service/scheduling-service';
-import {CommonModule} from '@angular/common';
-import {Button} from 'primeng/button';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import { GraduationRequirement, SchedulingService, AutogenerateScheduleResponse } from '../services/scheduling-service/scheduling-service';
+import { CommonModule } from '@angular/common';
+import { Button } from 'primeng/button';
 
 interface ScheduleSlot {
   courseCode?: string;
@@ -39,14 +39,14 @@ export class SchedulingPage implements OnInit {
   expandedClasses = signal<Set<string>>(new Set());
   scheduleData = signal<AutogenerateScheduleResponse | null>(null);
   scheduleCourses = signal<ScheduleCourse[][]>(Array(5).fill(null).map(() => []));
-  scheduleSections = signal<Array<{courseCode: string; title: string; requirementLabel: string | null}>>([]);
+  scheduleSections = signal<Array<{ courseCode: string; title: string; requirementLabels: string[] }>>([]);
   minTimePercent = signal<number>(this.timeToPercent('0600')); // 6am
   maxTimePercent = signal<number>(this.timeToPercent('1900')); // 7pm
   private schedulingService = inject(SchedulingService);
-  
+
   days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   times = ['12am', '1am', '2am', '3am', '4am', '5am', '6am', '7am', '8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm', '6pm', '7pm', '8pm', '9pm', '10pm', '11pm'];
-  
+
   // Pre-computed time percentages for template use
   timePercentages = this.times.map(time => {
     const match = time.match(/(\d+)(am|pm)/);
@@ -90,7 +90,7 @@ export class SchedulingPage implements OnInit {
   private buildScheduleGrid(data: AutogenerateScheduleResponse): void {
     // Initialize schedule for each day
     const schedule: ScheduleCourse[][] = Array(5).fill(null).map(() => []);
-    const sections: Array<{courseCode: string; title: string; requirementLabel: string | null}> = [];
+    const sections: Array<{ courseCode: string; title: string; requirementLabels: string[] }> = [];
     let minTime = Infinity;
     let maxTime = -Infinity;
 
@@ -120,7 +120,7 @@ export class SchedulingPage implements OnInit {
       sections.push({
         courseCode: section.courseCode,
         title: section.title,
-        requirementLabel: section.requirementLabel || null
+        requirementLabels: section.requirementLabels || []
       });
 
       section.meetingTimes.forEach((meeting) => {
@@ -128,7 +128,7 @@ export class SchedulingPage implements OnInit {
         if (dayIndex >= 0 && dayIndex < 5) {
           const startPercent = this.timeToPercent(meeting.startTime);
           const endPercent = this.timeToPercent(meeting.endTime);
-          
+
           // Calculate adjusted percentages relative to the visible range (0-100)
           const adjustedLeftPercent = ((startPercent - minTime) / timeRange) * 100;
           const adjustedWidthPercent = ((endPercent - startPercent) / timeRange) * 100;

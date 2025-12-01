@@ -129,6 +129,9 @@ class DegreeRequirement:
     needed: int
     course_rules: CourseRule
 
+    def __post_init__(self):
+        self.needed = int(self.needed)
+
     def to_dict(self) -> dict:
         return {
             "label": self.label,
@@ -149,7 +152,7 @@ class DegreeRequirement:
         for course in courses:
             if self.course_rules.is_satisfied_by(course):
                 satisfied_count += 1
-            if satisfied_count >= int(self.needed):
+            if satisfied_count >= self.needed:
                 return True
         return False
 
