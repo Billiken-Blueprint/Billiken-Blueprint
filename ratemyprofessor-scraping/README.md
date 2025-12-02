@@ -1,4 +1,4 @@
-# RateMyProfessor.com-Web-Scraper
+# ratemyprofessor-scraping
 A Python script that uses Selenium to scrape professor ratings from [RateMyProfessors.com](https://www.ratemyprofessors.com/) and saves them to a JSON file.
 
 ## Requirements

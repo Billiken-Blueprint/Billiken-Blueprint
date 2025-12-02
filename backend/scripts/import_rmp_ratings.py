@@ -27,9 +27,9 @@ async def import_rmp_ratings():
         script_dir / "cs_professors_with_reviews.json",
         script_dir / "cs_professors.json",
         script_dir.parent
-        / "RateMyProfessor.com-Web-Scraper"
+        / "ratemyprofessor-scraping"
         / "cs_professors_with_reviews.json",
-        script_dir.parent / "RateMyProfessor.com-Web-Scraper" / "cs_professors.json",
+        script_dir.parent / "ratemyprofessor-scraping" / "cs_professors.json",
         Path("/app/cs_professors_with_reviews.json"),
         Path("/app/cs_professors.json"),
     ]
@@ -41,9 +41,9 @@ async def import_rmp_ratings():
         script_dir / "math_professors_with_reviews.json",
         script_dir / "math_professors.json",
         script_dir.parent
-        / "RateMyProfessor.com-Web-Scraper"
+        / "ratemyprofessor-scraping"
         / "math_professors_with_reviews.json",
-        script_dir.parent / "RateMyProfessor.com-Web-Scraper" / "math_professors.json",
+        script_dir.parent / "ratemyprofessor-scraping" / "math_professors.json",
         Path("/app/math_professors_with_reviews.json"),
         Path("/app/math_professors.json"),
     ]

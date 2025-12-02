@@ -1,7 +1,7 @@
-import {Component, inject} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {Router} from '@angular/router';
-import {AuthService} from '../services/auth-service/auth-service';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { AuthService } from '../services/auth-service/auth-service';
 
 @Component({
   selector: 'app-landing-page',
@@ -10,6 +10,7 @@ import {AuthService} from '../services/auth-service/auth-service';
   ],
   templateUrl: './landing-page.html',
   styleUrl: './landing-page.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     'class': 'block w-full h-full'
   }

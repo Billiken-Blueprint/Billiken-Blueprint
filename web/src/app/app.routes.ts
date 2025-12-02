@@ -1,65 +1,58 @@
-import {Routes} from '@angular/router';
-import {LandingPage} from './landing-page/landing-page';
-import {LoginPage} from './login-page/login-page';
-import {RegisterPage} from './register-page/register-page';
-import {QuestionnairePage} from './questionnaire/questionnaire';
-import {ProfilePage} from './profile/profile';
-import {HomePage} from './home-page/home-page';
-import {RatingsPage} from './ratings-page/ratings-page';
-import {CreateRatingPage} from './ratings-page/create-rating-page/create-rating-page';
-import { CoursePage } from './course/course-page';
-import {SchedulingPage} from './scheduling-page/scheduling-page';
-
-import {InstructorReviewsPage} from './instructor-reviews-page/instructor-reviews-page';
+import { Routes } from '@angular/router';
+import { inject } from '@angular/core';
+import { AuthService } from './services/auth-service/auth-service';
 
 export const routes: Routes = [
   {
     path: '',
-    redirectTo: 'landing',
     pathMatch: 'full',
+    redirectTo: () => {
+      const authService = inject(AuthService);
+      return authService.getToken() ? 'home' : 'landing';
+    }
   },
   {
     path: 'landing',
-    component: LandingPage,
+    loadComponent: () => import('./landing-page/landing-page').then(m => m.LandingPage),
   },
   {
     path: 'login',
-    component: LoginPage,
+    loadComponent: () => import('./login-page/login-page').then(m => m.LoginPage),
   },
   {
     path: 'register',
-    component: RegisterPage,
+    loadComponent: () => import('./register-page/register-page').then(m => m.RegisterPage),
   },
   {
     path: 'questionnaire',
-    component: QuestionnairePage,
+    loadComponent: () => import('./questionnaire/questionnaire').then(m => m.QuestionnairePage),
   },
   {
     path: 'profile',
-    component: ProfilePage
+    loadComponent: () => import('./profile/profile').then(m => m.ProfilePage),
   },
   {
     path: 'courses',
-    component: CoursePage
+    loadComponent: () => import('./course/course-page').then(m => m.CoursePage),
   },
   {
     path: 'home',
-    component: HomePage
+    loadComponent: () => import('./home-page/home-page').then(m => m.HomePage),
   },
   {
     path: 'ratings',
-    component: RatingsPage
+    loadComponent: () => import('./ratings-page/ratings-page').then(m => m.RatingsPage),
   },
   {
     path: 'ratings/create',
-    component: CreateRatingPage
+    loadComponent: () => import('./ratings-page/create-rating-page/create-rating-page').then(m => m.CreateRatingPage),
   },
   {
     path: 'schedule',
-    component: SchedulingPage
+    loadComponent: () => import('./scheduling-page/scheduling-page').then(m => m.SchedulingPage),
   },
   {
     path: 'instructors/:id/reviews',
-    component: InstructorReviewsPage
+    loadComponent: () => import('./instructor-reviews-page/instructor-reviews-page').then(m => m.InstructorReviewsPage),
   }
 ];
