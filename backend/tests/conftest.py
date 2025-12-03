@@ -109,10 +109,41 @@ def rmp_review_repository(async_sessionmaker):
     return RmpReviewRepository(async_sessionmaker)
 
 
+from billiken_blueprint.dependencies import (
+    get_identity_user_repository,
+    get_student_repository,
+    get_course_repository,
+    get_instructor_repository,
+    get_degree_repository,
+    get_section_repository,
+    get_rating_repository,
+    get_course_attribute_repository,
+    get_rmp_review_repository,
+)
+
 @pytest.fixture(scope="function")
-def app_client(identity_user_repository, student_repository):
+def app_client(
+    identity_user_repository,
+    student_repository,
+    course_repository,
+    instructor_repository,
+    degree_repository,
+    section_repository,
+    rating_repository,
+    course_attribute_repository,
+    rmp_review_repository,
+):
     """Create a FastAPI test client with overridden dependencies."""
-    # This fixture is optional and can be extended to override specific dependencies
+    app.dependency_overrides[get_identity_user_repository] = lambda: identity_user_repository
+    app.dependency_overrides[get_student_repository] = lambda: student_repository
+    app.dependency_overrides[get_course_repository] = lambda: course_repository
+    app.dependency_overrides[get_instructor_repository] = lambda: instructor_repository
+    app.dependency_overrides[get_degree_repository] = lambda: degree_repository
+    app.dependency_overrides[get_section_repository] = lambda: section_repository
+    app.dependency_overrides[get_rating_repository] = lambda: rating_repository
+    app.dependency_overrides[get_course_attribute_repository] = lambda: course_attribute_repository
+    app.dependency_overrides[get_rmp_review_repository] = lambda: rmp_review_repository
+
     test_client = TestClient(app)
     yield test_client
 

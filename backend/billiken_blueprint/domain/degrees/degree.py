@@ -1,3 +1,4 @@
+from importlib.abc import MetaPathFinder
 from dataclasses import dataclass, field
 from typing import Sequence
 
@@ -5,7 +6,30 @@ from billiken_blueprint.domain.courses.course import CourseCode, CourseWithAttri
 from billiken_blueprint.domain.degrees.degree_requirement import (
     DegreeRequirement,
 )
-from billiken_blueprint.domain.section import Section
+from billiken_blueprint.domain.section import Section, MeetingTime
+from billiken_blueprint.domain.student import TimeSlot
+
+
+def check_time_overlap(time_slot: TimeSlot, meeting_time: MeetingTime) -> bool:
+    return meeting_time.overlaps(
+        MeetingTime(
+            day=time_slot.day,
+            start_time=time_slot.start,
+            end_time=time_slot.end,
+        )
+    )
+
+
+def section_overlaps_timeslots(section: Section, time_slots: Sequence[TimeSlot]) -> bool:
+    if section.course_code == 'CSCI 2300':
+        print(time_slots)
+        print(section.meeting_times)
+        print(section.instructor_names)
+    for time_slot in time_slots:
+        for meeting_time in section.meeting_times:
+            if check_time_overlap(time_slot, meeting_time):
+                return True
+    return False
 
 
 @dataclass
@@ -67,6 +91,8 @@ class Degree(DegreeWorksDegree):
         all_courses: Sequence[CourseWithAttributes],
         all_sections: Sequence[Section],
         course_equivalencies: Sequence[Sequence[CourseCode]],
+        unavailability_times: Sequence[TimeSlot] = [],
+        avoid_times: Sequence[TimeSlot] = [],
     ) -> Sequence[SectionWithRequirementsFulfilled]:
         # Same scoring mechanism as last implementation,
         # but this time we should first check which courses
@@ -109,8 +135,6 @@ class Degree(DegreeWorksDegree):
                     for prereq in course.prerequisites.filter_for_satisfying_courses(
                         all_courses
                     ):
-                        if prereq.major_code == "SPAN" and prereq.course_number == "3939":
-                            print(course.major_code, course.course_number)
                         course_scores[prereq] = course_scores.get(prereq, 0) + 1
                         if prereq in equivalency_map:
                             course_eq_scores[equivalency_map[prereq]] = (
@@ -145,16 +169,20 @@ class Degree(DegreeWorksDegree):
             for section in all_sections
             if section.course_code in course_codes_to_course
             and course_codes_to_course[section.course_code] not in set(taken_courses)
+            and not section_overlaps_timeslots(section, unavailability_times)
         ]
         
+        def get_section_score(section: Section) -> float:
+            score = course_scores[course_codes_to_course[section.course_code]]
+            if section_overlaps_timeslots(section, avoid_times):
+                score -= 10
+            return score
+
         sections_sorted = sorted(
             sections,
-            key=lambda s: course_scores[course_codes_to_course[s.course_code]],
+            key=get_section_score,
             reverse=True,
         )
-
-        #for section in sections_sorted:
-            #print(section.course_code, course_scores[course_codes_to_course[section.course_code])
 
         # Filter out sections where prerequisites are not satisfied
         sections_sorted = [
@@ -176,15 +204,24 @@ class Degree(DegreeWorksDegree):
             for section in sections_sorted
         ]
 
+
+
     def get_schedule(
         self,
         taken_courses: Sequence[CourseWithAttributes],
         all_courses: Sequence[CourseWithAttributes],
         all_sections: Sequence[Section],
         course_equivalencies: Sequence[Sequence[CourseCode]],
+        unavailability_times: Sequence[TimeSlot] = [],
+        avoid_times: Sequence[TimeSlot] = [],
     ) -> Sequence[SectionWithRequirementsFulfilled]:
         recommended_sections = self.get_recommended_sections(
-            taken_courses, all_courses, all_sections, course_equivalencies
+            taken_courses,
+            all_courses,
+            all_sections,
+            course_equivalencies,
+            unavailability_times,
+            avoid_times,
         )
         
         # Calculate remaining needed for each requirement
@@ -214,7 +251,7 @@ class Degree(DegreeWorksDegree):
                 # Skip if overlaps with current schedule
                 if any(section.overlaps(s.section) for s in schedule):
                     continue
-                
+
                 # Calculate dynamic score: how many *currently needed* requirements does it satisfy?
                 score = 0
                 for req_label in rec.fulfilled_requirements:
