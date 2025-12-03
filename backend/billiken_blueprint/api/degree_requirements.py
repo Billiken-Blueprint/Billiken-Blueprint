@@ -47,7 +47,7 @@ async def get_degree_requirements(
 
 
 class AutogenerateScheduleMeetingTime(BaseModel):
-    day: str
+    day: int
     startTime: str
     endTime: str
 
@@ -63,8 +63,15 @@ class AutogenerateScheduleSectionResponse(BaseModel):
     meetingTimes: list[AutogenerateScheduleMeetingTime]
     requirementLabels: list[str]
 
+class TimeSlotResponse(BaseModel):
+    day: int
+    start: str
+    end: str
+
 class AutogenerateScheduleResponse(BaseModel):
     sections: list[AutogenerateScheduleSectionResponse]
+    unavailabilityTimes: list[TimeSlotResponse]
+    avoidTimes: list[TimeSlotResponse]
 
 @router.get("/autogenerate-schedule", response_model=AutogenerateScheduleResponse)
 async def autogenerate_schedule(
@@ -104,6 +111,8 @@ async def autogenerate_schedule(
                 CourseCode("ENGL", "1900"),
             ]
         ],
+        unavailability_times=student.unavailability_times,
+        avoid_times=student.avoid_times,
     )
 
     return AutogenerateScheduleResponse(
@@ -128,5 +137,13 @@ async def autogenerate_schedule(
                 requirementLabels=section.fulfilled_requirements,
             )
             for section in schedule
-        ]
+        ],
+        unavailabilityTimes=[
+            TimeSlotResponse(day=ts.day, start=ts.start, end=ts.end)
+            for ts in student.unavailability_times
+        ],
+        avoidTimes=[
+            TimeSlotResponse(day=ts.day, start=ts.start, end=ts.end)
+            for ts in student.avoid_times
+        ],
     )

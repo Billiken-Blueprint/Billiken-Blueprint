@@ -1,4 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideZonelessChangeDetection } from '@angular/core';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { TopBanner } from './top-banner';
 
@@ -8,9 +11,10 @@ describe('TopBanner', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      providers: [provideZonelessChangeDetection(), provideHttpClient(), provideHttpClientTesting()],
       imports: [TopBanner]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(TopBanner);
     component = fixture.componentInstance;

@@ -8,7 +8,7 @@ from billiken_blueprint.dependencies import (
     IdentityUserRepo,
     StudentRepo,
 )
-from billiken_blueprint.domain.student import Student
+from billiken_blueprint.domain.student import Student, TimeSlot
 
 
 router = APIRouter(prefix="/user_info", tags=["user_info"])
@@ -20,10 +20,18 @@ credentials_exception = HTTPException(
 )
 
 
+class TimeSlotBody(BaseModel):
+    day: int
+    start: str  # HHMM format
+    end: str    # HHMM format
+
+
 class UserInfoBody(BaseModel):
     name: str
     graduation_year: int
     completed_course_ids: list[int]
+    unavailability_times: list[TimeSlotBody]
+    avoid_times: list[TimeSlotBody]
     degree_id: int
 
 
@@ -38,6 +46,8 @@ async def set_user_info(
         id=identity.student_id,
         name=user_info.name,
         completed_course_ids=user_info.completed_course_ids,
+        unavailability_times=[TimeSlot(day=ts.day, start=ts.start, end=ts.end) for ts in user_info.unavailability_times],
+        avoid_times=[TimeSlot(day=ts.day, start=ts.start, end=ts.end) for ts in user_info.avoid_times],
         graduation_year=user_info.graduation_year,
         degree_id=user_info.degree_id,
     )
@@ -59,6 +69,8 @@ async def get_user_info(student: CurrentStudent, course_repo: CourseRepo):
     return dict(
         name=student.name,
         completedCourseIds=student.completed_course_ids,
+        unavailabilityTimes=[{"day": ts.day, "start": ts.start, "end": ts.end} for ts in student.unavailability_times],
+        avoidTimes=[{"day": ts.day, "start": ts.start, "end": ts.end} for ts in student.avoid_times],
         savedCourseCodes=saved_course_codes,
         graduationYear=student.graduation_year,
         degreeId=student.degree_id,

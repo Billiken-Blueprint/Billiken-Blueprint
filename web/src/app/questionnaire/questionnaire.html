@@ -19,21 +19,17 @@
         <div [style.width.%]="(currentStep / totalSteps) * 100" class="progress-fill"></div>
       </div>
       <div class="step-indicators">
-        @for (step of [1, 2, 3]; track step) {
-          <div (click)="goToStep(step)"
-               [class.active]="step === currentStep"
-               [class.completed]="step < currentStep"
-               [class.upcoming]="step > currentStep"
-               class="step-indicator">
-            <div class="step-circle">
-              @if (step < currentStep) {
-                <i class="pi pi-check"></i>
+        @for (step of [1, 2, 3, 4]; track step) {
+        <div (click)="goToStep(step)" [class.active]="step === currentStep" [class.completed]="step < currentStep"
+          [class.upcoming]="step > currentStep" class="step-indicator">
+          <div class="step-circle">
+            @if (step < currentStep) { <i class="pi pi-check"></i>
               } @else {
-                <span>{{ step }}</span>
+              <span>{{ step }}</span>
               }
-            </div>
-            <span class="step-label">{{ getStepLabel(step) }}</span>
           </div>
+          <span class="step-label">{{ getStepLabel(step) }}</span>
+        </div>
         }
       </div>
     </div>
@@ -50,132 +46,227 @@
 
         <!-- Step 1: Personal Information -->
         @if (currentStep === 1) {
-          <div class="step-section">
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="fullName">
-                  <i class="pi pi-user"></i>
-                  Full Name
-                  <span class="required">*</span>
-                </label>
-                <input class="input-field" formControlName="fullName" id="fullName" placeholder="Enter your full name"/>
-              </div>
-
-              <div class="form-group">
-                <label for="graduationYear">
-                  <i class="pi pi-calendar"></i>
-                  Expected Graduation Year
-                  <span class="required">*</span>
-                </label>
-                <input class="input-field" formControlName="graduationYear" id="graduationYear" max="2030"
-                       min="2024" placeholder="e.g., 2026" type="number"/>
-              </div>
+        <div class="step-section">
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="fullName">
+                <i class="pi pi-user"></i>
+                Full Name
+                <span class="required">*</span>
+              </label>
+              <input class="input-field" formControlName="fullName" id="fullName" placeholder="Enter your full name" />
             </div>
 
-            <div class="form-grid">
-              <div class="form-group">
-                <label for="major">
-                  <i class="pi pi-book"></i>
-                  Major
-                  <span class="required">*</span>
-                </label>
-                <p-select [options]="degrees" formControlName="major" id="major" optionLabel="displayLabel"
-                          placeholder="Select your major"/>
-              </div>
+            <div class="form-group">
+              <label for="graduationYear">
+                <i class="pi pi-calendar"></i>
+                Expected Graduation Year
+                <span class="required">*</span>
+              </label>
+              <input class="input-field" formControlName="graduationYear" id="graduationYear" max="2030" min="2024"
+                placeholder="e.g., 2026" type="number" />
             </div>
           </div>
+
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="major">
+                <i class="pi pi-book"></i>
+                Major
+                <span class="required">*</span>
+              </label>
+              <p-select [options]="degrees" formControlName="major" id="major" optionLabel="displayLabel"
+                placeholder="Select your major" />
+            </div>
+          </div>
+        </div>
         }
 
         <!-- Step 2: Course Selection -->
         @if (currentStep === 2) {
-          <div class="step-section">
-            <div class="info-card">
-              <i class="pi pi-info-circle"></i>
-              <div>
-                <strong>Course Selection</strong>
-                <p>Select all courses you have already completed. This helps us recommend the best path forward.</p>
-              </div>
-            </div>
-            <div class="form-group">
-              <label>
-                <i class="pi pi-list"></i>
-                Completed Courses
-              </label>
-              <p-multi-select [options]="courses" fluid
-                              formControlName="completedCourses" optionLabel="courseCode"
-                              placeholder="Search and select courses">
-                <ng-template #item let-course>
-                  <div class="course-option">
-                    <strong>{{ course.courseCode }}</strong>
-                    <span class="course-title">{{ course.title }}</span>
-                  </div>
-                </ng-template>
-              </p-multi-select>
-              <div class="selection-count">
-                <i class="pi pi-check-circle"></i>
-                {{ questionnaireForm.get('completedCourses')?.value?.length || 0 }} course(s) selected
-              </div>
+        <div class="step-section">
+          <div class="info-card">
+            <i class="pi pi-info-circle"></i>
+            <div>
+              <strong>Course Selection</strong>
+              <p>Select all courses you have already completed. This helps us recommend the best path forward.</p>
             </div>
           </div>
+          <div class="form-group">
+            <label>
+              <i class="pi pi-list"></i>
+              Completed Courses
+            </label>
+            <p-multi-select [options]="courses" fluid formControlName="completedCourses" optionLabel="courseCode"
+              placeholder="Search and select courses">
+              <ng-template #item let-course>
+                <div class="course-option">
+                  <strong>{{ course.courseCode }}</strong>
+                  <span class="course-title">{{ course.title }}</span>
+                </div>
+              </ng-template>
+            </p-multi-select>
+            <div class="selection-count">
+              <i class="pi pi-check-circle"></i>
+              {{ questionnaireForm.get('completedCourses')?.value?.length || 0 }} course(s) selected
+            </div>
+          </div>
+        </div>
         }
 
-        <!-- Step 3: Review -->
+        <!-- Step 3: Schedule Preferences -->
         @if (currentStep === 3) {
-          <div class="step-section">
-            <div class="review-container">
-              <div class="review-card">
-                <div class="review-header">
-                  <i class="pi pi-user"></i>
-                  <h3>Personal Information</h3>
+        <div class="step-section">
+          <div class="info-card">
+            <i class="pi pi-info-circle"></i>
+            <div>
+              <strong>Schedule Preferences (Optional)</strong>
+              <p>Set times when you're unavailable or prefer to avoid classes. This helps optimize your schedule.</p>
+            </div>
+          </div>
+
+          <!-- Unavailability Times -->
+          <div class="form-group">
+            <label>
+              <i class="pi pi-ban"></i>
+              Unavailability Times
+            </label>
+            <p class="field-description">Times when you absolutely cannot attend classes</p>
+
+            @if ((questionnaireForm.get('unavailabilityTimes')?.value || []).length === 0) {
+            <div class="empty-state-message">
+              <i class="pi pi-calendar-times"></i>
+              <span>No unavailability times added yet.</span>
+            </div>
+            }
+
+            @for (time of questionnaireForm.get('unavailabilityTimes')?.value || []; track $index) {
+            <div class="time-slot-row">
+              <select [(ngModel)]="time.day" [ngModelOptions]="{standalone: true}" class="input-field day-select">
+                <option value="0">Monday</option>
+                <option value="1">Tuesday</option>
+                <option value="2">Wednesday</option>
+                <option value="3">Thursday</option>
+                <option value="4">Friday</option>
+              </select>
+              <input [(ngModel)]="time.start" [ngModelOptions]="{standalone: true}" class="input-field time-input"
+                type="time" />
+              <span class="time-separator">to</span>
+              <input [(ngModel)]="time.end" [ngModelOptions]="{standalone: true}" class="input-field time-input"
+                type="time" />
+              <button (click)="removeUnavailabilityTime($index)" class="btn-icon btn-remove" type="button">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            }
+
+            <button (click)="addUnavailabilityTime()" class="btn-secondary btn-add" type="button">
+              <i class="pi pi-plus"></i>
+              Add Unavailability Time
+            </button>
+          </div>
+
+          <!-- Avoid Times -->
+          <div class="form-group">
+            <label>
+              <i class="pi pi-clock"></i>
+              Avoid Times
+            </label>
+            <p class="field-description">Times you'd prefer to avoid if possible (not strict requirements)</p>
+
+            @if ((questionnaireForm.get('avoidTimes')?.value || []).length === 0) {
+            <div class="empty-state-message">
+              <i class="pi pi-calendar-minus"></i>
+              <span>No avoid times added yet.</span>
+            </div>
+            }
+
+            @for (time of questionnaireForm.get('avoidTimes')?.value || []; track $index) {
+            <div class="time-slot-row">
+              <select [(ngModel)]="time.day" [ngModelOptions]="{standalone: true}" class="input-field day-select">
+                <option value="0">Monday</option>
+                <option value="1">Tuesday</option>
+                <option value="2">Wednesday</option>
+                <option value="3">Thursday</option>
+                <option value="4">Friday</option>
+              </select>
+              <input [(ngModel)]="time.start" [ngModelOptions]="{standalone: true}" class="input-field time-input"
+                type="time" />
+              <span class="time-separator">to</span>
+              <input [(ngModel)]="time.end" [ngModelOptions]="{standalone: true}" class="input-field time-input"
+                type="time" />
+              <button (click)="removeAvoidTime($index)" class="btn-icon btn-remove" type="button">
+                <i class="pi pi-trash"></i>
+              </button>
+            </div>
+            }
+
+            <button (click)="addAvoidTime()" class="btn-secondary btn-add" type="button">
+              <i class="pi pi-plus"></i>
+              Add Avoid Time
+            </button>
+          </div>
+        </div>
+        }
+
+        <!-- Step 4: Review -->
+        @if (currentStep === 4) {
+        <div class="step-section">
+          <div class="review-container">
+            <div class="review-card">
+              <div class="review-header">
+                <i class="pi pi-user"></i>
+                <h3>Personal Information</h3>
+              </div>
+              <div class="review-content">
+                <div class="review-item">
+                  <span class="review-label">Full Name</span>
+                  <span class="review-value">{{ questionnaireForm.get('fullName')?.value || 'Not provided' }}</span>
                 </div>
-                <div class="review-content">
-                  <div class="review-item">
-                    <span class="review-label">Full Name</span>
-                    <span class="review-value">{{ questionnaireForm.get('fullName')?.value || 'Not provided' }}</span>
-                  </div>
-                  <div class="review-item">
-                    <span class="review-label">Graduation Year</span>
-                    <span
-                      class="review-value">{{ questionnaireForm.get('graduationYear')?.value || 'Not provided' }}</span>
-                  </div>
+                <div class="review-item">
+                  <span class="review-label">Graduation Year</span>
+                  <span class="review-value">{{ questionnaireForm.get('graduationYear')?.value || 'Not provided'
+                    }}</span>
                 </div>
               </div>
+            </div>
 
-              <div class="review-card">
-                <div class="review-header">
-                  <i class="pi pi-book"></i>
-                  <h3>Academic Program</h3>
-                </div>
-                <div class="review-content">
-                  <div class="review-item">
-                    <span class="review-label">Major</span>
-                    <span class="review-value">{{ questionnaireForm.get('major')?.value || 'Not provided' }}</span>
-                  </div>
-                  @if (questionnaireForm.get('minor')?.value) {
-                    <div class="review-item">
-                      <span class="review-label">Minor</span>
-                      <span class="review-value">{{ questionnaireForm.get('minor')?.value }}</span>
-                    </div>
-                  }
-                </div>
+            <div class="review-card">
+              <div class="review-header">
+                <i class="pi pi-book"></i>
+                <h3>Academic Program</h3>
               </div>
-
-              <div class="review-card">
-                <div class="review-header">
-                  <i class="pi pi-list"></i>
-                  <h3>Completed Courses</h3>
+              <div class="review-content">
+                <div class="review-item">
+                  <span class="review-label">Major</span>
+                  <span class="review-value">{{ questionnaireForm.get('major')?.value?.displayLabel || 'Not
+                    provided' }}</span>
                 </div>
-                <div class="review-content">
-                  <div class="review-item">
-                    <span class="review-label">Total Courses</span>
-                    <span
-                      class="review-value highlight">{{ questionnaireForm.get('completedCourses')?.value?.length || '0' }}
-                      completed</span>
-                  </div>
+                @if (questionnaireForm.get('minor')?.value) {
+                <div class="review-item">
+                  <span class="review-label">Minor</span>
+                  <span class="review-value">{{ questionnaireForm.get('minor')?.value }}</span>
+                </div>
+                }
+              </div>
+            </div>
+
+            <div class="review-card">
+              <div class="review-header">
+                <i class="pi pi-list"></i>
+                <h3>Completed Courses</h3>
+              </div>
+              <div class="review-content">
+                <div class="review-item">
+                  <span class="review-label">Total Courses</span>
+                  <span class="review-value highlight">{{ questionnaireForm.get('completedCourses')?.value?.length ||
+                    '0' }}
+                    completed</span>
                 </div>
               </div>
             </div>
           </div>
+        </div>
         }
       </form>
     </div>
@@ -184,26 +275,26 @@
     <div class="navigation">
       <div class="nav-left">
         @if (currentStep > 1) {
-          <button (click)="previousStep()" class="btn-secondary" type="button">
-            <i class="pi pi-arrow-left"></i>
-            Previous
-          </button>
+        <button (click)="previousStep()" class="btn-secondary" type="button">
+          <i class="pi pi-arrow-left"></i>
+          Previous
+        </button>
         }
       </div>
       <div class="nav-right">
-        @if (currentStep < totalSteps) {
-          <button (click)="nextStep()" [disabled]="!isCurrentStepValid()" class="btn-primary" type="button">
-            Next Step
-            <i class="pi pi-arrow-right"></i>
+        @if (currentStep < totalSteps) { <button (click)="nextStep()" [disabled]="!isCurrentStepValid()"
+          class="btn-primary" type="button">
+          Next Step
+          <i class="pi pi-arrow-right"></i>
           </button>
-        }
-        @if (currentStep === totalSteps) {
+          }
+          @if (currentStep === totalSteps) {
           <button (click)="onSubmit()" [disabled]="!questionnaireForm.valid" class="btn-primary btn-complete"
-                  type="submit">
+            type="submit">
             <i class="pi pi-check"></i>
             Complete Profile
           </button>
-        }
+          }
       </div>
     </div>
   </div>

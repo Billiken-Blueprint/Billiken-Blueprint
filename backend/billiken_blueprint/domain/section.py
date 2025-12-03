@@ -8,6 +8,9 @@ class MeetingTime:
     start_time: str
     end_time: str
 
+    def __post_init__(self):
+        self.day = int(self.day)
+        
     def overlaps(self, other: "MeetingTime") -> bool:
         if self.day != other.day:
             return False

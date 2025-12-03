@@ -1,7 +1,7 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {BehaviorSubject, tap, Observable, map} from 'rxjs';
-import {jwtDecode, JwtPayload} from 'jwt-decode';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { BehaviorSubject, tap, Observable, map } from 'rxjs';
+import { jwtDecode, JwtPayload } from 'jwt-decode';
 
 interface CustomTokenPayload extends JwtPayload {
   email?: string;
@@ -29,7 +29,7 @@ export class AuthService {
 
     return this.http.post<{
       access_token: string
-    }>('/api/identity/token', form.toString(), {headers: headers})
+    }>('/api/identity/token', form.toString(), { headers: headers })
       .pipe(tap({
         next: (res) => {
           if (res && res.access_token) {
@@ -48,7 +48,7 @@ export class AuthService {
       'Content-Type': 'application/x-www-form-urlencoded',
     });
 
-    return this.http.post<{ access_token: string }>('/api/identity/register', form.toString(), {headers: headers})
+    return this.http.post<{ access_token: string }>('/api/identity/register', form.toString(), { headers: headers })
       .pipe(tap({
         next: (res) => {
           if (res && res.access_token) {
@@ -117,7 +117,7 @@ export class AuthService {
     }
   }
 
-  private getLoginStatus() {
+  getLoginStatus() {
     const payload = this.getTokenPayload();
     // payload.exp is in seconds, Date.now() is in milliseconds
     return !!payload && !!payload.exp && Math.floor(Date.now() / 1000) < payload.exp;

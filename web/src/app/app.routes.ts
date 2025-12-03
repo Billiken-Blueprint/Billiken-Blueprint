@@ -8,7 +8,7 @@ export const routes: Routes = [
     pathMatch: 'full',
     redirectTo: () => {
       const authService = inject(AuthService);
-      return authService.getToken() ? 'home' : 'landing';
+      return authService.getLoginStatus() ? 'home' : 'landing';
     }
   },
   {

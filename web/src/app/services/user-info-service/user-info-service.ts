@@ -1,5 +1,5 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -16,9 +16,11 @@ export class UserInfoService {
       name: body.name,
       graduation_year: body.graduationYear,
       completed_course_ids: body.completedCourseIds,
+      unavailability_times: body.unavailabilityTimes,
+      avoid_times: body.avoidTimes,
       degree_id: body.degreeId
     }), {
-      headers: {'Content-Type': 'application/json'}
+      headers: { 'Content-Type': 'application/json' }
     });
   }
 
@@ -30,16 +32,26 @@ export class UserInfoService {
 }
 
 
+export interface TimeSlot {
+  day: number;
+  start: string;
+  end: string;
+}
+
 export interface SetUserInfoBody {
   name: string;
   graduationYear: number;
   completedCourseIds: number[];
+  unavailabilityTimes: TimeSlot[];
+  avoidTimes: TimeSlot[];
   degreeId: number;
 }
 
 export interface GetUserInfoResponse {
   name: string;
   completedCourseIds: number[];
+  unavailabilityTimes: TimeSlot[];
+  avoidTimes: TimeSlot[];
   savedCourseCodes: string[];
   graduationYear: number;
   degreeId: number;
