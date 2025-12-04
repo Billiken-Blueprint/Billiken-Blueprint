@@ -57,11 +57,11 @@ async def get_instructor_reviews(
         course_code = None
         course_name = None
         if review.course_id:
-            db_course = await course_repo.get_by_id(review.course_id)
-            if db_course:
-                course = db_course.to_course()
-                course_code = course.course_code
-                course_name = course.title
+            course = await course_repo.get_by_id(review.course_id)
+            if course:
+                course_code = f"{course.major_code} {course.course_number}"
+                # Course domain object doesn't have title, use course_code as name
+                course_name = course_code
         
         result.append({
             "id": review.id,
@@ -87,11 +87,11 @@ async def get_instructor_reviews(
         course_code = None
         course_name = None
         if rating.course_id:
-            db_course = await course_repo.get_by_id(rating.course_id)
-            if db_course:
-                course = db_course.to_course()
-                course_code = course.course_code
-                course_name = course.title
+            course = await course_repo.get_by_id(rating.course_id)
+            if course:
+                course_code = f"{course.major_code} {course.course_number}"
+                # Course domain object doesn't have title, use course_code as name
+                course_name = course_code
         
         result.append({
             "id": rating.id,

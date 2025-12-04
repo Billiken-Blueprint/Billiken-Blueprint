@@ -4,6 +4,10 @@ from sqlalchemy import select, delete, JSON
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 from datetime import datetime
+from pathlib import Path
+import json
+import re
+from functools import lru_cache
 
 from billiken_blueprint.base import Base
 from billiken_blueprint.domain.ratings.rmp_review import RmpReview
@@ -43,8 +47,16 @@ class DBRmpReview(Base):
 
 
 class RmpReviewRepository:
-    def __init__(self, async_sessionmaker: async_sessionmaker[AsyncSession]) -> None:
+    def __init__(
+        self,
+        async_sessionmaker: async_sessionmaker[AsyncSession],
+        instructor_repo=None,
+        course_repo=None,
+    ) -> None:
         self._async_sessionmaker = async_sessionmaker
+        self._instructor_repo = instructor_repo
+        self._course_repo = course_repo
+        self._rmp_data_cache = None
 
     async def save(self, review: RmpReview) -> RmpReview:
         """Save or update an RMP review in the database."""
@@ -129,25 +141,201 @@ class RmpReviewRepository:
             await session.execute(conflict_stmt)
             await session.commit()
 
+    def _load_rmp_data_from_files(self) -> list[dict]:
+        """Load RMP data from JSON files."""
+        if self._rmp_data_cache is not None:
+            return self._rmp_data_cache
+
+        rmp_data = []
+        data_dir = Path("data_dumps")
+
+        # Try CS professors files
+        for filename in ["cs_professors_with_reviews.json", "cs_professors.json"]:
+            path = data_dir / filename
+            if path.exists():
+                with open(path, "r") as f:
+                    cs_data = json.load(f)
+                    for prof in cs_data:
+                        prof["_department"] = "CSCI"
+                    rmp_data.extend(cs_data)
+                    break
+
+        # Try Math professors files
+        for filename in [
+            "math_professors_with_reviews.json",
+            "math_professors.json",
+        ]:
+            path = data_dir / filename
+            if path.exists():
+                with open(path, "r") as f:
+                    math_data = json.load(f)
+                    for prof in math_data:
+                        prof["_department"] = "MATH"
+                    rmp_data.extend(math_data)
+                    break
+
+        self._rmp_data_cache = rmp_data
+        return rmp_data
+
+    def _normalize_course_code(self, course_code: str) -> str:
+        """Normalize course code by removing spaces and converting to uppercase."""
+        if not course_code:
+            return ""
+        return course_code.replace(" ", "").replace("-", "").upper()
+
+    def _course_code_matches(self, review_course: Optional[str], target: str) -> bool:
+        """Check if a review's course field matches the target course code."""
+        if not review_course or not target:
+            return False
+        normalized_review = self._normalize_course_code(review_course)
+        normalized_target = self._normalize_course_code(target)
+        return normalized_target in normalized_review or normalized_review in normalized_target
+
     async def get_by_instructor_id(self, instructor_id: int) -> list[RmpReview]:
-        """Retrieve all RMP reviews for a specific instructor."""
+        """Retrieve all RMP reviews for a specific instructor.
+        
+        First tries database, then falls back to JSON files if database is empty.
+        """
+        # Try database first (for backward compatibility)
         stmt = select(DBRmpReview).where(DBRmpReview.instructor_id == instructor_id)
 
         async with self._async_sessionmaker() as session:
             result = await session.execute(stmt)
             db_reviews = result.scalars().all()
 
-        return [db_review.to_rmp_review() for db_review in db_reviews]
+        if db_reviews:
+            return [db_review.to_rmp_review() for db_review in db_reviews]
+
+        # Fall back to JSON files if database is empty
+        if not self._instructor_repo:
+            return []
+
+        instructor = await self._instructor_repo.get_by_id(instructor_id)
+        if not instructor:
+            return []
+
+        rmp_data = self._load_rmp_data_from_files()
+        reviews = []
+
+        for prof in rmp_data:
+            prof_name = prof.get("name", "").strip()
+            if prof_name.lower() != instructor.name.lower():
+                continue
+
+            prof_reviews = prof.get("reviews", [])
+            for review_data in prof_reviews:
+                review_date = None
+                if review_data.get("date"):
+                    try:
+                        review_date = datetime.fromisoformat(
+                            str(review_data["date"]).replace("Z", "+00:00")
+                        )
+                    except (ValueError, TypeError):
+                        pass
+
+                # Try to match course_id if course code matches
+                course_id = None
+                course_string = review_data.get("course")
+                if course_string and self._course_repo:
+                    course_code_match = re.search(
+                        r"([A-Z]+)\s*(\d{4})", course_string.upper()
+                    )
+                    if course_code_match:
+                        department = course_code_match.group(1)
+                        number = course_code_match.group(2)
+                        potential_course_code = f"{department} {number}"
+                        db_course = await self._course_repo.get_by_code(
+                            potential_course_code
+                        )
+                        if db_course:
+                            course_id = db_course.id
+
+                rmp_review = RmpReview(
+                    id=None,
+                    instructor_id=instructor_id,
+                    course=course_string,
+                    course_id=course_id,
+                    quality=review_data.get("quality", 0.0),
+                    difficulty=review_data.get("difficulty"),
+                    comment=review_data.get("comment", ""),
+                    would_take_again=review_data.get("would_take_again"),
+                    grade=review_data.get("grade"),
+                    attendance=review_data.get("attendance"),
+                    tags=review_data.get("tags", []) or [],
+                    review_date=review_date,
+                )
+                reviews.append(rmp_review)
+
+        return reviews
 
     async def get_by_course_id(self, course_id: int) -> list[RmpReview]:
-        """Retrieve all RMP reviews for a specific course."""
+        """Retrieve all RMP reviews for a specific course.
+        
+        First tries database, then falls back to JSON files if database is empty.
+        """
+        # Try database first (for backward compatibility)
         stmt = select(DBRmpReview).where(DBRmpReview.course_id == course_id)
 
         async with self._async_sessionmaker() as session:
             result = await session.execute(stmt)
             db_reviews = result.scalars().all()
 
-        return [db_review.to_rmp_review() for db_review in db_reviews]
+        if db_reviews:
+            return [db_review.to_rmp_review() for db_review in db_reviews]
+
+        # Fall back to JSON files if database is empty
+        if not self._course_repo:
+            return []
+
+        course = await self._course_repo.get_by_id(course_id)
+        if not course:
+            return []
+
+        course_code = f"{course.major_code} {course.course_number}"
+        rmp_data = self._load_rmp_data_from_files()
+        reviews = []
+
+        for prof in rmp_data:
+            prof_reviews = prof.get("reviews", [])
+            for review_data in prof_reviews:
+                review_course = review_data.get("course")
+                if not self._course_code_matches(review_course, course_code):
+                    continue
+
+                review_date = None
+                if review_data.get("date"):
+                    try:
+                        review_date = datetime.fromisoformat(
+                            str(review_data["date"]).replace("Z", "+00:00")
+                        )
+                    except (ValueError, TypeError):
+                        pass
+
+                # Try to get instructor_id by matching name
+                instructor_id = None
+                prof_name = prof.get("name", "").strip()
+                if self._instructor_repo:
+                    instructor = await self._instructor_repo.get_by_name(prof_name)
+                    if instructor:
+                        instructor_id = instructor.id
+
+                rmp_review = RmpReview(
+                    id=None,
+                    instructor_id=instructor_id,
+                    course=review_course,
+                    course_id=course_id,
+                    quality=review_data.get("quality", 0.0),
+                    difficulty=review_data.get("difficulty"),
+                    comment=review_data.get("comment", ""),
+                    would_take_again=review_data.get("would_take_again"),
+                    grade=review_data.get("grade"),
+                    attendance=review_data.get("attendance"),
+                    tags=review_data.get("tags", []) or [],
+                    review_date=review_date,
+                )
+                reviews.append(rmp_review)
+
+        return reviews
 
     async def delete_by_instructor_id(self, instructor_id: int) -> None:
         """Delete all RMP reviews for a specific instructor."""

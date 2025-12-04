@@ -1630,13 +1630,5 @@
     "rmp_num_ratings": null,
     "rmp_url": "https://www.ratemyprofessors.com/professor/2793908",
     "department": "MATH"
-  },
-  {
-    "id": 205,
-    "name": "Ted Ahn",
-    "rmp_rating": 3.5,
-    "rmp_num_ratings": 8,
-    "rmp_url": "https://www.ratemyprofessors.com/professor/2351201",
-    "department": "CSCI"
   }
 ]

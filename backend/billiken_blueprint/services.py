@@ -28,7 +28,12 @@ rating_repository = rating_repository.RatingRepository(async_sessionmaker)
 degree_repository = degree_repository.DegreeRepository(async_sessionmaker)
 section_repository = section_repository.SectionRepository(async_sessionmaker)
 
-rmp_review_repository = rmp_review_repository.RmpReviewRepository(async_sessionmaker)
+# Initialize RMP review repository with dependencies for file-based fallback
+rmp_review_repository = rmp_review_repository.RmpReviewRepository(
+    async_sessionmaker,
+    instructor_repo=instructor_repository,
+    course_repo=course_repository,
+)
 course_attribute_repository = course_attribute_repository.CourseAttributeRepository(
     async_sessionmaker
 )
