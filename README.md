@@ -22,28 +22,44 @@ which get bind-mounted into the containers.
 
 ### Backend
 
-Install uv
+**Initial Setup (Fresh Clone):**
 
+1. Install dependencies:
 ```bash
 cd backend
 uv sync
+```
+
+2. **Run database migrations (REQUIRED - creates database schema):**
+```bash
 uv run alembic upgrade head
 ```
 
-**Note:** After cloning the repository, the database will be empty. To populate it with initial data, you have two options:
+3. **Populate database with data:**
+
+**Note:** After cloning the repository, the database doesn't exist yet. You MUST run migrations first, then populate data:
+
+**Step 1: Run database migrations (REQUIRED)**
+```bash
+cd backend
+uv sync
+uv run alembic upgrade head  # Creates database schema
+```
+
+**Step 2: Populate database with data**
 
 **Option 1: Build a clean seed database (recommended)**
 ```bash
-# Builds a clean database with courses, instructors, etc.
+# Builds a clean database with courses, instructors, etc. (includes RMP data update)
 uv run scripts/build_seed_db.py
-# Update instructor RMP rating fields (needed for ratings to show)
-uv run scripts/update_instructor_rmp_data.py
 ```
 
 **Option 2: Import data manually**
 ```bash
 # Import courses, instructors, sections, degrees, and course attributes from JSON files
 uv run scripts/import_data.py
+# Update instructor RMP rating fields (needed for ratings to show)
+uv run scripts/update_instructor_rmp_data.py
 ```
 
 **Troubleshooting:** If ratings don't show up, check if instructors have RMP data:

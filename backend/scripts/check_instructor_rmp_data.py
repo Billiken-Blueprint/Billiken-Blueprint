@@ -15,7 +15,16 @@ async def check_instructor_rmp_data():
     print("Checking instructor RMP data...")
     print("=" * 60)
     
-    all_instructors = await services.instructor_repository.get_all()
+    try:
+        all_instructors = await services.instructor_repository.get_all()
+    except Exception as e:
+        if "no such table" in str(e).lower():
+            print("❌ ERROR: Database tables don't exist!")
+            print("   You need to run migrations first:")
+            print("   uv run alembic upgrade head")
+            return
+        else:
+            raise
     print(f"Total instructors in database: {len(all_instructors)}")
     print()
     
