@@ -12,7 +12,8 @@ RUN mkdir -p data && alembic upgrade head
 
 FROM migrations AS seeding
 RUN uv run scripts/import_data.py
-# Note: RMP reviews are loaded from JSON files automatically, no import needed
+RUN uv run scripts/update_instructor_rmp_data.py
+# Note: Individual RMP reviews are loaded from JSON files automatically, but we need to update instructor RMP fields
 
 FROM deps AS dev
 COPY --from=seeding /app/data /app/data

@@ -34,8 +34,10 @@ uv run alembic upgrade head
 
 **Option 1: Build a clean seed database (recommended)**
 ```bash
-# Builds a clean database with courses, instructors, etc. (no RMP reviews - they load from files)
+# Builds a clean database with courses, instructors, etc.
 uv run scripts/build_seed_db.py
+# Update instructor RMP rating fields (needed for ratings to show)
+uv run scripts/update_instructor_rmp_data.py
 ```
 
 **Option 2: Import data manually**

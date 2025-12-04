@@ -92,7 +92,12 @@ async def build_seed_database():
         )
     print(f"  Imported {len(attributes_data)} course attributes")
     
-    # Note: RMP reviews are NOT imported - they're loaded from JSON files automatically
+    print("\nUpdating instructor RMP data...")
+    # Update instructor RMP rating fields (needed for ratings to show)
+    from scripts.update_instructor_rmp_data import update_instructor_rmp_data
+    await update_instructor_rmp_data()
+    
+    # Note: Individual RMP reviews are NOT imported - they're loaded from JSON files automatically
     
     # Get final database size
     if db_path.exists():
