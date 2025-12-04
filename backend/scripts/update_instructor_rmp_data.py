@@ -80,14 +80,28 @@ async def update_instructor_rmp_data():
 
     print(f"Total RMP professor records: {len(rmp_data)}")
 
+    def normalize_name_for_matching(name: str) -> str:
+        """Normalize name for matching (e.g., Ted Ahn variations)."""
+        name_lower = name.lower()
+        # Normalize Ted Ahn variations
+        if "ahn" in name_lower and ("ted" in name_lower or "tae" in name_lower):
+            return "ted ahn"
+        return name_lower.strip()
+
     # Get all existing instructors
     existing_instructors = await services.instructor_repository.get_all()
-    instructor_by_name = {
-        instructor.name.lower(): instructor for instructor in existing_instructors
-    }
+    # Create lookup by both exact name and normalized name
+    instructor_by_name = {}
+    instructor_by_normalized = {}
+    for instructor in existing_instructors:
+        instructor_by_name[instructor.name.lower()] = instructor
+        normalized = normalize_name_for_matching(instructor.name)
+        if normalized not in instructor_by_normalized:
+            instructor_by_normalized[normalized] = instructor
 
     matched = 0
     not_matched = []
+    created_count = 0
 
     for rmp_prof in rmp_data:
         name = rmp_prof.get("name", "").strip()
@@ -99,7 +113,12 @@ async def update_instructor_rmp_data():
         # Try exact match first
         instructor = instructor_by_name.get(name.lower())
 
-        # If no exact match, try partial matches
+        # Try normalized name match (for Ted Ahn, etc.)
+        if not instructor:
+            normalized_rmp_name = normalize_name_for_matching(name)
+            instructor = instructor_by_normalized.get(normalized_rmp_name)
+
+        # If no exact match, try partial matches by last name
         if not instructor:
             rmp_name_parts = name.lower().split()
             for existing_name, existing_instructor in instructor_by_name.items():
@@ -161,29 +180,55 @@ async def update_instructor_rmp_data():
                 f"✓ Updated: {instructor_name} (Rating: {rmp_prof.get('overall_rating')}, Dept: {department})"
             )
         else:
-            # Create new instructor if not found
-            instructor_name = name
-            if "ahn" in name.lower() and (
-                "ted" in name.lower() or "tae" in name.lower()
-            ):
-                instructor_name = "Ted Ahn"
+            # Before creating new instructor, check if normalized name already exists
+            normalized_rmp_name = normalize_name_for_matching(name)
+            existing_normalized = instructor_by_normalized.get(normalized_rmp_name)
+            
+            if existing_normalized:
+                # Found by normalized name - update that one instead
+                instructor = existing_normalized
+                department = dept_from_prof or instructor.department
+                instructor_name = "Ted Ahn" if normalized_rmp_name == "ted ahn" else instructor.name
+                
+                updated_instructor = Professor(
+                    id=instructor.id,
+                    name=instructor_name,
+                    rmp_rating=rmp_prof.get("overall_rating"),
+                    rmp_num_ratings=rmp_prof.get("num_ratings"),
+                    rmp_url=rmp_prof.get("profile_url"),
+                    department=department,
+                )
+                await services.instructor_repository.save(updated_instructor)
+                matched += 1
+                print(
+                    f"✓ Updated (normalized match): {instructor_name} (was: {instructor.name}, Rating: {rmp_prof.get('overall_rating')}, Dept: {department})"
+                )
+            else:
+                # Create new instructor if truly not found
+                instructor_name = name
+                if "ahn" in name.lower() and (
+                    "ted" in name.lower() or "tae" in name.lower()
+                ):
+                    instructor_name = "Ted Ahn"
 
-            new_instructor = Professor(
-                id=None,
-                name=instructor_name,
-                rmp_rating=rmp_prof.get("overall_rating"),
-                rmp_num_ratings=rmp_prof.get("num_ratings"),
-                rmp_url=rmp_prof.get("profile_url"),
-                department=dept_from_prof,
-            )
-            await services.instructor_repository.save(new_instructor)
-            matched += 1
-            print(
-                f"✓ Created: {instructor_name} (Rating: {rmp_prof.get('overall_rating')}, Dept: {dept_from_prof})"
-            )
+                new_instructor = Professor(
+                    id=None,
+                    name=instructor_name,
+                    rmp_rating=rmp_prof.get("overall_rating"),
+                    rmp_num_ratings=rmp_prof.get("num_ratings"),
+                    rmp_url=rmp_prof.get("profile_url"),
+                    department=dept_from_prof,
+                )
+                await services.instructor_repository.save(new_instructor)
+                created_count += 1
+                print(
+                    f"✓ Created: {instructor_name} (Rating: {rmp_prof.get('overall_rating')}, Dept: {dept_from_prof})"
+                )
 
     print(f"\nSummary:")
-    print(f"  Updated/Created instructors: {matched}/{len(rmp_data)}")
+    print(f"  Updated instructors: {matched}")
+    print(f"  Created instructors: {created_count}")
+    print(f"  Total processed: {matched + created_count}/{len(rmp_data)}")
     print(f"  Note: Individual RMP reviews load from JSON files automatically")
 
 
