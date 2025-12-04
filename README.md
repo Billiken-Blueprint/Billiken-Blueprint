@@ -2,10 +2,17 @@
 
 ## Docker
 
+For a fresh clone, simply run:
+
 ```bash
 docker compose build
 docker compose up
 ```
+
+The Docker build process automatically:
+- Runs database migrations
+- Imports courses, instructors, sections, degrees, and course attributes
+- **RMP reviews load automatically from JSON files** (no import needed)
 
 The compose configuration targets the dev build of the frontend and backend images.
 These run their respective dev server which listen to changes you make in your local source directories,

@@ -12,7 +12,7 @@ RUN mkdir -p data && alembic upgrade head
 
 FROM migrations AS seeding
 RUN uv run scripts/import_data.py
-RUN python scripts/import_rmp_ratings.py
+# Note: RMP reviews are loaded from JSON files automatically, no import needed
 
 FROM deps AS dev
 COPY --from=seeding /app/data /app/data
