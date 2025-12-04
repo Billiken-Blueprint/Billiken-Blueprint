@@ -21,8 +21,28 @@ Install uv
 cd backend
 uv sync
 uv run alembic upgrade head
+```
+
+**Note:** After cloning the repository, the database will be empty. To populate it with initial data (courses, instructors, sections, degrees, etc.), run:
+
+```bash
+# Import courses, instructors, sections, degrees, and course attributes from JSON files
+uv run scripts/import_data.py
+```
+
+**Note:** RMP (RateMyProfessor) reviews are automatically loaded from JSON files in `data_dumps/` when needed - no import script required. The database only stores user-created ratings, keeping it small and simple.
+
+Then start the server:
+
+```bash
 uv run fastapi dev server.py
 ```
+
+**Important:** User-created ratings are stored in the local database file (`data/data.db`), which is gitignored. When you clone the repository to a new location:
+- Run database migrations (creates empty database)
+- Run the data import script (populates courses, instructors, etc.)
+- RMP reviews will be automatically available from JSON files
+- Any user-created ratings from your original setup won't be in the new clone - you'll need to create them again
 
 ### Frontend
 
