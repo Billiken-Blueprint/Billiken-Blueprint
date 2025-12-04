@@ -94,8 +94,14 @@ async def build_seed_database():
     
     print("\nUpdating instructor RMP data...")
     # Update instructor RMP rating fields (needed for ratings to show)
-    from scripts.update_instructor_rmp_data import update_instructor_rmp_data
-    await update_instructor_rmp_data()
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        "update_instructor_rmp_data",
+        Path(__file__).parent / "update_instructor_rmp_data.py"
+    )
+    update_module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(update_module)
+    await update_module.update_instructor_rmp_data()
     
     # Note: Individual RMP reviews are NOT imported - they're loaded from JSON files automatically
     
