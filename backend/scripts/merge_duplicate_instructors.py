@@ -16,7 +16,7 @@ from billiken_blueprint.repositories.rmp_review_repository import DBRmpReview
 
 
 def normalize_name_for_matching(name: str) -> str:
-    """Normalize name for matching (e.g., Ted Ahn variations, typos)."""
+    """Normalize name for matching (e.g., Ted Ahn variations, typos, common name variations)."""
     name_lower = name.lower().strip()
     
     # Normalize Ted Ahn variations
@@ -32,6 +32,62 @@ def normalize_name_for_matching(name: str) -> str:
     # Fix common typos
     name_normalized = name_normalized.replace("adbul", "abdul")
     
+    # Normalize common first name variations
+    parts = name_normalized.split()
+    if len(parts) >= 2:
+        first_name = parts[0]
+        last_name = parts[-1]
+        
+        # Common name variations mapping
+        name_variations = {
+            "jim": "james",
+            "jimmy": "james",
+            "phil": "philip",
+            "sam": "samuel",
+            "bob": "robert",
+            "rob": "robert",
+            "dick": "richard",
+            "rick": "richard",
+            "bill": "william",
+            "will": "william",
+            "mike": "michael",
+            "mikey": "michael",
+            "chris": "christopher",
+            "cj": "christopher",  # CJ Halverson -> Christopher Halverson
+            "chuck": "charles",
+            "charlie": "charles",
+            "ted": "theodore",
+            "ed": "edward",
+            "eddie": "edward",
+            "tom": "thomas",
+            "tommy": "thomas",
+            "dan": "daniel",
+            "danny": "daniel",
+            "joe": "joseph",
+            "joey": "joseph",
+            "steve": "steven",
+            "stephen": "steven",
+            "greg": "gregory",
+            "alex": "alexander",
+            "sandy": "alexander",
+            "andy": "andrew",
+            "drew": "andrew",
+            "josh": "joshua",
+            "matt": "matthew",
+            "nate": "nathaniel",
+            "nat": "nathaniel",
+            "ben": "benjamin",
+            "benny": "benjamin",
+            "tim": "timothy",
+            "timmy": "timothy",
+            "abby": "abigail",  # Abby -> Abigail
+        }
+        
+        # Normalize first name
+        normalized_first = name_variations.get(first_name, first_name)
+        
+        return f"{normalized_first} {last_name}"
+    
     return name_normalized
 
 
@@ -42,8 +98,9 @@ def choose_canonical_instructor(instructors: list[Professor]) -> Professor:
     1. Has RMP rating data
     2. Has department set
     3. Correct spelling (no typos like "Adbul" -> prefer "Abdul")
-    4. Has normalized name (e.g., "Ted Ahn" over "Tae Ahn")
-    5. Lower ID (older record)
+    4. Full name over nickname (e.g., "James" over "Jim", "Philip" over "Phil", "Samuel" over "Sam")
+    5. Has normalized name (e.g., "Ted Ahn" over "Tae Ahn")
+    6. Lower ID (older record)
     """
     # Prefer instructor with RMP data
     with_rmp = [inst for inst in instructors if inst.rmp_rating is not None]
@@ -59,6 +116,34 @@ def choose_canonical_instructor(instructors: list[Professor]) -> Professor:
     without_typos = [inst for inst in instructors if "adbul" not in inst.name.lower()]
     if without_typos:
         instructors = without_typos
+    
+    # Prefer full name over nickname
+    nickname_to_full = {
+        "jim": "james",
+        "phil": "philip",
+        "sam": "samuel",
+        "ted": "theodore",  # But "Ted Ahn" is special case
+        "cj": "christopher",
+        "abby": "abigail",
+    }
+    
+    # Prefer full names over nicknames
+    full_name_versions = []
+    nickname_versions = []
+    for inst in instructors:
+        first_name = inst.name.split()[0].lower() if inst.name.split() else ""
+        # Skip Ted Ahn special case
+        if "ahn" in inst.name.lower():
+            continue
+        if first_name in nickname_to_full.values() or first_name not in nickname_to_full:
+            # This is a full name or not a known nickname
+            full_name_versions.append(inst)
+        else:
+            nickname_versions.append(inst)
+    
+    # Prefer full names if available
+    if full_name_versions:
+        instructors = full_name_versions
     
     # Prefer normalized name (Ted Ahn over Tae Ahn)
     for inst in instructors:
@@ -126,9 +211,19 @@ async def merge_duplicate_instructors():
             canonical = choose_canonical_instructor(instructors)
             canonical_id = canonical.id
             
-            # Determine canonical name (prefer normalized)
+            # Determine canonical name (prefer normalized and full names)
             if normalized == "ted ahn":
                 canonical_name = "Ted Ahn"
+            elif normalized == "james gill":
+                canonical_name = "James Gill"
+            elif normalized == "philip huling":
+                canonical_name = "Philip Huling"
+            elif normalized == "samuel stoll":
+                canonical_name = "Samuel Stoll"
+            elif normalized == "christopher halverson":
+                canonical_name = "Christopher Halverson"
+            elif normalized == "abigail stylianou":
+                canonical_name = "Abigail Stylianou"
             else:
                 canonical_name = canonical.name
             
