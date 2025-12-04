@@ -81,12 +81,50 @@ async def update_instructor_rmp_data():
     print(f"Total RMP professor records: {len(rmp_data)}")
 
     def normalize_name_for_matching(name: str) -> str:
-        """Normalize name for matching (e.g., Ted Ahn variations)."""
-        name_lower = name.lower()
+        """Normalize name for matching (e.g., Ted Ahn variations, common name variations)."""
+        name_lower = name.lower().strip()
+        
         # Normalize Ted Ahn variations
         if "ahn" in name_lower and ("ted" in name_lower or "tae" in name_lower):
             return "ted ahn"
-        return name_lower.strip()
+        
+        # Normalize Jamal Abdul-Hafidh typo
+        if "jamal" in name_lower and "abdul" in name_lower.replace("adbul", "abdul") and "hafidh" in name_lower:
+            return "jamal abdul-hafidh"
+        
+        # Normalize common typos
+        name_normalized = name_lower.replace("adbul", "abdul")
+        
+        # Normalize common first name variations
+        parts = name_normalized.split()
+        if len(parts) >= 2:
+            first_name = parts[0]
+            last_name = parts[-1]
+            
+            name_variations = {
+                "jim": "james", "jimmy": "james",
+                "phil": "philip",
+                "sam": "samuel",
+                "chris": "christopher", "cj": "christopher",
+                "abby": "abigail",
+                "mike": "michael",
+                "tom": "thomas",
+                "dan": "daniel",
+                "joe": "joseph",
+                "steve": "steven", "stephen": "steven",
+                "greg": "gregory",
+                "alex": "alexander",
+                "andy": "andrew",
+                "josh": "joshua",
+                "matt": "matthew",
+                "ben": "benjamin",
+                "tim": "timothy",
+            }
+            
+            normalized_first = name_variations.get(first_name, first_name)
+            return f"{normalized_first} {last_name}"
+        
+        return name_normalized
 
     # Get all existing instructors
     existing_instructors = await services.instructor_repository.get_all()
