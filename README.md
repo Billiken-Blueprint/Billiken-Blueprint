@@ -2,8 +2,6 @@
 
 ## Docker
 
-For a fresh clone, simply run:
-
 ```bash
 docker compose build
 docker compose up
