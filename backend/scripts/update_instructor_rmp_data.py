@@ -68,8 +68,15 @@ async def update_instructor_rmp_data():
             print(f"Loaded {len(math_data)} Math professor records")
 
     if not rmp_data:
-        print("No RMP data found. Make sure data_dumps/*.json files exist.")
-        return
+        print("ERROR: No RMP data found. Make sure data_dumps/*.json files exist.")
+        print(f"  Checked paths:")
+        for path in cs_possible_paths + math_possible_paths:
+            exists = "✓" if path.exists() else "✗"
+            print(f"    {exists} {path.absolute()}")
+        # Don't fail silently - this is important for ratings to show
+        raise FileNotFoundError(
+            "RMP data files not found. Ratings will not show without instructor RMP data."
+        )
 
     print(f"Total RMP professor records: {len(rmp_data)}")
 
