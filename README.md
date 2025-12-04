@@ -46,6 +46,11 @@ uv run scripts/update_instructor_rmp_data.py
 uv run scripts/import_data.py
 ```
 
+**Troubleshooting:** If ratings don't show up, check if instructors have RMP data:
+```bash
+uv run scripts/check_instructor_rmp_data.py
+```
+
 **Important:** RMP (RateMyProfessor) reviews are automatically loaded from JSON files in `data_dumps/` when needed - they should NOT be imported into the database. If your database has RMP reviews and is too large, run:
 ```bash
 # Remove RMP reviews from database to reduce size
