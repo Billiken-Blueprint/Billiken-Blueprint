@@ -23,14 +23,27 @@ uv sync
 uv run alembic upgrade head
 ```
 
-**Note:** After cloning the repository, the database will be empty. To populate it with initial data (courses, instructors, sections, degrees, etc.), run:
+**Note:** After cloning the repository, the database will be empty. To populate it with initial data, you have two options:
 
+**Option 1: Build a clean seed database (recommended)**
+```bash
+# Builds a clean database with courses, instructors, etc. (no RMP reviews - they load from files)
+uv run scripts/build_seed_db.py
+```
+
+**Option 2: Import data manually**
 ```bash
 # Import courses, instructors, sections, degrees, and course attributes from JSON files
 uv run scripts/import_data.py
 ```
 
-**Note:** RMP (RateMyProfessor) reviews are automatically loaded from JSON files in `data_dumps/` when needed - no import script required. The database only stores user-created ratings, keeping it small and simple.
+**Important:** RMP (RateMyProfessor) reviews are automatically loaded from JSON files in `data_dumps/` when needed - they should NOT be imported into the database. If your database has RMP reviews and is too large, run:
+```bash
+# Remove RMP reviews from database to reduce size
+uv run scripts/clean_rmp_reviews.py
+```
+
+The database only stores user-created ratings and essential data (courses, instructors), keeping it small (~100-200KB instead of 800KB+).
 
 Then start the server:
 
