@@ -27,9 +27,22 @@ else
     echo "Database exists. Checking if migrations are needed..."
     uv run alembic upgrade head
     
-    # Check if database is empty (check file size - empty DB is usually < 10KB)
-    DB_SIZE=$(stat -f%z /app/data/data.db 2>/dev/null || stat -c%s /app/data/data.db 2>/dev/null || echo "0")
-    if [ "$DB_SIZE" -lt 10240 ]; then
+    # Check if database is empty (check if instructors table has data)
+    # Use Python to check since it's available and works cross-platform
+    HAS_DATA=$(uv run python -c "
+import sqlite3
+try:
+    conn = sqlite3.connect('/app/data/data.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT COUNT(*) FROM instructors')
+    count = cursor.fetchone()[0]
+    conn.close()
+    print('yes' if count > 0 else 'no')
+except:
+    print('no')
+" 2>/dev/null || echo "no")
+    
+    if [ "$HAS_DATA" = "no" ]; then
         echo "Database is empty. Importing data..."
         uv run scripts/import_data.py
         echo "Data imported."
