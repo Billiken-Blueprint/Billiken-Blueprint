@@ -25,14 +25,22 @@ COPY --from=seeding /app/data /app/data
 COPY --exclude=billiken_blueprint . .
 # Verify data_dumps is available for runtime RMP review loading
 RUN ls -la data_dumps/ 2>/dev/null && echo "data_dumps available in dev stage" || echo "WARNING: data_dumps not found in dev stage"
+# Copy and make entrypoint script executable
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 EXPOSE 8000
 VOLUME [ "/app/billiken_blueprint" ]
 VOLUME [ "/app/data" ]
+ENTRYPOINT [ "/app/entrypoint.sh" ]
 CMD [ "fastapi", "dev", "server.py", "--host", "0.0.0.0" ]
 
 FROM deps AS prod
 COPY --from=seeding /app/data /app/data
 COPY . .
+# Copy and make entrypoint script executable
+COPY entrypoint.sh /app/entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 EXPOSE 8000
 USER 1000
+ENTRYPOINT [ "/app/entrypoint.sh" ]
 CMD [ "fastapi", "run", "server.py", "--host", "0.0.0.0" ]

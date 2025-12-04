@@ -9,10 +9,12 @@ docker compose build
 docker compose up
 ```
 
-The Docker build process automatically:
-- Runs database migrations
-- Imports courses, instructors, sections, degrees, and course attributes
+**That's it!** The setup is fully automatic:
+
+- **On first run**: Database is created, migrations run, data is imported, and RMP ratings are updated
+- **On subsequent runs**: Only migrations are checked/run if needed
 - **RMP reviews load automatically from JSON files** (no import needed)
+- Everything happens automatically when the container starts
 
 The compose configuration targets the dev build of the frontend and backend images.
 These run their respective dev server which listen to changes you make in your local source directories,
