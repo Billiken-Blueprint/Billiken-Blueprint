@@ -27,21 +27,9 @@ else
     echo "Database exists. Checking if migrations are needed..."
     uv run alembic upgrade head
     
-    # Check if database is empty (no instructors)
-    INSTRUCTOR_COUNT=$(uv run python -c "
-import asyncio
-import sys
-sys.path.insert(0, '/app')
-from billiken_blueprint import services
-
-async def check():
-    instructors = await services.instructor_repository.get_all()
-    print(len(instructors))
-
-asyncio.run(check())
-" 2>/dev/null || echo "0")
-    
-    if [ "$INSTRUCTOR_COUNT" = "0" ]; then
+    # Check if database is empty (check file size - empty DB is usually < 10KB)
+    DB_SIZE=$(stat -f%z /app/data/data.db 2>/dev/null || stat -c%s /app/data/data.db 2>/dev/null || echo "0")
+    if [ "$DB_SIZE" -lt 10240 ]; then
         echo "Database is empty. Importing data..."
         uv run scripts/import_data.py
         echo "Data imported."
