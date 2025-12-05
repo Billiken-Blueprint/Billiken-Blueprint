@@ -20,6 +20,11 @@ if [ ! -f "/app/data/data.db" ]; then
     if [ -d "/app/data_dumps" ] && [ -n "$(ls -A /app/data_dumps/*.json 2>/dev/null)" ]; then
         echo "Updating instructor RMP data..."
         uv run scripts/update_instructor_rmp_data.py || echo "Warning: RMP data update failed, but continuing..."
+        
+        # Clean up any RMP reviews from database (they load from JSON files automatically)
+        # This ensures no incorrectly assigned reviews exist
+        echo "Cleaning RMP reviews from database..."
+        uv run scripts/clean_rmp_reviews.py || echo "Warning: RMP reviews cleanup failed, but continuing..."
     else
         echo "Warning: data_dumps directory not found, skipping RMP data update"
     fi
@@ -51,9 +56,14 @@ except:
         if [ -d "/app/data_dumps" ] && [ -n "$(ls -A /app/data_dumps/*.json 2>/dev/null)" ]; then
             echo "Updating instructor RMP data..."
             uv run scripts/update_instructor_rmp_data.py || echo "Warning: RMP data update failed, but continuing..."
+            
+            # Clean up any RMP reviews from database (they load from JSON files automatically)
+            # This ensures no incorrectly assigned reviews exist
+            echo "Cleaning RMP reviews from database..."
+            uv run scripts/clean_rmp_reviews.py || echo "Warning: RMP reviews cleanup failed, but continuing..."
         fi
     else
-        echo "Database already has $INSTRUCTOR_COUNT instructors. Skipping data import."
+        echo "Database already has data. Skipping data import."
     fi
 fi
 

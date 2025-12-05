@@ -319,6 +319,12 @@ class RmpReviewRepository:
                     if instructor:
                         instructor_id = instructor.id
 
+                # Skip review if instructor_id cannot be determined
+                # RmpReview requires instructor_id to be an int, not Optional
+                # This prevents reviews from being incorrectly assigned to wrong instructors
+                if instructor_id is None:
+                    continue
+
                 rmp_review = RmpReview(
                     id=None,
                     instructor_id=instructor_id,

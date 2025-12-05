@@ -1209,8 +1209,58 @@ export class CoursePage implements OnInit {
   }
 
   hasInstructorReviews(inst: Instructor): boolean {
-    if (inst.id) return true;
-    return this.allInstructors().some(ai => ai.name.toLowerCase() === inst.name.toLowerCase());
+    // If instructor already has an ID, they exist in the system
+    if (inst.id) {
+      return true;
+    }
+    
+    // Check if instructor exists in backend by name (case-insensitive)
+    const allInstructors = this.allInstructors();
+    if (allInstructors.length === 0) {
+      // Instructors not loaded yet, return false
+      return false;
+    }
+    
+    // Try exact match first
+    const exactMatch = allInstructors.find(ai => 
+      ai.name.toLowerCase().trim() === inst.name.toLowerCase().trim()
+    );
+    
+    if (exactMatch && exactMatch.id) {
+      // Found match - update the instructor object with ID so template re-evaluates
+      this.updateInstructorId(inst, exactMatch.id);
+      return true;
+    }
+    
+    // Try fuzzy matching (same as matchInstructorIds logic)
+    const instNameParts = inst.name.toLowerCase().trim().split(/\s+/);
+    const fuzzyMatched = allInstructors.find(ai => {
+      const aiNameParts = ai.name.toLowerCase().trim().split(/\s+/);
+      // Match if last names match
+      if (instNameParts.length > 0 && aiNameParts.length > 0 &&
+        instNameParts[instNameParts.length - 1] === aiNameParts[aiNameParts.length - 1]) {
+        // Also check if first names are similar
+        const instFirst = instNameParts[0];
+        const aiFirst = aiNameParts[0];
+        return (instFirst === aiFirst ||
+          instFirst.startsWith(aiFirst) ||
+          aiFirst.startsWith(instFirst) ||
+          (instFirst === "greg" && aiFirst === "gregory") ||
+          (aiFirst === "greg" && instFirst === "gregory") ||
+          (instFirst === "jim" && aiFirst === "james") ||
+          (aiFirst === "jim" && instFirst === "james"));
+      }
+      return false;
+    });
+    
+    // If fuzzy matched and has ID, instructor exists in backend
+    if (fuzzyMatched && fuzzyMatched.id) {
+      // Found match - update the instructor object with ID so template re-evaluates
+      this.updateInstructorId(inst, fuzzyMatched.id);
+      return true;
+    }
+    
+    return false;
   }
 
   openReviewsPage(instructor: Instructor): void {
@@ -1219,14 +1269,49 @@ export class CoursePage implements OnInit {
     if (instructor.id) {
       instructorId = instructor.id;
     } else {
-      // Try to find instructor ID by name
-      const matched = this.allInstructors().find(ai =>
-        ai.name.toLowerCase() === instructor.name.toLowerCase()
+      // Try to find instructor ID by name (use same matching logic as matchInstructorIds)
+      const allInstructors = this.allInstructors();
+      
+      if (allInstructors.length === 0) {
+        console.warn('Instructors not loaded yet for:', instructor.name);
+        return;
+      }
+      
+      // Try exact match first
+      let matched = allInstructors.find(ai =>
+        ai.name.toLowerCase().trim() === instructor.name.toLowerCase().trim()
       );
-      if (matched) {
-        instructorId = matched.id ?? null;
+      
+      // If no exact match, try fuzzy matching (same as matchInstructorIds logic)
+      if (!matched) {
+        const instNameParts = instructor.name.toLowerCase().trim().split(/\s+/);
+        matched = allInstructors.find(ai => {
+          const aiNameParts = ai.name.toLowerCase().trim().split(/\s+/);
+          // Match if last names match
+          if (instNameParts.length > 0 && aiNameParts.length > 0 &&
+            instNameParts[instNameParts.length - 1] === aiNameParts[aiNameParts.length - 1]) {
+            // Also check if first names are similar (Greg/Gregory, Jim/James)
+            const instFirst = instNameParts[0];
+            const aiFirst = aiNameParts[0];
+            return (instFirst === aiFirst ||
+              instFirst.startsWith(aiFirst) ||
+              aiFirst.startsWith(instFirst) ||
+              (instFirst === "greg" && aiFirst === "gregory") ||
+              (aiFirst === "greg" && instFirst === "gregory") ||
+              (instFirst === "jim" && aiFirst === "james") ||
+              (aiFirst === "jim" && instFirst === "james"));
+          }
+          return false;
+        });
+      }
+      
+      if (matched && matched.id) {
+        instructorId = matched.id;
+        // Update the instructor object with ID for future reference
+        this.updateInstructorId(instructor, matched.id);
       } else {
         console.warn('Instructor ID not found for:', instructor.name);
+        console.warn('Available instructors:', allInstructors.map(ai => `${ai.id}: ${ai.name}`).slice(0, 10));
         return;
       }
     }
@@ -1234,6 +1319,24 @@ export class CoursePage implements OnInit {
     if (instructorId) {
       this.router.navigate(['/instructors', instructorId, 'reviews']);
     }
+  }
+
+  private updateInstructorId(inst: Instructor, id: number): void {
+    // Update the instructor object in the courses signal
+    const courses = this.courses();
+    const updatedCourses = courses.map(course => {
+      if (course.instructors) {
+        const updatedInstructors = course.instructors.map(i => {
+          if (i.name.toLowerCase().trim() === inst.name.toLowerCase().trim() && !i.id) {
+            return { ...i, id };
+          }
+          return i;
+        });
+        return { ...course, instructors: updatedInstructors };
+      }
+      return course;
+    });
+    this.courses.set(updatedCourses);
   }
 
 
@@ -1252,6 +1355,7 @@ export class CoursePage implements OnInit {
 
   ngOnInit(): void {
     this.loadSavedCourses();
+    this.loadInstructors();
   }
 
   loadSavedCourses(): void {

@@ -159,7 +159,7 @@
                     <div class="inst-main">
                       <p class="inst-name" [class.cursor-pointer]="hasInstructorReviews(inst)" 
                          [class.hover\:underline]="hasInstructorReviews(inst)"
-                         (click)="openReviewsPage(inst)">{{ inst.name }}</p>
+                         (click)="hasInstructorReviews(inst) && openReviewsPage(inst)">{{ inst.name }}</p>
                       <p *ngIf="inst.email" class="inst-line">{{ inst.email }}</p>
                       <p *ngIf="inst.office" class="inst-line">{{ inst.office }}</p>
                     </div>
