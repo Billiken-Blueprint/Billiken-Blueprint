@@ -1,6 +1,7 @@
 import chromadb
 import chromadb.utils.embedding_functions
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+import os
 
 from billiken_blueprint.repositories import (
     course_attribute_repository,
