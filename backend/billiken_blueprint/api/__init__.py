@@ -6,6 +6,7 @@ from billiken_blueprint.api import (
     ratings,
     degrees,
     degree_requirements,
+    student_courses,
 )
 
 routers = [
@@ -16,6 +17,7 @@ routers = [
     ratings.router,
     degrees.router,
     degree_requirements.router,
+    student_courses.router,
 ]
 
 __all__ = ["routers"]

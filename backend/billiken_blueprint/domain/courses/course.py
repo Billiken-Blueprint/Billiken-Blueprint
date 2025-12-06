@@ -63,3 +63,7 @@ class CourseWithAttributes(Course):
 
     def __hash__(self) -> int:
         return hash((self.major_code, self.course_number))
+
+@dataclass
+class CourseWithDescription(Course):
+    description: str

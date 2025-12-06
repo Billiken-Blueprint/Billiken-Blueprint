@@ -1,5 +1,7 @@
-from click import echo
+import chromadb
+import chromadb.utils.embedding_functions
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+import os
 
 from billiken_blueprint.repositories import (
     course_attribute_repository,
@@ -16,6 +18,7 @@ from billiken_blueprint.repositories import (
 # SQLAlchemy
 engine = create_async_engine("sqlite+aiosqlite:///data/data.db", echo=False)
 async_sessionmaker = async_sessionmaker(engine, expire_on_commit=False)
+
 
 # Repositories
 identity_user_repository = identity_user_repository.IdentityUserRepository(

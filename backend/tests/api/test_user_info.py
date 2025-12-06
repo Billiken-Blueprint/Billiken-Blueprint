@@ -46,6 +46,7 @@ async def test_set_user_info(app_client: AsyncClient, identity_user_repository, 
         assert student.name == "Test Student"
         assert student.graduation_year == 2025
         assert student.completed_course_ids == [1, 2, 3]
+        assert student.desired_course_ids == []
         assert student.degree_id == 1
         
         # Verify Time Slots
@@ -66,6 +67,7 @@ async def test_get_user_info(app_client: AsyncClient, identity_user_repository, 
         name="Existing Student",
         graduation_year=2024,
         completed_course_ids=[101],
+        desired_course_ids=[],
         unavailability_times=[TimeSlot(day=1, start="1000", end="1100")],
         avoid_times=[],
         degree_id=2
@@ -89,6 +91,7 @@ async def test_get_user_info(app_client: AsyncClient, identity_user_repository, 
         assert data["name"] == "Existing Student"
         assert data["graduationYear"] == 2024
         assert data["completedCourseIds"] == [101]
+        assert data["desiredCourseIds"] == []
         assert data["degreeId"] == 2
         
         assert len(data["unavailabilityTimes"]) == 1

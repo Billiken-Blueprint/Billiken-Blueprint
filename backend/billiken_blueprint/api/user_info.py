@@ -46,6 +46,7 @@ async def set_user_info(
         id=identity.student_id,
         name=user_info.name,
         completed_course_ids=user_info.completed_course_ids,
+        desired_course_ids=[],
         unavailability_times=[TimeSlot(day=ts.day, start=ts.start, end=ts.end) for ts in user_info.unavailability_times],
         avoid_times=[TimeSlot(day=ts.day, start=ts.start, end=ts.end) for ts in user_info.avoid_times],
         graduation_year=user_info.graduation_year,
@@ -69,6 +70,7 @@ async def get_user_info(student: CurrentStudent, course_repo: CourseRepo):
     return dict(
         name=student.name,
         completedCourseIds=student.completed_course_ids,
+        desiredCourseIds=student.desired_course_ids,
         unavailabilityTimes=[{"day": ts.day, "start": ts.start, "end": ts.end} for ts in student.unavailability_times],
         avoidTimes=[{"day": ts.day, "start": ts.start, "end": ts.end} for ts in student.avoid_times],
         savedCourseCodes=saved_course_codes,
