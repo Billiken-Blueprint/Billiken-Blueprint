@@ -13,6 +13,10 @@ from billiken_blueprint.dependencies import (
 )
 from billiken_blueprint.domain.courses.course import CourseWithAttributes
 from billiken_blueprint.domain.courses.course_code import CourseCode
+from billiken_blueprint.use_cases.get_schedule import (
+    get_combined_requirements,
+    get_schedule,
+)
 
 
 router = APIRouter(prefix="/degree-requirements", tags=["degree-requirements"])
@@ -31,6 +35,7 @@ async def get_degree_requirements(
         for course in all_courses
     ]
     degree = await degree_repo.get_by_id(student.degree_id)
+    all_requirements = get_combined_requirements(degree, student, all_courses_with_attrs)
     return [
         dict(
             label=req.label,
@@ -42,7 +47,7 @@ async def get_degree_requirements(
                 )
             ],
         )
-        for req in degree.requirements
+        for req in all_requirements
     ]
 
 
@@ -101,7 +106,9 @@ async def autogenerate_schedule(
     all_sections = await sections_repo.get_all_for_semester(semester)
     all_sections = [section for section in all_sections if section.campus_code == "North Campus (Main Campus)"]
     
-    schedule = degree.get_schedule(
+    schedule = get_schedule(
+        degree,
+        student,
         taken_courses_with_attrs,
         all_courses_with_attrs,
         all_sections,

@@ -6,7 +6,6 @@ from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncSession
 from sqlalchemy.orm import mapped_column, Mapped
 
 from billiken_blueprint.base import Base
-from billiken_blueprint.degree_works.api import DegreeWorksDegree
 from billiken_blueprint.domain.degrees.degree import Degree
 from billiken_blueprint.domain.degrees.degree_requirement import DegreeRequirement
 

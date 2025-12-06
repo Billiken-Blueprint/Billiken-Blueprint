@@ -22,6 +22,7 @@ from billiken_blueprint.repositories.rating_repository import RatingRepository
 from billiken_blueprint.repositories.rmp_review_repository import RmpReviewRepository
 from billiken_blueprint.repositories.student_repository import StudentRepository
 from billiken_blueprint.repositories.section_repository import SectionRepository
+import chromadb
 
 
 def get_identity_user_repository() -> IdentityUserRepository:
@@ -146,6 +147,9 @@ def get_section_repository() -> SectionRepository:
     """
     return services.section_repository
 
+def get_course_descriptions_collection() -> chromadb.Collection:
+    """Get the course descriptions collection instance."""
+    return services.course_descriptions_collection
 
 # Common type annotations for use in route functions
 IdentityUserRepo = Annotated[
@@ -158,6 +162,7 @@ RatingRepo = Annotated[RatingRepository, Depends(get_rating_repository)]
 RmpReviewRepo = Annotated[RmpReviewRepository, Depends(get_rmp_review_repository)]
 DegreeRepo = Annotated[DegreeRepository, Depends(get_degree_repository)]
 SectionRepo = Annotated[SectionRepository, Depends(get_section_repository)]
+CourseDescriptionsCollection = Annotated[chromadb.Collection, Depends(get_course_descriptions_collection)]
 
 
 async def get_current_identity(auth: AuthPayload, repo: IdentityUserRepo):

@@ -21,7 +21,7 @@ class ResponseModel(BaseModel):
     operands: Sequence[ResponseModel | CoursePrereq]
 
 
-client = genai.Client()
+client = genai_client
 
 
 def parse_prereqs(reqs_text: str) -> dict:

@@ -25,5 +25,6 @@ class Student:
     degree_id: int
     graduation_year: int
     completed_course_ids: list[int]
+    desired_course_ids: list[int]
     unavailability_times: list[TimeSlot]
     avoid_times: list[TimeSlot]

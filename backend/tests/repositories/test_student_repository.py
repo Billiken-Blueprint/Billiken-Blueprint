@@ -15,6 +15,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2025,
             completed_course_ids=[101, 102, 103],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -34,6 +35,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2026,
             completed_course_ids=[201, 202],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -47,6 +49,7 @@ class TestStudentRepository:
             degree_id=2,
             graduation_year=2026,
             completed_course_ids=[201, 202, 203, 204],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -64,6 +67,7 @@ class TestStudentRepository:
             degree_id=3,
             graduation_year=2024,
             completed_course_ids=[301, 302],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -94,6 +98,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2027,
             completed_course_ids=[],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -114,6 +119,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2023,
             completed_course_ids=many_courses,
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -139,6 +145,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2025,
             completed_course_ids=[101],
+            desired_course_ids=[],
             unavailability_times=unavailability,
             avoid_times=avoid,
         )
@@ -170,6 +177,7 @@ class TestStudentRepository:
             degree_id=1,
             graduation_year=2025,
             completed_course_ids=[102],
+            desired_course_ids=[],
             unavailability_times=[],
             avoid_times=[],
         )
@@ -181,4 +189,28 @@ class TestStudentRepository:
         assert retrieved is not None
         assert retrieved.unavailability_times == []
         assert retrieved.avoid_times == []
+
+    async def test_save_student_with_desired_courses(
+        self, student_repository: StudentRepository
+    ):
+        """Test saving a student with desired courses."""
+        student = Student(
+            id=None,
+            name="Desired Courses Student",
+            degree_id=1,
+            graduation_year=2025,
+            completed_course_ids=[101],
+            desired_course_ids=[201, 202, 203],
+            unavailability_times=[],
+            avoid_times=[],
+        )
+
+        saved = await student_repository.save(student)
+        assert saved.id is not None
+        assert saved.desired_course_ids == [201, 202, 203]
+
+        # Verify retrieval
+        retrieved = await student_repository.get_by_id(saved.id)
+        assert retrieved is not None
+        assert retrieved.desired_course_ids == [201, 202, 203]
 

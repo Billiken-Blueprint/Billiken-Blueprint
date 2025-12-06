@@ -3,6 +3,8 @@ from billiken_blueprint.domain.section import Section, MeetingTime
 from billiken_blueprint.domain.degrees.degree import Degree
 from billiken_blueprint.domain.courses.course import CourseWithAttributes
 from billiken_blueprint.domain.degrees.degree_requirement import DegreeRequirement, CourseRule, CourseWithCode
+from billiken_blueprint.domain.student import Student
+from billiken_blueprint.use_cases.get_schedule import get_schedule
 
 class TestSchedule:
     def test_meeting_time_overlaps(self):
@@ -81,7 +83,9 @@ class TestSchedule:
         )
 
         # Should only pick one because they overlap
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -124,7 +128,9 @@ class TestSchedule:
             degree_works_college_code="ENGI", requirements=[req]
         )
 
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -180,7 +186,9 @@ class TestSchedule:
         )
 
         # Scenario 1: No courses taken. Should pick 2.
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -189,7 +197,9 @@ class TestSchedule:
         assert len(schedule) == 2
 
         # Scenario 2: One course taken. Should pick 1.
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[c1],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -260,7 +270,9 @@ class TestSchedule:
         # 3. Pick S3. Satisfies D, E. Remaining: None.
         # Result: S1, S3. (2 courses)
 
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -312,7 +324,9 @@ class TestSchedule:
             requirements=[req]
         )
 
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -373,7 +387,9 @@ class TestSchedule:
             requirements=[req]
         )
 
-        schedule = degree.get_schedule(
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,

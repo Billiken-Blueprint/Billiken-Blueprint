@@ -1,9 +1,10 @@
-import pytest
-from billiken_blueprint.domain.degrees.degree import Degree
-from billiken_blueprint.domain.courses.course import CourseWithAttributes, Course
 from billiken_blueprint.domain.section import Section, MeetingTime
+from billiken_blueprint.domain.degrees.degree import Degree
+from billiken_blueprint.domain.courses.course import CourseWithAttributes
 from billiken_blueprint.domain.degrees.degree_requirement import DegreeRequirement, CourseRule, CourseWithCode
+from billiken_blueprint.domain.student import Student
 from billiken_blueprint.domain.courses.course_prerequisite import CourseCoursePrerequisite, NestedCoursePrerequisite
+from billiken_blueprint.use_cases.get_schedule import get_recommended_sections
 
 class TestDegree:
     def test_get_recommended_sections_filters_permissions(self):
@@ -62,7 +63,9 @@ class TestDegree:
 
         # Case 1: No courses taken. Should only recommend C1 (s1).
         # C2 requires C1 (not taken). C3 requires C2 (not taken).
-        recs = degree.get_recommended_sections(
+        recs = get_recommended_sections(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[],
             all_courses=all_courses,
             all_sections=all_sections,
@@ -77,7 +80,9 @@ class TestDegree:
         # C1 already taken, so s1 should be filtered out.
         # C2 prereq (C1) satisfied.
         # C3 prereq (C2) not satisfied.
-        recs = degree.get_recommended_sections(
+        recs = get_recommended_sections(
+            degree=degree,
+            student=Student(id=1, name="Test", degree_id=1, graduation_year=2025, completed_course_ids=[], desired_course_ids=[], unavailability_times=[], avoid_times=[]),
             taken_courses=[c1],
             all_courses=all_courses,
             all_sections=all_sections,

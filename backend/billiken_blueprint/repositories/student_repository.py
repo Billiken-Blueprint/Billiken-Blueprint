@@ -15,6 +15,7 @@ class DBStudent(Base):
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column()
     completed_course_ids: Mapped[list[int]] = mapped_column(JSON)
+    desired_course_ids: Mapped[list[int]] = mapped_column(JSON, default=[])
     unavailability_times: Mapped[list[dict]] = mapped_column(JSON, default=[])
     avoid_times: Mapped[list[dict]] = mapped_column(JSON, default=[])
 
@@ -27,6 +28,7 @@ class DBStudent(Base):
             id=self.id,
             name=self.name,
             completed_course_ids=self.completed_course_ids,
+            desired_course_ids=self.desired_course_ids,
             unavailability_times=[TimeSlot.from_dict(d) for d in self.unavailability_times],
             avoid_times=[TimeSlot.from_dict(d) for d in self.avoid_times],
             degree_id=self.degree_id,
@@ -43,6 +45,7 @@ class StudentRepository:
             id=student.id,
             name=student.name,
             completed_course_ids=student.completed_course_ids,
+            desired_course_ids=student.desired_course_ids,
             unavailability_times=[ts.to_dict() for ts in student.unavailability_times],
             avoid_times=[ts.to_dict() for ts in student.avoid_times],
             degree_id=student.degree_id,
@@ -53,6 +56,7 @@ class StudentRepository:
             set_=dict(
                 name=insert_stmt.excluded.name,
                 completed_course_ids=insert_stmt.excluded.completed_course_ids,
+                desired_course_ids=insert_stmt.excluded.desired_course_ids,
                 unavailability_times=insert_stmt.excluded.unavailability_times,
                 avoid_times=insert_stmt.excluded.avoid_times,
                 graduation_year=insert_stmt.excluded.graduation_year,
