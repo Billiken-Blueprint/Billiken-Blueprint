@@ -149,7 +149,9 @@ def get_section_repository() -> SectionRepository:
 
 def get_course_descriptions_collection() -> chromadb.Collection:
     """Get the course descriptions collection instance."""
-    return services.course_descriptions_collection
+    from billiken_blueprint.chromadb import course_descriptions_collection
+    
+    return course_descriptions_collection
 
 # Common type annotations for use in route functions
 IdentityUserRepo = Annotated[

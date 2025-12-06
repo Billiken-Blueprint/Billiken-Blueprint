@@ -1,3 +1,4 @@
+from billiken_blueprint.chromadb import chroma_client
 from chromadb.utils.embedding_functions.google_embedding_function import GoogleGenerativeAiEmbeddingFunction
 from billiken_blueprint.ai.genai_client import genai_client
 from chromadb.api.types import EmbeddingFunction
@@ -60,7 +61,7 @@ async def main():
     
     courses_with_descriptions = get_courses_with_descriptions(courses, sections)
 
-    client = services.chroma_client
+    client = chroma_client
     collection_name = "course_descriptions"
     ef = GoogleGenerativeAiEmbeddingFunction(api_key=os.getenv("GEMINI_API_KEY"), model_name=MODEL_ID, task_type="RETRIEVAL_DOCUMENT",
         api_key_env_var="GEMINI_API_KEY")
