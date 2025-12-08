@@ -3,20 +3,45 @@ services:
     build:
       context: ./web
       dockerfile: Dockerfile
-      target: dev
+      target: development
+    develop:
+      watch:
+        - path: ./web/src
+          target: /app/src
+          action: sync
+        - path: ./web/public
+          target: /app/public
+          action: sync
+        - path: ./web/package.json
+          action: rebuild
+        - path: ./web/pnpm-lock.yaml
+          action: rebuild
+        - path: ./web/package-lock.json
+          action: rebuild
+        - path: ./web/angular.json
+          action: rebuild
+        - path: ./web/proxy.compose.conf.json
+          action: rebuild
     ports:
       - "4200:4200"
-    volumes:
-      - ./web/src:/app/src
-      - ./web/proxy.compose.conf.json:/app/proxy.compose.conf.json
     command: ng serve --configuration=dev-compose --host 0.0.0.0
   backend:
     build:
       context: ./backend
       dockerfile: ./Dockerfile
-      target: dev
+      target: development
+    develop:
+      watch:
+        - path: ./backend/pyproject.toml
+          action: rebuild
+        - path: ./backend/uv.lock
+          action: rebuild
+        - path: ./backend/alembic/
+          action: rebuild
+        - path: ./backend/billiken_blueprint
+          target: /app/billiken_blueprint
+          action: sync
     ports:
       - "8000:8000"
     volumes:
-      - ./backend/billiken_blueprint:/app/billiken_blueprint
       - ./backend/data:/app/data

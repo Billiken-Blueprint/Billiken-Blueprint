@@ -1,46 +1,38 @@
-FROM ghcr.io/astral-sh/uv:python3.14-bookworm AS base
+ARG base_image=python:3.13-slim
+FROM ${base_image} AS base
+
+FROM base AS uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+FROM uv AS deps
 WORKDIR /app
+RUN --mount=type=cache,target=/root/.cache/uv \
+    --mount=type=bind,source=uv.lock,target=uv.lock \
+    --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
+    uv sync --locked --no-install-project --compile-bytecode
 
-FROM base AS deps
-COPY ./pyproject.toml ./uv.lock ./
-RUN uv sync --locked
-ENV PATH="/app/.venv/bin:${PATH}"
-
-FROM deps AS migrations
+FROM deps AS seeding
 COPY . .
-RUN mkdir -p data && alembic upgrade head
-
-FROM migrations AS seeding
+RUN mkdir -p data && uv run alembic upgrade head
 RUN uv run scripts/import_data.py
-# Verify data_dumps exists and show contents
-RUN echo "Checking for data_dumps files..." && \
-    ls -la data_dumps/ 2>/dev/null && \
-    echo "Found data_dumps directory" || \
-    (echo "ERROR: data_dumps directory not found!" && exit 1)
 RUN uv run scripts/update_instructor_rmp_data.py
-# Note: Individual RMP reviews are loaded from JSON files automatically, but we need to update instructor RMP fields
 
-FROM deps AS dev
+FROM base AS development
+WORKDIR /app
+COPY --from=deps /app/.venv /app/.venv
 COPY --from=seeding /app/data /app/data
-COPY --exclude=billiken_blueprint . .
-# Verify data_dumps is available for runtime RMP review loading
-RUN ls -la data_dumps/ 2>/dev/null && echo "data_dumps available in dev stage" || echo "WARNING: data_dumps not found in dev stage"
-# Copy and make entrypoint script executable
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+COPY . .
+ENV PATH="/app/.venv/bin:${PATH}"
 EXPOSE 8000
-VOLUME [ "/app/billiken_blueprint" ]
-VOLUME [ "/app/data" ]
-ENTRYPOINT [ "/app/entrypoint.sh" ]
+VOLUME [ "/billiken_blueprint" ]
 CMD [ "fastapi", "dev", "server.py", "--host", "0.0.0.0" ]
 
-FROM deps AS prod
-COPY --from=seeding /app/data /app/data
-COPY . .
-# Copy and make entrypoint script executable
-COPY entrypoint.sh /app/entrypoint.sh
-RUN chmod +x /app/entrypoint.sh
+FROM base AS production
+WORKDIR /app
+COPY --chown=1000:1000 --from=deps /app/.venv /app/.venv
+COPY --chown=1000:1000 --from=seeding /app/data /app/data
+COPY --chown=1000:1000 . .
+ENV PATH="/app/.venv/bin:${PATH}"
 EXPOSE 8000
 USER 1000
-ENTRYPOINT [ "/app/entrypoint.sh" ]
-CMD [ "fastapi", "run", "server.py", "--host", "0.0.0.0" ]
+CMD ["fastapi", "run", "server.py", "--host", "0.0.0.0", "--port", "8000"]

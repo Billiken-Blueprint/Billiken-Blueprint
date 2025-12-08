@@ -1,61 +1,15 @@
-# ================================
-# Node and build output
-# ================================
-node_modules
-dist
-out-tsc
-.angular
-.cache
-.tmp
-
-# ================================
-# Testing & Coverage
-# ================================
-coverage
-jest
-cypress
-cypress/screenshots
-cypress/videos
-reports
-playwright-report
-.vite
-.vitepress
-
-# ================================
-# Environment & log files
-# ================================
-*.env*
-!*.env.production
-*.log
-*.tsbuildinfo
-
-# ================================
-# IDE & OS-specific files
-# ================================
-.vscode
-.idea
-.DS_Store
-Thumbs.db
-*.swp
-
-# ================================
-# Version control & CI files
-# ================================
-.git
-.gitignore
-
-# ================================
-# Docker & local orchestration
-# ================================
-Dockerfile
-Dockerfile.*
-.dockerignore
-docker-compose.yml
-docker-compose*.yml
-
-# ================================
-# Miscellaneous
-# ================================
-*.bak
-*.old
-*.tmp
+*
+!public
+!src
+!.postcssrc.json
+!angular.json
+!nginx-entrypoint.sh
+!nginx.conf.template
+!package-lock.json
+!package.json
+!pnpm-lock.yaml
+!proxy.compose.conf.json
+!proxy.conf.json
+!tsconfig.app.json
+!tsconfig.json
+!tsconfig.spec.json
