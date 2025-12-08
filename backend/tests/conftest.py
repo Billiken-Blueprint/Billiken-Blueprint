@@ -82,7 +82,21 @@ def instructor_repository(async_sessionmaker):
 @pytest.fixture(scope="function")
 def degree_repository(async_sessionmaker):
     """Create a test degree repository using in-memory database."""
-    return DegreeRepository(async_sessionmaker)
+
+    class MockDegreeRepository(DegreeRepository):
+        def __init__(self, async_sessionmaker):
+            super().__init__(async_sessionmaker)
+            self._requirements_store = {}
+
+        async def get_requirements_for_degree(self, id: int):
+            if id not in self._requirements_store:
+                raise ValueError(f"No requirements found for degree ID {id}")
+            return self._requirements_store[id]
+
+        async def save_requirements_for_degree(self, id: int, requirements):
+            self._requirements_store[id] = requirements
+
+    return MockDegreeRepository(async_sessionmaker)
 
 
 @pytest.fixture(scope="function")
@@ -121,6 +135,7 @@ from billiken_blueprint.dependencies import (
     get_rmp_review_repository,
 )
 
+
 @pytest.fixture(scope="function")
 def app_client(
     identity_user_repository,
@@ -134,14 +149,18 @@ def app_client(
     rmp_review_repository,
 ):
     """Create a FastAPI test client with overridden dependencies."""
-    app.dependency_overrides[get_identity_user_repository] = lambda: identity_user_repository
+    app.dependency_overrides[get_identity_user_repository] = (
+        lambda: identity_user_repository
+    )
     app.dependency_overrides[get_student_repository] = lambda: student_repository
     app.dependency_overrides[get_course_repository] = lambda: course_repository
     app.dependency_overrides[get_instructor_repository] = lambda: instructor_repository
     app.dependency_overrides[get_degree_repository] = lambda: degree_repository
     app.dependency_overrides[get_section_repository] = lambda: section_repository
     app.dependency_overrides[get_rating_repository] = lambda: rating_repository
-    app.dependency_overrides[get_course_attribute_repository] = lambda: course_attribute_repository
+    app.dependency_overrides[get_course_attribute_repository] = (
+        lambda: course_attribute_repository
+    )
     app.dependency_overrides[get_rmp_review_repository] = lambda: rmp_review_repository
 
     test_client = TestClient(app)

@@ -1,30 +1,38 @@
-FROM node:24-alpine AS base
+ARG base_image=node:24-alpine
+ARG nginx_base_image=nginxinc/nginx-unprivileged:alpine3.22-perl
+
+FROM ${base_image} AS base
+
+FROM base AS builder
 ENV PNPM_HOME="/pnpm"
 ENV PATH="${PNPM_HOME}:${PATH}"
 RUN corepack enable
-
-FROM base AS deps
 RUN npm install -g @angular/cli
 WORKDIR /app
-COPY  ./package.json ./package-lock.json ./pnpm-lock.yaml ./
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
+    --mount=type=bind,source=pnpm-lock.yaml,target=pnpm-lock.yaml \
+    --mount=type=bind,source=package.json,target=package.json \
+    --mount=type=bind,source=package-lock.json,target=package-lock.json \
+    pnpm install --frozen-lockfile
 
-FROM deps AS dev
-COPY --exclude=./src . .
-RUN mkdir src
-VOLUME [ "/app/src" ]
+FROM builder AS development
+WORKDIR /app
+COPY . .
+VOLUME ["/app"]
 EXPOSE 4200
-CMD [ "pnpm", "run", "start" ]
+CMD ["pnpm", "run", "start"]
 
-FROM deps AS build
-RUN pwd
+FROM builder AS dist-builder
+WORKDIR /app
 COPY . .
 RUN pnpm run build
 
-FROM nginxinc/nginx-unprivileged:alpine3.22-perl AS prod
+
+
+FROM ${nginx_base_image} AS production
 USER nginx
 COPY nginx.conf.template /etc/nginx/nginx.conf.template
-COPY --chown=nginx:nginx --from=build /app/dist/*/browser /usr/share/nginx/html
+COPY --chown=nginx:nginx --from=dist-builder /app/dist/*/browser /usr/share/nginx/html
 COPY --chown=nginx:nginx ./nginx-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 8080
