@@ -55,6 +55,7 @@ def get_recommended_sections(
     course_equivalencies: Sequence[Sequence[CourseCode]],
     unavailability_times: Sequence[TimeSlot] = [],
     avoid_times: Sequence[TimeSlot] = [],
+    instructor_ratings_map: dict[str, float] | None = None,
 ) -> Sequence[SectionWithRequirementsFulfilled]:
     # Same scoring mechanism as last implementation,
     # but this time we should first check which courses
@@ -140,6 +141,26 @@ def get_recommended_sections(
         score = course_scores[course_codes_to_course[section.course_code]]
         if section_overlaps_timeslots(section, avoid_times):
             score -= 10
+        
+        # Add average instructor rating to the score
+        if instructor_ratings_map and section.instructor_names:
+            instructor_ratings = []
+            for name in section.instructor_names:
+                name_stripped = name.strip()
+                # Try exact match first, then case-insensitive match
+                rating = (
+                    instructor_ratings_map.get(name_stripped) or
+                    instructor_ratings_map.get(name_stripped.lower())
+                )
+                if rating is not None:
+                    instructor_ratings.append(rating)
+            
+            # Calculate average rating if we have any valid ratings
+            if instructor_ratings:
+                avg_rating = sum(instructor_ratings) / len(instructor_ratings)
+                # Add the average rating to the score (ratings are typically 0-5)
+                score += avg_rating
+        
         return score
 
     sections_sorted = sorted(
@@ -179,6 +200,7 @@ def get_schedule(
     course_equivalencies: Sequence[Sequence[CourseCode]],
     unavailability_times: Sequence[TimeSlot] = [],
     avoid_times: Sequence[TimeSlot] = [],
+    instructor_ratings_map: dict[str, float] | None = None,
 ) -> Sequence[SectionWithRequirementsFulfilled]:
     recommended_sections = get_recommended_sections(
         degree,
@@ -189,6 +211,7 @@ def get_schedule(
         course_equivalencies,
         unavailability_times,
         avoid_times,
+        instructor_ratings_map,
     )
     
     # Calculate remaining needed for each requirement

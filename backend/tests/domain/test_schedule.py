@@ -403,3 +403,72 @@ class TestSchedule:
         assert "CSCI 1000" in course_codes
         assert "HIST 3000" not in course_codes
         assert len(schedule) == 3
+
+    def test_get_schedule_prioritizes_high_rated_instructors(self):
+        """Test that sections with higher-rated instructors are prioritized."""
+        # Setup courses
+        c1 = CourseWithAttributes(
+            id=1, major_code="CSCI", course_number="1000", 
+            attribute_ids=[], prerequisites=None, attributes=[]
+        )
+        all_courses = [c1]
+
+        # Setup sections: Two sections for the same course, different instructors
+        mt1 = MeetingTime(day=1, start_time="1000", end_time="1100")
+        mt2 = MeetingTime(day=1, start_time="1200", end_time="1300")
+        
+        s1 = Section(
+            id=1, crn="1", instructor_names=["Michael Goldwasser"], 
+            campus_code="STL", description="", title="S1",
+            course_code="CSCI 1000", semester="Fall", meeting_times=[mt1]
+        )
+        s2 = Section(
+            id=2, crn="2", instructor_names=["Low Rated Instructor"], 
+            campus_code="STL", description="", title="S2",
+            course_code="CSCI 1000", semester="Fall", meeting_times=[mt2]
+        )
+        
+        all_sections = [s1, s2]
+
+        # Setup Degree
+        req = DegreeRequirement(
+            label="Req", needed=1,
+            course_rules=CourseRule(
+                courses=[CourseWithCode("CSCI", "1000")],
+                exclude=[]
+            )
+        )
+        degree = Degree(
+            id=1, name="CS", degree_works_major_code="CS", 
+            degree_works_degree_type="BS",
+            degree_works_college_code="ENGI", requirements=[req]
+        )
+
+        # Create instructor ratings map
+        # Michael Goldwasser has a high rating (4.2)
+        # Low Rated Instructor has a low rating (1.5)
+        instructor_ratings_map = {
+            "Michael Goldwasser": 4.2,
+            "michael goldwasser": 4.2,  # lowercase for case-insensitive matching
+            "Low Rated Instructor": 1.5,
+            "low rated instructor": 1.5,
+        }
+
+        schedule = get_schedule(
+            degree=degree,
+            student=Student(
+                id=1, name="Test", degree_id=1, graduation_year=2025,
+                completed_course_ids=[], desired_course_ids=[],
+                unavailability_times=[], avoid_times=[]
+            ),
+            taken_courses=[],
+            all_courses=all_courses,
+            all_sections=all_sections,
+            course_equivalencies=[],
+            instructor_ratings_map=instructor_ratings_map,
+        )
+        
+        # Should pick the section with the higher-rated instructor
+        assert len(schedule) == 1
+        assert schedule[0].section.crn == "1"  # Michael Goldwasser's section
+        assert schedule[0].section.instructor_names == ["Michael Goldwasser"]

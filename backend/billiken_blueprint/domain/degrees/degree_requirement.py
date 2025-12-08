@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import Generator, Sequence
+from typing import Iterator, Sequence
 
 from billiken_blueprint.domain.courses.course import Course, CourseWithAttributes
 from billiken_blueprint.domain.courses.course_code import CourseCode
@@ -119,7 +119,7 @@ class CourseRule:
 
     def filter_satisfying_courses(
         self, courses: Sequence[CourseWithAttributes]
-    ) -> Generator[Course]:
+    ) -> Iterator[Course]:
         return (course for course in courses if self.is_satisfied_by(course))
 
 
