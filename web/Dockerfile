@@ -25,6 +25,7 @@ CMD ["pnpm", "run", "start"]
 FROM builder AS dist-builder
 WORKDIR /app
 COPY . .
+ENV API_URL="http://localhost:8000"
 RUN pnpm run build
 
 
@@ -36,5 +37,6 @@ COPY --chown=nginx:nginx --from=dist-builder /app/dist/*/browser /usr/share/ngin
 COPY --chown=nginx:nginx ./nginx-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 EXPOSE 8080
+ENV API_URL=""
 ENTRYPOINT [ "/entrypoint.sh" ]
 CMD [ "nginx", "-g", "daemon off;" ]
