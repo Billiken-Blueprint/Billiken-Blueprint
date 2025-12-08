@@ -66,8 +66,8 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           tags: ${{ env.REGISTRY_IMAGE }}
           outputs: type=image,push-by-digest=true,name-canonical=true,push=true
-          cache-to: type=gha,mode=max,scope=${{ matrix.platform }}
-          cache-from: type=gha,scope=${{ matrix.platform }}
+          cache-to: type=gha,mode=max,scope=backend/${{ matrix.platform }}
+          cache-from: type=gha,scope=backend/${{ matrix.platform }}
 
       - name: Export digest
         run: |
