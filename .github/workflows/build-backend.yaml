@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: billiken-blueprint/backend
+  REGISTRY_IMAGE: ghcr.io/billiken-blueprint/billiken-blueprint-backend
 
 jobs:
   build:

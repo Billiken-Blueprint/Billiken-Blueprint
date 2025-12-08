@@ -10,7 +10,7 @@ permissions:
   packages: write
 
 env:
-  IMAGE_NAME: billiken-blueprint/web
+  REGISTRY_IMAGE: ghcr.io/billiken-blueprint/billiken-blueprint-web
 
 jobs:
   build:
