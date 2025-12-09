@@ -24,6 +24,10 @@ services:
           action: rebuild
     ports:
       - "4200:4200"
+    labels:
+      com.billikenblueprint.role: "frontend"
+    stdin_open: true
+    tty: true
     command: ng serve --configuration=dev-compose --host 0.0.0.0
   backend:
     build:
@@ -43,5 +47,10 @@ services:
           action: sync
     ports:
       - "8000:8000"
+    labels:
+      com.billikenblueprint.role: "backend"
+    stdin_open: true
+    tty: true
     volumes:
       - ./backend/data:/app/data
+

@@ -1,0 +1,54 @@
+<div class="w-full h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-96 h-96 bg-blue-500/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+    <div class="absolute w-96 h-96 bg-cyan-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse delay-1000"></div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-grow flex flex-col px-6 md:px-8 py-8 md:py-12 relative z-10 overflow-y-auto">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto w-full mb-8">
+      <div class="mb-4">
+        <button type="button" (click)="goBack()" aria-label="Go back" class="text-slate-400 hover:text-slate-300 transition-colors flex items-center gap-2 mb-4">
+          <span class="text-lg">←</span>
+          <span>Back</span>
+        </button>
+      </div>
+      <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">{{ degreeInfo.name }}</h1>
+      <p class="text-slate-300 text-lg">{{ degreeInfo.totalCredits }} Total Credits Required</p>
+    </div>
+
+    <!-- Degree Requirements List -->
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="space-y-3 pb-8">
+        <div class="category" *ngFor="let cat of categories">
+          <button type="button"
+                  class="w-full text-left bg-white/10 hover:bg-white/15 rounded-xl px-4 py-3 mb-2 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between"
+                  (click)="toggleCategory(cat)">
+            <span class="text-white text-lg font-semibold">{{ cat.title }}</span>
+            <span class="text-slate-300 text-sm">{{ cat.expanded ? 'Hide' : 'Show' }}</span>
+          </button>
+          <div class="space-y-2" *ngIf="cat.expanded">
+            <div *ngFor="let course of cat.courses" 
+                 class="bg-gradient-to-r from-white/8 to-white/4 backdrop-blur-lg rounded-xl p-4 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between">
+              <div class="flex-1">
+                <p class="text-white font-semibold">{{ course.code }}</p>
+                <p class="text-slate-400 text-sm mt-1">{{ course.name }}</p>
+              </div>
+              <span class="text-slate-300 text-sm font-medium bg-white/10 px-3 py-1 rounded-lg flex-shrink-0 ml-4">{{ course.credits }} cr</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Navigation Button -->
+      <div class="max-w-7xl mx-auto w-full mt-8 mb-8">
+        <button (click)="navigateToSchedule()" 
+                class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+          Generate Your Spring 2026 Schedule
+        </button>
+      </div>
+  </div>
+</div>
