@@ -9,18 +9,15 @@
       </a>
       <div class="flex space-x-4">
         @if (isLoggedIn | async) {
-          <p-menubar [model]="items"/>
+        <p-menubar [model]="items" />
         } @else {
-          <a
-            class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
-            href="login">
-            Log In
-          </a>
-          <a
-            class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-lg px-6 py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
-            href="register">Sign Up</a>
+        <a class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-base sm:text-lg px-4 sm:px-6 py-2 sm:py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
+          href="login">
+          Log In
+        </a>
+        <a class="nav-button bg-white text-blue-800 hover:bg-gray-100 text-lg px-6 py-3 font-semibold rounded-xl flex items-center justify-center transition-colors duration-200 font-inter"
+          href="register">Sign Up</a>
         }
       </div>
     </div>
   </div>
-</header>

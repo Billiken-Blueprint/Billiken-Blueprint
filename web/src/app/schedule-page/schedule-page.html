@@ -1,0 +1,144 @@
+<div
+  class="w-full h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 relative overflow-hidden">
+  <!-- Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <div class="absolute w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
+    <div class="absolute w-96 h-96 bg-rose-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse delay-1000">
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-grow flex flex-col px-6 md:px-8 py-8 md:py-12 relative z-10 overflow-y-auto">
+    <!-- Header -->
+    <div class="max-w-7xl mx-auto w-full mb-8">
+      <div class="mb-2">
+        <button class="text-slate-400 hover:text-slate-300 transition-colors flex items-center gap-2">
+          <span class="text-lg">←</span>
+          <span>Back</span>
+        </button>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-white">{{ semester }} Schedule</h1>
+        </div>
+        <button (click)="chatbotService.open()"
+          class="bg-white/10 hover:bg-white/20 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 border border-white/10 backdrop-blur-md flex items-center gap-2">
+          <span>🤖</span>
+          Chatbot Course Suggestions
+        </button>
+        <button (click)="regenerateSchedule()"
+          class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+          Regenerate Schedule
+        </button>
+      </div>
+    </div>
+
+    <!-- Schedule Timeline -->
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden shadow-xl p-4">
+
+        <!-- Time Header -->
+        <div class="flex mb-4 relative h-6">
+          <div class="w-24 font-semibold text-slate-300">Time</div>
+          <div class="flex-1 relative h-6">
+            @for (time of times; track time; let i = $index) {
+            @let timePercent = timePercentages[i];
+            @let timeRange = maxTimePercent() - minTimePercent();
+            @let adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 : -999;
+            @if (adjustedPos >= 0 && adjustedPos <= 100) { <div
+              class="absolute text-xs font-medium text-slate-400 w-12 text-center transform -translate-x-1/2"
+              [style.left.%]="adjustedPos">
+              {{ time }}
+          </div>
+          }
+          }
+        </div>
+      </div>
+
+      <!-- Days Rows -->
+      @for (day of days; track day; let dayIndex = $index) {
+      <div class="border-t border-white/10 py-4">
+        <div class="flex">
+          <div class="w-24 font-semibold text-slate-300 flex items-center">
+            {{ day }}
+          </div>
+          <div class="flex-1 relative h-24 border border-white/10 rounded overflow-hidden bg-white/5">
+            <!-- Grid lines -->
+            @for (time of times; track time; let i = $index) {
+            @let timePercent = timePercentages[i];
+            @let timeRange = maxTimePercent() - minTimePercent();
+            @let adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 : -999;
+            @if (adjustedPos >= 0 && adjustedPos <= 100) { <div class="absolute top-0 bottom-0 w-px bg-white/10"
+              [style.left.%]="adjustedPos">
+          </div>
+          }
+          }
+
+          <!-- Courses -->
+          @if (scheduleCourses()[dayIndex]?.length) {
+          @for (block of scheduleCourses()[dayIndex]; track block.startTime) {
+          <div [style.left.%]="block.leftPercent" [style.width.%]="block.widthPercent" [ngClass]="{
+                           'bg-blue-500/20 border-blue-400/50 hover:bg-blue-500/30': block.type === 'section',
+                           'bg-red-500/20 border-red-400/50 hover:bg-red-500/30': block.type === 'unavailable',
+                           'bg-yellow-500/20 border-yellow-400/50 hover:bg-yellow-500/30': block.type === 'avoid'
+                         }"
+            class="absolute top-1 bottom-1 border rounded p-1 text-xs overflow-hidden backdrop-blur-md transition-colors cursor-pointer group flex flex-col justify-center">
+
+            @if (block.type === 'section') {
+            <div class="font-bold text-blue-100 truncate group-hover:whitespace-normal">
+              {{ block.courseCode }}
+            </div>
+            <div class="text-blue-200 truncate text-[10px] group-hover:whitespace-normal">
+              {{ block.title }}
+            </div>
+            } @else if (block.type === 'unavailable') {
+            <div class="font-bold text-red-100 truncate text-center">Busy</div>
+            } @else if (block.type === 'avoid') {
+            <div class="font-bold text-yellow-100 truncate text-center">Avoid</div>
+            }
+
+            <div [ngClass]="{
+                        'text-blue-300': block.type === 'section',
+                        'text-red-300': block.type === 'unavailable',
+                        'text-yellow-300': block.type === 'avoid'
+                      }" class="text-[10px] mt-0.5 truncate group-hover:whitespace-normal">
+              {{ formatTime(block.startTime) }} - {{ formatTime(block.endTime) }}
+            </div>
+          </div>
+          }
+          }
+        </div>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Scheduled Sections Panel -->
+  @if (scheduleSections().length > 0) {
+  <div class="max-w-7xl mx-auto w-full mt-6">
+    <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden shadow-xl p-6">
+      <h3 class="font-semibold text-white mb-4 text-lg">Recommended Sections</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (section of scheduleSections(); track section.courseCode) {
+        <div
+          class="p-4 bg-blue-500/10 border border-blue-400/20 rounded-xl backdrop-blur-md hover:bg-blue-500/20 transition-colors">
+          <div class="font-bold text-blue-100 text-lg mb-1">{{ section.courseCode }}</div>
+          <div class="text-blue-200 text-sm mb-2">{{ section.title }}</div>
+          @if (section.requirementLabels.length > 0) {
+          <div class="space-y-1">
+            @for (label of section.requirementLabels; track label) {
+            <div
+              class="inline-flex items-center px-2 py-1 rounded-md bg-blue-500/20 text-blue-200 text-xs font-medium border border-blue-400/30 mr-2">
+              ✓ {{ label }}
+            </div>
+            }
+          </div>
+          }
+        </div>
+        }
+      </div>
+    </div>
+  </div>
+  }
+</div>
+</div>

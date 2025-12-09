@@ -6,10 +6,7 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: () => {
-      const authService = inject(AuthService);
-      return authService.getLoginStatus() ? 'home' : 'landing';
-    }
+    redirectTo: 'landing'
   },
   {
     path: 'landing',
@@ -39,6 +36,15 @@ export const routes: Routes = [
     path: 'home',
     loadComponent: () => import('./home-page/home-page').then(m => m.HomePage),
   },
+  // Separate pages as requested
+  {
+    path: 'degree-requirements',
+    loadComponent: () => import('./degree-requirements-page/degree-requirements-page').then(m => m.DegreeRequirementsPage),
+  },
+  {
+    path: 'schedule',
+    loadComponent: () => import('./schedule-page/schedule-page').then(m => m.SchedulePage),
+  },
   {
     path: 'ratings',
     loadComponent: () => import('./ratings-page/ratings-page').then(m => m.RatingsPage),
@@ -46,10 +52,6 @@ export const routes: Routes = [
   {
     path: 'ratings/create',
     loadComponent: () => import('./ratings-page/create-rating-page/create-rating-page').then(m => m.CreateRatingPage),
-  },
-  {
-    path: 'schedule',
-    loadComponent: () => import('./scheduling-page/scheduling-page').then(m => m.SchedulingPage),
   },
   {
     path: 'instructors/:id/reviews',
