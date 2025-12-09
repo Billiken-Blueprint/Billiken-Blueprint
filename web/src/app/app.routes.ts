@@ -6,7 +6,10 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'landing'
+    redirectTo: () => {
+      const authService = inject(AuthService);
+      return authService.getLoginStatus() ? 'home' : 'landing';
+    }
   },
   {
     path: 'landing',

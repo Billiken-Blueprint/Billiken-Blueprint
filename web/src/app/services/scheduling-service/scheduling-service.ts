@@ -11,8 +11,12 @@ export class SchedulingService {
     return this.http.get<GraduationRequirement[]>('/api/degree-requirements');
   }
 
-  autoGenerateSchedule() {
-    return this.http.get<AutogenerateScheduleResponse>('api/degree-requirements/autogenerate-schedule')
+  autoGenerateSchedule(discardedSectionIds: number[] = []) {
+    let params = '?';
+    discardedSectionIds.forEach(id => {
+      params += `discarded_section_ids=${id}&`;
+    });
+    return this.http.get<AutogenerateScheduleResponse>('api/degree-requirements/autogenerate-schedule' + params);
   }
 }
 
@@ -20,6 +24,7 @@ export interface GraduationRequirement {
   label: string;
   needed: number;
   satisfyingCourseCodes: string[];
+  satisfyingCourseIds: number[];
 }
 
 export interface AutogenerateScheduleResponse {
@@ -49,4 +54,5 @@ export interface AutogenerateScheduleResponse {
     start: string;
     end: string;
   }[];
+  discardedSectionIds: number[];
 }

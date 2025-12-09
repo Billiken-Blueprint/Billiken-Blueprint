@@ -32,9 +32,10 @@ export class SchedulePage implements OnInit {
 
   // Data for the horizontal timeline
   scheduleCourses = signal<ScheduleBlock[][]>(Array(5).fill(null).map(() => []));
-  scheduleSections = signal<Array<{ courseCode: string; title: string; requirementLabels: string[] }>>([]);
+  scheduleSections = signal<Array<{ id: number; courseCode: string; title: string; requirementLabels: string[] }>>([]);
   minTimePercent = signal<number>(0);
   maxTimePercent = signal<number>(100);
+  discardedSectionIds = signal<number[]>([]);
 
   // Time percentages for the timeline header
   timePercentages: number[] = [];
@@ -47,7 +48,7 @@ export class SchedulePage implements OnInit {
   }
 
   loadSchedule() {
-    this.schedulingService.autoGenerateSchedule().subscribe({
+    this.schedulingService.autoGenerateSchedule(this.discardedSectionIds()).subscribe({
       next: (response) => {
         this.processScheduleData(response);
       },
@@ -61,11 +62,20 @@ export class SchedulePage implements OnInit {
     this.loadSchedule();
   }
 
+  discardSection(sectionId: number) {
+    this.discardedSectionIds.update(ids => [...ids, sectionId]);
+    this.loadSchedule();
+  }
+
   private processScheduleData(data: AutogenerateScheduleResponse): void {
     const schedule: ScheduleBlock[][] = Array(5).fill(null).map(() => []);
-    const sections: Array<{ courseCode: string; title: string; requirementLabels: string[] }> = [];
+    const sections: Array<{ id: number; courseCode: string; title: string; requirementLabels: string[] }> = [];
     let minTime = Infinity;
     let maxTime = -Infinity;
+
+    if (data.discardedSectionIds) {
+      this.discardedSectionIds.set(data.discardedSectionIds);
+    }
 
     // Helper to process time range
     const processTime = (startTime: string, endTime: string) => {
@@ -79,6 +89,7 @@ export class SchedulePage implements OnInit {
     // 1. Sections
     data.sections.forEach((section) => {
       sections.push({
+        id: section.id || 0,
         courseCode: section.courseCode,
         title: section.title,
         requirementLabels: section.requirementLabels || []

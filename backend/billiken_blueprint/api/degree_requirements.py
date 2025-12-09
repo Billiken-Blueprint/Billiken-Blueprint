@@ -37,13 +37,21 @@ async def get_degree_requirements(
         for course in all_courses
     ]
     degree = await degree_repo.get_by_id(student.degree_id)
-    all_requirements = get_combined_requirements(degree, student, all_courses_with_attrs)
+    all_requirements = get_combined_requirements(
+        degree, student, all_courses_with_attrs
+    )
     return [
         dict(
             label=req.label,
             needed=req.needed,
             satisfyingCourseCodes=[
                 f"{mc.major_code} {mc.course_number}"
+                for mc in req.course_rules.filter_satisfying_courses(
+                    all_courses_with_attrs
+                )
+            ],
+            satisfyingCourseIds=[
+                mc.id
                 for mc in req.course_rules.filter_satisfying_courses(
                     all_courses_with_attrs
                 )
@@ -58,6 +66,7 @@ class AutogenerateScheduleMeetingTime(BaseModel):
     startTime: str
     endTime: str
 
+
 class AutogenerateScheduleSectionResponse(BaseModel):
     id: int | None
     crn: str
@@ -70,15 +79,19 @@ class AutogenerateScheduleSectionResponse(BaseModel):
     meetingTimes: list[AutogenerateScheduleMeetingTime]
     requirementLabels: list[str]
 
+
 class TimeSlotResponse(BaseModel):
     day: int
     start: str
     end: str
 
+
 class AutogenerateScheduleResponse(BaseModel):
     sections: list[AutogenerateScheduleSectionResponse]
     unavailabilityTimes: list[TimeSlotResponse]
     avoidTimes: list[TimeSlotResponse]
+    discardedSectionIds: list[int]
+
 
 @router.get("/autogenerate-schedule", response_model=AutogenerateScheduleResponse)
 async def autogenerate_schedule(
@@ -91,6 +104,9 @@ async def autogenerate_schedule(
     rating_repo: RatingRepo,
     semester: str = Query(
         Semester.SPRING, description="Semester code (e.g., '202501' for Spring 2025)"
+    ),
+    discarded_section_ids: list[int] = Query(
+        [], description="List of section IDs to exclude from the schedule"
     ),
 ):
     degree = await degree_repo.get_by_id(student.degree_id)
@@ -108,24 +124,28 @@ async def autogenerate_schedule(
         if course
     ]
     all_sections = await sections_repo.get_all_for_semester(semester)
-    all_sections = [section for section in all_sections if section.campus_code == "North Campus (Main Campus)"]
-    
+    all_sections = [
+        section
+        for section in all_sections
+        if section.campus_code == "North Campus (Main Campus)"
+    ]
+
     # Get all instructors and create a mapping of instructor name -> rating
     # Priority: RMP rating > aggregated user-submitted ratings
     all_instructors = await instructor_repo.get_all()
     instructor_ratings_map: dict[str, float] = {}
-    
+
     # First, add RMP ratings (for CSCI and MATH departments)
     for instructor in all_instructors:
         if instructor.rmp_rating is not None:
             name_normalized = instructor.name.strip().lower()
             instructor_ratings_map[name_normalized] = instructor.rmp_rating
             instructor_ratings_map[instructor.name.strip()] = instructor.rmp_rating
-    
+
     # Then, aggregate user-submitted ratings for instructors without RMP ratings
     # This covers all departments, not just CSCI and MATH
     all_user_ratings = await rating_repo.get_all()
-    
+
     # Group ratings by instructor_id and calculate averages
     instructor_ratings_by_id: dict[int, list[int]] = {}
     for rating in all_user_ratings:
@@ -133,13 +153,13 @@ async def autogenerate_schedule(
             if rating.professor_id not in instructor_ratings_by_id:
                 instructor_ratings_by_id[rating.professor_id] = []
             instructor_ratings_by_id[rating.professor_id].append(rating.rating_value)
-    
+
     # Calculate average ratings and add to map (only if RMP rating doesn't exist)
     for instructor in all_instructors:
         # Skip if already has RMP rating
         if instructor.rmp_rating is not None:
             continue
-        
+
         # Check if instructor has user-submitted ratings
         if instructor.id and instructor.id in instructor_ratings_by_id:
             ratings = instructor_ratings_by_id[instructor.id]
@@ -153,7 +173,7 @@ async def autogenerate_schedule(
                     if name_normalized not in instructor_ratings_map:
                         instructor_ratings_map[name_normalized] = avg_rating
                         instructor_ratings_map[instructor.name.strip()] = avg_rating
-    
+
     schedule = get_schedule(
         degree,
         student,
@@ -169,6 +189,7 @@ async def autogenerate_schedule(
         unavailability_times=student.unavailability_times,
         avoid_times=student.avoid_times,
         instructor_ratings_map=instructor_ratings_map,
+        discarded_section_ids=discarded_section_ids,
     )
 
     return AutogenerateScheduleResponse(
@@ -202,4 +223,5 @@ async def autogenerate_schedule(
             TimeSlotResponse(day=ts.day, start=ts.start, end=ts.end)
             for ts in student.avoid_times
         ],
+        discardedSectionIds=discarded_section_ids,
     )
