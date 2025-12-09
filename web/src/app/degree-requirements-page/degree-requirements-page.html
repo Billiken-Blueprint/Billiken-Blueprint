@@ -22,23 +22,28 @@
     <!-- Degree Requirements List -->
     <div class="max-w-7xl mx-auto w-full">
       <div class="space-y-3 pb-8">
-        <div *ngFor="let requirement of requirements" 
-             class="bg-gradient-to-r from-white/8 to-white/4 backdrop-blur-lg rounded-xl p-4 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between">
-          <div class="flex-1">
-            <p class="text-white font-semibold">{{ requirement.code }}</p>
-            <p class="text-slate-400 text-sm mt-1">{{ requirement.name }}</p>
+        <div class="category" *ngFor="let cat of categories">
+          <h2 class="text-white text-lg font-semibold mb-2">{{ cat.title }}</h2>
+          <div class="space-y-2">
+            <div *ngFor="let course of cat.courses" 
+                 class="bg-gradient-to-r from-white/8 to-white/4 backdrop-blur-lg rounded-xl p-4 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between">
+              <div class="flex-1">
+                <p class="text-white font-semibold">{{ course.code }}</p>
+                <p class="text-slate-400 text-sm mt-1">{{ course.name }}</p>
+              </div>
+              <span class="text-slate-300 text-sm font-medium bg-white/10 px-3 py-1 rounded-lg flex-shrink-0 ml-4">{{ course.credits }} cr</span>
+            </div>
           </div>
-          <span class="text-slate-300 text-sm font-medium bg-white/10 px-3 py-1 rounded-lg flex-shrink-0 ml-4">{{ requirement.credits }} cr</span>
         </div>
       </div>
     </div>
 
     <!-- Navigation Button -->
-    <div class="max-w-7xl mx-auto w-full mt-8 mb-8">
-      <button (click)="navigateToSchedule()" 
-              class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-        Generate Your Spring 2026 Schedule
-      </button>
-    </div>
+      <div class="max-w-7xl mx-auto w-full mt-8 mb-8">
+        <button (click)="navigateToSchedule()" 
+                class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
+          Generate Your Spring 2026 Schedule
+        </button>
+      </div>
   </div>
 </div>
