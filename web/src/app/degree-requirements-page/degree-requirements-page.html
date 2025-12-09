@@ -12,13 +12,21 @@
     <!-- Header -->
     <div class="max-w-7xl mx-auto w-full mb-8">
       <div class="mb-4">
-        <button class="text-slate-400 hover:text-slate-300 transition-colors flex items-center gap-2 mb-4">
+        <a href="/" class="text-slate-400 hover:text-slate-300 transition-colors flex items-center gap-2 mb-4">
           <span class="text-lg">←</span>
           <span>Back</span>
+        </a>
+      </div>
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+        <div>
+          <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">{{ degreeInfo.name }}</h1>
+          <p class="text-slate-300 text-lg">{{ degreeInfo.totalCredits }} Total Credits Required</p>
+        </div>
+        <button (click)="navigateToSchedule()"
+          class="w-full md:w-auto bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-3 px-8 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 whitespace-nowrap mb-1">
+          Generate Your Spring 2026 Schedule
         </button>
       </div>
-      <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">{{ degreeInfo.name }}</h1>
-      <p class="text-slate-300 text-lg">{{ degreeInfo.totalCredits }} Total Credits Required</p>
     </div>
 
     <!-- Degree Requirements List -->
@@ -42,7 +50,7 @@
           <div class="space-y-2 pl-4 py-2 relative">
             <!-- Vertical line guide -->
             <div class="absolute left-0 top-0 bottom-0 w-px bg-white/10 ml-2"></div>
-            @for (code of req.satisfyingCourseCodes; track code) {
+            @for (code of req.satisfyingCourseCodes; track code; let i = $index) {
             <div
               class="ml-4 bg-slate-800/60 hover:bg-slate-800/80 backdrop-blur-sm rounded-lg px-4 py-3 border border-slate-700/50 hover:border-cyan-500/30 transition-all duration-300 flex items-center justify-between group/course">
               <div class="flex items-center gap-3">
@@ -50,8 +58,21 @@
                   class="text-cyan-400 opacity-60 group-hover/course:opacity-100 transition-opacity text-xs">●</span>
                 <p class="text-slate-200 font-medium text-sm group-hover/course:text-white">{{ code }}</p>
               </div>
-              <span class="text-xs text-slate-500 group-hover/course:text-cyan-400 transition-colors">Satisfies
-                Requirement</span>
+              <div class="flex items-center gap-3">
+                <span class="text-xs text-slate-500 group-hover/course:text-cyan-400 transition-colors">Satisfies
+                  Requirement</span>
+
+                @if (req.label.startsWith('Desired: ')) {
+                <button (click)="removeDesiredCourse(req.satisfyingCourseIds[i])"
+                  class="text-slate-500 hover:text-red-400 p-1 rounded transition-colors" title="Remove desired course">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd"
+                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </button>
+                }
+              </div>
             </div>
             }
           </div>
@@ -62,11 +83,5 @@
     </div>
 
     <!-- Navigation Button -->
-    <div class="max-w-7xl mx-auto w-full mt-8 mb-8">
-      <button (click)="navigateToSchedule()"
-        class="w-full bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-semibold py-4 px-6 rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105">
-        Generate Your Spring 2026 Schedule
-      </button>
-    </div>
   </div>
 </div>

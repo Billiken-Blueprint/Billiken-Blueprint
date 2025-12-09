@@ -44,6 +44,10 @@ export class CoursesService {
     );
     return forkJoin(requests);
   }
+
+  removeDesiredCourse(courseId: number) {
+    return this.http.delete(`/api/student/desired_courses/${courseId}`);
+  }
 }
 
 export interface Course {

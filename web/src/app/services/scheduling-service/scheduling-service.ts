@@ -20,6 +20,7 @@ export interface GraduationRequirement {
   label: string;
   needed: number;
   satisfyingCourseCodes: string[];
+  satisfyingCourseIds: number[];
 }
 
 export interface AutogenerateScheduleResponse {
