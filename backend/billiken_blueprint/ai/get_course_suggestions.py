@@ -4,13 +4,16 @@ from pydantic import BaseModel
 import time
 from google.genai import types
 from venv import logger
+
 client = genai_client
 
 debounce = 3
 last_query_t = 0
 
+
 class ResponseModel(BaseModel):
     keywords: list[str]
+
 
 def user_input_to_keywords(user_input: str) -> list[str]:
     global last_query_t
@@ -51,6 +54,7 @@ def user_input_to_keywords(user_input: str) -> list[str]:
     except Exception as e:
         logger.error(f"Unexpected Error: {str(e)}")
         raise
+
 
 if __name__ == "__main__":
     result = user_input_to_keywords("I want to be a pilot at NASA.")
