@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { SchedulingService, AutogenerateScheduleResponse } from '../services/scheduling-service/scheduling-service';
+import { ChatbotService } from '../services/chatbot-service/chatbot-service';
 
-interface TimeSlot {
-  time: string;
-  courses: CourseOnSchedule[];
-}
-
-interface CourseOnSchedule {
-  code: string;
-  name: string;
-  instructor: string;
-  location: string;
-  credits: number;
+interface ScheduleBlock {
+  type: 'section' | 'unavailable' | 'avoid';
+  title?: string;
+  courseCode?: string;
+  instructors?: string[];
   startTime: string;
   endTime: string;
-  day: string;
-  color: string;
+  leftPercent: number;
+  widthPercent: number;
 }
 
 @Component({
@@ -29,142 +25,179 @@ interface CourseOnSchedule {
 })
 export class SchedulePage implements OnInit {
   semester = 'Spring 2026';
-  totalCredits = 15;
-  
-  daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
-  timeSlots = [
-    '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM'
-  ];
+  chatbotService = inject(ChatbotService);
 
-  courses: CourseOnSchedule[] = [];
-  private colorClasses = [
-    'from-blue-500/40 to-blue-600/20 border-blue-400/50',
-    'from-purple-500/40 to-purple-600/20 border-purple-400/50',
-    'from-cyan-500/40 to-cyan-600/20 border-cyan-400/50',
-    'from-pink-500/40 to-pink-600/20 border-pink-400/50',
-    'from-indigo-500/40 to-indigo-600/20 border-indigo-400/50',
-    'from-amber-500/40 to-amber-600/20 border-amber-400/50',
-    'from-emerald-500/40 to-emerald-600/20 border-emerald-400/50',
-    'from-rose-500/40 to-rose-600/20 border-rose-400/50',
-  ];
+  days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
+  times = ['8am', '9am', '10am', '11am', '12pm', '1pm', '2pm', '3pm', '4pm', '5pm'];
+
+  // Data for the horizontal timeline
+  scheduleCourses = signal<ScheduleBlock[][]>(Array(5).fill(null).map(() => []));
+  scheduleSections = signal<Array<{ courseCode: string; title: string; requirementLabels: string[] }>>([]);
+  minTimePercent = signal<number>(0);
+  maxTimePercent = signal<number>(100);
+
+  // Time percentages for the timeline header
+  timePercentages: number[] = [];
+
+  private schedulingService = inject(SchedulingService);
 
   ngOnInit() {
-    this.courses = this.generateSchedule();
+    this.calculateTimePercentages();
+    this.loadSchedule();
   }
 
-  getCoursesForDayAndTime(day: string, hour: string): CourseOnSchedule[] {
-    return this.courses.filter(course => 
-      course.day === day && course.startTime === hour
-    );
-  }
-
-  private getRandomColor(): string {
-    return this.colorClasses[Math.floor(Math.random() * this.colorClasses.length)];
-  }
-
-  private getRandomTime(): string {
-    const times = ['8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'];
-    return times[Math.floor(Math.random() * times.length)];
-  }
-
-  private getRandomDays(): string[] {
-    const dayCombinations = [
-      ['Monday', 'Wednesday', 'Friday'],
-      ['Tuesday', 'Thursday'],
-      ['Monday', 'Wednesday'],
-      ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-      ['Tuesday', 'Wednesday', 'Thursday'],
-    ];
-    return dayCombinations[Math.floor(Math.random() * dayCombinations.length)];
-  }
-
-  private generateSchedule(): CourseOnSchedule[] {
-    const allCourses = [
-      { code: 'CS 3000', name: 'Algorithms', credits: 3 },
-      { code: 'CS 3500', name: 'Web Development', credits: 3 },
-      { code: 'CS 4000', name: 'Database Systems', credits: 3 },
-      { code: 'CS 4200', name: 'Software Engineering', credits: 3 },
-      { code: 'MATH 2100', name: 'Linear Algebra', credits: 4 },
-      { code: 'MATH 2500', name: 'Probability & Statistics', credits: 4 },
-      { code: 'ENG 2200', name: 'Literature and Composition', credits: 3 },
-      { code: 'PHYS 2050', name: 'Physics II', credits: 2 },
-      { code: 'CHEM 1030', name: 'Chemistry I', credits: 4 },
-      { code: 'BIOL 1040', name: 'Biology I', credits: 3 },
-    ];
-
-    const instructors = [
-      'Dr. Sarah Johnson',
-      'Prof. Michael Chen',
-      'Dr. Emily Rodriguez',
-      'Prof. James Wilson',
-      'Dr. David Kumar',
-      'Prof. Lisa Anderson',
-      'Dr. Robert Martinez',
-      'Prof. Jennifer Taylor',
-    ];
-
-    const locations = [
-      'Science Building 201',
-      'Science Building 310',
-      'Math Building 105',
-      'Tech Center 301',
-      'Humanities 220',
-      'Engineering Building 150',
-      'Life Sciences 250',
-      'Chemistry Lab 301',
-    ];
-
-    // Randomly select 5 courses for the schedule
-    const selectedCourses = [];
-    const shuffled = allCourses.sort(() => Math.random() - 0.5);
-    for (let i = 0; i < 5; i++) {
-      selectedCourses.push({
-        ...shuffled[i],
-        instructor: instructors[Math.floor(Math.random() * instructors.length)],
-        location: locations[Math.floor(Math.random() * locations.length)],
-        startTime: this.getRandomTime(),
-        days: this.getRandomDays(),
-        color: this.getRandomColor()
-      });
-    }
-
-    // Create schedule entries for each day/time combination
-    const schedule: CourseOnSchedule[] = [];
-    selectedCourses.forEach(course => {
-      course.days.forEach(day => {
-        schedule.push({
-          code: course.code,
-          name: course.name,
-          instructor: course.instructor,
-          location: course.location,
-          credits: course.credits,
-          startTime: course.startTime,
-          endTime: this.addMinutes(course.startTime, 90),
-          day: day,
-          color: course.color
-        });
-      });
+  loadSchedule() {
+    this.schedulingService.autoGenerateSchedule().subscribe({
+      next: (response) => {
+        this.processScheduleData(response);
+      },
+      error: (err) => {
+        console.error('Failed to load schedule', err);
+      }
     });
-
-    return schedule;
-  }
-
-  private addMinutes(time: string, minutes: number): string {
-    const [timePart, period] = time.split(' ');
-    const [hours, mins] = timePart.split(':').map(Number);
-    let totalMinutes = hours * 60 + (mins || 0) + minutes;
-    
-    let newHours = Math.floor(totalMinutes / 60) % 12;
-    if (newHours === 0) newHours = 12;
-    const newMins = totalMinutes % 60;
-    
-    const newPeriod = totalMinutes >= 12 * 60 ? 'PM' : 'AM';
-    return `${newHours}:${newMins === 0 ? '00' : newMins} ${newPeriod}`;
   }
 
   regenerateSchedule() {
-    // Regenerate a completely new schedule with different courses, times, instructors, and locations
-    this.courses = this.generateSchedule();
-    console.log('Schedule regenerated with', this.courses.length, 'course sessions');
+    this.loadSchedule();
+  }
+
+  private processScheduleData(data: AutogenerateScheduleResponse): void {
+    const schedule: ScheduleBlock[][] = Array(5).fill(null).map(() => []);
+    const sections: Array<{ courseCode: string; title: string; requirementLabels: string[] }> = [];
+    let minTime = Infinity;
+    let maxTime = -Infinity;
+
+    // Helper to process time range
+    const processTime = (startTime: string, endTime: string) => {
+      const start = this.timeToPercent(startTime);
+      const end = this.timeToPercent(endTime);
+      minTime = Math.min(minTime, start);
+      maxTime = Math.max(maxTime, end);
+      return { start, end };
+    };
+
+    // 1. Sections
+    data.sections.forEach((section) => {
+      sections.push({
+        courseCode: section.courseCode,
+        title: section.title,
+        requirementLabels: section.requirementLabels || []
+      });
+
+      section.meetingTimes.forEach((meeting) => {
+        processTime(meeting.startTime, meeting.endTime);
+      });
+    });
+
+    // 2. Unavailability
+    data.unavailabilityTimes?.forEach((time) => {
+      processTime(time.start, time.end);
+    });
+
+    // 3. Avoid
+    data.avoidTimes?.forEach((time) => {
+      processTime(time.start, time.end);
+    });
+
+    // Enforce default range (8am - 5pm)
+    const defaultMin = this.timeToPercent('0800');
+    const defaultMax = this.timeToPercent('1700');
+
+    if (minTime === Infinity) minTime = defaultMin;
+    else minTime = Math.min(minTime, defaultMin);
+
+    if (maxTime === -Infinity) maxTime = defaultMax;
+    else maxTime = Math.max(maxTime, defaultMax);
+
+    // Buffer range slightly
+    const buffer = (60 / 1440) * 100; // 1 hour buffer
+    minTime = Math.max(0, minTime - buffer);
+    maxTime = Math.min(100, maxTime + buffer);
+
+    this.minTimePercent.set(minTime);
+    this.maxTimePercent.set(maxTime);
+
+    // Recalculate header percentages based on new range
+    this.calculateTimePercentages();
+
+    // Second pass: build schedule
+    const timeRange = maxTime - minTime;
+
+    const createBlock = (type: 'section' | 'unavailable' | 'avoid', startTime: string, endTime: string, extra?: any): ScheduleBlock => {
+      const startPercent = this.timeToPercent(startTime);
+      const endPercent = this.timeToPercent(endTime);
+      const leftPercent = ((startPercent - minTime) / timeRange) * 100;
+      const widthPercent = ((endPercent - startPercent) / timeRange) * 100;
+
+      return {
+        type,
+        startTime,
+        endTime,
+        leftPercent,
+        widthPercent,
+        ...extra
+      };
+    };
+
+    data.sections.forEach((section) => {
+      section.meetingTimes.forEach((meeting) => {
+        if (meeting.day >= 0 && meeting.day < 5) {
+          schedule[meeting.day].push(createBlock('section', meeting.startTime, meeting.endTime, {
+            courseCode: section.courseCode,
+            title: section.title,
+            instructors: section.instructorNames
+          }));
+        }
+      });
+    });
+
+    data.unavailabilityTimes?.forEach((time) => {
+      if (time.day >= 0 && time.day < 5) {
+        schedule[time.day].push(createBlock('unavailable', time.start, time.end, { title: 'Busy' }));
+      }
+    });
+
+    data.avoidTimes?.forEach((time) => {
+      if (time.day >= 0 && time.day < 5) {
+        schedule[time.day].push(createBlock('avoid', time.start, time.end, { title: 'Avoid' }));
+      }
+    });
+
+    this.scheduleCourses.set(schedule);
+    this.scheduleSections.set(sections);
+  }
+
+  timeToPercent(timeStr: string): number {
+    if (!timeStr) {
+      console.warn('timeToPercent received empty time string');
+      return 0;
+    }
+    const hours = parseInt(timeStr.substring(0, 2), 10);
+    const mins = parseInt(timeStr.substring(2, 4), 10);
+    const totalMinutes = hours * 60 + mins;
+    return (totalMinutes / 1440) * 100;
+  }
+
+  calculateTimePercentages() {
+    this.timePercentages = this.times.map(time => {
+      const match = time.match(/(\d+)(am|pm)/);
+      if (!match) return 0;
+      let hours = parseInt(match[1], 10);
+      const isPm = match[2] === 'pm';
+      if (hours === 12) hours = isPm ? 12 : 0;
+      else if (isPm) hours += 12;
+      const timeStr = `${String(hours).padStart(2, '0')}00`;
+      return this.timeToPercent(timeStr);
+    });
+  }
+
+  formatTime(timeStr: string): string {
+    if (!timeStr) return '';
+    let hours = parseInt(timeStr.substring(0, 2), 10);
+    const mins = timeStr.substring(2, 4);
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+    return `${hours}:${mins} ${ampm}`;
   }
 }

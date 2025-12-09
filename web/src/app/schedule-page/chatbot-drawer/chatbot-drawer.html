@@ -1,0 +1,65 @@
+<!-- Backdrop -->
+<div class="absolute inset-0 bg-black/50 backdrop-blur-sm transition-opacity duration-300 pointer-events-auto"
+    [class.opacity-0]="!isOpen()" [class.pointer-events-none]="!isOpen()" (click)="onClose()">
+</div>
+
+<!-- Drawer -->
+<div class="absolute top-0 right-0 bottom-0 w-full md:w-[480px] bg-slate-900/95 backdrop-blur-xl border-l border-white/10 shadow-2xl transition-transform duration-300 ease-in-out pointer-events-auto flex flex-col h-full"
+    [class.translate-x-full]="!isOpen()" [class.translate-x-0]="isOpen()">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between p-6 border-b border-white/10">
+        <h2 class="text-xl font-bold text-white flex items-center gap-2">
+            <span class="text-2xl">🤖</span>
+            Chatbot Suggestions
+        </h2>
+        <button (click)="onClose()"
+            class="text-slate-400 hover:text-white transition-colors p-2 rounded-lg hover:bg-white/5">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+        </button>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-grow overflow-y-auto p-6">
+        <div class="bg-blue-500/10 border border-blue-400/20 rounded-xl p-6 text-center">
+            <div class="text-4xl mb-4">💬</div>
+            <h3 class="text-lg font-semibold text-blue-100 mb-2">AI Course Assistant</h3>
+            <p class="text-blue-200/80">
+                Ask for course recommendations based on your major, interests, or schedule preferences.
+            </p>
+        </div>
+
+        <!-- Placeholder for chat interface -->
+        <div class="mt-8 space-y-4">
+            <div class="flex justify-end">
+                <div class="bg-indigo-600 text-white rounded-2xl rounded-tr-none py-3 px-4 max-w-[85%] text-sm">
+                    Hi! Can you help me find an easy humanities elective?
+                </div>
+            </div>
+            <div class="flex justify-start">
+                <div class="bg-slate-800 text-slate-200 rounded-2xl rounded-tl-none py-3 px-4 max-w-[85%] text-sm">
+                    Absolutely! "Intro to Philosophy" is a popular choice and fits your schedule on Tuesdays and
+                    Thursdays.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Input Area Placeholder -->
+    <div class="p-4 border-t border-white/10 bg-black/20">
+        <div class="relative">
+            <input type="text" placeholder="Type a message..."
+                class="w-full bg-slate-800/50 border border-white/10 text-white rounded-xl py-3 px-4 pr-12 focus:outline-none focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 placeholder-slate-500">
+            <button
+                class="absolute right-2 top-1/2 -translate-y-1/2 p-2 text-indigo-400 hover:text-indigo-300 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                        d="M10.894 2.553a1 1 0 00-1.788 0l-7 14a1 1 0 001.169 1.409l5-1.429A1 1 0 009 15.571V11a1 1 0 112 0v4.571a1 1 0 00.725.962l5 1.428a1 1 0 001.17-1.408l-7-14z" />
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>

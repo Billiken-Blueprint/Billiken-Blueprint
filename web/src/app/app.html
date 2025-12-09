@@ -4,3 +4,4 @@
         <router-outlet />
     </div>
 </div>
+<app-chatbot-drawer [isOpen]="chatbotService.isOpen()" (close)="chatbotService.close()" />

@@ -1,8 +1,10 @@
-<div class="w-full h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 relative overflow-hidden">
+<div
+  class="w-full h-full flex flex-col bg-gradient-to-br from-slate-900 via-slate-800 to-slate-700 relative overflow-hidden">
   <!-- Background Elements -->
   <div class="absolute inset-0 overflow-hidden pointer-events-none">
     <div class="absolute w-96 h-96 bg-indigo-500/10 rounded-full blur-3xl -top-20 -left-20 animate-pulse"></div>
-    <div class="absolute w-96 h-96 bg-rose-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse delay-1000"></div>
+    <div class="absolute w-96 h-96 bg-rose-500/10 rounded-full blur-3xl -bottom-20 -right-20 animate-pulse delay-1000">
+    </div>
   </div>
 
   <!-- Main Content -->
@@ -18,92 +20,125 @@
       <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-2">
         <div>
           <h1 class="text-4xl md:text-5xl font-bold text-white">{{ semester }} Schedule</h1>
-          <p class="text-slate-300 text-lg">{{ totalCredits }} Credit Hours</p>
         </div>
-        <button (click)="regenerateSchedule()" 
-                class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
+        <button (click)="chatbotService.open()"
+          class="bg-white/10 hover:bg-white/20 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 border border-white/10 backdrop-blur-md flex items-center gap-2">
+          <span>🤖</span>
+          Chatbot Course Suggestions
+        </button>
+        <button (click)="regenerateSchedule()"
+          class="bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 text-white font-semibold py-2 px-6 rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl">
           Regenerate Schedule
         </button>
       </div>
     </div>
 
-    <!-- Schedule Grid -->
+    <!-- Schedule Timeline -->
     <div class="max-w-7xl mx-auto w-full">
-      <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden shadow-xl">
-        <!-- Time Grid Table -->
-        <div class="overflow-x-auto">
-          <table class="w-full">
-            <!-- Header -->
-            <thead>
-              <tr class="border-b border-white/20">
-                <th class="px-4 py-4 bg-white/10 text-left text-slate-300 font-semibold w-20">Time</th>
-                <th *ngFor="let day of daysOfWeek" class="px-4 py-4 bg-white/10 text-center text-slate-300 font-semibold min-w-48">
-                  {{ day }}
-                </th>
-              </tr>
-            </thead>
-            <!-- Body -->
-            <tbody>
-              <tr *ngFor="let time of timeSlots" class="border-b border-white/10 hover:bg-white/5 transition-colors">
-                <!-- Time Column -->
-                <td class="px-4 py-6 bg-white/5 text-slate-300 font-medium text-sm sticky left-0 z-10">
-                  {{ time }}
-                </td>
-                <!-- Day Columns -->
-                <td *ngFor="let day of daysOfWeek" class="px-4 py-6 relative">
-                  <div *ngFor="let course of getCoursesForDayAndTime(day, time)" 
-                       [class]="'bg-gradient-to-br ' + course.color + ' backdrop-blur-lg rounded-lg p-3 border transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer'">
-                    <p class="text-white font-bold text-sm">{{ course.code }}</p>
-                    <p class="text-slate-200 text-xs mt-1">{{ course.name }}</p>
-                    <p class="text-slate-300 text-xs mt-2">{{ course.startTime }} - {{ course.endTime }}</p>
-                    <div class="text-slate-400 text-xs mt-2 space-y-1">
-                      <p>{{ course.instructor }}</p>
-                      <p>{{ course.location }}</p>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden shadow-xl p-4">
+
+        <!-- Time Header -->
+        <div class="flex mb-4 relative h-6">
+          <div class="w-24 font-semibold text-slate-300">Time</div>
+          <div class="flex-1 relative h-6">
+            @for (time of times; track time; let i = $index) {
+            @let timePercent = timePercentages[i];
+            @let timeRange = maxTimePercent() - minTimePercent();
+            @let adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 : -999;
+            @if (adjustedPos >= 0 && adjustedPos <= 100) { <div
+              class="absolute text-xs font-medium text-slate-400 w-12 text-center transform -translate-x-1/2"
+              [style.left.%]="adjustedPos">
+              {{ time }}
+          </div>
+          }
+          }
+        </div>
+      </div>
+
+      <!-- Days Rows -->
+      @for (day of days; track day; let dayIndex = $index) {
+      <div class="border-t border-white/10 py-4">
+        <div class="flex">
+          <div class="w-24 font-semibold text-slate-300 flex items-center">
+            {{ day }}
+          </div>
+          <div class="flex-1 relative h-24 border border-white/10 rounded overflow-hidden bg-white/5">
+            <!-- Grid lines -->
+            @for (time of times; track time; let i = $index) {
+            @let timePercent = timePercentages[i];
+            @let timeRange = maxTimePercent() - minTimePercent();
+            @let adjustedPos = timeRange > 0 ? ((timePercent - minTimePercent()) / timeRange) * 100 : -999;
+            @if (adjustedPos >= 0 && adjustedPos <= 100) { <div class="absolute top-0 bottom-0 w-px bg-white/10"
+              [style.left.%]="adjustedPos">
+          </div>
+          }
+          }
+
+          <!-- Courses -->
+          @if (scheduleCourses()[dayIndex]?.length) {
+          @for (block of scheduleCourses()[dayIndex]; track block.startTime) {
+          <div [style.left.%]="block.leftPercent" [style.width.%]="block.widthPercent" [ngClass]="{
+                           'bg-blue-500/20 border-blue-400/50 hover:bg-blue-500/30': block.type === 'section',
+                           'bg-red-500/20 border-red-400/50 hover:bg-red-500/30': block.type === 'unavailable',
+                           'bg-yellow-500/20 border-yellow-400/50 hover:bg-yellow-500/30': block.type === 'avoid'
+                         }"
+            class="absolute top-1 bottom-1 border rounded p-1 text-xs overflow-hidden backdrop-blur-md transition-colors cursor-pointer group flex flex-col justify-center">
+
+            @if (block.type === 'section') {
+            <div class="font-bold text-blue-100 truncate group-hover:whitespace-normal">
+              {{ block.courseCode }}
+            </div>
+            <div class="text-blue-200 truncate text-[10px] group-hover:whitespace-normal">
+              {{ block.title }}
+            </div>
+            } @else if (block.type === 'unavailable') {
+            <div class="font-bold text-red-100 truncate text-center">Busy</div>
+            } @else if (block.type === 'avoid') {
+            <div class="font-bold text-yellow-100 truncate text-center">Avoid</div>
+            }
+
+            <div [ngClass]="{
+                        'text-blue-300': block.type === 'section',
+                        'text-red-300': block.type === 'unavailable',
+                        'text-yellow-300': block.type === 'avoid'
+                      }" class="text-[10px] mt-0.5 truncate group-hover:whitespace-normal">
+              {{ formatTime(block.startTime) }} - {{ formatTime(block.endTime) }}
+            </div>
+          </div>
+          }
+          }
         </div>
       </div>
     </div>
+    }
+  </div>
 
-    <!-- Course Legend -->
-    <div class="max-w-7xl mx-auto w-full mt-12 mb-8">
-      <h3 class="text-white font-semibold mb-4">Course Summary</h3>
+  <!-- Scheduled Sections Panel -->
+  @if (scheduleSections().length > 0) {
+  <div class="max-w-7xl mx-auto w-full mt-6">
+    <div class="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/20 overflow-hidden shadow-xl p-6">
+      <h3 class="font-semibold text-white mb-4 text-lg">Recommended Sections</h3>
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        <div class="bg-gradient-to-br from-blue-500/20 to-blue-600/10 backdrop-blur-lg rounded-lg p-4 border border-blue-500/30">
-          <p class="text-blue-300 font-semibold">CS 3000</p>
-          <p class="text-slate-300 text-sm mt-1">Algorithms</p>
-          <p class="text-slate-400 text-xs mt-2">3 Credits | Mon, Wed, Fri | 9:00 AM</p>
+        @for (section of scheduleSections(); track section.courseCode) {
+        <div
+          class="p-4 bg-blue-500/10 border border-blue-400/20 rounded-xl backdrop-blur-md hover:bg-blue-500/20 transition-colors">
+          <div class="font-bold text-blue-100 text-lg mb-1">{{ section.courseCode }}</div>
+          <div class="text-blue-200 text-sm mb-2">{{ section.title }}</div>
+          @if (section.requirementLabels.length > 0) {
+          <div class="space-y-1">
+            @for (label of section.requirementLabels; track label) {
+            <div
+              class="inline-flex items-center px-2 py-1 rounded-md bg-blue-500/20 text-blue-200 text-xs font-medium border border-blue-400/30 mr-2">
+              ✓ {{ label }}
+            </div>
+            }
+          </div>
+          }
         </div>
-        <div class="bg-gradient-to-br from-purple-500/20 to-purple-600/10 backdrop-blur-lg rounded-lg p-4 border border-purple-500/30">
-          <p class="text-purple-300 font-semibold">MATH 2100</p>
-          <p class="text-slate-300 text-sm mt-1">Linear Algebra</p>
-          <p class="text-slate-400 text-xs mt-2">4 Credits | Tue, Thu | 10:00 AM</p>
-        </div>
-        <div class="bg-gradient-to-br from-cyan-500/20 to-cyan-600/10 backdrop-blur-lg rounded-lg p-4 border border-cyan-500/30">
-          <p class="text-cyan-300 font-semibold">CS 3500</p>
-          <p class="text-slate-300 text-sm mt-1">Web Development</p>
-          <p class="text-slate-400 text-xs mt-2">3 Credits | Mon, Wed, Fri | 1:00 PM</p>
-        </div>
-        <div class="bg-gradient-to-br from-pink-500/20 to-pink-600/10 backdrop-blur-lg rounded-lg p-4 border border-pink-500/30">
-          <p class="text-pink-300 font-semibold">ENG 2200</p>
-          <p class="text-slate-300 text-sm mt-1">Literature and Composition</p>
-          <p class="text-slate-400 text-xs mt-2">3 Credits | Tue, Thu | 2:00 PM</p>
-        </div>
-        <div class="bg-gradient-to-br from-indigo-500/20 to-indigo-600/10 backdrop-blur-lg rounded-lg p-4 border border-indigo-500/30">
-          <p class="text-indigo-300 font-semibold">PHYS 2050</p>
-          <p class="text-slate-300 text-sm mt-1">Physics II</p>
-          <p class="text-slate-400 text-xs mt-2">2 Credits | Mon, Wed, Fri | 11:00 AM</p>
-        </div>
-        <div class="bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-lg rounded-lg p-4 border border-white/20">
-          <p class="text-white font-semibold">Total</p>
-          <p class="text-slate-300 text-sm mt-1">Spring 2026</p>
-          <p class="text-slate-400 text-xs mt-2">{{ totalCredits }} Credits</p>
-        </div>
+        }
       </div>
     </div>
   </div>
+  }
+</div>
 </div>

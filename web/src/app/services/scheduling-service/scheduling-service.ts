@@ -39,5 +39,14 @@ export interface AutogenerateScheduleResponse {
       endTime: string;
     }[]
   }[];
-  requirementsCovered: number;
+  unavailabilityTimes: {
+    day: number;
+    start: string;
+    end: string;
+  }[];
+  avoidTimes: {
+    day: number;
+    start: string;
+    end: string;
+  }[];
 }
