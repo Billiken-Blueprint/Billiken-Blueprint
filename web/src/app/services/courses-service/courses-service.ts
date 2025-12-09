@@ -1,6 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import { forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,13 @@ export class CoursesService {
           };
         });
       }));
+  }
+
+  addDesiredCourses(courseIds: number[]) {
+    const requests = courseIds.map(id =>
+      this.http.post('/api/student/desired_courses', { course_id: id })
+    );
+    return forkJoin(requests);
   }
 }
 

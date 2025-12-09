@@ -53,6 +53,28 @@ export class ChatbotDrawerComponent {
         this.suggestedCourses.update(courses => courses.filter(c => c.id !== courseId));
     }
 
+    isAddingToRoadmap = signal(false);
+
+    addToRoadmap() {
+        if (this.suggestedCourses().length === 0 || this.isAddingToRoadmap()) return;
+
+        this.isAddingToRoadmap.set(true);
+        const courseIds = this.suggestedCourses().map(c => c.id);
+
+        this.coursesService.addDesiredCourses(courseIds)
+            .pipe(finalize(() => this.isAddingToRoadmap.set(false)))
+            .subscribe({
+                next: () => {
+                    this.messages.update(msgs => [...msgs, { text: "Courses successfully added to your roadmap!", sender: 'bot' }]);
+                    this.suggestedCourses.set([]);
+                },
+                error: (err) => {
+                    console.error(err);
+                    this.messages.update(msgs => [...msgs, { text: "Failed to add courses to roadmap. Please try again.", sender: 'bot' }]);
+                }
+            });
+    }
+
     onClose() {
         this.close.emit();
     }
