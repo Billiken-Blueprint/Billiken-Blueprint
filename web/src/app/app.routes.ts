@@ -29,7 +29,7 @@ export const routes: Routes = [
   },
   {
     path: 'profile',
-    loadComponent: () => import('./profile/profile').then(m => m.ProfilePage),
+    loadComponent: () => import('./questionnaire/questionnaire').then(m => m.QuestionnairePage),
   },
   {
     path: 'courses',
