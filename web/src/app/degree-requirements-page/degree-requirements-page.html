@@ -23,8 +23,13 @@
     <div class="max-w-7xl mx-auto w-full">
       <div class="space-y-3 pb-8">
         <div class="category" *ngFor="let cat of categories">
-          <h2 class="text-white text-lg font-semibold mb-2">{{ cat.title }}</h2>
-          <div class="space-y-2">
+          <button type="button"
+                  class="w-full text-left bg-white/10 hover:bg-white/15 rounded-xl px-4 py-3 mb-2 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between"
+                  (click)="toggleCategory(cat)">
+            <span class="text-white text-lg font-semibold">{{ cat.title }}</span>
+            <span class="text-slate-300 text-sm">{{ cat.expanded ? 'Hide' : 'Show' }}</span>
+          </button>
+          <div class="space-y-2" *ngIf="cat.expanded">
             <div *ngFor="let course of cat.courses" 
                  class="bg-gradient-to-r from-white/8 to-white/4 backdrop-blur-lg rounded-xl p-4 border border-white/15 hover:border-white/30 transition-all duration-300 flex items-center justify-between">
               <div class="flex-1">

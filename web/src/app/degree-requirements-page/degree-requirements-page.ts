@@ -11,6 +11,7 @@ interface Course {
 interface RequirementCategory {
   title: string;
   courses: Course[];
+  expanded?: boolean;
 }
 
 @Component({
@@ -26,7 +27,7 @@ export class DegreeRequirementsPage {
   private router = new Router();
 
   degreeInfo = {
-    name: 'Computer Science (B.S.)',
+    name: 'Computer Science (B.A.)',
     totalCredits: 120,
   };
 
@@ -36,6 +37,7 @@ export class DegreeRequirementsPage {
       courses: [
         { code: 'IGN 1000', name: 'Ignite Seminar', credits: 1 },
       ],
+      expanded: false,
     },
     {
       title: 'Ultimate Questions: Philosophy',
@@ -43,6 +45,7 @@ export class DegreeRequirementsPage {
         { code: 'PHIL 1050', name: 'Introduction to Philosophy', credits: 3 },
         { code: 'PHLY 2000', name: 'Philosophy & Ethics', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Ultimate Questions: Theology',
@@ -50,6 +53,7 @@ export class DegreeRequirementsPage {
         { code: 'THEO 1000', name: 'Introduction to Theology', credits: 3 },
         { code: 'THEO 2510', name: 'Christianity', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Collaborative Inquiry: Writing',
@@ -57,6 +61,7 @@ export class DegreeRequirementsPage {
         { code: 'ENG 1000', name: 'English Composition I', credits: 3 },
         { code: 'ENG 1100', name: 'English Composition II', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Self in Community',
@@ -66,6 +71,7 @@ export class DegreeRequirementsPage {
         { code: 'HIST 2000', name: 'World History', credits: 3 },
         { code: 'COM 1200', name: 'Intro to Communication', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Self in Contemplation',
@@ -73,6 +79,7 @@ export class DegreeRequirementsPage {
         { code: 'PHIL 2050', name: 'Ethics', credits: 3 },
         { code: 'THEO 2420', name: 'Religion and Imagination', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Self in the World',
@@ -80,6 +87,7 @@ export class DegreeRequirementsPage {
         { code: 'SOC 1100', name: 'Introduction to Sociology', credits: 3 },
         { code: 'ANTH 1110', name: 'Cultural Anthropology', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Natural Sciences',
@@ -89,6 +97,7 @@ export class DegreeRequirementsPage {
         { code: 'CHEM 1030', name: 'Chemistry I', credits: 4 },
         { code: 'BIOL 1040', name: 'Biology I', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Core Computer Science',
@@ -104,6 +113,7 @@ export class DegreeRequirementsPage {
         { code: 'CS 4800', name: 'Computer Networks', credits: 3 },
         { code: 'CS 4900', name: 'Capstone Project', credits: 3 },
       ],
+      expanded: false,
     },
     {
       title: 'Mathematics',
@@ -113,6 +123,7 @@ export class DegreeRequirementsPage {
         { code: 'MATH 2100', name: 'Linear Algebra', credits: 4 },
         { code: 'MATH 2500', name: 'Probability & Statistics', credits: 4 },
       ],
+      expanded: false,
     },
     {
       title: 'Electives',
@@ -124,8 +135,13 @@ export class DegreeRequirementsPage {
         { code: 'CS 3800', name: 'Machine Learning', credits: 3 },
         { code: 'CS 3900', name: 'Cybersecurity', credits: 3 },
       ],
+      expanded: false,
     },
   ];
+
+  toggleCategory(cat: RequirementCategory) {
+    cat.expanded = !cat.expanded;
+  }
 
   navigateToSchedule() {
     this.router.navigate(['/schedule']);
