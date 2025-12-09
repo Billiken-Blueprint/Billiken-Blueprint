@@ -20,11 +20,9 @@ def check_time_overlap(time_slot: TimeSlot, meeting_time: MeetingTime) -> bool:
     )
 
 
-def section_overlaps_timeslots(section: Section, time_slots: Sequence[TimeSlot]) -> bool:
-    if section.course_code == 'CSCI 2300':
-        print(time_slots)
-        print(section.meeting_times)
-        print(section.instructor_names)
+def section_overlaps_timeslots(
+    section: Section, time_slots: Sequence[TimeSlot]
+) -> bool:
     for time_slot in time_slots:
         for meeting_time in section.meeting_times:
             if check_time_overlap(time_slot, meeting_time):
@@ -84,5 +82,3 @@ class Degree(DegreeWorksDegree):
                 DegreeRequirement.from_dict(req) for req in data["requirements"]
             ],
         )
-
-    

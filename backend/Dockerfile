@@ -33,6 +33,7 @@ COPY --chown=1000:1000 --from=deps /app/.venv /app/.venv
 COPY --chown=1000:1000 --from=seeding /app/data /app/data
 COPY --chown=1000:1000 . .
 ENV PATH="/app/.venv/bin:${PATH}"
+ENV GEMINI_API_KEY=""
 EXPOSE 8000
 USER 1000
 CMD ["fastapi", "run", "server.py", "--host", "0.0.0.0", "--port", "8000"]

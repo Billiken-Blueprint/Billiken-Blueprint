@@ -15,11 +15,8 @@ from billiken_blueprint.domain.section import Section
 from billiken_blueprint.domain.student import Student, TimeSlot
 
 
-
 def get_combined_requirements(
-    degree: Degree,
-    student: Student,
-    all_courses: Sequence[CourseWithAttributes]
+    degree: Degree, student: Student, all_courses: Sequence[CourseWithAttributes]
 ) -> Sequence[DegreeRequirement]:
     desired_reqs = []
     if student.desired_course_ids:
@@ -56,6 +53,7 @@ def get_recommended_sections(
     unavailability_times: Sequence[TimeSlot] = [],
     avoid_times: Sequence[TimeSlot] = [],
     instructor_ratings_map: dict[str, float] | None = None,
+    discarded_section_ids: Sequence[int] = [],
 ) -> Sequence[SectionWithRequirementsFulfilled]:
     # Same scoring mechanism as last implementation,
     # but this time we should first check which courses
@@ -77,9 +75,7 @@ def get_recommended_sections(
     all_requirements = get_combined_requirements(degree, student, all_courses)
 
     # Get unfulfilled requirements.
-    fulfilled_reqs = [
-        c for c in all_requirements if c.is_satisfied_by(taken_courses)
-    ]
+    fulfilled_reqs = [c for c in all_requirements if c.is_satisfied_by(taken_courses)]
     unfulfilled_reqs = [c for c in all_requirements if c not in fulfilled_reqs]
 
     # Score courses based on how many courses they are prerequisites for.
@@ -88,9 +84,7 @@ def get_recommended_sections(
     course_to_requirements = {}
 
     for req in unfulfilled_reqs:
-        courses = req.filter_for_untaken_satisfying_courses(
-            all_courses, taken_courses
-        )
+        courses = req.filter_for_untaken_satisfying_courses(all_courses, taken_courses)
         for course in courses:
             if course not in course_to_requirements:
                 course_to_requirements[course] = []
@@ -129,38 +123,41 @@ def get_recommended_sections(
     course_codes_to_course = {
         f"{c.major_code} {c.course_number}": c for c in course_scores.keys()
     }
+
+    discarded_ids_set = set(discarded_section_ids)
+
     sections = [
         section
         for section in all_sections
         if section.course_code in course_codes_to_course
         and course_codes_to_course[section.course_code] not in set(taken_courses)
         and not section_overlaps_timeslots(section, unavailability_times)
+        and section.id not in discarded_ids_set
     ]
-    
+
     def get_section_score(section: Section) -> float:
         score = course_scores[course_codes_to_course[section.course_code]]
         if section_overlaps_timeslots(section, avoid_times):
             score -= 10
-        
+
         # Add average instructor rating to the score
         if instructor_ratings_map and section.instructor_names:
             instructor_ratings = []
             for name in section.instructor_names:
                 name_stripped = name.strip()
                 # Try exact match first, then case-insensitive match
-                rating = (
-                    instructor_ratings_map.get(name_stripped) or
-                    instructor_ratings_map.get(name_stripped.lower())
-                )
+                rating = instructor_ratings_map.get(
+                    name_stripped
+                ) or instructor_ratings_map.get(name_stripped.lower())
                 if rating is not None:
                     instructor_ratings.append(rating)
-            
+
             # Calculate average rating if we have any valid ratings
             if instructor_ratings:
                 avg_rating = sum(instructor_ratings) / len(instructor_ratings)
                 # Add the average rating to the score (ratings are typically 0-5)
                 score += avg_rating
-        
+
         return score
 
     sections_sorted = sorted(
@@ -173,9 +170,7 @@ def get_recommended_sections(
     sections_sorted = [
         section
         for section in sections_sorted
-        if (
-            course := course_codes_to_course[section.course_code]
-        ).prerequisites is None
+        if (course := course_codes_to_course[section.course_code]).prerequisites is None
         or course.prerequisites.is_satisfied_by(taken_courses)
     ]
 
@@ -184,11 +179,10 @@ def get_recommended_sections(
             section=section,
             fulfilled_requirements=course_to_requirements.get(
                 course_codes_to_course[section.course_code], []
-            )
+            ),
         )
         for section in sections_sorted
     ]
-
 
 
 def get_schedule(
@@ -201,6 +195,7 @@ def get_schedule(
     unavailability_times: Sequence[TimeSlot] = [],
     avoid_times: Sequence[TimeSlot] = [],
     instructor_ratings_map: dict[str, float] | None = None,
+    discarded_section_ids: Sequence[int] = [],
 ) -> Sequence[SectionWithRequirementsFulfilled]:
     recommended_sections = get_recommended_sections(
         degree,
@@ -212,12 +207,13 @@ def get_schedule(
         unavailability_times,
         avoid_times,
         instructor_ratings_map,
+        discarded_section_ids,
     )
-    
+
     # Calculate remaining needed for each requirement
     # Re-calculate including desired courses
     all_requirements = get_combined_requirements(degree, student, all_courses)
-    
+
     requirements_status = {}
     for req in all_requirements:
         satisfied_count = 0
@@ -228,19 +224,19 @@ def get_schedule(
 
     schedule: Sequence[SectionWithRequirementsFulfilled] = []
     added_course_codes = set()
-    
+
     # Dynamic greedy selection
     for _ in range(6):
         best_section_wrapper = None
         best_score = 0
-        
+
         for rec in recommended_sections:
             section = rec.section
-            
+
             # Skip if already added
             if section.course_code in added_course_codes:
                 continue
-            
+
             # Skip if overlaps with current schedule
             if any(section.overlaps(s.section) for s in schedule):
                 continue
@@ -250,17 +246,17 @@ def get_schedule(
             for req_label in rec.fulfilled_requirements:
                 if requirements_status.get(req_label, 0) > 0:
                     score += 1
-            
+
             # We want the section that satisfies the MOST needed requirements
             if score > best_score:
                 best_score = score
                 best_section_wrapper = rec
-        
+
         # If we found a useful section, add it
         if best_section_wrapper and best_score > 0:
             schedule.append(best_section_wrapper)
             added_course_codes.add(best_section_wrapper.section.course_code)
-            
+
             # Decrement needed counts
             for req_label in best_section_wrapper.fulfilled_requirements:
                 if requirements_status.get(req_label, 0) > 0:
@@ -268,5 +264,5 @@ def get_schedule(
         else:
             # No more useful sections found
             break
-    
+
     return schedule

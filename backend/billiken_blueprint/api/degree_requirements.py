@@ -90,6 +90,7 @@ class AutogenerateScheduleResponse(BaseModel):
     sections: list[AutogenerateScheduleSectionResponse]
     unavailabilityTimes: list[TimeSlotResponse]
     avoidTimes: list[TimeSlotResponse]
+    discardedSectionIds: list[int]
 
 
 @router.get("/autogenerate-schedule", response_model=AutogenerateScheduleResponse)
@@ -103,6 +104,9 @@ async def autogenerate_schedule(
     rating_repo: RatingRepo,
     semester: str = Query(
         Semester.SPRING, description="Semester code (e.g., '202501' for Spring 2025)"
+    ),
+    discarded_section_ids: list[int] = Query(
+        [], description="List of section IDs to exclude from the schedule"
     ),
 ):
     degree = await degree_repo.get_by_id(student.degree_id)
@@ -185,6 +189,7 @@ async def autogenerate_schedule(
         unavailability_times=student.unavailability_times,
         avoid_times=student.avoid_times,
         instructor_ratings_map=instructor_ratings_map,
+        discarded_section_ids=discarded_section_ids,
     )
 
     return AutogenerateScheduleResponse(
@@ -218,4 +223,5 @@ async def autogenerate_schedule(
             TimeSlotResponse(day=ts.day, start=ts.start, end=ts.end)
             for ts in student.avoid_times
         ],
+        discardedSectionIds=discarded_section_ids,
     )
