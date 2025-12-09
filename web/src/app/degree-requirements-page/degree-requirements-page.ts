@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 interface Course {
   code: string;
@@ -24,7 +25,7 @@ interface RequirementCategory {
   }
 })
 export class DegreeRequirementsPage {
-  private router = new Router();
+  constructor(private location: Location, private router: Router) {}
 
   degreeInfo = {
     name: 'Computer Science (B.A.)',
@@ -145,5 +146,14 @@ export class DegreeRequirementsPage {
 
   navigateToSchedule() {
     this.router.navigate(['/schedule']);
+  }
+
+  goBack() {
+    // If there is history, go back; otherwise, navigate to landing
+    if (typeof window !== 'undefined' && window.history.length > 1) {
+      this.location.back();
+    } else {
+      this.router.navigate(['/landing']);
+    }
   }
 }
